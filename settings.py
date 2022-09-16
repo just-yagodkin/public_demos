@@ -211,7 +211,7 @@ SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1.00, participation
 LANGUAGE_CODE = 'rus'
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'RUR'
+REAL_WORLD_CURRENCY_CODE = 'en'
 USE_POINTS = True
 
 ADMIN_USERNAME = 'admin'
