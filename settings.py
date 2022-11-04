@@ -75,12 +75,12 @@ SESSION_CONFIGS = [
     #     app_sequence=['wisconsin'],
     #     num_demo_participants=1,
     # ),
-    dict(
-        name='iowa_gambling',
-        display_name="Iowa Gambling Task",
-        app_sequence=['iowa_gambling'],
-        num_demo_participants=1,
-    ),
+    # dict(
+    #     name='iowa_gambling',
+    #     display_name="Iowa Gambling Task",
+    #     app_sequence=['iowa_gambling'],
+    #     num_demo_participants=1,
+    # ),
     # dict(
     #     name='twitter',
     #     app_sequence=['twitter'],
@@ -117,12 +117,12 @@ SESSION_CONFIGS = [
     #     app_sequence=['shop'],
     #     num_demo_participants=1,
     # ),
-    dict(
-        name='double_auction',
-        display_name="Double auction market",
-        app_sequence=['double_auction'],
-        num_demo_participants=4,
-    ),
+    # dict(
+    #     name='double_auction',
+    #     display_name="Double auction market",
+    #     app_sequence=['double_auction'],
+    #     num_demo_participants=4,
+    # ),
     # dict(name='dollar_auction', app_sequence=['dollar_auction'], num_demo_participants=3),
     # dict(
     #     name='ebay',
@@ -179,11 +179,18 @@ SESSION_CONFIGS = [
     #     app_sequence=['read_mind_in_eyes'],
     #     num_demo_participants=1,
     # ),
+    dict(
+        name='rockpaperscissors',
+        display_name="Rock/Paper/Scissors against Robot",
+        app_sequence=['rockpaperscissors'],
+        num_demo_participants=1,
+    ),
+
     # dict(
-    #     name='rockpaperscissors',
-    #     display_name="Rock/Paper/Scissors",
-    #     app_sequence=['rockpaperscissors'],
-    #     num_demo_participants=2,
+    #     name='any_app', 
+    #     app_sequence=['any_app',], 
+    #     num_demo_participants=1,
+    #     # use_browser_bots=True
     # ),
     # dict(
     #     name='tictactoe',

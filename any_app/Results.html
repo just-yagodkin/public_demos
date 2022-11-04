@@ -1,0 +1,32 @@
+{{ block title }}
+    Your choice
+{{ endblock }}
+
+{{ block content }}
+
+<table class="table">
+    <thead>
+        <tr class="header">
+            <th class="center">edge</th>
+            <th class="center">choice</th>
+        </tr>
+    </thead>
+{% for i,f,p in edges %}
+    <tr>
+        <td >
+        {{f}}
+        </td>
+        <td >
+        {{p}}
+        </td>
+    </tr>
+    <tr>
+       {% endfor %} 
+    </tbody>
+    </table>
+
+
+    {{ next_button }}
+{{ endblock }}
+
+

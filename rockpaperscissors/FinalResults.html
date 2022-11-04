@@ -3,6 +3,54 @@
 {{ endblock }}
 
 {{ block content }}
+<p> Your accuracy <b> score is {{ player.points }} </b> out of 9 </p>
+<p> Your actual opponent was </p>
+
+<table class="table">
+    <thead>
+        <tr class="header">
+            <th class="center">Initial and target node</th>
+            <th class="center">Trigger for what opponent (you) action(s) </th>
+        </tr>
+    </thead>
+{% for i,f,p in CompPlayer %}
+    <tr>
+        <td >
+        {{f}}
+        </td>
+        <td >
+        {{p}}
+        </td>
+    </tr>
+    <tr>
+       {% endfor %} 
+    </tbody>
+    </table>
+
+Your choice was
+
+<table class="table">
+    <thead>
+        <tr class="header">
+            <th class="center">Initial and target node</th>
+            <th class="center">Reported by you</th>
+        </tr>
+    </thead>
+{% for i,f,p in edges %}
+    <tr>
+        <td >
+        {{f}}
+        </td>
+        <td >
+        {{p}}
+        </td>
+    </tr>
+    <tr>
+       {% endfor %} 
+    </tbody>
+    </table>
+
+    History of play was
 
     {{ include C.HISTORY_TEMPLATE }}
 {{ endblock }}

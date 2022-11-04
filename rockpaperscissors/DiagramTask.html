@@ -1,0 +1,205 @@
+{{ block styles }}
+<style>
+ .otree-body { 
+    font: 14px helvetica neue, helvetica, arial, sans-serif;
+  }
+  
+  #cy {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 200px;
+  display: block;
+  }
+  
+  #info {
+    color: #c88;
+    font-size: 2em;
+    width: 800px;
+    height: 200px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  }
+</style>
+{{ endblock }}
+
+{{ block title }}
+    Pick the edges and nodes
+{{ endblock }}
+
+{{ block content }}
+
+
+<div >
+  <p>Some information </p>
+  <p>about state-reaction diagram, </p>
+  <p>e.g. red contour means starting point</p>
+  <br />
+</div>
+<div id="cy"></div>
+
+
+    {{ next_button }}
+
+
+
+
+<script src="{{ static 'global/cytoscape.min.js' }}"> </script>
+
+
+<script>
+
+var cy = cytoscape({
+  container: document.getElementById('cy'),
+
+  boxSelectionEnabled: false,
+  autounselectify: true,
+
+  style: cytoscape.stylesheet()
+
+
+
+    .selector('node')
+      .css({
+        'content': 'data(name)',
+        'text-valign': 'center',
+        'color': 'black',
+        // 'text-outline-width': 2,
+        // 'text-outline-color': undefined,
+        'background-color': '#666'
+      })
+    .selector(':selected')
+      .css({
+        'background-color': 'black',
+        'line-color': 'black',
+        'target-arrow-color': 'black',
+        'source-arrow-color': 'black',
+        'text-outline-color': 'black'
+      })
+    .selector('edge')
+      .css({
+        'width': 2,
+        'line-color': '#ccc',
+        'target-arrow-color': 'black',
+        'target-arrow-shape': 'triangle',
+        'curve-style': 'bezier',
+        'line-style': 'dashed'
+      })
+      .selector('edge[label]')
+      .css({
+        "label": "data(label)",
+        "width": 3
+      })
+      .selector('layout')
+      .css({
+        'name': 'grid',
+        'rows': 1,
+        'cols': 2,
+        'padding': 10,
+      })
+      ,
+
+  
+
+      
+  elements: {
+    nodes: [
+      // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
+      { data: {counter:0, id: 'R', name: 'R', }, style: { 'background-color': '#ff0' } },
+      { data: {counter:0, id: 'P', name: 'P', },  style: { 'background-color': '#0ff' }},
+      { data: {counter:0, id: 'S', name: 'S', },  style: { 'background-color': '#9A726E' }},
+      // { data: {counter:0, id: 'S', name: '-', } }
+    ],
+    edges: [
+      { data: {counter:0, weight:0, id: 'RP', source: 'R', target: 'P', label: "-"} },
+      { data: {counter:0, weight:0, id: 'PR', source: 'P', target: 'R', label: "-"} },
+      { data: {counter:0, weight:0, id: 'PP', source: 'P', target: 'P' , label: "-"} },
+      { data: {counter:0, weight:0, id: 'PS', source: 'P', target: 'S' , label: "-"} },
+      { data: {counter:0, weight:0, id: 'RR', source: 'R', target: 'R' , label: "-"} },
+      { data: {counter:0, weight:0, id: 'RS', source: 'R', target: 'S' , label: "-"} },
+      { data: {counter:0, weight:0, id: 'SP', source: 'S', target: 'P' , label: "-"} },
+      { data: {counter:0, weight:0, id: 'SR', source: 'S', target: 'R' , label: "-"} },
+      { data: {counter:0, weight:0, id: 'SS', source: 'S', target: 'S' , label: "-"} },
+      // { data: {counter:0, weight:0, id: 'bc', source: 'P', target: 'S', label: "-"} },
+    ]
+  },
+
+
+});
+
+var layout = cy.layout({
+  name: 'circle'
+});
+
+layout.run();
+
+const edge_states = ["-","R","P","S","RP","RS","PS", "RPS"];
+const node_states = ["R","P","S"];
+const node_colours = ["#ff0","#0ff",'#9A726E'];
+const edge_colours = ["#ccc","#ff0","#0ff",'#9A726E', "#666","#666","#666","#666"];
+const edge_type = ['dashed','solid' ,'solid','solid','solid','solid','solid','solid'] 
+const edge_weight = [2,0,1,1,1,1,1,1] 
+
+// cy.on('tap', 'node', function(evt){
+//   var node = evt.target;
+//   node.data('name', iterator(node_states, node.data('counter'))[0]);
+//   node.data('counter', iterator(node_states, node.data('counter'))[1]);
+//   node.style('text-outline-color', node_colours[node.data('counter')] );
+//   node.style('background-color', node_colours[node.data('counter')] );
+  
+
+//   // console.log( 'tapped ' + node.id() );
+
+// });
+
+cy.on('tap', 'edge', function(evt){
+  var ele = evt.target;
+  var edges = cy.edges();
+  var form_data = [];
+  // console.log(iterator(numbers, ele.data('counter'))[0] );
+  ele.data('label', iterator(edge_states, ele.data('counter'))[0]);
+  ele.data('counter', iterator(edge_states, ele.data('counter'))[1]);
+  ele.data('weight', iterator(edge_weight, ele.data('counter'))[0]);
+  ele.style('line-style', edge_type[ele.data('counter')] );
+  ele.style('line-color', edge_colours[ele.data('counter')] );
+  for (var i = 0; i < edges.length; i++) {
+    form_data.push(edges[i]._private.data);
+  }
+  console.log(form_data);
+  liveSend(form_data);
+  // sendValue(form_data)
+  form_data = [];
+});
+
+function iterator(array, i) {
+  var index=(i+1)% array.length;
+  var value = array[index]; 
+
+    return [value, index];
+  };
+
+  // function sendValue(form_data) {
+  //   liveSend(form_data);
+  // }
+
+// const iterator = array => {
+//   let index = 0;
+
+//   return () => {
+//     const value = array[index];
+//     index=(index+1)% array.length;
+    
+
+//     return value;
+//   };
+// }
+
+// const numbers = ["A", "B", "C", "D"];
+// const next = iterator(numbers, 1);
+
+
+
+</script>
+
+{{ endblock }}
