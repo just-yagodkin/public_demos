@@ -37,119 +37,166 @@
 
 {{ block content }}
 
-<button id = "myButton"  onclick="toggle(this);" class="btn btn-primary" type="button">
-  Inerventional on Y
-</button>
-<!-- <div>Observational data</div> -->
+<p>You are have got a data table with 3 variables. The task asks you to reveal what is cause and what is effect. You have two option to manipulate table: (1) you can filter data by values of variables (2) you can switching between observational and intervantional (experimental) data. Data here are also not biassed (if we increase it up to 10000 e.g. frequencies will stay the same). Below the table you find the grafical form to submit your answer.  </p>
 
- <div class="tg-wrap"><table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+<div class="tg-wrap"><table id="menu"  class="table table-striped" style="
+  margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
   <tbody>
     <tr>
-      <td class="tg-0pky"></td>
-      <td class="tg-0pky">x</td>
-      <td class="tg-0pky">y</td>
-      <td class="tg-0pky">z</td>
+      <td class="searchable3"></td>
+      <td class="searchable3">
+        
+      </td>
+      <td class="searchable3">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+        <button id = "myButton"  onclick="toggle(this);"type="button" class="btn btn-outline-dark btn-sm">
+          Force Y=1 (do Y)
+        </button>
+
+        <div class="input-group"> <span class="input-group-addon"></span>
+      </td>
+      <td class="searchable3"></td>
     </tr>
     <tr>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">2</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">3</td>
-      <td class="tg-0pky">0</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">4</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">5</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">6</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">7</td>
-      <td class="tg-0pky">0</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">8</td>
-      <td class="tg-0pky">0</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">9</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">10</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">11</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">12</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">13</td>
-      <td class="tg-0pky">0</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">14</td>
-      <td class="tg-0pky">0</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">15</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">0</td>
-    </tr>
-    <tr>
-      <td class="tg-0pky">16</td>
-      <td class="tg-0pky">0</td>
-      <td class="tg-0pky">1</td>
-      <td class="tg-0pky">1</td>
-    </tr>
-  </tbody>
+
+    </tbody>
   </table></div>
 
-<br />
+<!-- <div>Observational data</div> -->
+
+<table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+  <tbody class="searchable2">
+    <tr>
+      <td class="searchable2"></td>
+      <td class="searchable2">
+        X
+        <br />
+        <label><input id="filterx_i" type="checkbox" >1</label>
+        <label><input id="filterx0_i" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+
+        
+
+        </td>
+      <td class="searchable2">Y
+        <br />
+        <label><input id="filtery_i" type="checkbox" >1</label>
+        <label><input id="filtery0_i" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
+      </td>
+      <td class="searchable2">Z
+        <br />
+        <label><input id="filterz_i" type="checkbox" >1</label>
+        <label><input id="filterz0_i" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">2</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">3</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">4</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">5</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">6</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">7</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">8</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">9</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">10</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">11</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">12</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">13</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">14</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">15</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">16</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+  </tbody>
+  </table>
+
+
 <table id="observ" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
   <tbody class="searchable">
@@ -161,7 +208,7 @@
         <label><input id="filterx" type="checkbox" >1</label>
         <label><input id="filterx0" type="checkbox" >0</label>
         <div class="input-group"> <span class="input-group-addon"></span>
-        <div class="input-group"> <span class="input-group-addon"></span>
+
         
 
         </td>
@@ -169,16 +216,16 @@
         <br />
         <label><input id="filtery" type="checkbox" >1</label>
         <label><input id="filtery0" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
-        <div class="input-group"> <span class="input-group-addon"></span>
+        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
 
       </td>
-      <td class="searchable">z
+      <td class="searchable">Z
         <br />
         <label><input id="filterz" type="checkbox" >1</label>
         <label><input id="filterz0" type="checkbox" >0</label>
         <div class="input-group"> <span class="input-group-addon"></span>
-        <div class="input-group"> <span class="input-group-addon"></span>
+
       </td>
     </tr>
     <tr>
@@ -520,6 +567,97 @@ $(document).ready(function () {
         
     });
 
+  }(jQuery));
+
+});
+$(document).ready(function () {
+  (function ($) {
+    $('#filterx_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(1).text() !== "0"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+
+    $('#filterx0_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(1).text() !== "1"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filtery_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(2).text() !== "0"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filtery0_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(2).text() !== "1"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filterz_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(3).text() !== "0"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filterz0_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(3).text() !== "1"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+
 
 }(jQuery));
 
@@ -533,11 +671,11 @@ let toggle = button => {
     if (hidden2) {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
-       button.innerText = "Inerventional on Y";
+       button.innerText = "Force Y=1 (do Y)";
     } else {
        anoth_element.removeAttribute("hidden");
        element.setAttribute("hidden", "hidden");
-       button.innerText = "Observational data";
+       button.innerText = "Show Observational ";
     }
 }
 // var i = 1
