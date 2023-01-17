@@ -7,7 +7,7 @@ doc = """
 Your app description
 """
 
-
+# test
 class C(BaseConstants):
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
