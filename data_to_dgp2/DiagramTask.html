@@ -1,0 +1,694 @@
+{{ block styles }}
+<style>
+ .otree-body { 
+    font: 14px helvetica neue, helvetica, arial, sans-serif;
+    max-width:600px
+  }
+  
+  #cy {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 200px;
+  display: block;
+  }
+  
+  #info {
+    color: #c88;
+    font-size: 2em;
+    width: 800px;
+    height: 200px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  }
+
+
+
+</style>
+
+
+{{ endblock }}
+
+{{ block title }}
+    Большой заголовок
+{{ endblock }}
+
+
+{{ block content }}
+
+<p>Это текст который увидят с самого начала </p>
+
+<div class="tg-wrap"><table id="menu"  class="table table-striped" style="
+  margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+  <tbody>
+    <tr>
+      <td class="searchable3"></td>
+      <td class="searchable3">
+        
+      </td>
+      <td class="searchable3">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+        <button id = "myButton"  onclick="toggle(this);"type="button" class="btn btn-outline-dark btn-sm">
+          Force Y=1 (do Y)
+        </button>
+
+        <div class="input-group"> <span class="input-group-addon"></span>
+      </td>
+      <td class="searchable3"></td>
+    </tr>
+    <tr>
+
+    </tbody>
+  </table></div>
+
+<!-- <div>Observational data</div> -->
+
+<table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+  <tbody class="searchable2">
+    <tr>
+      <td class="searchable2"></td>
+      <td class="searchable2">
+        X
+        <br />
+        <label><input id="filterx_i" type="checkbox" >1</label>
+        <label><input id="filterx0_i" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+
+        
+
+        </td>
+      <td class="searchable2">Y
+        <br />
+        <label><input id="filtery_i" type="checkbox" >1</label>
+        <label><input id="filtery0_i" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
+      </td>
+      <td class="searchable2">Z
+        <br />
+        <label><input id="filterz_i" type="checkbox" >1</label>
+        <label><input id="filterz0_i" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">2</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">3</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">4</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">5</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">6</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">7</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">8</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">9</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">10</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">11</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">12</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">13</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">14</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+    <tr>
+      <td class="searchable2">15</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">0</td>
+    </tr>
+    <tr>
+      <td class="searchable2">16</td>
+      <td class="searchable2">0</td>
+      <td class="searchable2">1</td>
+      <td class="searchable2">1</td>
+    </tr>
+  </tbody>
+  </table>
+
+
+<table id="observ" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+
+  <tbody class="searchable">
+    <tr>
+      <td class="searchable"></td>
+      <td class="searchable">
+        X
+        <br />
+        <label><input id="filterx" type="checkbox" >1</label>
+        <label><input id="filterx0" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+
+        
+
+        </td>
+      <td class="searchable">Y
+        <br />
+        <label><input id="filtery" type="checkbox" >1</label>
+        <label><input id="filtery0" type="checkbox" >0</label>
+        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
+      </td>
+      <td class="searchable">Z
+        <br />
+        <label><input id="filterz" type="checkbox" >1</label>
+        <label><input id="filterz0" type="checkbox" >0</label>
+        <div class="input-group"> <span class="input-group-addon"></span>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+    </tr>
+    <tr>
+      <td class="searchable">2</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+    </tr>
+    <tr>
+      <td class="searchable">3</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+    </tr>
+    <tr>
+      <td class="searchable">4</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">5</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">6</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">7</td>
+      <td class="searchable">0</td>
+      <td class="searchable">1</td>
+      <td class="searchable">1</td>
+    </tr>
+    <tr>
+      <td class="searchable">8</td>
+      <td class="searchable">0</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">9</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">10</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">11</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">12</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">13</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">14</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+    </tr>
+    <tr>
+      <td class="searchable">15</td>
+      <td class="searchable">1</td>
+      <td class="searchable">0</td>
+      <td class="searchable">1</td>
+    </tr>
+    <tr>
+      <td class="searchable">16</td>
+      <td class="searchable">0</td>
+      <td class="searchable">0</td>
+      <td class="searchable">1</td>
+    </tr>
+  </tbody>
+  </table></div><br />
+
+
+
+
+<div >
+  <p> Это текст который увидят чуть попозже
+  </p>
+
+  <br />
+</div>
+<div id="cy"></div>
+
+
+
+{{ next_button }}
+   
+
+
+<script src="{{ static 'global/cytoscape.min.js' }}"> </script>
+
+<script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+
+<script>
+
+var cy = cytoscape({
+  container: document.getElementById('cy'),
+
+  boxSelectionEnabled: false,
+  autounselectify: true,
+
+  style: cytoscape.stylesheet()
+
+
+
+    .selector('node')
+      .css({
+        'content': 'data(name)',
+        'text-valign': 'center',
+        'color': 'black',
+        // 'text-outline-width': 2,
+        // 'text-outline-color': undefined,
+        'background-color': '#666'
+      })
+    .selector(':selected')
+      .css({
+        'background-color': 'black',
+        'line-color': 'black',
+        'target-arrow-color': 'black',
+        'source-arrow-color': 'black',
+        'text-outline-color': 'black'
+      })
+    .selector('edge')
+      .css({
+        'width': 2,
+        'line-color': '#ccc',
+        'target-arrow-color': 'black',
+        'target-arrow-shape': 'triangle',
+        'curve-style': 'bezier',
+        'line-style': 'dashed'
+      })
+      .selector('edge[label]')
+      .css({
+        "label": "data(label)",
+        "width": 3
+      })
+      .selector('layout')
+      .css({
+        'name': 'grid',
+        'rows': 1,
+        'cols': 2,
+        'padding': 10,
+      })
+      ,
+
+  
+
+      
+  elements: {
+    nodes: [
+      // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
+      { data: {counter:0, id: 'X', name: 'X', }, style: { 'background-color': '#c3cec0' } },
+      { data: {counter:0, id: 'Y', name: 'Y', },  style: { 'background-color': '#c3cec0' }},
+      { data: {counter:0, id: 'Z', name: 'Z', },  style: { 'background-color': '#c3cec0' }},
+      // { data: {counter:0, id: 'Z', name: '-', } }
+    ],
+    edges: [
+      { data: {counter:0, weight:0, id: 'XY', source: 'X', target: 'Y', label: ""} },
+      { data: {counter:0, weight:0, id: 'YX', source: 'Y', target: 'X', label: ""} },
+      { data: {counter:0, weight:0, id: 'YZ', source: 'Y', target: 'Z' , label: ""} },
+      { data: {counter:0, weight:0, id: 'XZ', source: 'X', target: 'Z' , label: ""} },
+      { data: {counter:0, weight:0, id: 'ZY', source: 'Z', target: 'Y' , label: ""} },
+      { data: {counter:0, weight:0, id: 'ZX', source: 'Z', target: 'X' , label: ""} },
+      // { data: {counter:0, weight:0, id: 'bc', source: 'Y', target: 'Z', label: "-"} },
+    ]
+  },
+
+
+});
+
+var layout = cy.layout({
+  name: 'circle'
+});
+
+layout.run();
+
+const edge_states = ["",""];
+const edge_colours = ["#ccc","#000"]
+const edge_type = ['dashed','solid' ] 
+const edge_weight = [2,0] 
+
+
+
+cy.on('tap', 'edge', function(evt){
+  var ele = evt.target;
+  var edges = cy.edges();
+  var form_data = [];
+  // console.log(iterator(numbers, ele.data('counter'))[0] );
+  ele.data('label', iterator(edge_states, ele.data('counter'))[0]);
+  ele.data('counter', iterator(edge_states, ele.data('counter'))[1]);
+  ele.data('weight', iterator(edge_weight, ele.data('counter'))[0]);
+  ele.style('line-style', edge_type[ele.data('counter')] );
+  ele.style('line-color', edge_colours[ele.data('counter')] );
+  for (var i = 0; i < edges.length; i++) {
+    form_data.push(edges[i]._private.data);
+  }
+  console.log(form_data);
+  liveSend(form_data);
+  // sendValue(form_data)
+  form_data = [];
+});
+
+function iterator(array, i) {
+  var index=(i+1)% array.length;
+  var value = array[index]; 
+
+    return [value, index];
+  };
+
+
+
+
+$(document).ready(function () {
+
+(function ($) {
+
+    $('#filter').keyup(function () {
+
+        var rex = new RegExp($(this).val(), 'i');
+        $('.searchable tr').hide();
+        $('.searchable tr').filter(function () {
+            return rex.test($(this).text());
+        }).show();
+
+    });
+    
+    $('#filterx').on('change', function(){
+        
+        if(this.checked){
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function() {
+                return $(this).find('td').eq(1).text() !== "0"
+            }).show();
+        }else{
+            $('.searchable tr').show();
+        }
+        
+        
+    });
+
+    
+    $('#filterx0').on('change', function(){
+        
+        if(this.checked){
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function() {
+                return $(this).find('td').eq(1).text() !== "1"
+            }).show();
+        }else{
+            $('.searchable tr').show();
+        }
+        
+        
+    });
+
+    $('#filtery').on('change', function(){
+        
+        if(this.checked){
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function() {
+                return $(this).find('td').eq(2).text() !== "0"
+            }).show();
+        }else{
+            $('.searchable tr').show();
+        }
+        
+        
+    });
+
+    $('#filtery0').on('change', function(){
+        
+        if(this.checked){
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function() {
+                return $(this).find('td').eq(2).text() !== "1"
+            }).show();
+        }else{
+            $('.searchable tr').show();
+        }
+        
+        
+    });
+    
+    $('#filterz').on('change', function(){
+        
+        if(this.checked){
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function() {
+                return $(this).find('td').eq(3).text() !== "0"
+            }).show();
+        }else{
+            $('.searchable tr').show();
+        }
+        
+        
+    });
+
+    $('#filterz0').on('change', function(){
+        
+        if(this.checked){
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function() {
+                return $(this).find('td').eq(3).text() !== "1"
+            }).show();
+        }else{
+            $('.searchable tr').show();
+        }
+        
+        
+    });
+
+  }(jQuery));
+
+});
+$(document).ready(function () {
+  (function ($) {
+    $('#filterx_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(1).text() !== "0"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+
+    $('#filterx0_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(1).text() !== "1"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filtery_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(2).text() !== "0"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filtery0_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(2).text() !== "1"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filterz_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(3).text() !== "0"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+    $('#filterz0_i').on('change', function(){
+
+    if(this.checked){
+        $('.searchable2 tr').hide();
+        $('.searchable2 tr').filter(function() {
+            return $(this).find('td').eq(3).text() !== "1"
+        }).show();
+    }else{
+        $('.searchable2 tr').show();
+    }
+
+
+    });
+
+
+
+}(jQuery));
+
+});
+
+let toggle = button => {
+    let element = document.getElementById("observ");
+    let hidden2 = element.getAttribute("hidden");
+    let anoth_element = document.getElementById("interv");
+    let anoth_hidden = anoth_element.getAttribute("hidden");
+    if (hidden2) {
+       element.removeAttribute("hidden");
+       anoth_element.setAttribute( "hidden","hidden");
+       button.innerText = "Force Y=1 (do Y)";
+    } else {
+       anoth_element.removeAttribute("hidden");
+       element.setAttribute("hidden", "hidden");
+       button.innerText = "Show Observational ";
+    }
+}
+// var i = 1
+// $('#myButton').on('click', function(event) {
+//   i = i+1
+//   if (i/2==0){document.getElementById("observ").style.visibility = "hidden";}
+//   else {document.getElementById("observ").style.visibility = "visible" }
+//    }
+//   );
+</script>
+  {{ endblock }}
+
+
+
+
+
+

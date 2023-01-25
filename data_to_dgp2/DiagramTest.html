@@ -132,18 +132,6 @@ var layout = cy.layout({
 });
 layout.run();
 
-elements_revised = {}
-
-if (js_vars.show_edges_template == 1) {
-   elements_revised = {
-    nodes: js_vars.nodes,
-    edges: js_vars.edges_original
-  }
-} else {
-   elements_revised = {
-    nodes: js_vars.nodes
-  };
-}
 
 var cy2 = cytoscape({
   container: document.getElementById('cy2'),
@@ -197,7 +185,10 @@ var cy2 = cytoscape({
 
 
       
-  elements: elements_revised,
+  elements: {
+    nodes: js_vars.nodes,
+    edges: js_vars.edges_original
+  },
 
 
 
