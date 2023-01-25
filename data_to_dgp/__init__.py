@@ -42,6 +42,13 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     stored = models.StringField()
 
+# Functions
+def datatask_output_json(player: Player):
+    num_round = player.round_number
+    target_vocabulary = C.task_sequence[num_round]
+
+
+
 
 # PAGES
 class MyPage(Page):
@@ -56,6 +63,7 @@ class DiagramTaskCopy(Page):
     @staticmethod
     def vars_for_template(player):
         return dict(
+            '''
             onelinkx=C.observational_data['onelink']['x'],
             onelinky=C.observational_data['onelink']['y'],
             onelinkz=C.observational_data['onelink']['z'],
@@ -68,6 +76,7 @@ class DiagramTaskCopy(Page):
             colliderx=C.observational_data['collider']['x'],
             collidery=C.observational_data['collider']['y'],
             colliderz=C.observational_data['collider']['z'],
+            '''
         )
 
 
