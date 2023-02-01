@@ -192,7 +192,13 @@ SESSION_CONFIGS = [
         app_sequence=['data_to_dgp'],
         num_demo_participants=1,
     ),
-    
+
+    dict(
+        name='data_to_dgp2',
+        display_name="Копия страницы data to dgp",
+        app_sequence=['data_to_dgp2'],
+        num_demo_participants=1,
+    ),
 
     # dict(
     #     name='any_app', 

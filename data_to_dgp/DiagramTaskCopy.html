@@ -36,7 +36,8 @@
 
 
 {{ block content }}
-<p>You have got a data table with 3 variables. The task asks you to reveal what is a cause and what is an effect.
+
+<p> You have got a data table with 3 variables. The task asks you to reveal what is a cause and what is an effect.
   You have two ways to represent data in the table:
   (1) you can filter data by values of variables ;
   (2) you can switch between observational and interventional (experimental) data.
@@ -68,6 +69,7 @@
     </tbody>
   </table></div>
 
+
 <!-- <div>Observational data</div> -->
 
 <table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
@@ -98,105 +100,20 @@
         <label><input id="filterz_i" type="checkbox" >1</label>
         <label><input id="filterz0_i" type="checkbox" >0</label>
         <div class="input-group"> <span class="input-group-addon"></span>
-
       </td>
     </tr>
+    {% for i, x, y, z in datasetint %}
     <tr>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
+      <td>{{ i }}</td>
+      <td>{{ x }}</td>
+      <td>{{ y }}</td>
+      <td>{{ z }}</td>
     </tr>
-    <tr>
-      <td class="searchable2">2</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">3</td>
-      <td class="searchable2">0</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
-    <tr>
-      <td class="searchable2">4</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">5</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
-    <tr>
-      <td class="searchable2">6</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">7</td>
-      <td class="searchable2">0</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
-    <tr>
-      <td class="searchable2">8</td>
-      <td class="searchable2">0</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">9</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
-    <tr>
-      <td class="searchable2">10</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">11</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
-    <tr>
-      <td class="searchable2">12</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">13</td>
-      <td class="searchable2">0</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">14</td>
-      <td class="searchable2">0</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
-    <tr>
-      <td class="searchable2">15</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">0</td>
-    </tr>
-    <tr>
-      <td class="searchable2">16</td>
-      <td class="searchable2">0</td>
-      <td class="searchable2">1</td>
-      <td class="searchable2">1</td>
-    </tr>
+    {% endfor %}
+    <tr></tr>
+    {% for i in frequenciesint %}
+      <td>{{ i }}</td>
+    {% endfor %}
   </tbody>
   </table>
 
@@ -232,102 +149,18 @@
 
       </td>
     </tr>
+    {% for i, x, y, z in datasetobs %}
     <tr>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
+      <td>{{ i }}</td>
+      <td>{{ x }}</td>
+      <td>{{ y }}</td>
+      <td>{{ z }}</td>
     </tr>
-    <tr>
-      <td class="searchable">2</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">3</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">4</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">5</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">6</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">7</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">8</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">9</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">10</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">11</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">12</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">13</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">14</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">15</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">16</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-    </tr>
+    {% endfor %}
+    <tr></tr>
+    {% for i in frequenciesobs %}
+      <td>{{ i }}</td>
+    {% endfor %}
   </tbody>
   </table></div><br />
 
