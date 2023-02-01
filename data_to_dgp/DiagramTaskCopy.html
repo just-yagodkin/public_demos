@@ -100,15 +100,19 @@
         <label><input id="filterz_i" type="checkbox" >1</label>
         <label><input id="filterz0_i" type="checkbox" >0</label>
         <div class="input-group"> <span class="input-group-addon"></span>
-
       </td>
     </tr>
-    {% for x, y, z in dataset %}
+    {% for i, x, y, z in datasetint %}
     <tr>
+      <td>{{ i }}</td>
       <td>{{ x }}</td>
       <td>{{ y }}</td>
       <td>{{ z }}</td>
     </tr>
+    {% endfor %}
+    <tr></tr>
+    {% for i in frequenciesint %}
+      <td>{{ i }}</td>
     {% endfor %}
   </tbody>
   </table>
@@ -145,102 +149,18 @@
 
       </td>
     </tr>
+    {% for i, x, y, z in datasetobs %}
     <tr>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
+      <td>{{ i }}</td>
+      <td>{{ x }}</td>
+      <td>{{ y }}</td>
+      <td>{{ z }}</td>
     </tr>
-    <tr>
-      <td class="searchable">2</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">3</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">4</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">5</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">6</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">7</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">8</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">9</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">10</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">11</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">12</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">13</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">14</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-    </tr>
-    <tr>
-      <td class="searchable">15</td>
-      <td class="searchable">1</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-    </tr>
-    <tr>
-      <td class="searchable">16</td>
-      <td class="searchable">0</td>
-      <td class="searchable">0</td>
-      <td class="searchable">1</td>
-    </tr>
+    {% endfor %}
+    <tr></tr>
+    {% for i in frequenciesobs %}
+      <td>{{ i }}</td>
+    {% endfor %}
   </tbody>
   </table></div><br />
 

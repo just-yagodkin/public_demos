@@ -1,11 +1,12 @@
 from otree.api import *
+import goodfunctions as gf
 import random
-import pandas
 import json
 
 doc = """
 Your app description
 """
+
 
 # test
 class C(BaseConstants):
@@ -36,7 +37,18 @@ class C(BaseConstants):
                                        'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0],
                                        'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
 
-    interventional_data = 0  # пока не уверен в правильности интервенции не стал ничего писать
+    interventional_data = {'nolinks': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                      'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                                                      'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]}),
+                           'onelink': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                      'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                                      'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]}),
+                           'twolinks': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0],
+                                                       'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                       'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]}),
+                           'collider': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0],
+                                                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]})}
 
     task_sequence_keys = (list(observational_data.keys()))
     # task_sequence = random.choices(task_sequence_keys, k=len(task_sequence_keys))
@@ -59,7 +71,7 @@ class Player(BasePlayer):
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
     target_key = C.task_sequence[num_round]
-    target_vocabulary = C.observational_data[target_key]
+    target_vocabulary = [C.observational_data[target_key], C.interventional_data[target_key]]
     return target_vocabulary
 
 
@@ -68,6 +80,24 @@ def benchmark_diagram(player: Player):
     target_key = C.task_sequence[num_round]
     target_vocabulary = C.data_edges[target_key]
     return target_vocabulary
+
+
+def check_diagram(players_data: dict, original_data: dict):
+    '''Сравнивает диаграмму игрока и диаграмму датасета, выдает None, если игрок указал всё верно; либо набор лишних и нехвативших связей, если что-то оказалось неверным'''
+    if players_data == original_data:
+        return None
+    dif_list = []
+    for data in players_data:  # записываем лишнее
+        if data in original_data:
+            pass
+        else:
+            dif_list.append(data)
+    for data in original_data:  # записываем недостающее
+        if data in players_data:
+            pass
+        else:
+            dif_list.append(data)
+    return dif_list
 
 
 # PAGES
@@ -84,23 +114,12 @@ class DiagramTaskCopy(Page):
     def vars_for_template(player):
         output = datatask_output_json(player)
         return dict(
-            dataset=[(output['x'][i], output['y'][i], output['z'][i]) for i in range(len(output['x']))])
-
-
-'''
-            onelinkx=C.observational_data['onelink']['x'],
-            onelinky=C.observational_data['onelink']['y'],
-            onelinkz=C.observational_data['onelink']['z'],
-            nolinksx=C.observational_data['nolinks']['x'],
-            nolinky=C.observational_data['nolinks']['y'],
-            nolinksz=C.observational_data['nolinks']['z'],
-            twolinksx=C.observational_data['twolinks']['x'],
-            twolinksy=C.observational_data['twolinks']['y'],
-            twolinksz=C.observational_data['twolinks']['z'],
-            colliderx=C.observational_data['collider']['x'],
-            collidery=C.observational_data['collider']['y'],
-            colliderz=C.observational_data['collider']['z'],
-'''
+            datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
+                        range(len(output[0]['x']))],
+            datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
+                        range(len(output[1]['x']))],
+            frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
 
 
 class DiagramTest(Page):
