@@ -24,7 +24,7 @@ class C(BaseConstants):
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
                       {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}]}
 
-    observational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    pre_observational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                       'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
                                       'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
                           'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -37,7 +37,7 @@ class C(BaseConstants):
                                        'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0],
                                        'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
 
-    interventional_data = {'nolinks': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    pre_interventional_data = {'nolinks': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                       'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
                                                       'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]}),
                            'onelink': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -49,7 +49,18 @@ class C(BaseConstants):
                            'collider': gf.intervente2({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                        'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0],
                                                        'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]})}
-
+    def reshuffle(initialdict):
+        new_dict=initialdict.copy()
+        keys_level_1 = list(initialdict.keys())
+        # works with warning and only if use xyz names always!!!
+        keys_level_2 = list(initialdict[list(initialdict.keys())[0]].keys())
+        for key in keys_level_1:
+            for key_second in keys_level_2:
+                new_dict[key][key_second] = random.sample(initialdict[key][key_second], len(initialdict[key][key_second]))
+        return new_dict
+        
+    observational_data = reshuffle(pre_observational_data)
+    interventional_data= reshuffle(pre_interventional_data)
     task_sequence_keys = (list(observational_data.keys()))
     # task_sequence = random.choices(task_sequence_keys, k=len(task_sequence_keys))
     task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
@@ -80,6 +91,8 @@ def benchmark_diagram(player: Player):
     target_key = C.task_sequence[num_round]
     target_vocabulary = C.data_edges[target_key]
     return target_vocabulary
+
+
 
 
 def check_diagram(players_data: dict, original_data: dict):
