@@ -90,7 +90,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    stored = models.StringField()
+    stored = models.StringField(initial=json.dumps([{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}}, {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}}, {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
 
 
 # Functions
@@ -127,11 +127,16 @@ def check_diagram(players_data: dict, original_data: dict):
 
 
 # PAGES
-class MyPage(Page):
-    pass
+class Instruction(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
+        
+    
 
 
 class DiagramTaskCopy(Page):
+
     def live_method(player, data):
         # player.stored = str(1)
         player.stored = json.dumps(data)
@@ -186,4 +191,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [DiagramTaskCopy, DiagramTest, Results]
+page_sequence = [Instruction, DiagramTaskCopy, DiagramTest]
