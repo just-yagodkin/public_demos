@@ -91,8 +91,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     stored = models.StringField(initial=json.dumps([{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}}, {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}}, {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
-
-
+    trainig = models.IntegerField()
 # Functions
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
@@ -133,9 +132,30 @@ class Instruction(Page):
         return player.round_number == 1
         
     
+class Training(Page):
+    form_model = 'player'
+    form_fields = ['trainig']
+    def live_method(player, data):
+        player.trainig = json.loads(json.dumps(data))[0]["counter"]
+        return {1:player.trainig}
+        # json.loads(player.trainig)[0]["counter"]
 
 
-class DiagramTaskCopy(Page):
+    # def trainig_error_message(player, value):
+    #     if value != 1:
+    #         return 'Wrong answer'
+
+    def error_message(player, values):
+        solutions = dict(
+            trainig=1,
+        )
+        error_messages = dict()
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                error_messages[field_name] = 'incorrect report'
+        return error_messages
+
+class DiagramTask(Page):
 
     def live_method(player, data):
         # player.stored = str(1)
@@ -191,4 +211,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Instruction, DiagramTaskCopy, DiagramTest]
+page_sequence = [ Instruction,Training, DiagramTask, DiagramTest]
