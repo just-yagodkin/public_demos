@@ -135,6 +135,9 @@ class Instruction(Page):
 class Training(Page):
     form_model = 'player'
     form_fields = ['trainig']
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
     def live_method(player, data):
         player.trainig = json.loads(json.dumps(data))[0]["counter"]
         return {1:player.trainig}
