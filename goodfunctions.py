@@ -14,12 +14,12 @@ d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
      'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                  'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
                  'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-     'twolinks': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0],
-                  'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                  'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-     'collider': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                  'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0],
-                  'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
+     'twolinks':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+                 'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]},
+     'collider':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
 
 
 def check_dependencies(dictionary: dict):
@@ -70,11 +70,14 @@ def check_dependencies(dictionary: dict):
                 or
                 check_coop_frequencies(dictionary, (1, 0))[0] != check_frequencies(dictionary, (1, 0, 1))[0] *
                 check_frequencies(dictionary, (1, 0, 1))[1] or  # if P(x=1 & y=0) != P(x=1)*P(y=0)
+
                 check_coop_frequencies(dictionary, (0, 1))[0] != check_frequencies(dictionary, (0, 1, 1))[0] *
-                check_frequencies(dictionary, (1, 0, 1))[1] or  # if P(x=0 & y=1) != P(x=0)*P(y=1)
+                check_frequencies(dictionary, (0, 1, 1))[1] or  # if P(x=0 & y=1) != P(x=0)*P(y=1)
+
                 check_coop_frequencies(dictionary, (0, 0))[0] != check_frequencies(dictionary, (0, 0, 1))[0] *
-                check_frequencies(dictionary, (1, 0, 1))[1]):  # if P(x=0 & y=0) != P(x=0)*P(y=0)
+                check_frequencies(dictionary, (0, 0, 1))[1]):  # if P(x=0 & y=0) != P(x=0)*P(y=0)
             depd["x & y"] = "are DEPENDED"
+
         if (check_coop_frequencies(dictionary)[1] != check_frequencies(dictionary)[0] * check_frequencies(dictionary)[
             2]  # if P(x=1 & z=1) != P(x=1)*P(z=1)
                 or
@@ -158,80 +161,55 @@ def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)
     return [freqx, freqy, freqz]
 
 
+def get_chain_from_dict(dictionary: dict, value):
+    keys = []
+    for key in list(dictionary.keys()):
+        if value == dictionary[key]:
+            keys.append(key)
+    return keys[0]
+
+
 def intervente(dictionary: dict, name='y', fixed=1):
     '''does an intervention in variable "name" and equal it to "fixed"
        reutrns the dictionary with new distribution
        '''
+    d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                     'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                     'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+         'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                     'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                     'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+         'twolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                      'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+                      'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]},
+         'collider': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                      'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                      'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
     st = ['x', 'y', 'z']
     st.remove(name)  # to have a deal with other 2 variables
 
     indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # индексы, где Y = 0
     indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # индексы, где Y = 1
 
-    x_when_name = [dictionary[st[0]][i] for i in indexes_where_name_is_1]  # Xs where y=1
-    x_when_not_name = [dictionary[st[0]][i] for i in indexes_where_name_is_0]  # Xs where y=0
     z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
     z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
-
-    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)
-    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)
     freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)
     freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)
 
-    indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-    indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
+    X = [1 if i < round(0.5 * len(dictionary[st[0]])) else 0 for i in range(len(dictionary[st[0]]))]
 
-    indexes_when_y1_and_z0 = list(set(indexes_where_name_is_1) & set(indexes_where_z0))  # индексы где Y = 1 и Z = 0
-    indexes_when_y1_and_z1 = list(set(indexes_where_name_is_1) & set(indexes_where_z1))  # индексы где Y = 1 и Z = 1
-    indexes_when_y0_and_z0 = list(set(indexes_where_name_is_0) & set(indexes_where_z0))  # индексы где Y = 0 и Z = 0
-    indexes_when_y0_and_z1 = list(set(indexes_where_name_is_0) & set(indexes_where_z1))  # индексы где Y = 0 и Z = 1
-    # проверил, что они не пересекаются
-    x_when_y1_and_z0 = [dictionary[st[0]][i] for i in
-                        indexes_when_y1_and_z0]  # соответственно значения X в этих индексах
-    x_when_y1_and_z1 = [dictionary[st[0]][i] for i in indexes_when_y1_and_z1]
-    x_when_y0_and_z0 = [dictionary[st[0]][i] for i in indexes_when_y0_and_z0]
-    x_when_y0_and_z1 = [dictionary[st[0]][i] for i in indexes_when_y0_and_z1]
+    if get_chain_from_dict(d, dictionary) != 'twolinks':
+        Z = [1 if i < round(0.5 * len(dictionary[st[0]]) // 2) else 0 for i in range(len(dictionary[st[0]]) // 2)] * 2
+    elif fixed == 1:
+        Z = [1 if i < round(freq_z_when_name * len(dictionary[name]) // 2) else 0 for i in
+             range(len(dictionary[name]) // 2)] * 2
+    else:
+        Z = [1 if i < round(freq_z_when_not_name * len(dictionary[name]) // 2) else 0 for i in
+             range(len(dictionary[name]) // 2)] * 2
 
-    try:
-
-        freqx_when_y1_and_z0 = len([i for i in x_when_y1_and_z0 if i == 1]) / len(x_when_y1_and_z0)
-        freqx_when_y1_and_z1 = len([i for i in x_when_y1_and_z1 if i == 1]) / len(x_when_y1_and_z1)
-        freqx_when_y0_and_z0 = len([i for i in x_when_y0_and_z0 if i == 1]) / len(x_when_y0_and_z0)
-        freqx_when_y0_and_z1 = len([i for i in x_when_y0_and_z1 if i == 1]) / len(x_when_y0_and_z1)
-
-        dictionary[name] = [fixed] * len(dictionary[name])  # заполняем весь Y значением fixed
-
-        if fixed == 1:
-            dictionary[st[1]] = create_list_from_freq(freq_z_when_name, len(dictionary[name]))  # заполняем Z значениями
-            indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]  # новые индексы где Z = 0
-            indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]  # новые индексы где Z = 1
-            corresponding_list_x_y1_z0 = create_list_from_freq(freqx_when_y1_and_z0, len(indexes_where_z0))
-            corresponding_list_x_y1_z1 = create_list_from_freq(freqx_when_y1_and_z1, len(indexes_where_z1))
-
-            for i in range(len(indexes_where_z0)):
-                dictionary[st[0]][indexes_where_z0[i]] = corresponding_list_x_y1_z0[i]
-
-            for i in range(len(indexes_where_z1)):
-                dictionary[st[0]][indexes_where_z1[i]] = corresponding_list_x_y1_z1[i]
-
-        if fixed == 0:
-            dictionary[st[1]] = create_list_from_freq(freq_z_when_not_name,
-                                                      len(dictionary[name]))  # заполняем Z значениями
-            indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-            indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
-            corresponding_list_x_y0_z0 = create_list_from_freq(freqx_when_y0_and_z0, len(indexes_where_z0))
-            corresponding_list_x_y0_z1 = create_list_from_freq(freqx_when_y0_and_z1, len(indexes_where_z1))
-            for i in range(len(indexes_where_z0)):
-                dictionary[st[0]][indexes_where_z0[i]] = corresponding_list_x_y0_z0[i]
-
-            for i in range(len(indexes_where_z1)):
-                dictionary[st[0]][indexes_where_z1[i]] = corresponding_list_x_y0_z1[i]
-
-    except ZeroDivisionError:
-        return "WRONG 0"
-
-    except IndexError:
-        return "WRONG indexes"
+    dictionary[st[1]] = Z
+    dictionary[st[0]] = X
+    dictionary[name] = [fixed] * len(dictionary[name])  # заполняем весь Y значением fixed
 
     return dictionary
 
@@ -250,8 +228,8 @@ def intervente2(dictionary: dict, name='y', fixed=1):
     z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
     z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
 
-    #print(z_when_name)
-    #print([i for i in z_when_name if i == 1])
+    # print(z_when_name)
+    # print([i for i in z_when_name if i == 1])
 
     freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)
     freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)
@@ -314,97 +292,69 @@ def intervente2(dictionary: dict, name='y', fixed=1):
 
     return dictionary
 
-def intervente3(dictionary: dict, name='y', fixed=1):
-    '''does an intervention in variable "name" and equal it to "fixed"
-       reutrns the dictionary with new distribution
-       '''
-    st = ['x', 'y', 'z']
-    st.remove(name)  # to have a deal with other 2 variables
-
-    indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # индексы, где Y = 0
-    indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # индексы, где Y = 1
-
-    x_when_name = [dictionary[st[0]][i] for i in indexes_where_name_is_1]  # Xs where y=1
-    x_when_not_name = [dictionary[st[0]][i] for i in indexes_where_name_is_0]  # Xs where y=0
-    z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
-    z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
-
-    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)
-    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)
-    freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)
-    freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)
-
-    indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-    indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
-
-    indexes_when_y1_and_z0 = list(set(indexes_where_name_is_1) & set(indexes_where_z0))  # индексы где Y = 1 и Z = 0
-    indexes_when_y1_and_z1 = list(set(indexes_where_name_is_1) & set(indexes_where_z1))  # индексы где Y = 1 и Z = 1
-    indexes_when_y0_and_z0 = list(set(indexes_where_name_is_0) & set(indexes_where_z0))  # индексы где Y = 0 и Z = 0
-    indexes_when_y0_and_z1 = list(set(indexes_where_name_is_0) & set(indexes_where_z1))  # индексы где Y = 0 и Z = 1
-    # проверил, что они не пересекаются
-    x_when_y1_and_z0 = [dictionary[st[0]][i] for i in
-                        indexes_when_y1_and_z0]  # соответственно значения X в этих индексах
-    x_when_y1_and_z1 = [dictionary[st[0]][i] for i in indexes_when_y1_and_z1]
-    x_when_y0_and_z0 = [dictionary[st[0]][i] for i in indexes_when_y0_and_z0]
-    x_when_y0_and_z1 = [dictionary[st[0]][i] for i in indexes_when_y0_and_z1]
-
-    try:
-
-        freqx_when_y1_and_z0 = len([i for i in x_when_y1_and_z0 if i == 1]) / len(x_when_y1_and_z0)
-        freqx_when_y1_and_z1 = len([i for i in x_when_y1_and_z1 if i == 1]) / len(x_when_y1_and_z1)
-        freqx_when_y0_and_z0 = len([i for i in x_when_y0_and_z0 if i == 1]) / len(x_when_y0_and_z0)
-        freqx_when_y0_and_z1 = len([i for i in x_when_y0_and_z1 if i == 1]) / len(x_when_y0_and_z1)
-
-        dictionary[name] = [fixed] * len(dictionary[name])  # заполняем весь Y значением fixed
-
-        if fixed == 1:
-            dictionary[st[1]] = create_list_from_freq(freq_z_when_name, len(dictionary[name]))  # заполняем Z значениями
-            indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]  # новые индексы где Z = 0
-            indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]  # новые индексы где Z = 1
-            corresponding_list_x_y1_z0 = create_list_from_freq(freqx_when_y1_and_z0, len(indexes_where_z0))
-            corresponding_list_x_y1_z1 = create_list_from_freq(freqx_when_y1_and_z1, len(indexes_where_z1))
-
-            for i in range(len(indexes_where_z0)):
-                dictionary[st[0]][indexes_where_z0[i]] = corresponding_list_x_y1_z0[i]
-
-            for i in range(len(indexes_where_z1)):
-                dictionary[st[0]][indexes_where_z1[i]] = corresponding_list_x_y1_z1[i]
-
-        if fixed == 0:
-            dictionary[st[1]] = create_list_from_freq(freq_z_when_not_name,
-                                                      len(dictionary[name]))  # заполняем Z значениями
-            indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-            indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
-            corresponding_list_x_y0_z0 = create_list_from_freq(freqx_when_y0_and_z0, len(indexes_where_z0))
-            corresponding_list_x_y0_z1 = create_list_from_freq(freqx_when_y0_and_z1, len(indexes_where_z1))
-            for i in range(len(indexes_where_z0)):
-                dictionary[st[0]][indexes_where_z0[i]] = corresponding_list_x_y0_z0[i]
-
-            for i in range(len(indexes_where_z1)):
-                dictionary[st[0]][indexes_where_z1[i]] = corresponding_list_x_y0_z1[i]
-
-    except ZeroDivisionError:
-        return "WRONG 0"
-
-    except IndexError:
-        return "WRONG indexes"
-
-    return dictionary
-
-
 '''
-print(d['collider'], "- collider")
+print(d['onelink'], "- onelink")
+print(check_dependencies(d['onelink']), "- dependencies")
+print(check_frequencies(d['onelink']), "- frequencies")
+print(intervente(d['onelink']), "- orange distribution (Y fixed)")
+print(check_dependencies(d['onelink']), "- dependencies again")
+print(check_frequencies(d['onelink']), "- frequencies again")
 
-print(shuffle_coloumns(d['collider']), "- shuffled")
+temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+        'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]}
+
+print(intervente(temp), "- orange distribution (Y fixed)")
+print(check_dependencies(temp), "- dependencies again x2")
+print(check_frequencies(temp), "- frequencies again x2")
+
+print()
+print()
+
+print(d['nolinks'], "- nolinks")
+print(check_dependencies(d['nolinks']), "- dependencies")
+print(check_frequencies(d['nolinks']), "- frequencies")
+print(intervente(d['nolinks']), "- orange distribution (Y fixed)")
+print(check_dependencies(d['nolinks']), "- dependencies again")
+print(check_frequencies(d['nolinks']), "- frequencies again")
+
+temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]}
+print(intervente(temp), "- orange distribution (Y fixed)")
+print(check_dependencies(temp), "- dependencies again x2")
+print(check_frequencies(temp), "- frequencies again x2")
+
+print()
+print()
+
+print(d['twolinks'], "- twolinks")
+print(check_dependencies(d['twolinks']), "- dependencies")
+print(check_frequencies(d['twolinks']), "- frequencies")
+print(intervente(d['twolinks']), "- orange distribution (Y fixed)")
+print(check_dependencies(d['twolinks']), "- dependencies again")
+print(check_frequencies(d['twolinks']), "- frequencies again")
+temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]}
+
+print(intervente(temp), "- orange distribution (Y fixed)")
+print(check_dependencies(temp), "- dependencies again x2")
+print(check_frequencies(temp), "- frequencies again x2")
+
+print()
+print()
+
+print(d['collider'], "- collider")
 print(check_dependencies(d['collider']), "- dependencies")
 print(check_frequencies(d['collider']), "- frequencies")
-print(intervente2(d['collider'], 'z', 0), "- orange distribution (Z fixed")
+print(intervente(d['collider']), "- orange distribution (Y fixed")
 print(check_dependencies(d['collider']), "- dependencies again")
 print(check_frequencies(d['collider']), "- frequencies again")
 temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                  'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0],
-                  'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}
-print(intervente2(temp, 'z', 0), "- orange distribution (Z fixed)")
+        'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}
+print(intervente(temp), "- orange distribution (Y fixed)")
 print(check_dependencies(temp), "- dependencies again x2")
 print(check_frequencies(temp), "- frequencies again x2")
 '''
