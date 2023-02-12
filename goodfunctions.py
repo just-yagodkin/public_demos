@@ -9,17 +9,23 @@ def create_list_from_freq(freq, size=16):
 
 
 d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                 'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                 'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-     'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                 'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                 'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-     'twolinks':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                 'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-                 'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]},
-     'collider':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                 'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                 'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
+                     'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                     'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+         'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                     'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                     'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+         'twolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                      'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+                      'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]},
+         'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+         'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                  'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                  'z': [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]},
+         'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],           # collider2 is optional
+                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}}
 
 
 def check_dependencies(dictionary: dict):
@@ -182,34 +188,59 @@ def intervente(dictionary: dict, name='y', fixed=1):
          'twolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                       'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
                       'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]},
-         'collider': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                      'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                      'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}}
+         'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+         'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                  'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                  'z': [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]},
+         'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}}
+    length = 16
     st = ['x', 'y', 'z']
     st.remove(name)  # to have a deal with other 2 variables
 
     indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # индексы, где Y = 0
     indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # индексы, где Y = 1
 
+    x_when_name = [dictionary[st[0]][i] for i in indexes_where_name_is_1]  # Xs where y=1
+    x_when_not_name = [dictionary[st[0]][i] for i in indexes_where_name_is_0]  # Xs where y=0
     z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
     z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
+
     freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)
     freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)
+    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)
+    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)
 
-    X = [1 if i < round(0.5 * len(dictionary[st[0]])) else 0 for i in range(len(dictionary[st[0]]))]
+    X = [1 if i < round(0.5 * length) else 0 for i in range(length)]
 
-    if get_chain_from_dict(d, dictionary) != 'twolinks':
-        Z = [1 if i < round(0.5 * len(dictionary[st[0]]) // 2) else 0 for i in range(len(dictionary[st[0]]) // 2)] * 2
-    elif fixed == 1:
-        Z = [1 if i < round(freq_z_when_name * len(dictionary[name]) // 2) else 0 for i in
-             range(len(dictionary[name]) // 2)] * 2
-    else:
-        Z = [1 if i < round(freq_z_when_not_name * len(dictionary[name]) // 2) else 0 for i in
-             range(len(dictionary[name]) // 2)] * 2
+    if get_chain_from_dict(d, dictionary) == 'twolinks':
+        if fixed == 1:
+            Z = [1 if i < round(freq_z_when_name * length // 2) else 0 for i in
+                 range(length // 2)] * 2
+        else:
+            Z = [1 if i < round(freq_z_when_not_name * length // 2) else 0 for i in
+                 range(length // 2)] * 2
+    elif get_chain_from_dict(d, dictionary) == 'fork':
+        if fixed == 1:
+            X = [1 if i < round(freq_x_when_name * length) else 0 for i in
+                 range(length)]
+            Z = [1 if i < round(freq_z_when_name * length) else 0 for i in
+                 range(length)]
+        else:
+            X = [1 if i < round(freq_x_when_not_name * length) else 0 for i in
+                 range(length)]
+            Z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in
+                 range(length)]
+
+    else:  # onelink, nolinks, collider1, collider2
+        Z = [1 if i < round(0.5 * length // 2) else 0 for i in range(length // 2)] * 2
 
     dictionary[st[1]] = Z
     dictionary[st[0]] = X
-    dictionary[name] = [fixed] * len(dictionary[name])  # заполняем весь Y значением fixed
+    dictionary[name] = [fixed] * length  # заполняем весь Y значением fixed
 
     return dictionary
 
@@ -345,15 +376,47 @@ print(check_frequencies(temp), "- frequencies again x2")
 print()
 print()
 
-print(d['collider'], "- collider")
-print(check_dependencies(d['collider']), "- dependencies")
-print(check_frequencies(d['collider']), "- frequencies")
-print(intervente(d['collider']), "- orange distribution (Y fixed")
-print(check_dependencies(d['collider']), "- dependencies again")
-print(check_frequencies(d['collider']), "- frequencies again")
+print(d['collider1'], "- collider1")
+print(check_dependencies(d['collider1']), "- dependencies")
+print(check_frequencies(d['collider1']), "- frequencies")
+print(intervente(d['collider1']), "- orange distribution (Y fixed)")
+print(check_dependencies(d['collider1']), "- dependencies again")
+print(check_frequencies(d['collider1']), "- frequencies again")
 temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
         'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
         'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}
+print(intervente(temp), "- orange distribution (Y fixed)")
+print(check_dependencies(temp), "- dependencies again x2")
+print(check_frequencies(temp), "- frequencies again x2")
+
+print()
+print()
+
+print(d['collider2'], "- collider2")
+print(check_dependencies(d['collider2']), "- dependencies")
+print(check_frequencies(d['collider2']), "- frequencies")
+print(intervente(d['collider2']), "- orange distribution (Y fixed)")
+print(check_dependencies(d['collider2']), "- dependencies again")
+print(check_frequencies(d['collider2']), "- frequencies again")
+temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+        'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+        'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
+print(intervente(temp), "- orange distribution (Y fixed)")
+print(check_dependencies(temp), "- dependencies again x2")
+print(check_frequencies(temp), "- frequencies again x2")
+
+print()
+print()
+
+print(d['fork'], "- fork")
+print(check_dependencies(d['fork']), "- dependencies")
+print(check_frequencies(d['fork']), "- frequencies")
+print(intervente(d['fork']), "- orange distribution (Y fixed)")
+print(check_dependencies(d['fork']), "- dependencies again")
+print(check_frequencies(d['fork']), "- frequencies again")
+temp = {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+        'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        'z': [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]}
 print(intervente(temp), "- orange distribution (Y fixed)")
 print(check_dependencies(temp), "- dependencies again x2")
 print(check_frequencies(temp), "- frequencies again x2")
