@@ -77,14 +77,14 @@ Instructions
       <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
             <li>The session consists of {{C.NUM_ROUNDS}} rounds.
-              In each round you will be asked to perform typical tasks that do not differ 
+              In each round you will be asked to perform identical tasks that do not differ 
               in structure or purpose.
             </li>
             <li>Inside each assignment you will be given sets of data, which are divided 
               into columns (3 columns in total). Each column contains 16 rows. 
               The value of a row in each column can take the values 0 and 1. 
               Each such value is the result of a random choice of the system, 
-              but the frequency of their generation is determined by the 
+              but the frequency of their occurence depends on
               mechanism assigned to each column. 
             </li>
             <li>If the columns are dependent, then in one of them certain values have been randomly selected, and in the other one the generation frequency on the corresponding rows has changed. For example, if Y is dependent on X, it may happen that column Y generates a one more often (or less often) on those rows that were also ones in column X.
@@ -120,7 +120,9 @@ Instructions
   </div>
 </div>
 
-{{ next_button }}
+<button class="btn btn-warning btn-lg btn-block"> 
+  Using < > elements, I carefully read all slides and understand the task. 
+</button>
 
 
 

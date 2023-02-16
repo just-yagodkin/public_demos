@@ -10,8 +10,8 @@ Your app description
 
 # test 123
 class C(BaseConstants):
-    TEST = True
-    
+    TEST = False
+
     NUM_ROUNDS = 4
 
     NAME_IN_URL = 'data_to_dgp'
@@ -46,20 +46,20 @@ class C(BaseConstants):
                              'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                            'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                            'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                             'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-                                      'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                      'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
-                             'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                                           'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                                           'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
+                            #  'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+                            #           'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                            #           'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
+                            #  'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                            #                'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                            #                'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
                              }  # collider2 is optional
 
     preinterventional_data = {'nolinks':    gf.intervente('nolinks', preobservational_data['nolinks']),
                               'onelink':    gf.intervente('onelink', preobservational_data['onelink']),
                               'twolinks':   gf.intervente('twolinks', preobservational_data['twolinks']),
                               'collider1':  gf.intervente('collider', preobservational_data['collider1']),
-                              'fork':       gf.intervente('fork', preobservational_data['fork']),
-                              'collider2':  gf.intervente('collider', preobservational_data['collider2'])
+                            #   'fork':       gf.intervente('fork', preobservational_data['fork']),
+                            #   'collider2':  gf.intervente('collider', preobservational_data['collider2'])
                               }
     '''                                                 
 
