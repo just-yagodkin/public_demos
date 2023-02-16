@@ -114,7 +114,7 @@ var cy = cytoscape({
         'name': 'grid',
         'rows': 1,
         'cols': 2,
-        'padding': 10,
+        'padding': 15,
       })
       ,
 
@@ -176,8 +176,8 @@ cy.on('tap', 'edge', function(evt){
 });
 
 function liveRecv(data) {
-      // forminputs.trainig.value = data; // for server setting
-      formInputs.trainig.value = data;
+      forminputs.trainig.value = data; // for server setting
+      // formInputs.trainig.value = data;
       console.log(data)
   }
 

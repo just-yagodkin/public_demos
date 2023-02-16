@@ -11,10 +11,8 @@ Your app description
 # test 123
 class C(BaseConstants):
     TEST = True
-    if not TEST:
-        NUM_ROUNDS = 2
-    else:
-        NUM_ROUNDS = 5
+    
+    NUM_ROUNDS = 4
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
@@ -94,9 +92,9 @@ class C(BaseConstants):
     if not TEST:
         task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
     else:
-        task_sequence = ['collider1', 'twolinks', 'collider2', 'fork', 'onelink' ]
+        task_sequence = ['collider1', 'twolinks',   'onelink', "nolinks" ]
 
-
+# 'collider2','fork',
 class Subsession(BaseSubsession):
     pass
 
