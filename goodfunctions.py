@@ -9,23 +9,24 @@ def create_list_from_freq(freq, size=16):
 
 
 d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                     'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                     'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-         'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                     'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                     'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-         'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
-         'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-         'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                 'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                 'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+     'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                 'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+     'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                  'z': [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]},
-         'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],           # collider2 is optional
-                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}}
+                  'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
+     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+     'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+              'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+              'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
+     'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
+     }  # collider2 is optional
 
 
 def check_dependencies(dictionary: dict):
@@ -35,6 +36,7 @@ def check_dependencies(dictionary: dict):
             "x & z": "are INDEPENDED",
             "y & z": "are INDEPENDED", }
 
+
     iwx0 = indexes_where_x_is_0 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[0]]) if x == 0}
     iwx1 = indexes_where_x_is_1 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[0]]) if x == 1}
     iwy0 = indexes_where_y_is_0 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 0}
@@ -42,7 +44,87 @@ def check_dependencies(dictionary: dict):
     iwz0 = indexes_where_z_is_0 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[2]]) if x == 0}
     iwz1 = indexes_where_z_is_1 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[2]]) if x == 1}
 
+    number_of_x1_when_y1 = len(iwx1 & iwy1)
+    number_of_x0_when_y1 = len(iwx0 & iwy1)
+    number_of_x0_when_y0 = len(iwx0 & iwy0)
+    number_of_x1_when_y0 = len(iwx1 & iwy0)
+
+    number_of_x1_when_z1 = len(iwx1 & iwz1)
+    number_of_x0_when_z1 = len(iwx0 & iwz1)
+    number_of_x0_when_z0 = len(iwx0 & iwz0)
+    number_of_x1_when_z0 = len(iwx1 & iwz0)
+
+    number_of_y1_when_z1 = len(iwy1 & iwz1)
+    number_of_y0_when_z1 = len(iwy0 & iwz1)
+    number_of_y0_when_z0 = len(iwy0 & iwz0)
+    number_of_y1_when_z0 = len(iwy1 & iwz0)
+
+    #   checking X and Y independencies
+
+    if number_of_x0_when_y1 != 0 and number_of_x0_when_y0 != 0:
+        if number_of_x1_when_y1 / number_of_x0_when_y1 != number_of_x1_when_y0 / number_of_x0_when_y0:
+            depd['x & y'] = 'are DEPENDED'
+    elif number_of_x1_when_y1 != 0 and number_of_x1_when_y0 !=0:
+        if number_of_x0_when_y1 / number_of_x1_when_y1 != number_of_x0_when_y0 / number_of_x1_when_y0:
+            depd['x & y'] = 'are DEPENDED'
+    elif number_of_x1_when_y0 !=0 and number_of_x0_when_y0 != 0:
+        if number_of_x1_when_y1 / number_of_x1_when_y0 != number_of_x0_when_y1 / number_of_x0_when_y0:
+            depd['x & y'] = 'are DEPENDED'
+    elif number_of_x1_when_y1 != 0 and number_of_x0_when_y1 != 0:
+        if number_of_x1_when_y0 / number_of_x1_when_y1 != number_of_x0_when_y0 / number_of_x0_when_y1:
+            depd['x & y'] = 'are DEPENDED'
+    elif len(iwx0) != len(iwx1) and len(iwy0) != len(iwy1):                               # not sure
+        depd['x & y'] = 'are DEPENDED'                                                    # not sure
+    else:
+        print('беда')
+
+    #   checking X and Z independencies
+
+    if number_of_x0_when_z1 != 0 and number_of_x0_when_z0 != 0:
+        if number_of_x1_when_z1 / number_of_x0_when_z1 != number_of_x1_when_z0 / number_of_x0_when_z0:
+            depd['x & z'] = 'are DEPENDED'
+    elif number_of_x1_when_z1 != 0 and number_of_x1_when_z0 !=0:
+        if number_of_x0_when_z1 / number_of_x1_when_z1 != number_of_x0_when_z0 / number_of_x1_when_z0:
+            depd['x & z'] = 'are DEPENDED'
+    elif number_of_x1_when_z0 !=0 and number_of_x0_when_z0 != 0:
+        if number_of_x1_when_z1 / number_of_x1_when_z0 != number_of_x0_when_z1 / number_of_x0_when_z0:
+            depd['x & z'] = 'are DEPENDED'
+    elif number_of_x1_when_z1 != 0 and number_of_x0_when_z1 != 0:
+        if number_of_x1_when_z0 / number_of_x1_when_z1 != number_of_x0_when_z0 / number_of_x0_when_z1:
+            depd['x & z'] = 'are DEPENDED'
+    elif len(iwx0) != len(iwx1) and len(iwz0) != len(iwz1):                               # not sure
+        depd['x & z'] = 'are DEPENDED'                                                    # not sure
+    else:
+        print('беда')
+
+    #   checking Y and Z independencies
+
+    if number_of_y0_when_z1 != 0 and number_of_y0_when_z0 != 0:
+        if number_of_y1_when_z1 / number_of_y0_when_z1 != number_of_y1_when_z0 / number_of_y0_when_z0:
+            depd['y & z'] = 'are DEPENDED'
+    elif number_of_y1_when_z1 != 0 and number_of_y1_when_z0 !=0:
+        if number_of_y0_when_z1 / number_of_y1_when_z1 != number_of_y0_when_z0 / number_of_y1_when_z0:
+            depd['y & z'] = 'are DEPENDED'
+    elif number_of_y1_when_z0 !=0 and number_of_y0_when_z0 != 0:
+        if number_of_y1_when_z1 / number_of_y1_when_z0 != number_of_y0_when_z1 / number_of_y0_when_z0:
+            depd['y & z'] = 'are DEPENDED'
+    elif number_of_y1_when_z1 != 0 and number_of_y0_when_z1 != 0:
+        if number_of_y1_when_z0 / number_of_y1_when_z1 != number_of_y0_when_z0 / number_of_y0_when_z1:
+            depd['y & z'] = 'are DEPENDED'
+    elif len(iwy0) != len(iwy1) and len(iwz0) != len(iwz1):                               # not sure
+        depd['y & z'] = 'are DEPENDED'                                                    # not sure
+    else:
+        print('беда')
+
+    """
     try:
+        #print(check_coop_frequencies(dictionary)[0], check_frequencies(dictionary)[0], check_frequencies(dictionary)[1], 'P(x=1, y=1), P(x=1), P(y=1)')
+        #print(check_coop_frequencies(dictionary, (1, 0))[0], check_frequencies(dictionary, (1, 0, 1))[0],
+        #      check_frequencies(dictionary, (1, 0, 1))[1], 'P(x=1, y=0), P(x=1), P(y=0)')
+        #print(check_coop_frequencies(dictionary, (0, 1))[0], check_frequencies(dictionary, (0, 1, 1))[0],
+        #      check_frequencies(dictionary, (0, 1, 1))[1], 'P(x=0, y=1), P(x=0), P(y=1)')
+        #print(check_coop_frequencies(dictionary, (0, 0))[0], check_frequencies(dictionary, (0, 0, 1))[0],
+        #      check_frequencies(dictionary, (0, 0, 1))[1], 'P(x=0, y=0), P(x=0), P(y=0)')
         '''
         if len(iwx1 & iwy1) / len(iwx0 & iwy1) != len(iwx1 & iwy0) / len(iwx0 & iwy0) or len(iwy1 & iwx1) / len(
                 iwy0 & iwx1) != len(iwy1 & iwx0) / len(
@@ -94,7 +176,11 @@ def check_dependencies(dictionary: dict):
                 check_coop_frequencies(dictionary, (0, 0))[1] != check_frequencies(dictionary, (0, 1, 0))[0] *
                 check_frequencies(dictionary, (0, 1, 0))[2]):  # if P(x=0 & z=0) != P(x=0)*P(z=0)
             depd["x & z"] = "are DEPENDED"
-        if (check_coop_frequencies(dictionary)[2] != check_frequencies(dictionary)[0] * check_frequencies(dictionary)[
+            #print(check_coop_frequencies(dictionary, (1, 1))[1], check_frequencies(dictionary, (1,1,1))[0], check_frequencies(dictionary,(1,1,1))[2] , 'P(x=1 & z=1), P(x=1), P(z=1)')
+            #print(check_coop_frequencies(dictionary, (1, 0))[1], check_frequencies(dictionary, (1, 1, 0))[0], check_frequencies(dictionary, (1, 1, 0))[2], 'P(x=1 & z=0), P(x=1), P(z=0)')
+            #print(check_coop_frequencies(dictionary, (0, 1))[1], check_frequencies(dictionary, (0, 1, 1))[0], check_frequencies(dictionary, (0, 1, 1))[2], 'P(x=0 & z=1), P(x=0), P(z=1)')
+            #print(check_coop_frequencies(dictionary, (0, 0))[1], check_frequencies(dictionary, (0, 1, 0))[0], check_frequencies(dictionary, (0, 1, 0))[2], 'P(x=0 & z=0), P(x=0), P(z=0)')
+        if (check_coop_frequencies(dictionary)[2] != check_frequencies(dictionary)[2] * check_frequencies(dictionary)[
             1]  # if P(y=1 & z=1) != P(y=1)*P(z=1)
                 or
                 check_coop_frequencies(dictionary, (1, 0))[2] != check_frequencies(dictionary, (1, 1, 0))[2] *
@@ -104,9 +190,14 @@ def check_dependencies(dictionary: dict):
                 check_coop_frequencies(dictionary, (0, 0))[2] != check_frequencies(dictionary, (1, 0, 0))[2] *
                 check_frequencies(dictionary, (1, 0, 0))[1]):  # if P(y=0 & z=0) != P(y=0)*P(z=0)
             depd["y & z"] = "are DEPENDED"
-        return [depd["x & y"], depd["x & z"], depd["y & z"]]
-    except:
-        return "check_dependencies doesnt work"
+            #print(check_coop_frequencies(dictionary, (1, 1))[2], check_frequencies(dictionary, (1,1,1))[2], check_frequencies(dictionary,(1,1,1))[1] , 'P(y=1 & z=1), P(z=1), P(y=1)')
+            #print(check_coop_frequencies(dictionary, (1, 0))[2], check_frequencies(dictionary, (1, 1, 0))[2], check_frequencies(dictionary, (1, 1, 0))[1], 'P(y=1 & z=0), P(z=0), P(y=1)')
+            #print(check_coop_frequencies(dictionary, (0, 1))[2], check_frequencies(dictionary, (1, 0, 1))[2], check_frequencies(dictionary, (1, 0, 1))[1], 'P(y=0 & z=1), P(z=1), P(y=0)')
+            #print(check_coop_frequencies(dictionary, (0, 0))[2], check_frequencies(dictionary, (1, 0, 0))[2], check_frequencies(dictionary, (1, 0, 0))[1], 'P(y=0 & z=0), P(z=0), P(y=0)')
+    """
+    return [depd["x & y"], depd["x & z"], depd["y & z"]]
+    #except:
+    #    return "check_dependencies doesnt work"
 
 
 def reshuffle(dictionary: dict):
@@ -149,10 +240,18 @@ def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 
         iwy1 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 1}
         iwy2 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 0}
         iwz = {i for i, x in enumerate(dictionary[list(dictionary.keys())[2]]) if x == 1}
+    #else:
+    #    raise ValueError('second argument takes an invalid value')
 
     freqxy, freqxz, freqyz = [len(iwx & iwy1) / len(dictionary[list(dictionary.keys())[0]]),
                               len(iwx & iwz) / len(dictionary[list(dictionary.keys())[0]]),
                               len(iwy2 & iwz) / len(dictionary[list(dictionary.keys())[0]])]
+    if freqxy == 0:
+        freqxy = 1/2
+    if freqxz == 0:
+        freqxz = 1/2
+    if freqyz == 0:
+        freqyz =1/2
 
     return [freqxy, freqxz, freqyz]
 
@@ -175,74 +274,72 @@ def get_chain_from_dict(dictionary: dict, value):
     return keys[0]
 
 
-def intervente(dictionary: dict, name='y', fixed=1):
+def intervente(key: str, dictionary: dict, name='y', fixed=1):
     '''does an intervention in variable "name" and equal it to "fixed"
-       reutrns the dictionary with new distribution
+       reutrns the copy of new dictionary with new distribution
        '''
-    d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                     'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                     'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-         'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                     'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                     'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-         'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-                    'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                    'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
-         'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-         'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                  'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                  'z': [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]},
-         'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                       'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                       'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}}
+
+    interv_dict = dictionary.copy()
+
     length = 16
     st = ['x', 'y', 'z']
     st.remove(name)  # to have a deal with other 2 variables
 
-    indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # индексы, где Y = 0
-    indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # индексы, где Y = 1
+    indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # indexes where Y = 0
+    indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # indexes where Y = 1
 
     x_when_name = [dictionary[st[0]][i] for i in indexes_where_name_is_1]  # Xs where y=1
     x_when_not_name = [dictionary[st[0]][i] for i in indexes_where_name_is_0]  # Xs where y=0
     z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
     z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
 
-    freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)
-    freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)
-    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)
-    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)
+    freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)  # freq z if y = 1
+    freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)  # freq z if y = 0
+    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)  # freq x if y = 1
+    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)  # freq x if y = 0
 
-    X = [1 if i < round(0.5 * length) else 0 for i in range(length)]
+    interv_dict[name] = [fixed] * length  # fill Y with fixed value
 
-    if get_chain_from_dict(d, dictionary) == 'twolinks':
+    if key == 'twolinks':
         if fixed == 1:
-            Z = [1 if i < round(freq_z_when_name * length // 2) else 0 for i in
-                 range(length // 2)] * 2
+            z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
+            x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
+                 range(round(freq_z_when_name * length))]
+            x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0 for i in
+                  range(round(length * (1 - freq_z_when_name)))]
         else:
-            Z = [1 if i < round(freq_z_when_not_name * length // 2) else 0 for i in
-                 range(length // 2)] * 2
-    elif get_chain_from_dict(d, dictionary) == 'fork':
+            z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
+            x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
+                 range(round(freq_z_when_not_name * length))]
+            x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0 for i in
+                  range(round(length * (1 - freq_z_when_not_name)))]
+
+    elif key == 'fork':
         if fixed == 1:
-            X = [1 if i < round(freq_x_when_name * length) else 0 for i in
+            x = [1 if i < round(freq_x_when_name * length) else 0 for i in
                  range(length)]
-            Z = [1 if i < round(freq_z_when_name * length) else 0 for i in
-                 range(length)]
+            z = [1 if i < round(freq_z_when_name * freq_x_when_name * length) else 0 for i in
+                 range(round(freq_x_when_name * length))]
+            z += [1 if i < round(freq_z_when_name * round(length * (1 - freq_x_when_name))) else 0 for i in
+                  range(round(length * (1 - freq_x_when_name)))]
         else:
-            X = [1 if i < round(freq_x_when_not_name * length) else 0 for i in
+            x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in
                  range(length)]
-            Z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in
-                 range(length)]
+            z = [1 if i < round(freq_z_when_not_name * freq_x_when_not_name * length) else 0 for i in
+                 range(round(freq_x_when_not_name * length))]
+            z += [1 if i < round(freq_z_when_not_name * round(length * (1 - freq_x_when_not_name))) else 0 for i in
+                  range(round(length * (1 - freq_x_when_not_name)))]
 
-    else:  # onelink, nolinks, collider1, collider2
-        Z = [1 if i < round(0.5 * length // 2) else 0 for i in range(length // 2)] * 2
+    else:
+        x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+        z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
 
-    dictionary[st[1]] = Z
-    dictionary[st[0]] = X
-    dictionary[name] = [fixed] * length  # заполняем весь Y значением fixed
+    # fork?????
 
-    return dictionary
+    interv_dict[st[1]] = z
+    interv_dict[st[0]] = x
+
+    return interv_dict
 
 
 def intervente2(dictionary: dict, name='y', fixed=1):
@@ -327,17 +424,13 @@ def intervente2(dictionary: dict, name='y', fixed=1):
 print(d['onelink'], "- onelink")
 print(check_dependencies(d['onelink']), "- dependencies")
 print(check_frequencies(d['onelink']), "- frequencies")
-print(intervente(d['onelink']), "- orange distribution (Y fixed)")
-print(check_dependencies(d['onelink']), "- dependencies again")
-print(check_frequencies(d['onelink']), "- frequencies again")
+print(intervente('onelink', d['onelink']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('onelink', d['onelink'])), "- dependencies again")
+print(check_frequencies(intervente('onelink', d['onelink'])), "- frequencies again")
 
-temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-        'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]}
-
-print(intervente(temp), "- orange distribution (Y fixed)")
-print(check_dependencies(temp), "- dependencies again x2")
-print(check_frequencies(temp), "- frequencies again x2")
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
 
 print()
 print()
@@ -345,16 +438,13 @@ print()
 print(d['nolinks'], "- nolinks")
 print(check_dependencies(d['nolinks']), "- dependencies")
 print(check_frequencies(d['nolinks']), "- frequencies")
-print(intervente(d['nolinks']), "- orange distribution (Y fixed)")
-print(check_dependencies(d['nolinks']), "- dependencies again")
-print(check_frequencies(d['nolinks']), "- frequencies again")
+print(intervente('nolinks', d['nolinks']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('nolinks', d['nolinks'])), "- dependencies again")
+print(check_frequencies(intervente('nolinks', d['nolinks'])), "- frequencies again")
 
-temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-        'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]}
-print(intervente(temp), "- orange distribution (Y fixed)")
-print(check_dependencies(temp), "- dependencies again x2")
-print(check_frequencies(temp), "- frequencies again x2")
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
 
 print()
 print()
@@ -362,16 +452,13 @@ print()
 print(d['twolinks'], "- twolinks")
 print(check_dependencies(d['twolinks']), "- dependencies")
 print(check_frequencies(d['twolinks']), "- frequencies")
-print(intervente(d['twolinks']), "- orange distribution (Y fixed)")
-print(check_dependencies(d['twolinks']), "- dependencies again")
-print(check_frequencies(d['twolinks']), "- frequencies again")
-temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        'y': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        'z': [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]}
+print(intervente('twolinks', d['twolinks']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('twolinks', d['twolinks'])), "- dependencies again")
+print(check_frequencies(intervente('twolinks', d['twolinks'])), "- frequencies again")
 
-print(intervente(temp), "- orange distribution (Y fixed)")
-print(check_dependencies(temp), "- dependencies again x2")
-print(check_frequencies(temp), "- frequencies again x2")
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
 
 print()
 print()
@@ -379,15 +466,13 @@ print()
 print(d['collider1'], "- collider1")
 print(check_dependencies(d['collider1']), "- dependencies")
 print(check_frequencies(d['collider1']), "- frequencies")
-print(intervente(d['collider1']), "- orange distribution (Y fixed)")
-print(check_dependencies(d['collider1']), "- dependencies again")
-print(check_frequencies(d['collider1']), "- frequencies again")
-temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]}
-print(intervente(temp), "- orange distribution (Y fixed)")
-print(check_dependencies(temp), "- dependencies again x2")
-print(check_frequencies(temp), "- frequencies again x2")
+print(intervente('collider', d['collider1']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('collider', d['collider1'])), "- dependencies again")
+print(check_frequencies(intervente('collider', d['collider1'])), "- frequencies again")
+
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
 
 print()
 print()
@@ -395,15 +480,13 @@ print()
 print(d['collider2'], "- collider2")
 print(check_dependencies(d['collider2']), "- dependencies")
 print(check_frequencies(d['collider2']), "- frequencies")
-print(intervente(d['collider2']), "- orange distribution (Y fixed)")
-print(check_dependencies(d['collider2']), "- dependencies again")
-print(check_frequencies(d['collider2']), "- frequencies again")
-temp = {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-        'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-        'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
-print(intervente(temp), "- orange distribution (Y fixed)")
-print(check_dependencies(temp), "- dependencies again x2")
-print(check_frequencies(temp), "- frequencies again x2")
+print(intervente('collider', d['collider2']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('collider', d['collider2'])), "- dependencies again")
+print(check_frequencies(intervente('collider', d['collider2'])), "- frequencies again")
+
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
 
 print()
 print()
@@ -411,13 +494,12 @@ print()
 print(d['fork'], "- fork")
 print(check_dependencies(d['fork']), "- dependencies")
 print(check_frequencies(d['fork']), "- frequencies")
-print(intervente(d['fork']), "- orange distribution (Y fixed)")
-print(check_dependencies(d['fork']), "- dependencies again")
-print(check_frequencies(d['fork']), "- frequencies again")
-temp = {'x': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-        'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        'z': [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]}
-print(intervente(temp), "- orange distribution (Y fixed)")
-print(check_dependencies(temp), "- dependencies again x2")
-print(check_frequencies(temp), "- frequencies again x2")
+print(intervente('fork', d['fork']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('fork', d['fork'])), "- dependencies again")
+print(check_frequencies(intervente('fork', d['fork'])), "- frequencies again")
+
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
 '''
+
