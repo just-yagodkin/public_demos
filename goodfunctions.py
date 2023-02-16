@@ -303,15 +303,15 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
     if key == 'twolinks':
         if fixed == 1:
             z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
-            x = [1 if i < round(0.5 * freq_z_when_name * length) else 0 for i in
+            x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
                  range(round(freq_z_when_name * length))]
-            x += [1 if i < round(0.5 * round(length * (1 - freq_z_when_name))) else 0 for i in
+            x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0 for i in
                   range(round(length * (1 - freq_z_when_name)))]
         else:
             z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
-            x = [1 if i < round(0.5 * freq_z_when_not_name * length) else 0 for i in
+            x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
                  range(round(freq_z_when_not_name * length))]
-            x += [1 if i < round(0.5 * round(length * (1 - freq_z_when_not_name))) else 0 for i in
+            x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0 for i in
                   range(round(length * (1 - freq_z_when_not_name)))]
 
     elif key == 'fork':
@@ -331,8 +331,8 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                   range(round(length * (1 - freq_x_when_not_name)))]
 
     else:
-        x = [1 if i < round(0.5 * length) else 0 for i in range(length)]
-        z = [1 if i < round(0.5 * length // 2) else 0 for i in range(length // 2)] * 2
+        x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+        z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
 
     # fork?????
 
