@@ -205,9 +205,8 @@ class DiagramTask(Page):
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            # frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
-            frequenciesobs=gf.check_frequencies(output[0]),
-            # frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
+            frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            # frequenciesobs=gf.check_frequencies(output[0]),
             frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
 
     @staticmethod
@@ -218,9 +217,8 @@ class DiagramTask(Page):
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            # frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
-            frequenciesobs=gf.check_frequencies(output[0]),
-            # frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
+            frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            # frequenciesobs=gf.check_frequencies(output[0]),
             frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
             seed=C.SEEDS[player.round_number - 1])
 
