@@ -31,20 +31,26 @@
 {{ endblock }}
 
 {{ block title }}
-    Pick the edges and nodes
+<dl class="lng-DTestTitle">Pick the edges and nodes.</dl>
 {{ endblock }}
 
 {{ block content }}
 
-
+<div class = "lang-container">
+    <select class="change-lang">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+    </select>
+</div>
+<br>
 <div >
-  <p> That what was chosen  </p>
+  <p class="lng-DTestText1">That what was chosen</p>
 
   <br />
 </div>
 <div id="cy"></div>
 <br />
-<p> That is the original dependencies (Data Generation Process)  </p>
+<p class="lng-DTestText2">That is the original dependencies (Data Generation Process)</p>
 
   <br />
 <div id="cy2"></div>
@@ -55,6 +61,9 @@
 
 
 <script src="{{ static 'global/cytoscape.min.js' }}"> </script>
+
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 
 <script>

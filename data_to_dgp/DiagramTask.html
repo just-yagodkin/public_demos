@@ -31,167 +31,207 @@
 {{ endblock }}
 
 {{ block title }}
-    Pick the edges between variables acccording to data
+<dl class="lng-Title">Pick the arrows (edges) between variables according to data.</dl>
 {{ endblock }}
 
 
 {{ block content }}
 
+<div class = "lang-container">
+    <select class="change-lang">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+    </select>
+</div>
 
+<br>
 
-<div class="tg-wrap"><table id="menu"  class="table table-striped" style="
+<div class="tg-wrap">
+    <table id="menu" class="table table-striped" style="
   margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-  <tbody>
-    <tr>
-      <td class="searchable3"></td>
-      <td class="searchable3">
-        
-      </td>
-      <td class="searchable3">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       
-        <button id = "myButton"  onclick="toggle(this);"type="button" class="btn btn-outline-dark btn-sm">
-          Force Y=1 (do Y)
-        </button>
+        <tbody>
+        <tr>
+            <td class="searchable3"></td>
+            <td class="searchable3">
 
-        <div class="input-group"> <span class="input-group-addon"></span>
-      </td>
-      <td class="searchable3"></td>
-    </tr>
-    <tr>
+            </td>
+            <td class="searchable3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    </tbody>
-  </table></div>
+                <button id="myButton" onclick="toggle(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force Y=1 (DO Y)
+                </button>
+
+                <script>
+                    let seed = js_vars.seed;
+                    function minifunc(number){
+                    if (number == 1 || number == 3){return "Z"}
+                    if (number == 0 || number == 5){return "Y"}
+                    if (number == 2 || number == 4){return "X"}
+                    }
+
+                    document.getElementById("myButton").innerText = 'Force ' + minifunc(seed) + '=1 (DO ' + minifunc(seed) + ')'
+                </script>
+
+                <div class="input-group"><span class="input-group-addon"></span>
+            </td>
+            <td class="searchable3"></td>
+        </tr>
+        <tr>
+
+        </tbody>
+    </table>
+</div>
 
 
 <!-- <div>Observational data</div> -->
 
-<table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-  <tbody class="searchable2">
+<table id="interv" hidden="true" class="table table-striped"
+       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <tbody class="searchable2">
     <tr>
-      <td class="searchable2"></td>
-      <td class="searchable2">
-        X
-        <br />
-        <label><input id="filterx_i" type="checkbox" >1</label>
-        <label><input id="filterx0_i" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
+        <td class="searchable2"></td>
+        <td class="searchable2">
+            X
+            <br/>
+            <label><input id="filterx_i" type="checkbox">1</label>
+            <label><input id="filterx0_i" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
 
-        
 
         </td>
-      <td class="searchable2">Y
-        <br />
-        <label><input id="filtery_i" type="checkbox" >1</label>
-        <label><input id="filtery0_i" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
-        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+        <td class="searchable2">Y
+            <br/>
+            <label><input id="filtery_i" type="checkbox">1</label>
+            <label><input id="filtery0_i" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
 
-      </td>
-      <td class="searchable2">Z
-        <br />
-        <label><input id="filterz_i" type="checkbox" >1</label>
-        <label><input id="filterz0_i" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
-      </td>
+        </td>
+        <td class="searchable2">Z
+            <br/>
+            <label><input id="filterz_i" type="checkbox">1</label>
+            <label><input id="filterz0_i" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+        </td>
     </tr>
     {% for i, x, y, z in datasetint %}
     <tr>
-      <td>{{ i }}</td>
-      <td>{{ x }}</td>
-      <td>{{ y }}</td>
-      <td>{{ z }}</td>
+        <td>{{ i }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        <td>{{ z }}</td>
     </tr>
     {% endfor %}
     <tr></tr>
-    {% for i in frequenciesint %}
-      <td>{{ i }}</td>
-    {% endfor %}
-  </tbody>
-  </table>
+
+    <!--
+        {% for i in frequenciesint %}
+        <td>{{ i }}</td>
+        {% endfor %}
+    -->
+
+    </tbody>
+</table>
 
 
 <table id="observ" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
-  <tbody class="searchable">
+    <tbody class="searchable">
     <tr>
-      <td class="searchable"></td>
-      <td class="searchable">
-        X
-        <br />
-        <label><input id="filterx" type="checkbox" >1</label>
-        <label><input id="filterx0" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
+        <td class="searchable"></td>
+        <td class="searchable">
+            X
+            <br/>
+            <label><input id="filterx" type="checkbox">1</label>
+            <label><input id="filterx0" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
 
-        
 
         </td>
-      <td class="searchable">Y
-        <br />
-        <label><input id="filtery" type="checkbox" >1</label>
-        <label><input id="filtery0" type="checkbox" >0</label>
-        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+        <td class="searchable">Y
+            <br/>
+            <label><input id="filtery" type="checkbox">1</label>
+            <label><input id="filtery0" type="checkbox">0</label>
+            <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+            <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
 
-      </td>
-      <td class="searchable">Z
-        <br />
-        <label><input id="filterz" type="checkbox" >1</label>
-        <label><input id="filterz0" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
+        </td>
+        <td class="searchable">Z
+            <br/>
+            <label><input id="filterz" type="checkbox">1</label>
+            <label><input id="filterz0" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
 
-      </td>
+        </td>
     </tr>
     {% for i, x, y, z in datasetobs %}
     <tr>
-      <td>{{ i }}</td>
-      <td>{{ x }}</td>
-      <td>{{ y }}</td>
-      <td>{{ z }}</td>
+        <td>{{ i }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        <td>{{ z }}</td>
     </tr>
     {% endfor %}
     <tr></tr>
-    {% for i in frequenciesobs %}
-      <td>{{ i }}</td>
-    {% endfor %}
-  </tbody>
-  </table></div><br />
+
+    <!--
+        {% for i in frequenciesobs %}
+        <td>{{ i }}</td>
+        {% endfor %}
+    -->
+
+    </tbody>
+</table></div><br/>
 
 <!--
 <script>document.write("мой текст!");</script>
 -->
 
-<div >
-  <p> Choose (click) the edges as follows: dashed if there is no influence from one variable to another variable and solid if there is.
-    Remember that each variable could be simultaneously ONLY one of the following: a) independent b) cause с) effect.
-  </p>
+<div id="freqs">Freqs: {% for i in frequenciesobs %}
+                            {{ i }}
+                            {% endfor %}
+</div>
 
-  <br />
+<div>
+    <p class="lng-DtText">Choose (click) the edges as follows: leave it dashed if there is no influence from one variable to another variable, or make it solid if there is.
+            Remember that each variable could be simultaneously ONLY ONE of the following: a) independent b) cause с) effect.
+    </p>
+
+    <br/>
 </div>
 <div id="cy"></div>
 
 
 <br>
 <div align="center">
-<div class="slidecontainer">
-  <p><h3>Choose your confidence</h3></p>
-  <input type="range" min="1" max="10" value="3" class="slider" id="myRange">
+    <div class="slidecontainer">
+        <p>
+        <h3 class = "lng-confidence">Choose your confidence</h3></p>
+        <input type="range" min="1" max="10" value="3" class="slider" id="myRange">
+    </div>
 </div>
-</div>
-
 
 
 {{ next_button }}
-   
 
-
-<script src="{{ static 'global/cytoscape.min.js' }}"> </script>
+<script src="{{ static 'global/cytoscape.min.js' }}"></script>
 
 <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
 
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
 <script>
+function crfunc(b1, b2){
+  if (b1){return "0";}
+
+  else if (b2){return "1";}
+
+  else {return "-1";}
+}
 
 var cy = cytoscape({
   container: document.getElementById('cy'),
@@ -321,33 +361,47 @@ $(document).ready(function () {
         $('.searchable tr').filter(function () {
             return rex.test($(this).text());
         }).show();
-
     });
     
     $('#filterx').on('change', function(){
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterx0').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(1).text() !== "0"
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
-        
-        
     });
 
-    
     $('#filterx0').on('change', function(){
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterx').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(1).text() !== "1"
+                return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
         
         
@@ -357,11 +411,20 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filtery0').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(2).text() !== "0"
+                return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
         
         
@@ -371,11 +434,20 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filtery').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(2).text() !== "1"
+                return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
         
         
@@ -385,11 +457,17 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterz0').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(3).text() !== "0"
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
             }).show();
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ))
+            }).show();
         }
         
         
@@ -399,11 +477,18 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterz').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(3).text() !== "1"
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
             }).show();
         }else{
-            $('.searchable tr').show();
+           $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ))
+            }).show();
+
         }
         
         
@@ -411,19 +496,30 @@ $(document).ready(function () {
 
   }(jQuery));
 
+
+
+
+
+
+
 });
 $(document).ready(function () {
   (function ($) {
     $('#filterx_i').on('change', function(){
-
-    if(this.checked){
-        $('.searchable2 tr').hide();
-        $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(1).text() !== "0"
-        }).show();
-    }else{
-        $('.searchable2 tr').show();
-    }
+        if(this.checked){
+            $('.searchable2 tr').hide();
+            document.getElementById('filterx0_i').checked = false;
+            $('.searchable2 tr').filter(function() {
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
+        }else{
+            $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
+        }
 
 
     });
@@ -433,11 +529,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filterx_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(1).text() !== "1"
+            return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
     }
 
 
@@ -447,11 +549,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+         document.getElementById('filtery0_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(2).text() !== "0"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
     }
 
 
@@ -461,11 +569,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filtery_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(2).text() !== "1"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
     }
 
 
@@ -475,11 +589,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filterz0_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(3).text() !== "0"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ))
+            }).show();
     }
 
 
@@ -489,11 +609,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filterz_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(3).text() !== "1"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ))
+            }).show();
     }
 
 
@@ -513,7 +639,7 @@ let toggle = button => {
     if (hidden2) {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
-       button.innerText = "Force Y=1 (do Y)";
+       button.innerText = 'Force ' + minifunc(seed) + '=1 (DO ' + minifunc(seed) + ')';
     } else {
        anoth_element.removeAttribute("hidden");
        element.setAttribute("hidden", "hidden");
@@ -527,8 +653,10 @@ let toggle = button => {
 //   else {document.getElementById("observ").style.visibility = "visible" }
 //    }
 //   );
+
 </script>
-  {{ endblock }}
+
+{{ endblock }}
 
 
 

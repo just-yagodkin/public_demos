@@ -10,57 +10,80 @@ Your app description
 
 # test 123
 class C(BaseConstants):
-    TEST = False
-
-    NUM_ROUNDS = 4
+    NUM_ROUNDS = 5
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
 
+    NOLINKSSEED = random.randint(0, 5)
+    ONELINKSEED = random.randint(0, 5)
+    TWOLINKSSEED = random.randint(0, 5)
+    COLLIDER1SEED = random.randint(0, 5)
+    FORKSEED = random.randint(0, 5)
+    COLLIDER2SEED = random.randint(0, 5)
+
+    seed = {'collider1': COLLIDER1SEED,
+            'nolinks': NOLINKSSEED,
+            'onelink': ONELINKSEED,
+            'twolinks': TWOLINKSSEED,
+            'fork': FORKSEED,
+            'collider2': COLLIDER2SEED}
+
     data_edges = {'nolinks': [False],
-                  'onelink': [
+                  'onelink': gf.smartedgesinterv([
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}],
-                  'twolinks': [
+                      ONELINKSEED),
+                  'twolinks': gf.smartedgesinterv([
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
                       {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}],
-                  'collider1': [
+                      TWOLINKSSEED),
+                  'collider1': gf.smartedgesinterv([
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
                       {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}],
-                  'fork': [
+                      COLLIDER1SEED),
+                  'fork': gf.smartedgesinterv([
                       {'data': {'counter': 0, 'weight': 0, 'id': 'YX', 'source': 'Y', 'target': 'X', 'label': ""}},
                       {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}],
-                  'collider2': [
+                      FORKSEED),
+                  'collider2': gf.smartedgesinterv([
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}]
+                      {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}],
+                      COLLIDER2SEED)
                   }
 
-    preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                         'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                         'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                             'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                         'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                         'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                             'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
-                             'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                           'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                           'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                            #  'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-                            #           'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                            #           'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
-                            #  'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                            #                'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                            #                'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
+    preobservational_data = {'nolinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                            'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                                                            'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                                                           NOLINKSSEED),
+                             'onelink': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                            'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                                            'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+                                                           ONELINKSEED),
+                             'twolinks': gf.smartdatainterv({'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+                                                             'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                             'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
+                                                            TWOLINKSSEED),
+                             'collider1': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                              'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                              'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                                                             COLLIDER1SEED),
+                             'fork': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
+                                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                         'z': [1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1]},
+                                                        FORKSEED),
+                             #  'collider2': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                             #                'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+                             #                'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}, COLLIDER2SEED)
                              }  # collider2 is optional
 
-    preinterventional_data = {'nolinks':    gf.intervente('nolinks', preobservational_data['nolinks']),
-                              'onelink':    gf.intervente('onelink', preobservational_data['onelink']),
-                              'twolinks':   gf.intervente('twolinks', preobservational_data['twolinks']),
-                              'collider1':  gf.intervente('collider', preobservational_data['collider1']),
-                            #   'fork':       gf.intervente('fork', preobservational_data['fork']),
-                            #   'collider2':  gf.intervente('collider', preobservational_data['collider2'])
-                              }
+    preinterventional_data = {
+        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', preobservational_data['nolinks']), NOLINKSSEED),
+        'onelink': gf.smartdatainterv(gf.intervente('onelink', preobservational_data['onelink']), ONELINKSEED),
+        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks']), TWOLINKSSEED),
+        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1']), COLLIDER1SEED),
+        'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork']), FORKSEED),
+        # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
+    }
     '''                                                 
 
     def reshuffle(initialdict):
@@ -81,18 +104,19 @@ class C(BaseConstants):
                 new_dict[key][key_second] = [initialdict[key][key_second][seq[i]] for i in  range(lenght) ]
     '''
 
-
-    #observational_data = reshuffle(preobservational_data)
-    #interventional_data = reshuffle(preinterventional_data)
-
     observational_data = gf.reshuffle(preobservational_data)
     interventional_data = gf.reshuffle(preinterventional_data)
 
     task_sequence_keys = (list(observational_data.keys()))
-    if not TEST:
-        task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    else:
-        task_sequence = ['collider1', 'twolinks',   'onelink', "nolinks" ]
+
+    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    # task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks"]
+
+    SEEDS = []  # SEEDS contains seed for every round
+
+    for i in task_sequence:
+        SEEDS.append(seed[i])
+
 
 # 'collider2','fork',
 class Subsession(BaseSubsession):
@@ -126,31 +150,16 @@ def benchmark_diagram(player: Player):
     return target_vocabulary
 
 
-'''
-def check_diagram(players_data: dict, original_data: dict):
-    Сравнивает диаграмму игрока и диаграмму датасета, выдает None, если игрок указал всё верно; либо набор лишних и нехвативших связей, если что-то оказалось неверным
-    if players_data == original_data:
-        return None
-    dif_list = []
-    for data in players_data:  # записываем лишнее
-        if data in original_data:
-            pass
-        else:
-            dif_list.append(data)
-    for data in original_data:  # записываем недостающее
-        if data in players_data:
-            pass
-        else:
-            dif_list.append(data)
-    return dif_list
-'''
-
-
 # PAGES
 class Instruction(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            num_rounds=C.NUM_ROUNDS)
 
 
 class Training(Page):
@@ -190,24 +199,41 @@ class DiagramTask(Page):
     @staticmethod
     def vars_for_template(player):
         output = datatask_output_json(player)
+
         return dict(
             datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            # frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            frequenciesobs=gf.check_frequencies(output[0]),
+            # frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
             frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
+
+    @staticmethod
+    def js_vars(player):
+        output = datatask_output_json(player)
+        return dict(
+            datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
+                        range(len(output[0]['x']))],
+            datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
+                        range(len(output[1]['x']))],
+            # frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            frequenciesobs=gf.check_frequencies(output[0]),
+            # frequenciesint=["frequencies"] + gf.check_frequencies(output[1]))
+            frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
+            seed=C.SEEDS[player.round_number - 1])
 
 
 class DiagramTest(Page):
     @staticmethod
     def vars_for_template(player):
         output = datatask_output_json(player)
-        if C.TEST:
-            return dict(
-                ekey=[C.task_sequence, C.task_sequence_keys, benchmark_diagram(player)[0]])
-        else:
-            return
+        store_array = json.loads(player.stored)
+        seed = C.SEEDS[player.round_number - 1]
+        edges = C.data_edges
+        return dict(
+            ekey=[C.task_sequence, gf.tanc(store_array), seed])
 
     @staticmethod
     def js_vars(player):

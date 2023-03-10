@@ -341,6 +341,105 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
 
     return interv_dict
 
+def revstring(string: str):
+    temp = "%s" % string
+    return temp[::-1]
+
+def tanc(lst: list):
+
+    temp = list()
+
+    if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}}, {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}}, {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]:
+        return True                 # That's for the case when there are no edges :(
+
+    for dictionary in lst:
+        if dictionary['counter'] == 1:
+            temp.append(dictionary['source'] + dictionary['target'])
+
+    for tpl in temp:
+        if revstring(tpl) in temp:
+            return False
+
+    if (('XY' in temp) and ('YZ' in temp) and ('ZX' in temp)) or (('YX' in temp) and ('XZ' in temp) and ('ZY' in temp)):
+        return False
+
+    return True
+
+def smartdatainterv(d : dict, seed = 0):
+    '''seed 1:  X Y Z   ->   X Z Y
+       seed 2:  X Y Z   ->   Y X Z
+       seed 3:  X Y Z   ->   Y Z X
+       seed 4:  X Y Z   ->   Z X Y
+       seed 5:  X Y Z   ->   Z Y X
+    '''
+
+    if seed == 0:
+        return d
+
+    tempd = d.copy()
+    if seed == 1:
+        tempd['y'], tempd['z'] = d['z'], d['y']
+    if seed == 2:
+        tempd['x'], tempd['y'] = d['y'], d['x']
+    if seed == 3:
+        tempd['x'], tempd['y'], tempd['z'] = d['y'], d['z'], d['x']
+    if seed == 4:
+        tempd['x'], tempd['y'], tempd['z'] = d['z'], d['x'], d['y']
+    if seed == 5:
+        tempd['x'], tempd['z'] = d['z'], d['x']
+    return tempd
+
+def smartedgesinterv(l: list, seed = 0):
+    '''seed 1:  X Y Z   ->   X Z Y
+       seed 2:  X Y Z   ->   Y X Z
+       seed 3:  X Y Z   ->   Y Z X
+       seed 4:  X Y Z   ->   Z X Y
+       seed 5:  X Y Z   ->   Z Y X
+    '''
+
+    if seed == 0 or l == [False]:
+        return l
+
+    templ = l.copy()
+    if seed == 1:
+        for d in templ:
+            d['data']['id'] = d['data']['id'].replace("Y", "z").replace("Z", "y").upper()
+            d['data']['source'] = d['data']['source'].replace("Y", "z").replace("Z", "y").upper()
+            d['data']['target'] = d['data']['target'].replace("Y", "z").replace("Z", "y").upper()
+
+    if seed == 2:
+        for d in templ:
+            d['data']['id'] = d['data']['id'].replace("Y", "x").replace("X", "y").upper()
+            d['data']['source'] = d['data']['source'].replace("Y", "x").replace("X", "y").upper()
+            d['data']['target'] = d['data']['target'].replace("Y", "x").replace("X", "y").upper()
+
+    if seed == 3:
+        for d in templ:
+            d['data']['id'] = d['data']['id'].replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
+            d['data']['source'] = d['data']['source'].replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
+            d['data']['target'] = d['data']['target'].replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
+
+    if seed == 4:
+        for d in templ:
+            d['data']['id'] = d['data']['id'].replace("X", "z").replace("Y", "x").replace("Z", "y").upper()
+            d['data']['source'] = d['data']['source'].replace("X", "z").replace("Y", "x").replace("Z", "y").upper()
+            d['data']['target'] = d['data']['target'].replace("X", "z").replace("Y", "x").replace("Z", "y").upper()
+
+    if seed == 5:
+        for d in templ:
+            d['data']['id'] = d['data']['id'].replace("Z", "x").replace("X", "z").upper()
+            d['data']['source'] = d['data']['source'].replace("Z", "x").replace("X", "z").upper()
+            d['data']['target'] = d['data']['target'].replace("Z", "x").replace("X", "z").upper()
+    return templ
+
+def minifunc(number):
+    if (number == 1 or number == 3):
+        return "Z"
+    if (number == 0 or number == 5):
+        return "Y"
+    if (number == 2 or number == 4):
+        return "X"
+
 
 def intervente2(dictionary: dict, name='y', fixed=1):
     '''does an intervention in variable "name" and equal it to "fixed"
@@ -502,4 +601,3 @@ print(check_frequencies(intervente('fork', d['fork'])), "- frequencies again")
 # print(check_dependencies(temp), "- dependencies again x2")
 # print(check_frequencies(temp), "- frequencies again x2")
 '''
-
