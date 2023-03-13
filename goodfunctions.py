@@ -25,7 +25,10 @@ d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
               'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
      'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
                    'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}
+                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]},
+     'threelinks': {'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                    'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
      }  # collider2 is optional
 
 
@@ -266,13 +269,6 @@ def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)
     return [freqx, freqy, freqz]
 
 
-def get_chain_from_dict(dictionary: dict, value):
-    keys = []
-    for key in list(dictionary.keys()):
-        if value == dictionary[key]:
-            keys.append(key)
-    return keys[0]
-
 
 def intervente(key: str, dictionary: dict, name='y', fixed=1):
     '''does an intervention in variable "name" and equal it to "fixed"
@@ -314,6 +310,14 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0 for i in
                   range(round(length * (1 - freq_z_when_not_name)))]
 
+    elif key == 'threelinks':
+        if fixed == 1:
+            x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
+            z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
+        else:
+            x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
+            z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
+
     elif key == 'fork':
         if fixed == 1:
             x = [1 if i < round(freq_x_when_name * length) else 0 for i in
@@ -334,10 +338,11 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
         z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
 
-    # fork?????
-
     interv_dict[st[1]] = z
     interv_dict[st[0]] = x
+
+    print(z)
+    print(x)
 
     return interv_dict
 
@@ -596,6 +601,18 @@ print(check_frequencies(d['fork']), "- frequencies")
 print(intervente('fork', d['fork']), "- orange distribution (Y fixed)")
 print(check_dependencies(intervente('fork', d['fork'])), "- dependencies again")
 print(check_frequencies(intervente('fork', d['fork'])), "- frequencies again")
+
+# print(intervente(temp), "- orange distribution (Y fixed)")
+# print(check_dependencies(temp), "- dependencies again x2")
+# print(check_frequencies(temp), "- frequencies again x2")
+'''
+'''
+print(d['threelinks'], "- threelinks")
+print(check_dependencies(d['threelinks']), "- dependencies")
+print(check_frequencies(d['threelinks']), "- frequencies")
+print(intervente('threelinks', d['threelinks']), "- orange distribution (Y fixed)")
+print(check_dependencies(intervente('threelinks', d['threelinks'])), "- dependencies again")
+print(check_frequencies(intervente('threelinks', d['threelinks'])), "- frequencies again")
 
 # print(intervente(temp), "- orange distribution (Y fixed)")
 # print(check_dependencies(temp), "- dependencies again x2")

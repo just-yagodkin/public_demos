@@ -58,8 +58,11 @@
             <td class="searchable3"></td>
             <td class="searchable3">
 
-                <button id="myButtonX" onclick="toggleX(this);" type="button" class="btn btn-outline-dark btn-sm">
-                    Force X=1 (DO X)
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <button style="display: none;" id="myButtonX" onclick="toggleX(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force X=1 (DO X)    <!-- this text is optional -->
                 </button>
                 <script>
                     let seed = js_vars.seed;
@@ -69,7 +72,11 @@
                     if (number == 2 || number == 4){return "X"}
                     }
 
-                    document.getElementById("myButtonX").innerText = 'Force X=1 (DO X)'
+                    butx = document.getElementById("myButtonX");
+                    butx.innerText = 'Force X=1 (DO X)';
+                    //if (true){butx.style.display = "inline-block";}        //temporary
+                    if (minifunc(seed) == 'X'){butx.style.display = "inline-block";}        //temporary
+
                 </script>
 
                 <div class="input-group"><span class="input-group-addon"></span>
@@ -78,18 +85,16 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <button id="myButtonY" onclick="toggleY(this);" type="button" class="btn btn-outline-dark btn-sm">
-                    Force Y=1 (DO Y)
+                <button style="display: none;" id="myButtonY" onclick="toggleY(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force Y=1 (DO Y)    <!-- this text is optional -->
                 </button>
-                <script>
-                    let seed = js_vars.seed;
-                    function minifunc(number){
-                    if (number == 1 || number == 3){return "Z"}
-                    if (number == 0 || number == 5){return "Y"}
-                    if (number == 2 || number == 4){return "X"}
-                    }
 
-                    document.getElementById("myButtonY").innerText = 'Force Y=1 (DO Y)'
+                <script>
+                buty = document.getElementById("myButtonY");
+                buty.innerText = 'Force Y=1 (DO Y)';
+                //if (true){buty.style.display = "inline-block";}        //temporary
+                if (minifunc(seed) == 'Y'){buty.style.display = "inline-block";}        //temporary
+
                 </script>
 
                 <div class="input-group"><span class="input-group-addon"></span>
@@ -97,18 +102,18 @@
 
             <td class="searchable3">
 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button style="display: none;" id="myButtonZ" onclick="toggleZ(this);" type="button" class="btn btn-outline-dark btn-sm">
-                    Force Z=1 (DO Z)
+                    Force Z=1 (DO Z)    <!-- this text is optional -->
                 </button>
-                <script>
-                    let seed = js_vars.seed;
-                    function minifunc(number){
-                    if (number == 1 || number == 3){return "Z"}
-                    if (number == 0 || number == 5){return "Y"}
-                    if (number == 2 || number == 4){return "X"}
-                    }
 
-                    document.getElementById("myButtonZ").innerText = 'Force Z=1 (DO Z)'
+                <script>
+                    butz = document.getElementById("myButtonZ");
+                    butz.innerText = 'Force Z=1 (DO Z)';
+                    //if (true){butz.style.display = "inline-block";}        //temporary
+                    if (minifunc(seed) == 'Z'){butz.style.display = "inline-block";}        //temporary
+
                 </script>
 
                 <div class="input-group"><span class="input-group-addon"></span>
@@ -227,9 +232,6 @@
     </tbody>
 </table></div><br/>
 
-<!--
-<script>document.write("мой текст!");</script>
--->
 
 <div id="freqs">Freqs: {% for i in frequenciesobs %}
                             {{ i }}
@@ -279,6 +281,7 @@ var cy = cytoscape({
 
   boxSelectionEnabled: false,
   autounselectify: true,
+  wheelSensitivity:0.1,
 
   style: cytoscape.stylesheet()
 
@@ -677,6 +680,9 @@ let toggleX = button => {
     let hidden2 = element.getAttribute("hidden");
     let anoth_element = document.getElementById("interv");
     let anoth_hidden = anoth_element.getAttribute("hidden");
+
+
+
     if (hidden2) {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");

@@ -10,7 +10,7 @@ Your app description
 
 # test 123
 class C(BaseConstants):
-    NUM_ROUNDS = 5
+    NUM_ROUNDS = 6
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
@@ -21,13 +21,16 @@ class C(BaseConstants):
     COLLIDER1SEED = random.randint(0, 5)
     FORKSEED = random.randint(0, 5)
     COLLIDER2SEED = random.randint(0, 5)
+    THREELINKSSEED = random.randint(0, 5)
 
     seed = {'collider1': COLLIDER1SEED,
             'nolinks': NOLINKSSEED,
             'onelink': ONELINKSEED,
             'twolinks': TWOLINKSSEED,
             'fork': FORKSEED,
-            'collider2': COLLIDER2SEED}
+            'collider2': COLLIDER2SEED,
+            'threelinks': THREELINKSSEED
+            }
 
     data_edges = {'nolinks': [False],
                   'onelink': gf.smartedgesinterv([
@@ -48,7 +51,12 @@ class C(BaseConstants):
                   'collider2': gf.smartedgesinterv([
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
                       {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}],
-                      COLLIDER2SEED)
+                      COLLIDER2SEED),
+                  'threelinks': gf.smartedgesinterv([
+                      {'data': {'counter': 0, 'weight': 0, 'id': 'YX', 'source': 'Y', 'target': 'X', 'label': ""}},
+                      {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
+                      {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}],
+                      THREELINKSSEED)
                   }
 
     preobservational_data = {'nolinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -71,6 +79,10 @@ class C(BaseConstants):
                                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                          'z': [1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1]},
                                                         FORKSEED),
+                             'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                         'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                                                        THREELINKSSEED)
                              #  'collider2': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
                              #                'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
                              #                'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}, COLLIDER2SEED)
@@ -82,6 +94,7 @@ class C(BaseConstants):
         'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks']), TWOLINKSSEED),
         'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1']), COLLIDER1SEED),
         'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork']), FORKSEED),
+        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', preobservational_data['threelinks']), THREELINKSSEED)
         # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
     }
     '''                                                 
@@ -117,8 +130,6 @@ class C(BaseConstants):
     for i in task_sequence:
         SEEDS.append(seed[i])
 
-
-# 'collider2','fork',
 class Subsession(BaseSubsession):
     pass
 
@@ -186,7 +197,7 @@ class Training(Page):
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
-                error_messages[field_name] = 'incorrect report'
+                error_messages[field_name] = 'Incorrect report'
         return error_messages
 
 
