@@ -49,20 +49,18 @@
 <div class="tg-wrap">
     <table id="menu" class="table table-striped" style="
   margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+        <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
         <tbody>
         <tr>
             <td class="searchable3"></td>
             <td class="searchable3">
 
-            </td>
-            <td class="searchable3">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                <button id="myButton" onclick="toggle(this);" type="button" class="btn btn-outline-dark btn-sm">
-                    Force Y=1 (DO Y)
+                <button id="myButtonX" onclick="toggleX(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force X=1 (DO X)
                 </button>
-
                 <script>
                     let seed = js_vars.seed;
                     function minifunc(number){
@@ -71,12 +69,50 @@
                     if (number == 2 || number == 4){return "X"}
                     }
 
-                    document.getElementById("myButton").innerText = 'Force ' + minifunc(seed) + '=1 (DO ' + minifunc(seed) + ')'
+                    document.getElementById("myButtonX").innerText = 'Force X=1 (DO X)'
                 </script>
 
                 <div class="input-group"><span class="input-group-addon"></span>
             </td>
-            <td class="searchable3"></td>
+            <td class="searchable3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <button id="myButtonY" onclick="toggleY(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force Y=1 (DO Y)
+                </button>
+                <script>
+                    let seed = js_vars.seed;
+                    function minifunc(number){
+                    if (number == 1 || number == 3){return "Z"}
+                    if (number == 0 || number == 5){return "Y"}
+                    if (number == 2 || number == 4){return "X"}
+                    }
+
+                    document.getElementById("myButtonY").innerText = 'Force Y=1 (DO Y)'
+                </script>
+
+                <div class="input-group"><span class="input-group-addon"></span>
+            </td>
+
+            <td class="searchable3">
+
+                <button style="display: none;" id="myButtonZ" onclick="toggleZ(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force Z=1 (DO Z)
+                </button>
+                <script>
+                    let seed = js_vars.seed;
+                    function minifunc(number){
+                    if (number == 1 || number == 3){return "Z"}
+                    if (number == 0 || number == 5){return "Y"}
+                    if (number == 2 || number == 4){return "X"}
+                    }
+
+                    document.getElementById("myButtonZ").innerText = 'Force Z=1 (DO Z)'
+                </script>
+
+                <div class="input-group"><span class="input-group-addon"></span>
+            </td>
         </tr>
         <tr>
 
@@ -89,6 +125,11 @@
 
 <table id="interv" hidden="true" class="table table-striped"
        style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
+
     <tbody class="searchable2">
     <tr>
         <td class="searchable2"></td>
@@ -136,6 +177,10 @@
 
 
 <table id="observ" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
 
     <tbody class="searchable">
     <tr>
@@ -627,7 +672,7 @@ $(document).ready(function () {
 
 });
 
-let toggle = button => {
+let toggleX = button => {
     let element = document.getElementById("observ");
     let hidden2 = element.getAttribute("hidden");
     let anoth_element = document.getElementById("interv");
@@ -635,11 +680,43 @@ let toggle = button => {
     if (hidden2) {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
-       button.innerText = 'Force ' + minifunc(seed) + '=1 (DO ' + minifunc(seed) + ')';
+       button.innerText = 'Force X=1 (DO X)';
     } else {
        anoth_element.removeAttribute("hidden");
        element.setAttribute("hidden", "hidden");
-       button.innerText = "Show Observational ";
+       button.innerText = "Show Observational";
+    }
+}
+
+let toggleY = button => {
+    let element = document.getElementById("observ");
+    let hidden2 = element.getAttribute("hidden");
+    let anoth_element = document.getElementById("interv");
+    let anoth_hidden = anoth_element.getAttribute("hidden");
+    if (hidden2) {
+       element.removeAttribute("hidden");
+       anoth_element.setAttribute( "hidden","hidden");
+       button.innerText = 'Force Y=1 (DO Y)';
+    } else {
+       anoth_element.removeAttribute("hidden");
+       element.setAttribute("hidden", "hidden");
+       button.innerText = "Show Observational";
+    }
+}
+
+let toggleZ = button => {
+    let element = document.getElementById("observ");
+    let hidden2 = element.getAttribute("hidden");
+    let anoth_element = document.getElementById("interv");
+    let anoth_hidden = anoth_element.getAttribute("hidden");
+    if (hidden2) {
+       element.removeAttribute("hidden");
+       anoth_element.setAttribute( "hidden","hidden");
+       button.innerText = 'Force Z=1 (DO Z)';
+    } else {
+       anoth_element.removeAttribute("hidden");
+       element.setAttribute("hidden", "hidden");
+       button.innerText = "Show Observational";
     }
 }
 // var i = 1
