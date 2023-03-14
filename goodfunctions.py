@@ -39,7 +39,6 @@ def check_dependencies(dictionary: dict):
             "x & z": "are INDEPENDED",
             "y & z": "are INDEPENDED", }
 
-
     iwx0 = indexes_where_x_is_0 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[0]]) if x == 0}
     iwx1 = indexes_where_x_is_1 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[0]]) if x == 1}
     iwy0 = indexes_where_y_is_0 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 0}
@@ -67,17 +66,17 @@ def check_dependencies(dictionary: dict):
     if number_of_x0_when_y1 != 0 and number_of_x0_when_y0 != 0:
         if number_of_x1_when_y1 / number_of_x0_when_y1 != number_of_x1_when_y0 / number_of_x0_when_y0:
             depd['x & y'] = 'are DEPENDED'
-    elif number_of_x1_when_y1 != 0 and number_of_x1_when_y0 !=0:
+    elif number_of_x1_when_y1 != 0 and number_of_x1_when_y0 != 0:
         if number_of_x0_when_y1 / number_of_x1_when_y1 != number_of_x0_when_y0 / number_of_x1_when_y0:
             depd['x & y'] = 'are DEPENDED'
-    elif number_of_x1_when_y0 !=0 and number_of_x0_when_y0 != 0:
+    elif number_of_x1_when_y0 != 0 and number_of_x0_when_y0 != 0:
         if number_of_x1_when_y1 / number_of_x1_when_y0 != number_of_x0_when_y1 / number_of_x0_when_y0:
             depd['x & y'] = 'are DEPENDED'
     elif number_of_x1_when_y1 != 0 and number_of_x0_when_y1 != 0:
         if number_of_x1_when_y0 / number_of_x1_when_y1 != number_of_x0_when_y0 / number_of_x0_when_y1:
             depd['x & y'] = 'are DEPENDED'
-    elif len(iwx0) != len(iwx1) and len(iwy0) != len(iwy1):                               # not sure
-        depd['x & y'] = 'are DEPENDED'                                                    # not sure
+    elif len(iwx0) != len(iwx1) and len(iwy0) != len(iwy1):  # not sure
+        depd['x & y'] = 'are DEPENDED'  # not sure
     else:
         print('беда')
 
@@ -86,17 +85,17 @@ def check_dependencies(dictionary: dict):
     if number_of_x0_when_z1 != 0 and number_of_x0_when_z0 != 0:
         if number_of_x1_when_z1 / number_of_x0_when_z1 != number_of_x1_when_z0 / number_of_x0_when_z0:
             depd['x & z'] = 'are DEPENDED'
-    elif number_of_x1_when_z1 != 0 and number_of_x1_when_z0 !=0:
+    elif number_of_x1_when_z1 != 0 and number_of_x1_when_z0 != 0:
         if number_of_x0_when_z1 / number_of_x1_when_z1 != number_of_x0_when_z0 / number_of_x1_when_z0:
             depd['x & z'] = 'are DEPENDED'
-    elif number_of_x1_when_z0 !=0 and number_of_x0_when_z0 != 0:
+    elif number_of_x1_when_z0 != 0 and number_of_x0_when_z0 != 0:
         if number_of_x1_when_z1 / number_of_x1_when_z0 != number_of_x0_when_z1 / number_of_x0_when_z0:
             depd['x & z'] = 'are DEPENDED'
     elif number_of_x1_when_z1 != 0 and number_of_x0_when_z1 != 0:
         if number_of_x1_when_z0 / number_of_x1_when_z1 != number_of_x0_when_z0 / number_of_x0_when_z1:
             depd['x & z'] = 'are DEPENDED'
-    elif len(iwx0) != len(iwx1) and len(iwz0) != len(iwz1):                               # not sure
-        depd['x & z'] = 'are DEPENDED'                                                    # not sure
+    elif len(iwx0) != len(iwx1) and len(iwz0) != len(iwz1):  # not sure
+        depd['x & z'] = 'are DEPENDED'  # not sure
     else:
         print('беда')
 
@@ -105,17 +104,17 @@ def check_dependencies(dictionary: dict):
     if number_of_y0_when_z1 != 0 and number_of_y0_when_z0 != 0:
         if number_of_y1_when_z1 / number_of_y0_when_z1 != number_of_y1_when_z0 / number_of_y0_when_z0:
             depd['y & z'] = 'are DEPENDED'
-    elif number_of_y1_when_z1 != 0 and number_of_y1_when_z0 !=0:
+    elif number_of_y1_when_z1 != 0 and number_of_y1_when_z0 != 0:
         if number_of_y0_when_z1 / number_of_y1_when_z1 != number_of_y0_when_z0 / number_of_y1_when_z0:
             depd['y & z'] = 'are DEPENDED'
-    elif number_of_y1_when_z0 !=0 and number_of_y0_when_z0 != 0:
+    elif number_of_y1_when_z0 != 0 and number_of_y0_when_z0 != 0:
         if number_of_y1_when_z1 / number_of_y1_when_z0 != number_of_y0_when_z1 / number_of_y0_when_z0:
             depd['y & z'] = 'are DEPENDED'
     elif number_of_y1_when_z1 != 0 and number_of_y0_when_z1 != 0:
         if number_of_y1_when_z0 / number_of_y1_when_z1 != number_of_y0_when_z0 / number_of_y0_when_z1:
             depd['y & z'] = 'are DEPENDED'
-    elif len(iwy0) != len(iwy1) and len(iwz0) != len(iwz1):                               # not sure
-        depd['y & z'] = 'are DEPENDED'                                                    # not sure
+    elif len(iwy0) != len(iwy1) and len(iwz0) != len(iwz1):  # not sure
+        depd['y & z'] = 'are DEPENDED'  # not sure
     else:
         print('беда')
 
@@ -199,7 +198,7 @@ def check_dependencies(dictionary: dict):
             #print(check_coop_frequencies(dictionary, (0, 0))[2], check_frequencies(dictionary, (1, 0, 0))[2], check_frequencies(dictionary, (1, 0, 0))[1], 'P(y=0 & z=0), P(z=0), P(y=0)')
     """
     return [depd["x & y"], depd["x & z"], depd["y & z"]]
-    #except:
+    # except:
     #    return "check_dependencies doesnt work"
 
 
@@ -243,18 +242,18 @@ def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 
         iwy1 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 1}
         iwy2 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 0}
         iwz = {i for i, x in enumerate(dictionary[list(dictionary.keys())[2]]) if x == 1}
-    #else:
+    # else:
     #    raise ValueError('second argument takes an invalid value')
 
     freqxy, freqxz, freqyz = [len(iwx & iwy1) / len(dictionary[list(dictionary.keys())[0]]),
                               len(iwx & iwz) / len(dictionary[list(dictionary.keys())[0]]),
                               len(iwy2 & iwz) / len(dictionary[list(dictionary.keys())[0]])]
     if freqxy == 0:
-        freqxy = 1/2
+        freqxy = 1 / 2
     if freqxz == 0:
-        freqxz = 1/2
+        freqxz = 1 / 2
     if freqyz == 0:
-        freqyz =1/2
+        freqyz = 1 / 2
 
     return [freqxy, freqxz, freqyz]
 
@@ -267,7 +266,6 @@ def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)
             dictionary[list(dictionary.keys())[i]].count(t[i]) / len(dictionary[list(dictionary.keys())[i]]) for i in
             range(3)]
     return [freqx, freqy, freqz]
-
 
 
 def intervente(key: str, dictionary: dict, name='y', fixed=1):
@@ -294,68 +292,166 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
     freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)  # freq x if y = 1
     freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)  # freq x if y = 0
 
+    freq_z_when_x = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
+        [i for i, x in enumerate(dictionary[st[1]]) if x == 1])) / len(
+        [i for i, x in enumerate(dictionary[st[0]]) if x == 1])
+    freq_z_when_not_x = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
+        [i for i, x in enumerate(dictionary[st[1]]) if x == 0])) / len(
+        [i for i, x in enumerate(dictionary[st[0]]) if x == 0])
+
     interv_dict[name] = [fixed] * length  # fill Y with fixed value
 
-    if key == 'twolinks':
-        if fixed == 1:
-            z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
-            x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
-                 range(round(freq_z_when_name * length))]
-            x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0 for i in
-                  range(round(length * (1 - freq_z_when_name)))]
-        else:
-            z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
-            x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
-                 range(round(freq_z_when_not_name * length))]
-            x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0 for i in
-                  range(round(length * (1 - freq_z_when_not_name)))]
+    if name == 'y':
+        if key == 'twolinks':
+            if fixed == 1:
+                z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
+                x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
+                     range(round(freq_z_when_name * length))]
+                x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0
+                      for i
+                      in
+                      range(round(length * (1 - freq_z_when_name)))]
+            else:
+                z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
+                x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
+                     range(round(freq_z_when_not_name * length))]
+                x += [
+                    1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0
+                    for i in
+                    range(round(length * (1 - freq_z_when_not_name)))]
 
-    elif key == 'threelinks':
-        if fixed == 1:
-            x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
-            z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
-        else:
-            x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
-            z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
+        elif key == 'threelinks':
+            if fixed == 1:
+                x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
+                z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
+            else:
+                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
+                z = [0] * length
 
-    elif key == 'fork':
-        if fixed == 1:
-            x = [1 if i < round(freq_x_when_name * length) else 0 for i in
-                 range(length)]
-            z = [1 if i < round(freq_z_when_name * freq_x_when_name * length) else 0 for i in
-                 range(round(freq_x_when_name * length))]
-            z += [1 if i < round(freq_z_when_name * round(length * (1 - freq_x_when_name))) else 0 for i in
-                  range(round(length * (1 - freq_x_when_name)))]
-        else:
-            x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in
-                 range(length)]
-            z = [1 if i < round(freq_z_when_not_name * freq_x_when_not_name * length) else 0 for i in
-                 range(round(freq_x_when_not_name * length))]
-            z += [1 if i < round(freq_z_when_not_name * round(length * (1 - freq_x_when_not_name))) else 0 for i in
-                  range(round(length * (1 - freq_x_when_not_name)))]
+        elif key == 'fork':
+            if fixed == 1:
+                x = [1 if i < round(freq_x_when_name * length) else 0 for i in
+                     range(length)]
+                z = [1 if i < round(freq_z_when_name * freq_x_when_name * length) else 0 for i in
+                     range(round(freq_x_when_name * length))]
+                z += [1 if i < round(freq_z_when_name * round(length * (1 - freq_x_when_name))) else 0 for i in
+                      range(round(length * (1 - freq_x_when_name)))]
+            else:
+                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in
+                     range(length)]
+                z = [1 if i < round(freq_z_when_not_name * freq_x_when_not_name * length) else 0 for i in
+                     range(round(freq_x_when_not_name * length))]
+                z += [1 if i < round(freq_z_when_not_name * round(length * (1 - freq_x_when_not_name))) else 0 for i in
+                      range(round(length * (1 - freq_x_when_not_name)))]
 
-    else:
-        x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-        z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
+        else:
+            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+            z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
+
+    if name == 'x':
+        if key == 'twolinks':
+            if fixed == 1:
+                x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
+
+                z = [1 if i < round(freq_z_when_x * freq_x_when_name * length) else 0 for i in
+                     range(round(freq_x_when_name * length))]
+                z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_x * length - 1) else 0 for i in
+                      # 1 is a crunch :(
+                      range(length - round(freq_x_when_name * length))]
+            else:
+                pass
+                '''
+                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
+
+                freq_z_when_x = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
+                    [i for i, x in enumerate(dictionary[st[1]]) if x == 1])) / len(
+                    [i for i, x in enumerate(dictionary[st[0]]) if x == 1])
+
+                z = [1 if i < round(freq_z_when_x * freq_x_when_name * length) else 0 for i in
+                     range(round(freq_x_when_name * length))]
+                z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_x * length - 1) else 0 for i in
+                      # 1 is a crunch :(
+                      range(length - round(freq_x_when_name * length))]         
+                      '''
+
+                '''
+                z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
+                x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
+                     range(round(freq_z_when_not_name * length))]
+                x += [
+                    1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0
+                    for i in
+                    range(round(length * (1 - freq_z_when_not_name)))]      - old version
+                    '''
+        elif key == 'threelinks':
+            if fixed == 1:
+                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+                z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+            else:
+                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+                z = [0] * length
+
+        elif key == 'fork':
+            if fixed == 1:
+                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+                z = [1 if i < round(freq_z_when_x * check_frequencies(dictionary)[1] * length) else 0 for i in
+                     range(round(check_frequencies(dictionary)[1] * length))]
+                z += [1 if i < round(freq_z_when_not_x * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
+                      for i in
+                      range(round(length * (1 - check_frequencies(dictionary)[1])))]
+            else:
+                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+
+                z = [1 if i < round(freq_z_when_x * check_frequencies(dictionary)[1] * length) else 0 for i in
+                     range(round(check_frequencies(dictionary)[1] * length))]
+                z += [1 if i < round(freq_z_when_not_x * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
+                      for i in
+                      range(round(length * (1 - check_frequencies(dictionary)[1])))]
+
+        elif key == "nolinks":
+            x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+            z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
+
+        elif key == "onelink":
+            if fixed == 1:
+                x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
+                z = [1 if i < round(check_frequencies(dictionary)[2] * freq_x_when_name * length) else 0 for i in
+                     range(round(freq_x_when_name * length))]
+                z += [1 if i < round(check_frequencies(dictionary)[2] * round(length * (1 - freq_x_when_name))) else 0
+                      for i in range(round(length * (1 - freq_x_when_name)))]
+            else:
+                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
+                z = [1 if i < round(check_frequencies(dictionary)[2] * freq_x_when_not_name * length) else 0 for i in
+                     range(round(freq_x_when_not_name * length))]
+                z += [
+                    1 if i < round(check_frequencies(dictionary)[2] * round(length * (1 - freq_x_when_not_name))) else 0
+                    for i in range(round(length * (1 - freq_x_when_not_name)))]
+        elif key == "collider":
+            if fixed == 1:
+                z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
+                x = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
+            else:
+                z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
+                x = [0] * length
 
     interv_dict[st[1]] = z
     interv_dict[st[0]] = x
 
-    print(z)
-    print(x)
-
     return interv_dict
+
 
 def revstring(string: str):
     temp = "%s" % string
     return temp[::-1]
 
-def tanc(lst: list):
 
+def tanc(lst: list):
     temp = list()
 
-    if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}}, {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}}, {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]:
-        return True                 # That's for the case when there are no edges :(
+    if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
+               {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
+               {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]:
+        return True  # That's for the case when there are no edges :(
 
     for dictionary in lst:
         if dictionary['counter'] == 1:
@@ -370,7 +466,8 @@ def tanc(lst: list):
 
     return True
 
-def smartdatainterv(d : dict, seed = 0):
+
+def smartdatainterv(d: dict, seed=0):
     '''seed 1:  X Y Z   ->   X Z Y
        seed 2:  X Y Z   ->   Y X Z
        seed 3:  X Y Z   ->   Y Z X
@@ -394,7 +491,8 @@ def smartdatainterv(d : dict, seed = 0):
         tempd['x'], tempd['z'] = d['z'], d['x']
     return tempd
 
-def smartedgesinterv(l: list, seed = 0):
+
+def smartedgesinterv(l: list, seed=0):
     '''seed 1:  X Y Z   ->   X Z Y
        seed 2:  X Y Z   ->   Y X Z
        seed 3:  X Y Z   ->   Y Z X
@@ -437,12 +535,13 @@ def smartedgesinterv(l: list, seed = 0):
             d['data']['target'] = d['data']['target'].replace("Z", "x").replace("X", "z").upper()
     return templ
 
+
 def minifunc(number):
-    if (number == 1 or number == 3):
+    if (number == 1 or number == 4):
         return "Z"
     if (number == 0 or number == 5):
         return "Y"
-    if (number == 2 or number == 4):
+    if (number == 2 or number == 3):
         return "X"
 
 
@@ -523,6 +622,7 @@ def intervente2(dictionary: dict, name='y', fixed=1):
         return "WRONG indexes"
 
     return dictionary
+
 
 '''
 print(d['onelink'], "- onelink")

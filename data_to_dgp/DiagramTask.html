@@ -66,16 +66,24 @@
                 </button>
                 <script>
                     let seed = js_vars.seed;
-                    function minifunc(number){
-                    if (number == 1 || number == 3){return "Z"}
+                    function minifuncy(number){
+                    if (number == 1 || number == 4){return "Z"}
                     if (number == 0 || number == 5){return "Y"}
-                    if (number == 2 || number == 4){return "X"}
+                    if (number == 2 || number == 3){return "X"}
                     }
+
+                    function minifuncx(number){
+                    if (number == 4 || number == 5){return "Z"}
+                    if (number == 0 || number == 1){return "X"}
+                    if (number == 2 || number == 3){return "Y"}
+                    }
+
+
 
                     butx = document.getElementById("myButtonX");
                     butx.innerText = 'Force X=1 (DO X)';
                     //if (true){butx.style.display = "inline-block";}        //temporary
-                    if (minifunc(seed) == 'X'){butx.style.display = "inline-block";}        //temporary
+                    if (minifuncy(seed) == 'X'){butx.style.display = "inline-block";}        //temporary
 
                 </script>
 
@@ -93,7 +101,7 @@
                 buty = document.getElementById("myButtonY");
                 buty.innerText = 'Force Y=1 (DO Y)';
                 //if (true){buty.style.display = "inline-block";}        //temporary
-                if (minifunc(seed) == 'Y'){buty.style.display = "inline-block";}        //temporary
+                if (minifuncy(seed) == 'Y'){buty.style.display = "inline-block";}        //temporary
 
                 </script>
 
@@ -112,7 +120,7 @@
                     butz = document.getElementById("myButtonZ");
                     butz.innerText = 'Force Z=1 (DO Z)';
                     //if (true){butz.style.display = "inline-block";}        //temporary
-                    if (minifunc(seed) == 'Z'){butz.style.display = "inline-block";}        //temporary
+                    if (minifuncy(seed) == 'Z'){butz.style.display = "inline-block";}        //temporary
 
                 </script>
 
