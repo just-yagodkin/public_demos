@@ -418,11 +418,12 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
 
         elif key == 'fork':
             x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-            z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
-                     range(round(check_frequencies(dictionary)[1] * length))]
-            z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
-                    for i in
-                    range(round(length * (1 - check_frequencies(dictionary)[1])))]
+            z = dictionary[st[1]].copy()
+            #z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
+            #         range(round(check_frequencies(dictionary)[1] * length))]
+            #z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
+            #        for i in
+            #        range(round(length * (1 - check_frequencies(dictionary)[1])))]
 
         elif key == "nolinks":
             x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -464,20 +465,23 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             z = [1 if i < round(check_frequencies(dictionary)[1] * length // 2) else 0 for i in range(length // 2)] * 2
 
         if key == "onelink" or key == "twolinks":
-            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-            z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[0] * length) else 0 for i in
-                 range(round(check_frequencies(dictionary)[0] * length))]
-            z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[0]))) else 0
-                  for i in
-                  range(round(length * (1 - check_frequencies(dictionary)[0])))]
+            x = dictionary[st[0]].copy()
+            #x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)
+            z = dictionary[st[1]].copy()
+            #z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[0] * length) else 0 for i in
+            #     range(round(check_frequencies(dictionary)[0] * length))]
+            #z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[0]))) else 0
+            #      for i in
+            #      range(round(length * (1 - check_frequencies(dictionary)[0])))]
 
         if key == 'fork' or key == "threelinks":
             z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-            x = [1 if i < round(freq_x_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
-                 range(round(check_frequencies(dictionary)[1] * length))]
-            x += [1 if i < round(freq_x_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
-                  for i in
-                  range(round(length * (1 - check_frequencies(dictionary)[1])))]
+            x = dictionary[st[0]].copy()
+            #x = [1 if i < round(freq_x_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
+            #     range(round(check_frequencies(dictionary)[1] * length))]
+            #x += [1 if i < round(freq_x_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
+            #      for i in
+            #      range(round(length * (1 - check_frequencies(dictionary)[1])))]
 
     interv_dict[st[1]] = z
     interv_dict[st[0]] = x
@@ -520,10 +524,10 @@ def smartdatainterv(d: dict, seed=0):
        seed 5:  X Y Z   ->   Z Y X
     '''
 
-    if seed == 0:
-        return d
-
     tempd = d.copy()
+
+    if seed == 0:
+        return tempd
     if seed == 1:
         tempd['y'], tempd['z'] = d['z'], d['y']
     if seed == 2:
@@ -561,13 +565,13 @@ def smartedgesinterv(l: list, seed=0):
             d['data']['source'] = d['data']['source'].replace("Y", "x").replace("X", "y").upper()
             d['data']['target'] = d['data']['target'].replace("Y", "x").replace("X", "y").upper()
 
-    if seed == 3:
+    if seed == 4:
         for d in templ:
             d['data']['id'] = d['data']['id'].replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
             d['data']['source'] = d['data']['source'].replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
             d['data']['target'] = d['data']['target'].replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
 
-    if seed == 4:
+    if seed == 3:
         for d in templ:
             d['data']['id'] = d['data']['id'].replace("X", "z").replace("Y", "x").replace("Z", "y").upper()
             d['data']['source'] = d['data']['source'].replace("X", "z").replace("Y", "x").replace("Z", "y").upper()
@@ -669,98 +673,84 @@ def intervente2(dictionary: dict, name='y', fixed=1):
     return dictionary
 
 
-'''
-print(d['onelink'], "- onelink")
-#print(check_dependencies(d['onelink']), "- dependencies")
-print(check_frequencies(d['onelink'], 'x'), "- frequencies")
-print(intervente('onelink', d['onelink'], "x"), "- orange distribution (X fixed)")
-t = intervente('onelink', d['onelink'], "x")
-#print(check_dependencies(intervente('onelink', d['onelink']), 'x'), "- dependencies again")
-print(check_frequencies(intervente('onelink', d['onelink'], "x")), "- frequencies again")
 
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
+print(d['onelink'], "- onelink")
+print(check_frequencies(d['onelink']), "- frequencies")
+
+print(intervente('onelink', d['onelink'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('onelink', d['onelink'], "x")), "- frequencies again")
+print(intervente('onelink', d['onelink'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('onelink', d['onelink'], "y")), "- frequencies again")
+print(intervente('onelink', d['onelink'], "z"), "- orange distribution (Z fixed)")
+print(check_frequencies(intervente('onelink', d['onelink'], "z")), "- frequencies again")
+
+
 
 print()
 print()
 
 print(d['nolinks'], "- nolinks")
-print(check_dependencies(d['nolinks']), "- dependencies")
 print(check_frequencies(d['nolinks']), "- frequencies")
-print(intervente('nolinks', d['nolinks']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('nolinks', d['nolinks'])), "- dependencies again")
-print(check_frequencies(intervente('nolinks', d['nolinks'])), "- frequencies again")
 
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
+print(intervente('nolinks', d['nolinks'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('nolinks', d['onelink'], "x")), "- frequencies again")
+print(intervente('nolinks', d['nolinks'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('nolinks', d['nolinks'], "y")), "- frequencies again")
+print(intervente('nolinks', d['nolinks'], "z"), "- orange distribution (Z fixed)")
+print(check_frequencies(intervente('nolinks', d['nolinks'], "z")), "- frequencies again")
 
 print()
 print()
 
 print(d['twolinks'], "- twolinks")
-print(check_dependencies(d['twolinks']), "- dependencies")
 print(check_frequencies(d['twolinks']), "- frequencies")
-print(intervente('twolinks', d['twolinks']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('twolinks', d['twolinks'])), "- dependencies again")
-print(check_frequencies(intervente('twolinks', d['twolinks'])), "- frequencies again")
 
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
+print(intervente('twolinks', d['twolinks'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('twolinks', d['twolinks'], "x")), "- frequencies again")
+print(intervente('twolinks', d['twolinks'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('twolinks', d['twolinks'], "y")), "- frequencies again")
+print(intervente('twolinks', d['twolinks'], "z"), "- orange distribution (Z fixed)")
+print(check_frequencies(intervente('twolinks', d['twolinks'], "z")), "- frequencies again")
 
 print()
 print()
 
-print(d['collider1'], "- collider1")
-print(check_dependencies(d['collider1']), "- dependencies")
+
+print(d['collider1'], "- collider")
 print(check_frequencies(d['collider1']), "- frequencies")
-print(intervente('collider', d['collider1']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('collider', d['collider1'])), "- dependencies again")
-print(check_frequencies(intervente('collider', d['collider1'])), "- frequencies again")
 
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
-
-print()
-print()
-
-print(d['collider2'], "- collider2")
-print(check_dependencies(d['collider2']), "- dependencies")
-print(check_frequencies(d['collider2']), "- frequencies")
-print(intervente('collider', d['collider2']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('collider', d['collider2'])), "- dependencies again")
-print(check_frequencies(intervente('collider', d['collider2'])), "- frequencies again")
-
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
+print(intervente('collider', d['collider1'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('collider', d['collider1'], "x")), "- frequencies again")
+print(intervente('collider', d['collider1'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('collider', d['collider1'], "y")), "- frequencies again")
+print(intervente('collider', d['collider1'], "z"), "- orange distribution (Z fixed)")
+print(check_frequencies(intervente('collider', d['collider1'], "z")), "- frequencies again")
 
 print()
 print()
+
 
 print(d['fork'], "- fork")
-print(check_dependencies(d['fork']), "- dependencies")
 print(check_frequencies(d['fork']), "- frequencies")
-print(intervente('fork', d['fork']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('fork', d['fork'])), "- dependencies again")
-print(check_frequencies(intervente('fork', d['fork'])), "- frequencies again")
 
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
-'''
-'''
+print(intervente('fork', d['fork'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('fork', d['fork'], "x")), "- frequencies again")
+print(intervente('fork', d['fork'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('fork', d['fork'], "y")), "- frequencies again")
+print(intervente('fork', d['fork'], "z"), "- orange distribution (Z fixed)")
+print(check_frequencies(intervente('fork', d['fork'], "z")), "- frequencies again")
+
+print()
+print()
+
+
 print(d['threelinks'], "- threelinks")
-print(check_dependencies(d['threelinks']), "- dependencies")
 print(check_frequencies(d['threelinks']), "- frequencies")
-print(intervente('threelinks', d['threelinks']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('threelinks', d['threelinks'])), "- dependencies again")
-print(check_frequencies(intervente('threelinks', d['threelinks'])), "- frequencies again")
 
-# print(intervente(temp), "- orange distribution (Y fixed)")
-# print(check_dependencies(temp), "- dependencies again x2")
-# print(check_frequencies(temp), "- frequencies again x2")
-'''
+print(intervente('threelinks', d['threelinks'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('threelinks', d['threelinks'], "x")), "- frequencies again")
+print(intervente('threelinks', d['threelinks'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('threelinks', d['threelinks'], "y")), "- frequencies again")
+print(intervente('threelinks', d['threelinks'], "z"), "- orange distribution (Z fixed)")
+print(check_frequencies(intervente('threelinks', d['threelinks'], "z")), "- frequencies again")
+''''''

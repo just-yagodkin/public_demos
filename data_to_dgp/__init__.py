@@ -59,6 +59,26 @@ class C(BaseConstants):
                       THREELINKSSEED)
                   }
 
+    original_data = {'nolinks':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                                'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                             'onelink':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                        'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+                             'twolinks':{'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                         'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
+                             'collider1':{'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                          'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                          'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                             'fork':{'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+                                     'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                     'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
+                             'threelinks':{'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                           'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+                             }
+
     preobservational_data = {'nolinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
                                                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
@@ -75,52 +95,46 @@ class C(BaseConstants):
                                                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
                                                              COLLIDER1SEED),
-                             'fork': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
-                                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                         'z': [1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1]},
+                             'fork': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+                                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                                         'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
                                                         FORKSEED),
                              'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
                                                                'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                                               THREELINKSSEED)
-                             #  'collider2': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                             #                'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-                             #                'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]}, COLLIDER2SEED)
-                             }  # collider2 is optional
+                             }
 
     preinterventional_data = {
-        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', preobservational_data['nolinks']), NOLINKSSEED),
-        'onelink': gf.smartdatainterv(gf.intervente('onelink', preobservational_data['onelink']), ONELINKSEED),
-        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks']), TWOLINKSSEED),
-        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1']), COLLIDER1SEED),
-        'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork']), FORKSEED),
-        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', preobservational_data['threelinks']),
+        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks']), NOLINKSSEED),
+        'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink']), ONELINKSEED),
+        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks']), TWOLINKSSEED),
+        'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1']), COLLIDER1SEED),
+        'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork']), FORKSEED),
+        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks']),
                                          THREELINKSSEED)
-        # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
     }
 
     preinterventionalx_data = {
-        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', preobservational_data['nolinks'], 'x'), NOLINKSSEED),
-        'onelink': gf.smartdatainterv(gf.intervente('onelink', preobservational_data['onelink'], 'x'), ONELINKSEED),
-        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks'], 'x'), TWOLINKSSEED),
-        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1'], 'x'),
+        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'x'), NOLINKSSEED),
+        'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'x'), ONELINKSEED),
+        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'x'), TWOLINKSSEED),
+        'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1'], 'x'),
                                         COLLIDER1SEED),
-        'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork'], 'x'), FORKSEED),
-        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', preobservational_data['threelinks'], 'x'),
+        'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork'], 'x'), FORKSEED),
+        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'x'),
                                          THREELINKSSEED)
-        # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
     }
 
     preinterventionalz_data = {
-        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', preobservational_data['nolinks'], 'z'), NOLINKSSEED),
-        'onelink': gf.smartdatainterv(gf.intervente('onelink', preobservational_data['onelink'], 'z'), ONELINKSEED),
-        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks'], 'z'), TWOLINKSSEED),
-        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1'], 'z'),
+        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'z'), NOLINKSSEED),
+        'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'z'), ONELINKSEED),
+        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'z'), TWOLINKSSEED),
+        'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1'], 'z'),
                                         COLLIDER1SEED),
-        'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork'], 'z'), FORKSEED),
-        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', preobservational_data['threelinks'], 'z'),
+        'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork'], 'z'), FORKSEED),
+        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'z'),
                                          THREELINKSSEED)
-        # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
     }
     '''                                                 
 
@@ -142,20 +156,20 @@ class C(BaseConstants):
                 new_dict[key][key_second] = [initialdict[key][key_second][seq[i]] for i in  range(lenght) ]
     '''
 
-    #observational_data = gf.reshuffle(preobservational_data)
-    #interventional_data = gf.reshuffle(preinterventional_data)
-    #interventionalx_data = gf.reshuffle(preinterventionalx_data)
-    #interventionalz_data = gf.reshuffle(preinterventionalz_data)
+    observational_data = gf.reshuffle(preobservational_data)
+    interventional_data = gf.reshuffle(preinterventional_data)
+    interventionalx_data = gf.reshuffle(preinterventionalx_data)
+    interventionalz_data = gf.reshuffle(preinterventionalz_data)
 
-    observational_data = preobservational_data
-    interventional_data = preinterventional_data
-    interventionalx_data = preinterventionalx_data
-    interventionalz_data = preinterventionalz_data
+    #observational_data = preobservational_data
+    #interventional_data = preinterventional_data
+    #interventionalx_data = preinterventionalx_data
+    #interventionalz_data = preinterventionalz_data
 
     task_sequence_keys = (list(observational_data.keys()))
 
-    # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "threelinks", "fork"]
+    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    #task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "threelinks", "fork"]
 
     SEEDS = []  # SEEDS contains seed for every round
 
@@ -256,6 +270,7 @@ class DiagramTask(Page):
             datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
                          range(len(output[3]['x']))],
             frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            datasetint1 = C.interventional_data[C.task_sequence[player.round_number - 1]],
             # frequenciesobs=gf.check_frequencies(output[0]),
             frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
             frequenciesintx=["frequencies"] + gf.check_frequencies(output[2]),
