@@ -103,9 +103,22 @@ class C(BaseConstants):
         'nolinks': gf.smartdatainterv(gf.intervente('nolinks', preobservational_data['nolinks'], 'x'), NOLINKSSEED),
         'onelink': gf.smartdatainterv(gf.intervente('onelink', preobservational_data['onelink'], 'x'), ONELINKSEED),
         'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks'], 'x'), TWOLINKSSEED),
-        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1'], 'x'), COLLIDER1SEED),
+        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1'], 'x'),
+                                        COLLIDER1SEED),
         'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork'], 'x'), FORKSEED),
         'threelinks': gf.smartdatainterv(gf.intervente('threelinks', preobservational_data['threelinks'], 'x'),
+                                         THREELINKSSEED)
+        # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
+    }
+
+    preinterventionalz_data = {
+        'nolinks': gf.smartdatainterv(gf.intervente('nolinks', preobservational_data['nolinks'], 'z'), NOLINKSSEED),
+        'onelink': gf.smartdatainterv(gf.intervente('onelink', preobservational_data['onelink'], 'z'), ONELINKSEED),
+        'twolinks': gf.smartdatainterv(gf.intervente('twolinks', preobservational_data['twolinks'], 'z'), TWOLINKSSEED),
+        'collider1': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider1'], 'z'),
+                                        COLLIDER1SEED),
+        'fork': gf.smartdatainterv(gf.intervente('fork', preobservational_data['fork'], 'z'), FORKSEED),
+        'threelinks': gf.smartdatainterv(gf.intervente('threelinks', preobservational_data['threelinks'], 'z'),
                                          THREELINKSSEED)
         # 'collider2': gf.smartdatainterv(gf.intervente('collider', preobservational_data['collider2']), COLLIDER2SEED)
     }
@@ -129,9 +142,15 @@ class C(BaseConstants):
                 new_dict[key][key_second] = [initialdict[key][key_second][seq[i]] for i in  range(lenght) ]
     '''
 
-    observational_data = gf.reshuffle(preobservational_data)
-    interventional_data = gf.reshuffle(preinterventional_data)
-    interventionalx_data = gf.reshuffle(preinterventionalx_data)
+    #observational_data = gf.reshuffle(preobservational_data)
+    #interventional_data = gf.reshuffle(preinterventional_data)
+    #interventionalx_data = gf.reshuffle(preinterventionalx_data)
+    #interventionalz_data = gf.reshuffle(preinterventionalz_data)
+
+    observational_data = preobservational_data
+    interventional_data = preinterventional_data
+    interventionalx_data = preinterventionalx_data
+    interventionalz_data = preinterventionalz_data
 
     task_sequence_keys = (list(observational_data.keys()))
 
@@ -164,7 +183,9 @@ class Player(BasePlayer):
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
     target_key = C.task_sequence[num_round]
-    target_vocabulary = [C.observational_data[target_key], C.interventional_data[target_key], C.interventionalx_data[target_key]]
+    target_vocabulary = [C.observational_data[target_key], C.interventional_data[target_key],
+                         C.interventionalx_data[target_key],
+                         C.interventionalz_data[target_key]]
     return target_vocabulary
 
 
@@ -231,11 +252,14 @@ class DiagramTask(Page):
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
             datasetintx=[(i + 1, output[2]['x'][i], output[2]['y'][i], output[2]['z'][i]) for i in
-                        range(len(output[2]['x']))],
+                         range(len(output[2]['x']))],
+            datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
+                         range(len(output[3]['x']))],
             frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
             # frequenciesobs=gf.check_frequencies(output[0]),
             frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
-            frequenciesintx=["frequencies"] + gf.check_frequencies(output[2]))
+            frequenciesintx=["frequencies"] + gf.check_frequencies(output[2]),
+            frequenciesintz=["frequencies"] + gf.check_frequencies(output[3]))
 
     @staticmethod
     def js_vars(player):
@@ -247,10 +271,13 @@ class DiagramTask(Page):
                         range(len(output[1]['x']))],
             datasetintx=[(i + 1, output[2]['x'][i], output[2]['y'][i], output[2]['z'][i]) for i in
                          range(len(output[2]['x']))],
+            datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
+                         range(len(output[3]['x']))],
             frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
             # frequenciesobs=gf.check_frequencies(output[0]),
             frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
             frequenciesintx=["frequencies"] + gf.check_frequencies(output[2]),
+            frequenciesintz=["frequencies"] + gf.check_frequencies(output[3]),
             seed=C.SEEDS[player.round_number - 1])
 
 
@@ -261,8 +288,12 @@ class DiagramTest(Page):
         store_array = json.loads(player.stored)
         seed = C.SEEDS[player.round_number - 1]
         edges = C.data_edges
+        datasetobs = C.observational_data[C.task_sequence[player.round_number - 1]],
+        datasetint = C.interventional_data[C.task_sequence[player.round_number - 1]],
+        datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
+        datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
         return dict(
-            ekey=[C.task_sequence, gf.tanc(store_array), seed])
+            ekey=[datasetobs, datasetint, datasetintx, datasetintz, C.task_sequence, gf.tanc(store_array), seed])
 
     @staticmethod
     def js_vars(player):

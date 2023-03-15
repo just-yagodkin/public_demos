@@ -261,11 +261,26 @@ def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 
 def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)]
     '''shows how often "1" occurs
        returns triplet(list) of frquencies'''
-    for i in range(len(dictionary[list(dictionary.keys())[0]])):
-        freqx, freqy, freqz = [
-            dictionary[list(dictionary.keys())[i]].count(t[i]) / len(dictionary[list(dictionary.keys())[i]]) for i in
-            range(3)]
-    return [freqx, freqy, freqz]
+    length = 16
+    freqx = 0
+    freqy = 0
+    freqz = 0
+    for i in dictionary['x']:
+        if i == 1:
+            freqx += 1
+    for i in dictionary['y']:
+        if i == 1:
+            freqy += 1
+    for i in dictionary['z']:
+        if i == 1:
+            freqz += 1
+
+    #for i in range(len(dictionary[list(dictionary.keys())[0]])):
+    #    freqx, freqy, freqz = [
+    #        dictionary[list(dictionary.keys())[i]].count(t[i]) / len(dictionary[list(dictionary.keys())[i]]) for i in
+    #        range(3)]
+
+    return [freqx/length, freqy/length, freqz/length]
 
 
 def intervente(key: str, dictionary: dict, name='y', fixed=1):
@@ -292,12 +307,20 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
     freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)  # freq x if y = 1
     freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)  # freq x if y = 0
 
-    freq_z_when_x = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
+    freq_z_when_y = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
         [i for i, x in enumerate(dictionary[st[1]]) if x == 1])) / len(
         [i for i, x in enumerate(dictionary[st[0]]) if x == 1])
-    freq_z_when_not_x = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
+    freq_z_when_not_y = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
         [i for i, x in enumerate(dictionary[st[1]]) if x == 0])) / len(
         [i for i, x in enumerate(dictionary[st[0]]) if x == 0])
+
+    freq_x_when_y = len(set([i for i, x in enumerate(dictionary[st[1]]) if x == 1]) & set(
+        [i for i, x in enumerate(dictionary[st[0]]) if x == 1])) / len(
+        [i for i, x in enumerate(dictionary[st[1]]) if x == 1])
+    freq_x_when_not_y = len(set([i for i, x in enumerate(dictionary[st[1]]) if x == 1]) & set(
+        [i for i, x in enumerate(dictionary[st[0]]) if x == 0])) / len(
+        [i for i, x in enumerate(dictionary[st[1]]) if x == 0])
+
 
     interv_dict[name] = [fixed] * length  # fill Y with fixed value
 
@@ -353,13 +376,15 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             if fixed == 1:
                 x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
 
-                z = [1 if i < round(freq_z_when_x * freq_x_when_name * length) else 0 for i in
+                z = [1 if i < round(freq_z_when_y * freq_x_when_name * length) else 0 for i in
                      range(round(freq_x_when_name * length))]
-                z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_x * length - 1) else 0 for i in
+                z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_y * length - 1) else 0 for i in
                       # 1 is a crunch :(
                       range(length - round(freq_x_when_name * length))]
             else:
+                print("Don't use zero!! PLS!")
                 pass
+
                 '''
                 x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
 
@@ -392,21 +417,12 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 z = [0] * length
 
         elif key == 'fork':
-            if fixed == 1:
-                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-                z = [1 if i < round(freq_z_when_x * check_frequencies(dictionary)[1] * length) else 0 for i in
+            x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+            z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
                      range(round(check_frequencies(dictionary)[1] * length))]
-                z += [1 if i < round(freq_z_when_not_x * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
-                      for i in
-                      range(round(length * (1 - check_frequencies(dictionary)[1])))]
-            else:
-                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-
-                z = [1 if i < round(freq_z_when_x * check_frequencies(dictionary)[1] * length) else 0 for i in
-                     range(round(check_frequencies(dictionary)[1] * length))]
-                z += [1 if i < round(freq_z_when_not_x * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
-                      for i in
-                      range(round(length * (1 - check_frequencies(dictionary)[1])))]
+            z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
+                    for i in
+                    range(round(length * (1 - check_frequencies(dictionary)[1])))]
 
         elif key == "nolinks":
             x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -433,6 +449,35 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             else:
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
                 x = [0] * length
+
+    if name == 'z':
+        if key == 'collider':
+            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+            if fixed == 1:
+                z = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+            else:
+                z = [0] * length
+
+
+        if key == "nolinks":
+            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+            z = [1 if i < round(check_frequencies(dictionary)[1] * length // 2) else 0 for i in range(length // 2)] * 2
+
+        if key == "onelink" or key == "twolinks":
+            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+            z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[0] * length) else 0 for i in
+                 range(round(check_frequencies(dictionary)[0] * length))]
+            z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[0]))) else 0
+                  for i in
+                  range(round(length * (1 - check_frequencies(dictionary)[0])))]
+
+        if key == 'fork' or key == "threelinks":
+            z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+            x = [1 if i < round(freq_x_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
+                 range(round(check_frequencies(dictionary)[1] * length))]
+            x += [1 if i < round(freq_x_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
+                  for i in
+                  range(round(length * (1 - check_frequencies(dictionary)[1])))]
 
     interv_dict[st[1]] = z
     interv_dict[st[0]] = x
@@ -536,7 +581,7 @@ def smartedgesinterv(l: list, seed=0):
     return templ
 
 
-def minifunc(number):
+def minifunc(number):           # where Y will be. optional
     if (number == 1 or number == 4):
         return "Z"
     if (number == 0 or number == 5):
@@ -626,11 +671,12 @@ def intervente2(dictionary: dict, name='y', fixed=1):
 
 '''
 print(d['onelink'], "- onelink")
-print(check_dependencies(d['onelink']), "- dependencies")
-print(check_frequencies(d['onelink']), "- frequencies")
-print(intervente('onelink', d['onelink']), "- orange distribution (Y fixed)")
-print(check_dependencies(intervente('onelink', d['onelink'])), "- dependencies again")
-print(check_frequencies(intervente('onelink', d['onelink'])), "- frequencies again")
+#print(check_dependencies(d['onelink']), "- dependencies")
+print(check_frequencies(d['onelink'], 'x'), "- frequencies")
+print(intervente('onelink', d['onelink'], "x"), "- orange distribution (X fixed)")
+t = intervente('onelink', d['onelink'], "x")
+#print(check_dependencies(intervente('onelink', d['onelink']), 'x'), "- dependencies again")
+print(check_frequencies(intervente('onelink', d['onelink'], "x")), "- frequencies again")
 
 # print(intervente(temp), "- orange distribution (Y fixed)")
 # print(check_dependencies(temp), "- dependencies again x2")
