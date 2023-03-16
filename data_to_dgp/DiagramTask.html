@@ -31,163 +31,374 @@
 {{ endblock }}
 
 {{ block title }}
-    Pick the edges between variables acccording to data
+<dl class="lng-Title">Pick the arrows (edges) between variables according to data.</dl>
 {{ endblock }}
 
 
 {{ block content }}
 
+<div class = "lang-container">
+    <select class="change-lang">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+    </select>
+</div>
 
+<br>
 
-<div class="tg-wrap"><table id="menu"  class="table table-striped" style="
+<div class="tg-wrap">
+    <table id="menu" class="table table-striped" style="
   margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-  <tbody>
-    <tr>
-      <td class="searchable3"></td>
-      <td class="searchable3">
-        
-      </td>
-      <td class="searchable3">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       
-        <button id = "myButton"  onclick="toggle(this);"type="button" class="btn btn-outline-dark btn-sm">
-          Force Y=1 (do Y)
-        </button>
+        <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
+        <tbody>
+        <tr>
+            <td class="searchable3"></td>
+            <td class="searchable3">
 
-        <div class="input-group"> <span class="input-group-addon"></span>
-      </td>
-      <td class="searchable3"></td>
-    </tr>
-    <tr>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    </tbody>
-  </table></div>
+                <button style="display: none;" id="myButtonX" onclick="toggleX(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force X=1 (DO X)    <!-- this text is optional -->
+                </button>
+                <script>
+                    let seed = js_vars.seed;
+                    function minifuncy(number){
+                    if (number == 1 || number == 4){return "Z"}
+                    if (number == 0 || number == 5){return "Y"}
+                    if (number == 2 || number == 3){return "X"}
+                    }
+
+                    function minifuncx(number){
+                    if (number == 3 || number == 5){return "Z"}
+                    if (number == 0 || number == 1){return "X"}
+                    if (number == 2 || number == 4){return "Y"}
+                    }
+
+                    function minifuncz(number){
+                    if (number == 0 || number == 2){return "Z"}
+                    if (number == 4 || number == 5){return "X"}
+                    if (number == 1 || number == 3){return "Y"}
+                    }
+
+
+                    butx = document.getElementById("myButtonX");
+                    butx.innerText = 'Force X=1 (DO X)';
+                    if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
+                    //if (minifuncy(seed) == 'X'){butx.style.display = "inline-block";}
+
+                </script>
+
+                <div class="input-group"><span class="input-group-addon"></span>
+            </td>
+            <td class="searchable3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <button style="display: none;" id="myButtonY" onclick="toggleY(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force Y=1 (DO Y)    <!-- this text is optional -->
+                </button>
+
+                <script>
+                buty = document.getElementById("myButtonY");
+                buty.innerText = 'Force Y=1 (DO Y)';
+                if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
+                //if (minifuncy(seed) == 'Y'){buty.style.display = "inline-block";}
+
+                </script>
+
+                <div class="input-group"><span class="input-group-addon"></span>
+            </td>
+
+            <td class="searchable3">
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button style="display: none;" id="myButtonZ" onclick="toggleZ(this);" type="button" class="btn btn-outline-dark btn-sm">
+                    Force Z=1 (DO Z)    <!-- this text is optional -->
+                </button>
+
+                <script>
+                    butz = document.getElementById("myButtonZ");
+                    butz.innerText = 'Force Z=1 (DO Z)';
+                    if (minifuncx(seed) == 'Z' || minifuncy(seed) == 'Z' || minifuncz(seed) == 'Z'){butz.style.display = "inline-block";}
+                    //if (minifuncy(seed) == 'Z'){butz.style.display = "inline-block";}
+
+                </script>
+
+                <div class="input-group"><span class="input-group-addon"></span>
+            </td>
+        </tr>
+        <tr>
+
+        </tbody>
+    </table>
+</div>
 
 
 <!-- <div>Observational data</div> -->
 
-<table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-  <tbody class="searchable2">
-    <tr>
-      <td class="searchable2"></td>
-      <td class="searchable2">
-        X
-        <br />
-        <label><input id="filterx_i" type="checkbox" >1</label>
-        <label><input id="filterx0_i" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
+<table id="interv" hidden="true" class="table table-striped"
+       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
 
-        
+    <tbody class="searchable2">
+    <tr>
+        <td class="searchable2"></td>
+        <td class="searchable2">
+            X
+            <br/>
+            <label><input id="filterx_i" type="checkbox">1</label>
+            <label><input id="filterx0_i" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+
 
         </td>
-      <td class="searchable2">Y
-        <br />
-        <label><input id="filtery_i" type="checkbox" >1</label>
-        <label><input id="filtery0_i" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
-        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+        <td class="searchable2">Y
+            <br/>
+            <label><input id="filtery_i" type="checkbox">1</label>
+            <label><input id="filtery0_i" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
 
-      </td>
-      <td class="searchable2">Z
-        <br />
-        <label><input id="filterz_i" type="checkbox" >1</label>
-        <label><input id="filterz0_i" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
-      </td>
+        </td>
+        <td class="searchable2">Z
+            <br/>
+            <label><input id="filterz_i" type="checkbox">1</label>
+            <label><input id="filterz0_i" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+        </td>
     </tr>
     {% for i, x, y, z in datasetint %}
     <tr>
-      <td>{{ i }}</td>
-      <td>{{ x }}</td>
-      <td>{{ y }}</td>
-      <td>{{ z }}</td>
+        <td>{{ i }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        <td>{{ z }}</td>
     </tr>
     {% endfor %}
     <tr></tr>
-    {% for i in frequenciesint %}
-      <td>{{ i }}</td>
+
+        {% for i in frequenciesint %}
+        <td>{{ i }}</td>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+<table id="intervx" hidden="true" class="table table-striped"
+       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
+
+    <tbody class="searchable4">
+    <tr>
+        <td class="searchable4"></td>
+        <td class="searchable4">
+            X
+            <br/>
+            <label><input id="filterx_ix" type="checkbox">1</label>
+            <label><input id="filterx0_ix" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+
+
+        </td>
+        <td class="searchable4">Y
+            <br/>
+            <label><input id="filtery_ix" type="checkbox">1</label>
+            <label><input id="filtery0_ix" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
+        </td>
+        <td class="searchable4">Z
+            <br/>
+            <label><input id="filterz_ix" type="checkbox">1</label>
+            <label><input id="filterz0_ix" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+        </td>
+    </tr>
+    {% for i, x, y, z in datasetintx %}
+    <tr>
+        <td>{{ i }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        <td>{{ z }}</td>
+    </tr>
     {% endfor %}
-  </tbody>
-  </table>
+    <tr></tr>
+
+        {% for i in frequenciesintx %}
+        <td>{{ i }}</td>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+<table id="intervz" hidden="true" class="table table-striped"
+       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
+
+    <tbody class="searchable5">
+    <tr>
+        <td class="searchable5"></td>
+        <td class="searchable5">
+            X
+            <br/>
+            <label><input id="filterx_iz" type="checkbox">1</label>
+            <label><input id="filterx0_iz" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+
+
+        </td>
+        <td class="searchable5">Y
+            <br/>
+            <label><input id="filtery_iz" type="checkbox">1</label>
+            <label><input id="filtery0_iz" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
+        </td>
+        <td class="searchable5">Z
+            <br/>
+            <label><input id="filterz_iz" type="checkbox">1</label>
+            <label><input id="filterz0_iz" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
+        </td>
+    </tr>
+    {% for i, x, y, z in datasetintz %}
+    <tr>
+        <td>{{ i }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        <td>{{ z }}</td>
+    </tr>
+    {% endfor %}
+    <tr></tr>
+
+        {% for i in frequenciesintz %}
+        <td>{{ i }}</td>
+        {% endfor %}
+
+    </tbody>
+</table>
 
 
 <table id="observ" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+    <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
 
-  <tbody class="searchable">
+    <tbody class="searchable">
     <tr>
-      <td class="searchable"></td>
-      <td class="searchable">
-        X
-        <br />
-        <label><input id="filterx" type="checkbox" >1</label>
-        <label><input id="filterx0" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
+        <td class="searchable"></td>
+        <td class="searchable">
+            X
+            <br/>
+            <label><input id="filterx" type="checkbox">1</label>
+            <label><input id="filterx0" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
 
-        
 
         </td>
-      <td class="searchable">Y
-        <br />
-        <label><input id="filtery" type="checkbox" >1</label>
-        <label><input id="filtery0" type="checkbox" >0</label>
-        <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-        <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+        <td class="searchable">Y
+            <br/>
+            <label><input id="filtery" type="checkbox">1</label>
+            <label><input id="filtery0" type="checkbox">0</label>
+            <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
+            <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
 
-      </td>
-      <td class="searchable">Z
-        <br />
-        <label><input id="filterz" type="checkbox" >1</label>
-        <label><input id="filterz0" type="checkbox" >0</label>
-        <div class="input-group"> <span class="input-group-addon"></span>
+        </td>
+        <td class="searchable">Z
+            <br/>
+            <label><input id="filterz" type="checkbox">1</label>
+            <label><input id="filterz0" type="checkbox">0</label>
+            <div class="input-group"><span class="input-group-addon"></span>
 
-      </td>
+        </td>
     </tr>
     {% for i, x, y, z in datasetobs %}
     <tr>
-      <td>{{ i }}</td>
-      <td>{{ x }}</td>
-      <td>{{ y }}</td>
-      <td>{{ z }}</td>
+        <td>{{ i }}</td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        <td>{{ z }}</td>
     </tr>
     {% endfor %}
     <tr></tr>
-    {% for i in frequenciesobs %}
-      <td>{{ i }}</td>
-    {% endfor %}
-  </tbody>
-  </table></div><br />
+
+        {% for i in frequenciesobs %}
+        <td>{{ i }}</td>
+        {% endfor %}
+
+    </tbody>
+</table></div><br/>
 
 
+<div id="freqs">Freqs: {% for i in frequenciesobs %}
+                            {{ i }}
+                            {% endfor %}
+</div>
 
+<div>
+    <p class="lng-DtText">Choose (click) the edges as follows: leave it dashed if there is no influence from one variable to another variable, or make it solid if there is.
+            Remember that each variable could be simultaneously ONLY ONE of the following: a) independent b) cause с) effect.
+    </p>
 
-<div >
-  <p> Choose (click) the edges as follows: dashed if there is no influence from one variable to another variable and solid if there is.
-    Remember that each variable could be simultaneously ONLY one of the following: a) independent b) cause с) effect.
-  </p>
-
-  <br />
+    <br/>
 </div>
 <div id="cy"></div>
 
 
+<br>
+<div align="center">
+    <div class="slidecontainer">
+        <p>
+        <h3 class = "lng-confidence">Choose your confidence</h3></p>
+        <input type="range" min="1" max="10" value="3" class="slider" id="myRange">
+    </div>
+</div>
+
 
 {{ next_button }}
-   
 
-
-<script src="{{ static 'global/cytoscape.min.js' }}"> </script>
+<script src="{{ static 'global/cytoscape.min.js' }}"></script>
 
 <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
 
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
 <script>
+function crfunc(b1, b2){
+  if (b1){return "0";}
+
+  else if (b2){return "1";}
+
+  else {return "-1";}
+}
 
 var cy = cytoscape({
   container: document.getElementById('cy'),
 
   boxSelectionEnabled: false,
   autounselectify: true,
+  wheelSensitivity:0.1,
 
   style: cytoscape.stylesheet()
 
@@ -311,33 +522,47 @@ $(document).ready(function () {
         $('.searchable tr').filter(function () {
             return rex.test($(this).text());
         }).show();
-
     });
     
     $('#filterx').on('change', function(){
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterx0').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(1).text() !== "0"
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
-        
-        
     });
 
-    
     $('#filterx0').on('change', function(){
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterx').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(1).text() !== "1"
+                return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
         
         
@@ -347,11 +572,20 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filtery0').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(2).text() !== "0"
+                return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
         
         
@@ -361,11 +595,20 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filtery').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(2).text() !== "1"
+                return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
             }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+            }).show();
+            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
         }
         
         
@@ -375,11 +618,17 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterz0').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(3).text() !== "0"
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
             }).show();
         }else{
-            $('.searchable tr').show();
+            $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ))
+            }).show();
         }
         
         
@@ -389,31 +638,40 @@ $(document).ready(function () {
         
         if(this.checked){
             $('.searchable tr').hide();
+            document.getElementById('filterz').checked = false;
             $('.searchable tr').filter(function() {
-                return $(this).find('td').eq(3).text() !== "1"
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
             }).show();
         }else{
-            $('.searchable tr').show();
+           $('.searchable tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ))
+            }).show();
         }
-        
-        
     });
-
   }(jQuery));
-
 });
+
+
 $(document).ready(function () {
   (function ($) {
     $('#filterx_i').on('change', function(){
-
-    if(this.checked){
-        $('.searchable2 tr').hide();
-        $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(1).text() !== "0"
-        }).show();
-    }else{
-        $('.searchable2 tr').show();
-    }
+        if(this.checked){
+            $('.searchable2 tr').hide();
+            document.getElementById('filterx0_i').checked = false;
+            $('.searchable2 tr').filter(function() {
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
+        }else{
+            $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
+        }
 
 
     });
@@ -423,11 +681,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filterx_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(1).text() !== "1"
+            return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
     }
 
 
@@ -437,11 +701,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+         document.getElementById('filtery0_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(2).text() !== "0"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
     }
 
 
@@ -451,11 +721,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filtery_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(2).text() !== "1"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+            }).show();
     }
 
 
@@ -465,11 +741,17 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filterz0_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(3).text() !== "0"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ))
+            }).show();
     }
 
 
@@ -479,35 +761,353 @@ $(document).ready(function () {
 
     if(this.checked){
         $('.searchable2 tr').hide();
+        document.getElementById('filterz_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return $(this).find('td').eq(3).text() !== "1"
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
         }).show();
     }else{
-        $('.searchable2 tr').show();
+        $('.searchable2 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ))
+            }).show();
     }
+    });
+}(jQuery));
+});
+
+$(document).ready(function () {
+  (function ($) {
+    $('#filterx_ix').on('change', function(){
+        if(this.checked){
+            $('.searchable4 tr').hide();
+            document.getElementById('filterx0_ix').checked = false;
+            $('.searchable4 tr').filter(function() {
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+        }else{
+            $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+        }
 
 
     });
 
 
+    $('#filterx0_ix').on('change', function(){
 
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filterx_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+         document.getElementById('filtery0_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery0_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filtery_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filterz0_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz0_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filterz_i').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ))
+            }).show();
+    }
+    });
 }(jQuery));
-
 });
 
-let toggle = button => {
+$(document).ready(function () {
+  (function ($) {
+    $('#filterx_iz').on('change', function(){
+        if(this.checked){
+            $('.searchable5 tr').hide();
+            document.getElementById('filterx0_iz').checked = false;
+            $('.searchable5 tr').filter(function() {
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+        }else{
+            $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+        }
+
+
+    });
+
+
+    $('#filterx0_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filterx_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+         document.getElementById('filtery0_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery0_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filtery_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filterz0_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz0_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filterz_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ))
+            }).show();
+    }
+    });
+}(jQuery));
+});
+
+let toggleX = button => {
     let element = document.getElementById("observ");
     let hidden2 = element.getAttribute("hidden");
-    let anoth_element = document.getElementById("interv");
+
+
+    if (minifuncy(seed) == "X"){var anoth_element = document.getElementById("interv");}
+    if (minifuncx(seed) == "X"){var anoth_element = document.getElementById("intervx");}
+    if (minifuncz(seed) == "X"){var anoth_element = document.getElementById("intervz");}
+
+
+    //let anoth_element = document.getElementById("intervx");
+    let anoth_hidden = anoth_element.getAttribute("hidden");
+
+    if (hidden2) {
+       element.removeAttribute("hidden");
+       anoth_element.setAttribute( "hidden","hidden");
+       button.innerText = 'Force X=1 (DO X)';
+       butz.style.display = "inline-block";
+       butx.style.display = "inline-block";
+
+    } else {
+       anoth_element.removeAttribute("hidden");
+       element.setAttribute("hidden", "hidden");
+       button.innerText = "Show Observational";
+       butz.style.display = "none";
+       butx.style.display = "none";
+       buty.innerText = "Show Observational";
+       buty.style.display = "inline-block";
+    }
+}
+
+let toggleY = button => {
+    let element = document.getElementById("observ");
+    let hidden2 = element.getAttribute("hidden");
+
+    if (minifuncy(seed) == "Y"){var anoth_element = document.getElementById("interv");}
+    if (minifuncx(seed) == "Y"){var anoth_element = document.getElementById("intervx");}
+    if (minifuncz(seed) == "Y"){var anoth_element = document.getElementById("intervz");}
+
+    // let anoth_element = document.getElementById("interv");
+    let anoth_hidden = anoth_element.getAttribute("hidden");
+    if (hidden2) {
+       element.removeAttribute("hidden");
+       anoth_element.setAttribute("hidden","hidden");
+       button.innerText = 'Force Y=1 (DO Y)';
+
+       document.getElementById("interv").setAttribute("hidden","hidden");
+       document.getElementById("intervx").setAttribute("hidden","hidden");
+       document.getElementById("intervz").setAttribute("hidden","hidden");
+
+       butz.innerText = "Force Z=1 (DO Z)";
+       butx.innerText = "Force X=1 (DO X)";
+       butz.style.display = "inline-block";
+       butx.style.display = "inline-block";
+    } else {
+       anoth_element.removeAttribute("hidden");
+       element.setAttribute("hidden", "hidden");
+       button.innerText = "Show Observational";
+       butz.style.display = "none";
+       butx.style.display = "none";
+    }
+}
+
+let toggleZ = button => {
+    let element = document.getElementById("observ");
+    let hidden2 = element.getAttribute("hidden");
+
+    if (minifuncy(seed) == "Z"){var anoth_element = document.getElementById("interv");}
+    if (minifuncx(seed) == "Z"){var anoth_element = document.getElementById("intervx");}
+    if (minifuncz(seed) == "Z"){var anoth_element = document.getElementById("intervz");}
+
+    // let anoth_element = document.getElementById("intervz");
     let anoth_hidden = anoth_element.getAttribute("hidden");
     if (hidden2) {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
-       button.innerText = "Force Y=1 (do Y)";
+       button.innerText = 'Force Z=1 (DO Z)';
+       butz.style.display = "inline-block";
+       butx.style.display = "inline-block";
     } else {
        anoth_element.removeAttribute("hidden");
        element.setAttribute("hidden", "hidden");
-       button.innerText = "Show Observational ";
+       button.innerText = "Show Observational";
+       butz.style.display = "none";
+       butx.style.display = "none";
+       buty.innerText = "Show Observational";
+       buty.style.display = "inline-block";
     }
 }
 // var i = 1
@@ -517,8 +1117,10 @@ let toggle = button => {
 //   else {document.getElementById("observ").style.visibility = "visible" }
 //    }
 //   );
+
 </script>
-  {{ endblock }}
+
+{{ endblock }}
 
 
 

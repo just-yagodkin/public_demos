@@ -27,25 +27,35 @@
 
 </style>
 
+<head>
+</head>
+
+
 
 {{ endblock }}
+
 
 {{ block title }}
-    Pick the edges between variables acccording to data
+<dl class="lng-Title">Pick the arrows (edges) between variables according to data.</dl>
 {{ endblock }}
 
-
 {{ block content }}
+
+<div class = "lang-container">
+    <select class="change-lang">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+    </select>
+</div>
+
 <!-- {{ formfield "trainig"  }} -->
 
-
+<br>
 <div >
-  <p> 
-    Lets figure out how to fil the form!
-    Choose (click) the edges as follows: dashed if there is no influence from one variable to another variable
-    and solid if there is. 
-    As an example please fill the form for following situation:
-    column Y are dependent from X
+  <p class="lng-TrText">
+    Lets figure out how to fill the form!
+      Choose (click) the arrows as follows: leave the edge dashed if there is no influence from one variable to another variable and make it solid if there is.
+        As an example please fill the form for following situation: column Y are dependent from X. Then tap Next.
   </p>
 
   <br />
@@ -59,20 +69,18 @@
 
 {{ next_button }}
 
-   
-
 
 <script src="{{ static 'global/cytoscape.min.js' }}"> </script>
 
 <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
 
 <script>
-
-var cy = cytoscape({
+    var cy = cytoscape({
   container: document.getElementById('cy'),
 
   boxSelectionEnabled: false,
   autounselectify: true,
+  wheelSensitivity:0.1,
 
   style: cytoscape.stylesheet()
 
@@ -118,9 +126,9 @@ var cy = cytoscape({
       })
       ,
 
-  
 
-      
+
+
   elements: {
     nodes: [
       // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
@@ -151,8 +159,8 @@ layout.run();
 
 const edge_states = ["",""];
 const edge_colours = ["#ccc","#000"]
-const edge_type = ['dashed','solid' ] 
-const edge_weight = [2,0] 
+const edge_type = ['dashed','solid' ]
+const edge_weight = [2,0]
 
 
 
@@ -185,16 +193,17 @@ function liveRecv(data) {
 
 function iterator(array, i) {
   var index=(i+1)% array.length;
-  var value = array[index]; 
+  var value = array[index];
 
     return [value, index];
   };
-
-
-
 </script>
 
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
   {{ endblock }}
+
 
 
 
