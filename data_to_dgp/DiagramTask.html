@@ -87,8 +87,8 @@
 
                     butx = document.getElementById("myButtonX");
                     butx.innerText = 'Force X=1 (DO X)';
-                    if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
-                    //if (minifuncy(seed) == 'X'){butx.style.display = "inline-block";}
+                    //if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
+                    if (minifuncy(seed) == 'X'){butx.style.display = "inline-block";}
 
                 </script>
 
@@ -105,8 +105,8 @@
                 <script>
                 buty = document.getElementById("myButtonY");
                 buty.innerText = 'Force Y=1 (DO Y)';
-                if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
-                //if (minifuncy(seed) == 'Y'){buty.style.display = "inline-block";}
+                //if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
+                if (minifuncy(seed) == 'Y'){buty.style.display = "inline-block";}
 
                 </script>
 
@@ -124,8 +124,8 @@
                 <script>
                     butz = document.getElementById("myButtonZ");
                     butz.innerText = 'Force Z=1 (DO Z)';
-                    if (minifuncx(seed) == 'Z' || minifuncy(seed) == 'Z' || minifuncz(seed) == 'Z'){butz.style.display = "inline-block";}
-                    //if (minifuncy(seed) == 'Z'){butz.style.display = "inline-block";}
+                    //if (minifuncx(seed) == 'Z' || minifuncy(seed) == 'Z' || minifuncz(seed) == 'Z'){butz.style.display = "inline-block";}
+                    if (minifuncy(seed) == 'Z'){butz.style.display = "inline-block";}
 
                 </script>
 
@@ -1038,8 +1038,17 @@ let toggleX = button => {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
        button.innerText = 'Force X=1 (DO X)';
+
+///////
+       if (minifuncy(seed) == "Z"){
        butz.style.display = "inline-block";
+       }
+
+       if (minifuncy(seed) == "X"){
        butx.style.display = "inline-block";
+       }
+///////
+
 
     } else {
        anoth_element.removeAttribute("hidden");
@@ -1073,14 +1082,29 @@ let toggleY = button => {
 
        butz.innerText = "Force Z=1 (DO Z)";
        butx.innerText = "Force X=1 (DO X)";
+
+       if (minifuncy(seed) == "Z"){
        butz.style.display = "inline-block";
+       }
+
+       if (minifuncy(seed) == "X"){
        butx.style.display = "inline-block";
+       }
+
+///////
+       if (minifuncy(seed) == "Y"){
+       buty.style.display = "inline-block";
+       }
+       else {buty.style.display = "none";}
+///////
+
     } else {
        anoth_element.removeAttribute("hidden");
        element.setAttribute("hidden", "hidden");
        button.innerText = "Show Observational";
        butz.style.display = "none";
        butx.style.display = "none";
+
     }
 }
 
@@ -1098,8 +1122,18 @@ let toggleZ = button => {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
        button.innerText = 'Force Z=1 (DO Z)';
+
+
+///////
+       if (minifuncy(seed) == "Z"){
        butz.style.display = "inline-block";
+       }
+
+       if (minifuncy(seed) == "X"){
        butx.style.display = "inline-block";
+       }
+///////
+
     } else {
        anoth_element.removeAttribute("hidden");
        element.setAttribute("hidden", "hidden");
@@ -1121,9 +1155,3 @@ let toggleZ = button => {
 </script>
 
 {{ endblock }}
-
-
-
-
-
-

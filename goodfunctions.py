@@ -673,7 +673,7 @@ def intervente2(dictionary: dict, name='y', fixed=1):
     return dictionary
 
 
-
+'''
 print(d['onelink'], "- onelink")
 print(check_frequencies(d['onelink']), "- frequencies")
 
@@ -753,4 +753,4 @@ print(intervente('threelinks', d['threelinks'], "y"), "- orange distribution (Y 
 print(check_frequencies(intervente('threelinks', d['threelinks'], "y")), "- frequencies again")
 print(intervente('threelinks', d['threelinks'], "z"), "- orange distribution (Z fixed)")
 print(check_frequencies(intervente('threelinks', d['threelinks'], "z")), "- frequencies again")
-''''''
+'''
