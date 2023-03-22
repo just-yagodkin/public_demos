@@ -184,14 +184,14 @@
         <td>{{ z }}</td>
     </tr>
     {% endfor %}
-    <tr></tr>
-
+    </table>
+<!--
         {% for i in frequenciesint %}
         <td>{{ i }}</td>
         {% endfor %}
-
+-->
     </tbody>
-</table>
+
 
 <table id="intervx" hidden="true" class="table table-striped"
        style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
@@ -340,20 +340,24 @@
         <td>{{ z }}</td>
     </tr>
     {% endfor %}
-    <tr></tr>
-
+    </table>
+    </tbody>
+</div><br/>
+<!--
+<tr id="FreqObs">
         {% for i in frequenciesobs %}
         <td>{{ i }}</td>
         {% endfor %}
+    </tr>
+    -->
 
-    </tbody>
-</table></div><br/>
-
-
-<div id="freqs">Freqs: {% for i in frequenciesobs %}
+<div id="freqs">{% for i in frequenciesobs %}
                             {{ i }}
                             {% endfor %}
 </div>
+<script>var freqs = document.getElementById('freqs')</script>
+
+
 
 <div>
     <p class="lng-DtText">Choose (click) the edges as follows: leave it dashed if there is no influence from one variable to another variable, or make it solid if there is.
@@ -362,7 +366,10 @@
 
     <br/>
 </div>
+
+
 <div id="cy"></div>
+
 
 
 <br>
@@ -375,7 +382,13 @@
 </div>
 
 
+
 {{ next_button }}
+
+
+
+
+
 
 <script src="{{ static 'global/cytoscape.min.js' }}"></script>
 
@@ -392,6 +405,7 @@ function crfunc(b1, b2){
 
   else {return "-1";}
 }
+
 
 var cy = cytoscape({
   container: document.getElementById('cy'),
@@ -509,7 +523,9 @@ function iterator(array, i) {
   };
 
 
-
+function sum(array){
+    return array.reduce((sum, number) => Math.round(sum) + Math.round(number), 0)
+    }
 
 $(document).ready(function () {
 
@@ -523,132 +539,234 @@ $(document).ready(function () {
             return rex.test($(this).text());
         }).show();
     });
-    
+
+
+
+
     $('#filterx').on('change', function(){
-        
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterx0').checked = false;
             $('.searchable tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== "0" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
-            }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+                filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                    $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                    $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
+             }).show();
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' ' + out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
+
 
         }else{
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' ' + out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
     });
 
     $('#filterx0').on('change', function(){
-        
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterx').checked = false;
             $('.searchable tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== "1" &&
+                filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
 
         }else{
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                       if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
         
         
     });
 
     $('#filtery').on('change', function(){
-        
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filtery0').checked = false;
             $('.searchable tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
                         $(this).find('td').eq(2).text() !== "0" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+            var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
 
         }else{
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
         
         
     });
 
     $('#filtery0').on('change', function(){
-        
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filtery').checked = false;
             $('.searchable tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
                         $(this).find('td').eq(2).text() !== "1" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
 
         }else{
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
-            document.getElementById("freqs").innerText = (`Freqs: ${xs/(tbl.length-2)}, ${ys/(tbl.length-2)}, ${zs/(tbl.length-2)}`);
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
         
         
     });
     
     $('#filterz').on('change', function(){
-        
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterz0').checked = false;
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== "0")
+                        $(this).find('td').eq(3).text() !== "0");
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }else{
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
         
         
     });
 
     $('#filterz0').on('change', function(){
-        
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterz').checked = false;
             $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== "1")
+                        $(this).find('td').eq(3).text() !== "1");
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }else{
            $('.searchable tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
     });
   }(jQuery));
@@ -658,19 +776,39 @@ $(document).ready(function () {
 $(document).ready(function () {
   (function ($) {
     $('#filterx_i').on('change', function(){
+        var out = [];
+        var tab = 0;
+        var filt_cut = 0;
         if(this.checked){
             $('.searchable2 tr').hide();
             document.getElementById('filterx0_i').checked = false;
             $('.searchable2 tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== "0" &&
+                filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
+
+
+            var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }else{
             $('.searchable2 tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
         }
 
 
@@ -678,100 +816,207 @@ $(document).ready(function () {
 
 
     $('#filterx0_i').on('change', function(){
-
+    var out = [];
+        var tab = 0;
+        var filt_cut = 0;
     if(this.checked){
         $('.searchable2 tr').hide();
         document.getElementById('filterx_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== "1" &&
+            filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+            return (filt_cut)
         }).show();
+
+
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             console.log(tab);
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }else{
         $('.searchable2 tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            console.log(tab);
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }
 
 
     });
 
     $('#filtery_i').on('change', function(){
-
+    var out = [];
+        var tab = 0;
+        var filt_cut = 0;
     if(this.checked){
         $('.searchable2 tr').hide();
          document.getElementById('filtery0_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
                         $(this).find('td').eq(2).text() !== "0" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+            return (filt_cut)
         }).show();
+
+
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }else{
         $('.searchable2 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }
 
 
     });
 
     $('#filtery0_i').on('change', function(){
-
+    var out = [];
+        var tab = 0;
+        var filt_cut = 0;
     if(this.checked){
         $('.searchable2 tr').hide();
         document.getElementById('filtery_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
                         $(this).find('td').eq(2).text() !== "1" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+            return (filt_cut)
         }).show();
+
+
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }else{
         $('.searchable2 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }
 
 
     });
 
     $('#filterz_i').on('change', function(){
-
+    var out = [];
+        var tab = 0;
+        var filt_cut = 0;
     if(this.checked){
         $('.searchable2 tr').hide();
         document.getElementById('filterz0_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== "0")
+                        $(this).find('td').eq(3).text() !== "0");
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+            return (filt_cut)
         }).show();
+
+
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }else{
         $('.searchable2 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }
 
 
     });
 
     $('#filterz0_i').on('change', function(){
-
+    var out = [];
+        var tab = 0;
+        var filt_cut = 0;
     if(this.checked){
         $('.searchable2 tr').hide();
         document.getElementById('filterz_i').checked = false;
         $('.searchable2 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
                         $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== "1")
+                        $(this).find('td').eq(3).text() !== "1");
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+            return (filt_cut)
         }).show();
+
+
+
+
+             var tab = Array.from(out.slice(1, out.length));
+             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+             freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }else{
         $('.searchable2 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ))
+               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ));
+               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
             }).show();
+
+
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = 'freq'+' '+out2[0]  + ' '+ out2[1]  + ' ' + out2[2];
     }
     });
 }(jQuery));
@@ -1155,3 +1400,4 @@ let toggleZ = button => {
 </script>
 
 {{ endblock }}
+

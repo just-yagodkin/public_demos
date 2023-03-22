@@ -168,8 +168,8 @@ class C(BaseConstants):
 
     task_sequence_keys = (list(observational_data.keys()))
 
-    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    #task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "threelinks", "fork"]
+    #task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "threelinks", "fork"]
 
     SEEDS = []  # SEEDS contains seed for every round
 
@@ -269,12 +269,12 @@ class DiagramTask(Page):
                          range(len(output[2]['x']))],
             datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
                          range(len(output[3]['x']))],
-            frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
             datasetint1 = C.interventional_data[C.task_sequence[player.round_number - 1]],
             # frequenciesobs=gf.check_frequencies(output[0]),
-            frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
-            frequenciesintx=["frequencies"] + gf.check_frequencies(output[2]),
-            frequenciesintz=["frequencies"] + gf.check_frequencies(output[3]))
+            frequenciesint=["freq"] + gf.check_frequencies(output[1]),
+            frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
+            frequenciesintz=["freq"] + gf.check_frequencies(output[3]))
 
     @staticmethod
     def js_vars(player):
@@ -288,11 +288,11 @@ class DiagramTask(Page):
                          range(len(output[2]['x']))],
             datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
                          range(len(output[3]['x']))],
-            frequenciesobs=["frequencies"] + gf.check_frequencies(output[0]),
+            frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
             # frequenciesobs=gf.check_frequencies(output[0]),
-            frequenciesint=["frequencies"] + gf.check_frequencies(output[1]),
-            frequenciesintx=["frequencies"] + gf.check_frequencies(output[2]),
-            frequenciesintz=["frequencies"] + gf.check_frequencies(output[3]),
+            frequenciesint=["freq"] + gf.check_frequencies(output[1]),
+            frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
+            frequenciesintz=["freq"] + gf.check_frequencies(output[3]),
             seed=C.SEEDS[player.round_number - 1])
 
 
