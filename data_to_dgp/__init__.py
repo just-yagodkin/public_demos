@@ -98,11 +98,12 @@ class C(BaseConstants):
                              'fork': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
                                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
                                                          'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
-                                                        FORKSEED),
-                             'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                               'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                                              THREELINKSSEED)
+                                                        FORKSEED)
+                                                        # ,
+                            #  'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                            #                                    'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                            #                                    'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                            #                                   THREELINKSSEED)
                              }
 
     preinterventional_data = {
@@ -168,8 +169,8 @@ class C(BaseConstants):
 
     task_sequence_keys = (list(observational_data.keys()))
 
-    #task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "threelinks", "fork"]
+    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    # task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "threelinks", "fork"]
 
     SEEDS = []  # SEEDS contains seed for every round
 
