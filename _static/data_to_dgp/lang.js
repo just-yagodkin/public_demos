@@ -11,30 +11,30 @@ const langArr = {
 
     "carSlide1String2":{
         "ru": `Внутри каждого задания вам предстоит ознакомиться с наборами данных, которые разбиты по столбцам (всего 3 столбца). Каждый столбец содержит 16 строк.
-              Значение строки в каждом столбце может принимать значения 0 и 1.
-              Каждое такое значение является результатом случайного выбора системы,
-              однако частота их генерации определяется механизмом, закрепленным за каждым столбцом.`,
+               Значение строки в каждом столбце может принимать значения 0 и 1.
+               Каждое такое значение является результатом <i>случайного</i> выбора системы,
+               однако частота их генерации определяется механизмом, закрепленным за каждым столбцом.`,
 
         "en": `Inside each assignment you will be given sets of data, which are divided into columns (3 columns in total). Each column contains 16 rows.
-              The value of a row in each column can take the values 0 and 1.
-              Each such value is the result of a random choice of the system,
-              but the frequency of their occurence depends on mechanism assigned to each column.`
+               The value of a row in each column can take the values 0 and 1.
+               Each such value is the result of a <i>random</i> choice of the system,
+               but the frequency of their occurence depends on mechanism assigned to each column.`
     },
 
     "carSlide1String3":{
-        "ru": `Частота генерации внутри столбца может зависеть от механизма в другом столбце. 
-        Это будет означать что если такая зависимость в задании в раунде есть, то значения в столбцах будут генерироваться последовательно, сначала в одном столбце, потом в зависимом от него.`,
+        "ru": `<b>Частота генерации</b> внутри столбца может зависеть от механизма в другом столбце.
+               Это будет означать что если такая зависимость в задании в раунде есть, то значения в столбцах будут генерироваться последовательно, сначала в одном столбце, потом в зависимом от него.`,
 
-        "en": `If the columns are dependent, then in one of them certain values have been randomly selected, and in the other one the generation frequency on the corresponding rows has changed.
-              For example, if Y is dependent on X, it may happen that column Y generates a one more often (or less often) on those rows that were also ones in column X.`
+        "en": `If the columns are dependent, then in one of them certain values have been randomly selected, and in the other one the <b>generation frequency</b> on the corresponding rows has changed.
+               For example, if Y is dependent on X, it may happen that column Y generates a one more often (or less often) on those rows that were also ones in column X.`
     },
 
     "carSlide2String1":{
         "ru": `Однако в каждом раунде вам не будет известно есть ли зависимость между столбцами, и в какой последовательности они были сгенерированы (если зависимостей нет, то это не имеет значения).
-              Вы будете наблюдать только наборы данных (таблицу с тремя столбцами X, Y и Z) сформированные после того, как система запустит работу механизмов.`,
+               Вы будете наблюдать только наборы данных (таблицу с тремя столбцами X, Y и Z) сформированные после того, как система запустит работу механизмов.`,
 
         "en": `However, in each round, you will not know if there is a dependency between columns, and in what sequence they were generated (if there is no dependency, then it does not matter).
-              You will only observe data sets (a table with three columns X, Y and Z) generated after the system runs the mechanisms.`
+               You will only observe data sets (a table with three columns X, Y and Z) generated after the system runs the mechanisms.`
     },
 
     "carSlide2String2":{
@@ -44,7 +44,7 @@ const langArr = {
 
         "en": `In each task you will have the opportunity to start the generation process again as follows:
               the values in one of the columns (you will always know which one) will be changed to ones first, and then the values in the other columns will be determined.
-              This operation will be called &quot;DO &lt;column name&gt;&quot; and there will be a separate button above column.`
+              This operation will be called DO (column name) and there will be a separate button above column.`
     },
 
     "carSlide3String1":{
@@ -66,10 +66,10 @@ const langArr = {
     },
 
     "carSlide3String3":{
-        "ru": `В задании последовательность генерации не может быть длиннее трех шагов, т.е. между столбцами не может быть циклов зависимости.
+        "ru": `В задании последовательность генерации <b>не может</b> быть длиннее трех шагов, т.е. между столбцами не может быть циклов зависимости.
               Это исключает ситуации, в которых, например, столбец X зависит от Y, Y зависит от Z, а Z зависит от X или когда X зависит от Y, а Y зависит от X.`,
 
-        "en": `In this task, the generation sequence cannot be longer than three steps, i.e. there cannot be dependency cycles between columns.
+        "en": `In this task, the generation sequence <b>cannot be</b> longer than three steps, i.e. there cannot be dependency cycles between columns.
               This eliminates situations where, for example, column X is dependent on Y, Y is dependent on Z and Z is dependent on X, or where X is dependent on Y and Y is dependent on X.`
     },
 
@@ -106,7 +106,7 @@ const langArr = {
     "Title":{
         "ru": `Выберите соответствующие стрелки (ребра) между переменными согласно данным.`,
 
-        "en": `Pick the arrows (edges) between variables according to data.`
+        "en": `Pick the arrows (edges) between variables according the data.`
     },
 
     "TrText":{

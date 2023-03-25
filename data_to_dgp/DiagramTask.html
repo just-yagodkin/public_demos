@@ -1,42 +1,40 @@
 {{ block styles }}
 <style>
- .otree-body { 
-    font: 14px helvetica neue, helvetica, arial, sans-serif;
-    max-width:600px
-  }
-  
-  #cy {
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  height: 200px;
-  display: block;
-  }
-  
-  #info {
-    color: #c88;
-    font-size: 2em;
-    width: 800px;
-    height: 200px;
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-  }
+    .otree-body {
+        font: 14px helvetica neue, helvetica, arial, sans-serif;
+        max-width:600px
+    }
 
 
+    #cy {
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: 200px;
+        display: block;
+    }
 
+
+    #info {
+        color: #c88;
+        font-size: 2em;
+        width: 800px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
-
 
 {{ endblock }}
 
+
 {{ block title }}
-<dl class="lng-Title">Pick the arrows (edges) between variables according to data.</dl>
+<dl class="lng-Title">Pick the arrows (edges) between variables according the data.</dl>
 {{ endblock }}
 
 
 {{ block content }}
-
 <div class = "lang-container">
     <select class="change-lang">
         <option value="en">EN</option>
@@ -64,7 +62,9 @@
                 <button style="display: none;" id="myButtonX" onclick="toggleX(this);" type="button" class="btn btn-outline-dark btn-sm">
                     Force X=1 (DO X)    <!-- this text is optional -->
                 </button>
-                <script>
+
+
+<script>
                     let seed = js_vars.seed;
                     function minifuncy(number){
                     if (number == 1 || number == 4){return "Z"}
@@ -89,12 +89,13 @@
                     butx.innerText = 'Force X=1 (DO X)';
                     //if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
                     if (minifuncy(seed) == 'X'){butx.style.display = "inline-block";}
+</script>
 
-                </script>
 
                 <div class="input-group"><span class="input-group-addon"></span>
             </td>
             <td class="searchable3">
+
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -102,13 +103,13 @@
                     Force Y=1 (DO Y)    <!-- this text is optional -->
                 </button>
 
-                <script>
-                buty = document.getElementById("myButtonY");
-                buty.innerText = 'Force Y=1 (DO Y)';
-                //if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
-                if (minifuncy(seed) == 'Y'){buty.style.display = "inline-block";}
+<script>
+                    buty = document.getElementById("myButtonY");
+                    buty.innerText = 'Force Y=1 (DO Y)';
+                    //if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
+                    if (minifuncy(seed) == 'Y'){buty.style.display = "inline-block";}
 
-                </script>
+</script>
 
                 <div class="input-group"><span class="input-group-addon"></span>
             </td>
@@ -117,6 +118,7 @@
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                 <button style="display: none;" id="myButtonZ" onclick="toggleZ(this);" type="button" class="btn btn-outline-dark btn-sm">
                     Force Z=1 (DO Z)    <!-- this text is optional -->
                 </button>
@@ -141,18 +143,16 @@
 
 <!-- <div>Observational data</div> -->
 
-<table id="interv" hidden="true" class="table table-striped"
-       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+<table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="10%">
-        <col width="30%">
-        <col width="30%">
-        <col width="30%">
+    <col width="30%">
+    <col width="30%">
+    <col width="30%">
 
     <tbody class="searchable2">
     <tr>
         <td class="searchable2"></td>
-        <td class="searchable2">
-            X
+        <td class="searchable2">X
             <br/>
             <label><input id="filterx_i" type="checkbox">1</label>
             <label><input id="filterx0_i" type="checkbox">0</label>
@@ -165,8 +165,7 @@
             <label><input id="filtery_i" type="checkbox">1</label>
             <label><input id="filtery0_i" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
-                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
 
         </td>
         <td class="searchable2">Z
@@ -174,6 +173,8 @@
             <label><input id="filterz_i" type="checkbox">1</label>
             <label><input id="filterz0_i" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
+
+
         </td>
     </tr>
     {% for i, x, y, z in datasetint %}
@@ -184,17 +185,9 @@
         <td>{{ z }}</td>
     </tr>
     {% endfor %}
-    </table>
-<!--
-        {% for i in frequenciesint %}
-        <td>{{ i }}</td>
-        {% endfor %}
--->
-    </tbody>
+</table>
 
-
-<table id="intervx" hidden="true" class="table table-striped"
-       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+<table id="intervx" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="10%">
         <col width="30%">
         <col width="30%">
@@ -203,8 +196,7 @@
     <tbody class="searchable4">
     <tr>
         <td class="searchable4"></td>
-        <td class="searchable4">
-            X
+        <td class="searchable4">X
             <br/>
             <label><input id="filterx_ix" type="checkbox">1</label>
             <label><input id="filterx0_ix" type="checkbox">0</label>
@@ -217,8 +209,7 @@
             <label><input id="filtery_ix" type="checkbox">1</label>
             <label><input id="filtery0_ix" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
-                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
 
         </td>
         <td class="searchable4">Z
@@ -226,6 +217,8 @@
             <label><input id="filterz_ix" type="checkbox">1</label>
             <label><input id="filterz0_ix" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
+
+
         </td>
     </tr>
     {% for i, x, y, z in datasetintx %}
@@ -245,18 +238,16 @@
     </tbody>
 </table>
 
-<table id="intervz" hidden="true" class="table table-striped"
-       style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
+<table id="intervz" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="10%">
-        <col width="30%">
-        <col width="30%">
-        <col width="30%">
+    <col width="30%">
+    <col width="30%">
+    <col width="30%">
 
     <tbody class="searchable5">
     <tr>
         <td class="searchable5"></td>
-        <td class="searchable5">
-            X
+        <td class="searchable5">X
             <br/>
             <label><input id="filterx_iz" type="checkbox">1</label>
             <label><input id="filterx0_iz" type="checkbox">0</label>
@@ -269,8 +260,7 @@
             <label><input id="filtery_iz" type="checkbox">1</label>
             <label><input id="filtery0_iz" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
-                <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-                <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
 
         </td>
         <td class="searchable5">Z
@@ -278,6 +268,8 @@
             <label><input id="filterz_iz" type="checkbox">1</label>
             <label><input id="filterz0_iz" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
+
+
         </td>
     </tr>
     {% for i, x, y, z in datasetintz %}
@@ -289,26 +281,22 @@
     </tr>
     {% endfor %}
     <tr></tr>
-
         {% for i in frequenciesintz %}
         <td>{{ i }}</td>
         {% endfor %}
-
     </tbody>
 </table>
 
-
 <table id="observ" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="10%">
-        <col width="30%">
-        <col width="30%">
-        <col width="30%">
+    <col width="30%">
+    <col width="30%">
+    <col width="30%">
 
     <tbody class="searchable">
     <tr>
         <td class="searchable"></td>
-        <td class="searchable">
-            X
+        <td class="searchable">X
             <br/>
             <label><input id="filterx" type="checkbox">1</label>
             <label><input id="filterx0" type="checkbox">0</label>
@@ -320,8 +308,7 @@
             <br/>
             <label><input id="filtery" type="checkbox">1</label>
             <label><input id="filtery0" type="checkbox">0</label>
-            <!-- <label><input id="myButton" onclick="toggle(this);" type="checkbox" >do(1)</label> -->
-            <!-- <div class="input-group"> <span class="input-group-addon"></span> -->
+
 
         </td>
         <td class="searchable">Z
@@ -329,6 +316,7 @@
             <label><input id="filterz" type="checkbox">1</label>
             <label><input id="filterz0" type="checkbox">0</label>
             <div class="input-group"><span class="input-group-addon"></span>
+
 
         </td>
     </tr>
@@ -341,35 +329,26 @@
     </tr>
     {% endfor %}
     </table>
-    </tbody>
-</div><br/>
-<!--
-<tr id="FreqObs">
-        {% for i in frequenciesobs %}
-        <td>{{ i }}</td>
-        {% endfor %}
-    </tr>
-    -->
 
-</table>
 
 <div class="tg-wrap">
-<table id="freqs" class="table table-striped" style="
+    <table id="freqs" class="table table-striped" style="
 margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="10%">
     <col width="30%">
     <col width="30%">
     <col width="30%">
-    <tbody>
+        <tbody>
 
-    {% for i in frequenciesobs %}
-    <td class="searchable3">{{ i }}</td>
-    {% endfor %}    
-    </tr>
-    <tr>
+        {% for i in frequenciesobs %}
+        <td class="searchable3">{{ i }}</td>
+        {% endfor %}
+        </tr>
+        <tr>
 
-    </tbody>
-</table>
+        </tbody>
+
+    </table>
 
 <div class="tg-wrap">
     <table id="freqsint" hidden="true" class="table table-striped" style="
@@ -387,14 +366,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tr>
     
         </tbody>
-    </table>
 
-<script>var freqs = document.getElementById('freqs');
-        var freqsint = document.getElementById('freqsint');
-        var freqsintjs = js_vars.frequenciesint;
-        var freqsobs = js_vars.frequenciesobs;
-        var flag = 0;
-</script>
+    </table>
 
 <br>
 
@@ -402,16 +375,20 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <p class="lng-DtText">Choose (click) the edges as follows: leave it dashed if there is no influence from one variable to another variable, or make it solid if there is.
             Remember that each variable could be simultaneously ONLY ONE of the following: a) independent b) cause с) effect.
     </p>
-
-    <br/>
 </div>
 
+<script>
+        var freqs = document.getElementById('freqs');
+        var freqsint = document.getElementById('freqsint');
+        var freqsintjs = js_vars.frequenciesint;
+        var freqsobs = js_vars.frequenciesobs;
+        var flag = 0;
+</script>
 
 <div id="cy"></div>
 
-
-
 <br>
+
 <!-- <div align="center">
     <div class="slidecontainer">
         <p>
@@ -421,12 +398,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 </div> -->
 
 
-
 {{ next_button }}
-
-
-
-
 
 
 <script src="{{ static 'global/cytoscape.min.js' }}"></script>
@@ -434,6 +406,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
 
 <script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 <script>
@@ -447,15 +420,13 @@ function crfunc(b1, b2){
 
 
 var cy = cytoscape({
-  container: document.getElementById('cy'),
+    container: document.getElementById('cy'),
 
-  boxSelectionEnabled: false,
-  autounselectify: true,
-  wheelSensitivity:0.1,
+    boxSelectionEnabled: false,
+    autounselectify: true,
+    wheelSensitivity:0.1,
 
-  style: cytoscape.stylesheet()
-
-
+    style: cytoscape.stylesheet()
 
     .selector('node')
       .css({
@@ -494,39 +465,38 @@ var cy = cytoscape({
         'rows': 1,
         'cols': 2,
         'padding': 15,
-      })
-      ,
-
-  
-
-      
-  elements: {
-    nodes: [
-      // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
-      { data: {counter:0, id: 'X', name: 'X', }, style: { 'background-color': '#c3cec0' } },
-      { data: {counter:0, id: 'Y', name: 'Y', },  style: { 'background-color': '#c3cec0' }},
-      { data: {counter:0, id: 'Z', name: 'Z', },  style: { 'background-color': '#c3cec0' }},
-      // { data: {counter:0, id: 'Z', name: '-', } }
-    ],
-    edges: [
-      { data: {counter:0, weight:0, id: 'XY', source: 'X', target: 'Y', label: ""} },
-      { data: {counter:0, weight:0, id: 'YX', source: 'Y', target: 'X', label: ""} },
-      { data: {counter:0, weight:0, id: 'YZ', source: 'Y', target: 'Z' , label: ""} },
-      { data: {counter:0, weight:0, id: 'XZ', source: 'X', target: 'Z' , label: ""} },
-      { data: {counter:0, weight:0, id: 'ZY', source: 'Z', target: 'Y' , label: ""} },
-      { data: {counter:0, weight:0, id: 'ZX', source: 'Z', target: 'X' , label: ""} },
-      // { data: {counter:0, weight:0, id: 'bc', source: 'Y', target: 'Z', label: "-"} },
-    ]
-  },
+      }),
 
 
+    elements: {
+        nodes: [
+            // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
+            { data: {counter:0, id: 'X', name: 'X', }, style: { 'background-color': '#c3cec0' } },
+            { data: {counter:0, id: 'Y', name: 'Y', },  style: { 'background-color': '#c3cec0' }},
+            { data: {counter:0, id: 'Z', name: 'Z', },  style: { 'background-color': '#c3cec0' }},
+            // { data: {counter:0, id: 'Z', name: '-', } }
+        ],
+
+        edges: [
+            { data: {counter:0, weight:0, id: 'XY', source: 'X', target: 'Y', label: ""} },
+            { data: {counter:0, weight:0, id: 'YX', source: 'Y', target: 'X', label: ""} },
+            { data: {counter:0, weight:0, id: 'YZ', source: 'Y', target: 'Z' , label: ""} },
+            { data: {counter:0, weight:0, id: 'XZ', source: 'X', target: 'Z' , label: ""} },
+            { data: {counter:0, weight:0, id: 'ZY', source: 'Z', target: 'Y' , label: ""} },
+            { data: {counter:0, weight:0, id: 'ZX', source: 'Z', target: 'X' , label: ""} },
+            // { data: {counter:0, weight:0, id: 'bc', source: 'Y', target: 'Z', label: "-"} },
+        ]
+    },
 });
+
+
 
 var layout = cy.layout({
   name: 'circle'
-});
-
+    });
 layout.run();
+
+
 
 const edge_states = ["",""];
 const edge_colours = ["#ccc","#000"]
@@ -554,22 +524,19 @@ cy.on('tap', 'edge', function(evt){
   form_data = [];
 });
 
+
 function iterator(array, i) {
   var index=(i+1)% array.length;
-  var value = array[index]; 
-
+  var value = array[index];
     return [value, index];
   };
 
 
-function sum(array){
-    return array.reduce((sum, number) => Math.round(sum) + Math.round(number), 0)
-    }
+function sum(array){ return array.reduce((sum, number) => Math.round(sum) + Math.round(number), 0)}
+
 
 $(document).ready(function () {
-
 (function ($) {
-
     $('#filter').keyup(function () {
 
         var rex = new RegExp($(this).val(), 'i');
@@ -577,42 +544,39 @@ $(document).ready(function () {
         $('.searchable tr').filter(function () {
             return rex.test($(this).text());
         }).show();
+
     });
-
-
 
 
     $('#filterx').on('change', function(){
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterx0').checked = false;
             $('.searchable tr').filter(function() {
                 filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
-                    $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                    $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
+                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ))
                 if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-                return (filt_cut)
-             }).show();
+                    return (filt_cut)
+            }).show();
 
-
-             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-             
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
@@ -620,72 +584,76 @@ $(document).ready(function () {
             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
     });
+
+
 
     $('#filterx0').on('change', function(){
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterx').checked = false;
             $('.searchable tr').filter(function() {
                 filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
                 if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-                return (filt_cut)
+                    return (filt_cut)
             }).show();
 
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
 
-             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
 
         }else{
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                       $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
-                       if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
-        
-        
     });
+
+
 
     $('#filtery').on('change', function(){
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filtery0').checked = false;
             $('.searchable tr').filter(function() {
                 filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== "0" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                $(this).find('td').eq(2).text() !== "0" &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
                 if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-                return (filt_cut)
+                    return (filt_cut)
             }).show();
 
             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+
 
         }else{
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
 
             var tab = Array.from(out.slice(1, out.length));
@@ -693,75 +661,77 @@ $(document).ready(function () {
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
-        
-        
     });
+
+
 
     $('#filtery0').on('change', function(){
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filtery').checked = false;
             $('.searchable tr').filter(function() {
                 filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== "1" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                $(this).find('td').eq(2).text() !== "1" &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
                 if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-                return (filt_cut)
+                    return (filt_cut)
             }).show();
 
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
 
-             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
 
         }else{
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz').checked, document.getElementById('filterz0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
-        
-        
     });
+
+
     
     $('#filterz').on('change', function(){
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterz0').checked = false;
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== "0");
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                $(this).find('td').eq(3).text() !== "0");
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
 
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
 
-             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+
         }else{
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
 
             var tab = Array.from(out.slice(1, out.length));
@@ -769,48 +739,51 @@ $(document).ready(function () {
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
-        
-        
     });
+
+
 
     $('#filterz0').on('change', function(){
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable tr').hide();
             document.getElementById('filterz').checked = false;
             $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
-                        $(this).find('td').eq(3).text() !== "1");
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ) &&
+                $(this).find('td').eq(3).text() !== "1");
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
-
-
-
-             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-        }else{
-           $('.searchable tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
-            }).show();
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+
+
+        }else{
+           $('.searchable tr').filter(function() {
+              filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked ) &&
+              $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked ));
+              if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                   return (filt_cut)
+           }).show();
+
+
+           var tab = Array.from(out.slice(1, out.length));
+           var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+           out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+           freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
     });
+
   }(jQuery));
 });
+
 
 
 $(document).ready(function () {
@@ -819,83 +792,76 @@ $(document).ready(function () {
         var out = [];
         var tab = 0;
         var filt_cut = 0;
+
         if(this.checked){
             $('.searchable2 tr').hide();
             document.getElementById('filterx0_i').checked = false;
             $('.searchable2 tr').filter(function() {
-                filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
-                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+            filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
                 return (filt_cut)
             }).show();
 
-
             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+
+
         }else{
             $('.searchable2 tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+                $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+                if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                    return (filt_cut)
             }).show();
-
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
         }
-
-
     });
 
 
+
     $('#filterx0_i').on('change', function(){
-    var out = [];
+        var out = [];
         var tab = 0;
         var filt_cut = 0;
-    if(this.checked){
-        $('.searchable2 tr').hide();
-        document.getElementById('filterx_i').checked = false;
-        $('.searchable2 tr').filter(function() {
+
+        if(this.checked){
+            $('.searchable2 tr').hide();
+            document.getElementById('filterx_i').checked = false;
+            $('.searchable2 tr').filter(function() {
             filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
             if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-            return (filt_cut)
-        }).show();
-
-
-
-
-             var tab = Array.from(out.slice(1, out.length));
-             console.log(tab);
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }else{
-        $('.searchable2 tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                return (filt_cut)
             }).show();
 
-
-
             var tab = Array.from(out.slice(1, out.length));
-            console.log(tab);
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }
 
 
+        }else{
+            $('.searchable2 tr').filter(function() {
+            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+               return (filt_cut)
+            }).show();
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+        }
     });
 
     $('#filtery_i').on('change', function(){
@@ -907,404 +873,151 @@ $(document).ready(function () {
          document.getElementById('filtery0_i').checked = false;
         $('.searchable2 tr').filter(function() {
             filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== "0" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            $(this).find('td').eq(2).text() !== "0" &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
             if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-            return (filt_cut)
-        }).show();
-
-
-
+                return (filt_cut)
+            }).show();
 
              var tab = Array.from(out.slice(1, out.length));
              var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
              out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
              freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }else{
-        $('.searchable2 tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+
+
+        }else{
+            $('.searchable2 tr').filter(function() {
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
-
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }
-
-
+        }
     });
 
     $('#filtery0_i').on('change', function(){
-    var out = [];
+        var out = [];
         var tab = 0;
         var filt_cut = 0;
-    if(this.checked){
-        $('.searchable2 tr').hide();
-        document.getElementById('filtery_i').checked = false;
-        $('.searchable2 tr').filter(function() {
+
+        if(this.checked){
+            $('.searchable2 tr').hide();
+            document.getElementById('filtery_i').checked = false;
+            $('.searchable2 tr').filter(function() {
             filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== "1" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            $(this).find('td').eq(2).text() !== "1" &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
             if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-            return (filt_cut)
-        }).show();
-
-
-
+                return (filt_cut)
+            }).show();
 
              var tab = Array.from(out.slice(1, out.length));
              var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
              out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
              freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }else{
-        $('.searchable2 tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+
+
+        }else{
+            $('.searchable2 tr').filter(function() {
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_i').checked, document.getElementById('filterz0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
-
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }
-
-
+        }
     });
+
+
 
     $('#filterz_i').on('change', function(){
-    var out = [];
+        var out = [];
         var tab = 0;
         var filt_cut = 0;
-    if(this.checked){
-        $('.searchable2 tr').hide();
-        document.getElementById('filterz0_i').checked = false;
-        $('.searchable2 tr').filter(function() {
+
+        if(this.checked){
+            $('.searchable2 tr').hide();
+            document.getElementById('filterz0_i').checked = false;
+            $('.searchable2 tr').filter(function() {
             filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== "0");
+            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== "0");
             if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-            return (filt_cut)
-        }).show();
-
-
-
-
-             var tab = Array.from(out.slice(1, out.length));
-             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }else{
-        $('.searchable2 tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+                return (filt_cut)
             }).show();
-
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }
 
 
+        }else{
+            $('.searchable2 tr').filter(function() {
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
+            }).show();
+
+            var tab = Array.from(out.slice(1, out.length));
+            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+        }
     });
+
+
 
     $('#filterz0_i').on('change', function(){
-    var out = [];
+        var out = [];
         var tab = 0;
         var filt_cut = 0;
-    if(this.checked){
-        $('.searchable2 tr').hide();
-        document.getElementById('filterz_i').checked = false;
-        $('.searchable2 tr').filter(function() {
+
+        if(this.checked){
+            $('.searchable2 tr').hide();
+            document.getElementById('filterz_i').checked = false;
+            $('.searchable2 tr').filter(function() {
             filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
-                        $(this).find('td').eq(3).text() !== "1");
+            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ) &&
+            $(this).find('td').eq(3).text() !== "1");
             if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-            return (filt_cut)
+                return (filt_cut)
         }).show();
-
-
-
 
              var tab = Array.from(out.slice(1, out.length));
              var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
              out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
              freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }else{
-        $('.searchable2 tr').filter(function() {
-               filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ));
-               if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
-               return (filt_cut)
+
+
+        }else{
+            $('.searchable2 tr').filter(function() {
+            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked ) &&
+            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked ));
+            if (filt_cut) {out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(),$(this).find('td').eq(3).text()])};
+                return (filt_cut)
             }).show();
-
-
 
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
-    }
-    });
-}(jQuery));
-});
-
-$(document).ready(function () {
-  (function ($) {
-    $('#filterx_ix').on('change', function(){
-        if(this.checked){
-            $('.searchable4 tr').hide();
-            document.getElementById('filterx0_ix').checked = false;
-            $('.searchable4 tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== "0" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-            }).show();
-        }else{
-            $('.searchable4 tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-            }).show();
         }
-
-
     });
 
-
-    $('#filterx0_ix').on('change', function(){
-
-    if(this.checked){
-        $('.searchable4 tr').hide();
-        document.getElementById('filterx_ix').checked = false;
-        $('.searchable4 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== "1" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-        }).show();
-    }else{
-        $('.searchable4 tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filtery_ix').on('change', function(){
-
-    if(this.checked){
-        $('.searchable4 tr').hide();
-         document.getElementById('filtery0_ix').checked = false;
-        $('.searchable4 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(2).text() !== "0" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-        }).show();
-    }else{
-        $('.searchable4 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filtery0_ix').on('change', function(){
-
-    if(this.checked){
-        $('.searchable4 tr').hide();
-        document.getElementById('filtery_ix').checked = false;
-        $('.searchable4 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(2).text() !== "1" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-        }).show();
-    }else{
-        $('.searchable4 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filterz_ix').on('change', function(){
-
-    if(this.checked){
-        $('.searchable4 tr').hide();
-        document.getElementById('filterz0_ix').checked = false;
-        $('.searchable4 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== "0")
-        }).show();
-    }else{
-        $('.searchable4 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filterz0_ix').on('change', function(){
-
-    if(this.checked){
-        $('.searchable4 tr').hide();
-        document.getElementById('filterz_i').checked = false;
-        $('.searchable4 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
-                        $(this).find('td').eq(3).text() !== "1")
-        }).show();
-    }else{
-        $('.searchable4 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ))
-            }).show();
-    }
-    });
 }(jQuery));
 });
 
-$(document).ready(function () {
-  (function ($) {
-    $('#filterx_iz').on('change', function(){
-        if(this.checked){
-            $('.searchable5 tr').hide();
-            document.getElementById('filterx0_iz').checked = false;
-            $('.searchable5 tr').filter(function() {
-                return ($(this).find('td').eq(1).text() !== "0" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-            }).show();
-        }else{
-            $('.searchable5 tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-            }).show();
-        }
-
-
-    });
-
-
-    $('#filterx0_iz').on('change', function(){
-
-    if(this.checked){
-        $('.searchable5 tr').hide();
-        document.getElementById('filterx_iz').checked = false;
-        $('.searchable5 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== "1" &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-        }).show();
-    }else{
-        $('.searchable5 tr').filter(function() {
-               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filtery_iz').on('change', function(){
-
-    if(this.checked){
-        $('.searchable5 tr').hide();
-         document.getElementById('filtery0_iz').checked = false;
-        $('.searchable5 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(2).text() !== "0" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-        }).show();
-    }else{
-        $('.searchable5 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filtery0_iz').on('change', function(){
-
-    if(this.checked){
-        $('.searchable5 tr').hide();
-        document.getElementById('filtery_iz').checked = false;
-        $('.searchable5 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(2).text() !== "1" &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-        }).show();
-    }else{
-        $('.searchable5 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filterz_iz').on('change', function(){
-
-    if(this.checked){
-        $('.searchable5 tr').hide();
-        document.getElementById('filterz0_iz').checked = false;
-        $('.searchable5 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== "0")
-        }).show();
-    }else{
-        $('.searchable5 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ))
-            }).show();
-    }
-
-
-    });
-
-    $('#filterz0_iz').on('change', function(){
-
-    if(this.checked){
-        $('.searchable5 tr').hide();
-        document.getElementById('filterz_iz').checked = false;
-        $('.searchable5 tr').filter(function() {
-            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
-                        $(this).find('td').eq(3).text() !== "1")
-        }).show();
-    }else{
-        $('.searchable5 tr').filter(function() {
-               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
-                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ))
-            }).show();
-    }
-    });
-}(jQuery));
-});
 
 let toggleX = button => {
     let element = document.getElementById("observ");
@@ -1324,7 +1037,7 @@ let toggleX = button => {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
        button.innerText = 'Force X=1 (DO X)';
-       
+
 ///////
        if (minifuncy(seed) == "Z"){
        butz.style.display = "inline-block";
@@ -1334,26 +1047,28 @@ let toggleX = button => {
        butx.style.display = "inline-block";
        }
 ///////
+    }
 
-
-    } else {
-       anoth_element.removeAttribute("hidden");
-       element.setAttribute("hidden", "hidden");
-       button.innerText = "Show Observational";
-       butz.style.display = "none";
-       butx.style.display = "none";
-       buty.innerText = "Show Observational";
-       buty.style.display = "inline-block";
-       if(flag !== 0){
-        xid = document.getElementById('freqsint')
-        out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
-        freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+    else {
+        anoth_element.removeAttribute("hidden");
+        element.setAttribute("hidden", "hidden");
+        button.innerText = "Show Observational";
+        butz.style.display = "none";
+        butx.style.display = "none";
+        buty.innerText = "Show Observational";
+        buty.style.display = "inline-block";
+        if(flag !== 0){
+            xid = document.getElementById('freqsint')
+            out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
         }
+
         else{
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + freqsintjs[1]  + '</td><td style="width:31%">'+ freqsintjs[2]  + '</td><td style="width:31%">' + freqsintjs[3]  + '</td><td>' ;
         }
- }
+    }
 }
+
 
 let toggleY = button => {
     let element = document.getElementById("observ");
@@ -1367,60 +1082,60 @@ let toggleY = button => {
     // let anoth_element = document.getElementById("interv");
     let anoth_hidden = anoth_element.getAttribute("hidden");
     if (hidden2) {
-       element.removeAttribute("hidden");
-       anoth_element.setAttribute("hidden","hidden");
-       button.innerText = 'Force Y=1 (DO Y)';
-       freqsint.hidden = true;
-       freqs.hidden = false;
-       document.getElementById("interv").setAttribute("hidden","hidden");
-       document.getElementById("intervx").setAttribute("hidden","hidden");
-       document.getElementById("intervz").setAttribute("hidden","hidden");
-         
- 
+        element.removeAttribute("hidden");
+        anoth_element.setAttribute("hidden","hidden");
+        button.innerText = 'Force Y=1 (DO Y)';
+        freqsint.hidden = true;
+        freqs.hidden = false;
+        document.getElementById("interv").setAttribute("hidden","hidden");
+        document.getElementById("intervx").setAttribute("hidden","hidden");
+        document.getElementById("intervz").setAttribute("hidden","hidden");
+
         ids = document.getElementById('freqs')
         out3 = [$(ids).find('td').eq(1).text(), $(ids).find('td').eq(2).text(),$(ids).find('td').eq(3).text()]
-        freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
-    
-   
-        
-       flag=1;
+        freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>';
 
-       butz.innerText = "Force Z=1 (DO Z)";
-       butx.innerText = "Force X=1 (DO X)";
+        flag=1;
 
-       if (minifuncy(seed) == "Z"){
-       butz.style.display = "inline-block";
-       }
+        butz.innerText = "Force Z=1 (DO Z)";
+        butx.innerText = "Force X=1 (DO X)";
 
-       if (minifuncy(seed) == "X"){
-       butx.style.display = "inline-block";
-       }
-
-///////
-       if (minifuncy(seed) == "Y"){
-       buty.style.display = "inline-block";
-       }
-       else {buty.style.display = "none";}
-///////
-
-    } else {
-       freqsint.hidden = false;
-       freqs.hidden = true;
-       anoth_element.removeAttribute("hidden");
-       element.setAttribute("hidden", "hidden");
-       button.innerText = "Show Observational";
-       butz.style.display = "none";
-       butx.style.display = "none";
-       if(flag !== 0){
-        xid = document.getElementById('freqsint')
-        out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
-        freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+        if (minifuncy(seed) == "Z"){
+        butz.style.display = "inline-block";
         }
+
+        if (minifuncy(seed) == "X"){
+        butx.style.display = "inline-block";
+        }
+
+///////
+        if (minifuncy(seed) == "Y"){
+        buty.style.display = "inline-block";
+        }
+        else {buty.style.display = "none";}
+///////
+    }
+
+    else {
+        freqsint.hidden = false;
+        freqs.hidden = true;
+        anoth_element.removeAttribute("hidden");
+        element.setAttribute("hidden", "hidden");
+        button.innerText = "Show Observational";
+        butz.style.display = "none";
+        butx.style.display = "none";
+        if(flag !== 0){
+            xid = document.getElementById('freqsint')
+            out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+        }
+
         else{
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + freqsintjs[1]  + '</td><td style="width:31%">'+ freqsintjs[2]  + '</td><td style="width:31%">' + freqsintjs[3]  + '</td><td>' ;
         }
     }
 }
+
 
 let toggleZ = button => {
     let element = document.getElementById("observ");
@@ -1434,38 +1149,42 @@ let toggleZ = button => {
     // let anoth_element = document.getElementById("intervz");
     let anoth_hidden = anoth_element.getAttribute("hidden");
     if (hidden2) {
-       element.removeAttribute("hidden");
-       anoth_element.setAttribute( "hidden","hidden");
-       button.innerText = 'Force Z=1 (DO Z)';
-
+        element.removeAttribute("hidden");
+        anoth_element.setAttribute( "hidden","hidden");
+        button.innerText = 'Force Z=1 (DO Z)';
 
 ///////
-       if (minifuncy(seed) == "Z"){
-       butz.style.display = "inline-block";
-       }
-
-       if (minifuncy(seed) == "X"){
-       butx.style.display = "inline-block";
-       }
-///////
-
-    } else {
-       anoth_element.removeAttribute("hidden");
-       element.setAttribute("hidden", "hidden");
-       button.innerText = "Show Observational";
-       butz.style.display = "none";
-       butx.style.display = "none";
-       buty.innerText = "Show Observational";
-       buty.style.display = "inline-block";
-       if(flag !== 0){
-        xid = document.getElementById('freqsint')
-        out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
-        freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+        if (minifuncy(seed) == "Z"){
+        butz.style.display = "inline-block";
         }
+
+        if (minifuncy(seed) == "X"){
+        butx.style.display = "inline-block";
+        }
+///////
+    }
+
+    else {
+        anoth_element.removeAttribute("hidden");
+        element.setAttribute("hidden", "hidden");
+        button.innerText = "Show Observational";
+        butz.style.display = "none";
+        butx.style.display = "none";
+        buty.innerText = "Show Observational";
+        buty.style.display = "inline-block";
+        if(flag !== 0){
+            xid = document.getElementById('freqsint')
+            out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+        }
+
         else{
             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + freqsintjs[1]  + '</td><td style="width:31%">'+ freqsintjs[2]  + '</td><td style="width:31%">' + freqsintjs[3]  + '</td><td>' ;
-        }}
+        }
+    }
 }
+
+
 // var i = 1
 // $('#myButton').on('click', function(event) {
 //   i = i+1
@@ -1477,4 +1196,3 @@ let toggleZ = button => {
 </script>
 
 {{ endblock }}
-

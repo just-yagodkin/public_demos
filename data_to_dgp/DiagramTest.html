@@ -63,6 +63,7 @@
 <script src="{{ static 'global/cytoscape.min.js' }}"> </script>
 
 <script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 
@@ -70,21 +71,21 @@
 let array_edge = [];
 var myStringArray = js_vars.edges;
 var arrayLength = myStringArray.length;
-  for (var i = 0; i < arrayLength; i++) {
+    for (var i = 0; i < arrayLength; i++) {
+
     // console.log(myStringArray[i]);
 
     if (myStringArray[i].counter==1) array_edge.push({data:myStringArray[i]});
-      }
-var cy = cytoscape({
-  container: document.getElementById('cy'),
+    }
 
-  boxSelectionEnabled: false,
-  autounselectify: true,
-  wheelSensitivity:0.1,
+    var cy = cytoscape({
+    container: document.getElementById('cy'),
+
+    boxSelectionEnabled: false,
+    autounselectify: true,
+    wheelSensitivity:0.1,
 
   style: cytoscape.stylesheet()
-
-
 
     .selector('node')
       .css({
@@ -125,17 +126,14 @@ var cy = cytoscape({
         'padding': 10,
       })
       ,
-
-
       
   elements: {
     nodes: js_vars.nodes,
     edges: array_edge
   },
-
-
-
 });
+
+
 
 var layout = cy.layout({
   name: 'circle'
@@ -210,9 +208,8 @@ var cy2 = cytoscape({
       
   elements: elements_revised,
 
-
-
 });
+
 
 var layout2 = cy2.layout({
   name: 'circle'

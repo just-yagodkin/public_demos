@@ -33,8 +33,8 @@ d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
 
 
 def check_dependencies(dictionary: dict):
-    '''The idea is if [(z=1xn\z=0xn)|y=1]==[(z=1xn\z=0xn)|y=0] => z_||_y (z & y  are independed)
-       returns list of "answers"'''
+    """The idea is if [(z=1xn/z=0xn)|y=1]==[(z=1xn/z=0xn)|y=0] => z_||_y (z & y  are independed)
+       returns list of 'answers'"""
     depd = {"x & y": "are INDEPENDED",
             "x & z": "are INDEPENDED",
             "y & z": "are INDEPENDED", }
@@ -117,89 +117,7 @@ def check_dependencies(dictionary: dict):
         depd['y & z'] = 'are DEPENDED'  # not sure
     else:
         print('беда')
-
-    """
-    try:
-        #print(check_coop_frequencies(dictionary)[0], check_frequencies(dictionary)[0], check_frequencies(dictionary)[1], 'P(x=1, y=1), P(x=1), P(y=1)')
-        #print(check_coop_frequencies(dictionary, (1, 0))[0], check_frequencies(dictionary, (1, 0, 1))[0],
-        #      check_frequencies(dictionary, (1, 0, 1))[1], 'P(x=1, y=0), P(x=1), P(y=0)')
-        #print(check_coop_frequencies(dictionary, (0, 1))[0], check_frequencies(dictionary, (0, 1, 1))[0],
-        #      check_frequencies(dictionary, (0, 1, 1))[1], 'P(x=0, y=1), P(x=0), P(y=1)')
-        #print(check_coop_frequencies(dictionary, (0, 0))[0], check_frequencies(dictionary, (0, 0, 1))[0],
-        #      check_frequencies(dictionary, (0, 0, 1))[1], 'P(x=0, y=0), P(x=0), P(y=0)')
-        '''
-        if len(iwx1 & iwy1) / len(iwx0 & iwy1) != len(iwx1 & iwy0) / len(iwx0 & iwy0) or len(iwy1 & iwx1) / len(
-                iwy0 & iwx1) != len(iwy1 & iwx0) / len(
-            iwy0 & iwx0):  # if [(X=1xN/X=0xN) | Y=1] != [(X=1xN/X=0xN) | Y=0] or [(Y=1xN/Y=0xN) | X=1] != [(Y=1xN/Y=0xN) | X=0]
-            depd["x & y"] = "are DEPENDED"
-        if len(iwx1 & iwz1) / len(iwx0 & iwz1) != len(iwx1 & iwz0) / len(iwx0 & iwz0) or len(iwz1 & iwx1) / len(
-                iwz0 & iwx1) != len(iwz1 & iwx0) / len(
-            iwz0 & iwx0):  # if [(X=1xN/X=0xN) | Z=1] != [(X=1xN/X=0xN) | Z=0] or [(Z=1xN/Z=0xN) | X=1] != [(Z=1xN/Z=0xN) | X=0]
-            depd["x & z"] = "are DEPENDED"
-        if len(iwy1 & iwz1) / len(iwy0 & iwz1) != len(iwy1 & iwz0) / len(iwy0 & iwz0) or len(iwz1 & iwy1) / len(
-                iwz0 & iwy1) != len(iwz1 & iwy0) / len(
-            iwz0 & iwy0):  # if [(Y=1xN/Y=0xN) | Z=1] != [(Y=1xN/Y=0xN) | Z=0] or [(Z=1xN/Z=0xN) | Y=1] != [(Z=1xN/Z=0xN) | Y=0]
-            depd["y & z"] = "are DEPENDED"
-        print("x & y ", depd["x & y"], "\n", "x & z ", depd["x & z"], "\n", "y & z ", depd["y & z"], sep="")
-
-    except ZeroDivisionError:
-
-        if len(iwx0 & iwy1) / len(iwx1 & iwy1) != len(iwx0 & iwy0) / len(iwx1 & iwy0) or len(iwy0 & iwx1) / len(
-                iwy1 & iwx1) != len(iwy0 & iwx0) / len(iwy1 & iwx0):  # if [(X=0xN/X=1xN) | Y=1] != [(X=0xN/X=1xN) | Y=0] or [(Y=0xN/Y=1xN) | X=1] != [(Y=0xN/Y=1xN) | X=0]
-            depd["x & y"] = "are DEPENDED"
-        if len(iwx0 & iwz1) / len(iwx1 & iwz1) != len(iwx0 & iwz0) / len(iwx1 & iwz0) or len(iwz0 & iwx1) / len(
-                iwz1 & iwx1) != len(iwz0 & iwx0) / len(iwz1 & iwx0):  # if [(X=0xN/X=1xN) | Z=1] != [(X=0xN/X=1xN) | Z=0] or [(Z=0xN/Z=1xN) | X=1] != [(Z=0xN/Z=1xN) | X=0]
-            depd["x & z"] = "are DEPENDED"
-        if len(iwy0 & iwz1) / len(iwy1 & iwz1) != len(iwy0 & iwz0) / len(iwy1 & iwz0) or len(iwz0 & iwy1) / len(
-                iwz1 & iwy1) != len(iwz0 & iwy0) / len(iwz1 & iwy0):  # if [(Y=0xN/Y=1xN) | Z=1] != [(Y=0xN/Y=1xN) | Z=0] or [(Z=0xN/Z=1xN) | Y=1] != [(Z=0xN/Z=1xN) | Y=0]
-            depd["y & z"] = "are DEPENDED"
-        print("x & y ", depd["x & y"], "\n", "x & z ", depd["x & z"], "\n", "y & z ", depd["y & z"], sep="")
-        '''
-        if (check_coop_frequencies(dictionary)[0] != check_frequencies(dictionary)[0] * check_frequencies(dictionary)[
-            1]  # if P(x=1 & y=1) != P(x=1)*P(y=1)
-                or
-                check_coop_frequencies(dictionary, (1, 0))[0] != check_frequencies(dictionary, (1, 0, 1))[0] *
-                check_frequencies(dictionary, (1, 0, 1))[1] or  # if P(x=1 & y=0) != P(x=1)*P(y=0)
-
-                check_coop_frequencies(dictionary, (0, 1))[0] != check_frequencies(dictionary, (0, 1, 1))[0] *
-                check_frequencies(dictionary, (0, 1, 1))[1] or  # if P(x=0 & y=1) != P(x=0)*P(y=1)
-
-                check_coop_frequencies(dictionary, (0, 0))[0] != check_frequencies(dictionary, (0, 0, 1))[0] *
-                check_frequencies(dictionary, (0, 0, 1))[1]):  # if P(x=0 & y=0) != P(x=0)*P(y=0)
-            depd["x & y"] = "are DEPENDED"
-
-        if (check_coop_frequencies(dictionary)[1] != check_frequencies(dictionary)[0] * check_frequencies(dictionary)[
-            2]  # if P(x=1 & z=1) != P(x=1)*P(z=1)
-                or
-                check_coop_frequencies(dictionary, (1, 0))[1] != check_frequencies(dictionary, (1, 1, 0))[0] *
-                check_frequencies(dictionary, (1, 1, 0))[2] or  # if P(x=1 & z=0) != P(x=1)*P(z=0)
-                check_coop_frequencies(dictionary, (0, 1))[1] != check_frequencies(dictionary, (0, 1, 1))[0] *
-                check_frequencies(dictionary, (0, 1, 1))[2] or  # if P(x=0 & z=1) != P(x=0)*P(z=1)
-                check_coop_frequencies(dictionary, (0, 0))[1] != check_frequencies(dictionary, (0, 1, 0))[0] *
-                check_frequencies(dictionary, (0, 1, 0))[2]):  # if P(x=0 & z=0) != P(x=0)*P(z=0)
-            depd["x & z"] = "are DEPENDED"
-            #print(check_coop_frequencies(dictionary, (1, 1))[1], check_frequencies(dictionary, (1,1,1))[0], check_frequencies(dictionary,(1,1,1))[2] , 'P(x=1 & z=1), P(x=1), P(z=1)')
-            #print(check_coop_frequencies(dictionary, (1, 0))[1], check_frequencies(dictionary, (1, 1, 0))[0], check_frequencies(dictionary, (1, 1, 0))[2], 'P(x=1 & z=0), P(x=1), P(z=0)')
-            #print(check_coop_frequencies(dictionary, (0, 1))[1], check_frequencies(dictionary, (0, 1, 1))[0], check_frequencies(dictionary, (0, 1, 1))[2], 'P(x=0 & z=1), P(x=0), P(z=1)')
-            #print(check_coop_frequencies(dictionary, (0, 0))[1], check_frequencies(dictionary, (0, 1, 0))[0], check_frequencies(dictionary, (0, 1, 0))[2], 'P(x=0 & z=0), P(x=0), P(z=0)')
-        if (check_coop_frequencies(dictionary)[2] != check_frequencies(dictionary)[2] * check_frequencies(dictionary)[
-            1]  # if P(y=1 & z=1) != P(y=1)*P(z=1)
-                or
-                check_coop_frequencies(dictionary, (1, 0))[2] != check_frequencies(dictionary, (1, 1, 0))[2] *
-                check_frequencies(dictionary, (1, 1, 0))[1] or  # if P(y=1 & z=0) != P(y=1)*P(z=0)
-                check_coop_frequencies(dictionary, (0, 1))[2] != check_frequencies(dictionary, (1, 0, 1))[2] *
-                check_frequencies(dictionary, (1, 0, 1))[1] or  # if P(y=0 & z=1) != P(y=0)*P(z=1)
-                check_coop_frequencies(dictionary, (0, 0))[2] != check_frequencies(dictionary, (1, 0, 0))[2] *
-                check_frequencies(dictionary, (1, 0, 0))[1]):  # if P(y=0 & z=0) != P(y=0)*P(z=0)
-            depd["y & z"] = "are DEPENDED"
-            #print(check_coop_frequencies(dictionary, (1, 1))[2], check_frequencies(dictionary, (1,1,1))[2], check_frequencies(dictionary,(1,1,1))[1] , 'P(y=1 & z=1), P(z=1), P(y=1)')
-            #print(check_coop_frequencies(dictionary, (1, 0))[2], check_frequencies(dictionary, (1, 1, 0))[2], check_frequencies(dictionary, (1, 1, 0))[1], 'P(y=1 & z=0), P(z=0), P(y=1)')
-            #print(check_coop_frequencies(dictionary, (0, 1))[2], check_frequencies(dictionary, (1, 0, 1))[2], check_frequencies(dictionary, (1, 0, 1))[1], 'P(y=0 & z=1), P(z=1), P(y=0)')
-            #print(check_coop_frequencies(dictionary, (0, 0))[2], check_frequencies(dictionary, (1, 0, 0))[2], check_frequencies(dictionary, (1, 0, 0))[1], 'P(y=0 & z=0), P(z=0), P(y=0)')
-    """
     return [depd["x & y"], depd["x & z"], depd["y & z"]]
-    # except:
-    #    return "check_dependencies doesnt work"
 
 
 def reshuffle(dictionary: dict):
@@ -211,8 +129,9 @@ def reshuffle(dictionary: dict):
 
 
 def shuffle_coloumns(dictionary: dict):
-    '''influence on dictionary(tabs) and shuffle coloumn(strings)
-       returns the shuffled dictionary'''
+    """influence on dictionary(tabs) and shuffle coloumn(strings)
+       returns the shuffled dictionary"""
+
     shufflelist = [i for i in range(len(dictionary[list(dictionary.keys())[0]]))]  # list(dictionary.keys())[0] = 'x'
     rm.shuffle(shufflelist)
     tempx, tempy, tempz = [dictionary[list(dictionary.keys())[i]].copy() for i in range(3)]
@@ -242,8 +161,6 @@ def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 
         iwy1 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 1}
         iwy2 = {i for i, x in enumerate(dictionary[list(dictionary.keys())[1]]) if x == 0}
         iwz = {i for i, x in enumerate(dictionary[list(dictionary.keys())[2]]) if x == 1}
-    # else:
-    #    raise ValueError('second argument takes an invalid value')
 
     freqxy, freqxz, freqyz = [len(iwx & iwy1) / len(dictionary[list(dictionary.keys())[0]]),
                               len(iwx & iwz) / len(dictionary[list(dictionary.keys())[0]]),
@@ -259,8 +176,10 @@ def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 
 
 
 def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)]
-    '''shows how often "1" occurs
-       returns triplet(list) of frquencies'''
+    """shows how often "1" occurs
+       returns triplet(list) of frquencies
+       """
+
     length = 16
     freqx = 0
     freqy = 0
@@ -275,18 +194,13 @@ def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)
         if i == 1:
             freqz += 1
 
-    #for i in range(len(dictionary[list(dictionary.keys())[0]])):
-    #    freqx, freqy, freqz = [
-    #        dictionary[list(dictionary.keys())[i]].count(t[i]) / len(dictionary[list(dictionary.keys())[i]]) for i in
-    #        range(3)]
-
-    return [freqx/length, freqy/length, freqz/length]
+    return [freqx / length, freqy / length, freqz / length]
 
 
 def intervente(key: str, dictionary: dict, name='y', fixed=1):
-    '''does an intervention in variable "name" and equal it to "fixed"
+    """does an intervention in variable "name" and equal it to "fixed"
        reutrns the copy of new dictionary with new distribution
-       '''
+       """
 
     interv_dict = dictionary.copy()
 
@@ -321,8 +235,9 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         [i for i, x in enumerate(dictionary[st[0]]) if x == 0])) / len(
         [i for i, x in enumerate(dictionary[st[1]]) if x == 0])
 
-
     interv_dict[name] = [fixed] * length  # fill Y with fixed value
+
+    ###----- Y BLOCK -----###
 
     if name == 'y':
         if key == 'twolinks':
@@ -371,6 +286,8 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
 
+    ###----- X BLOCK -----###
+
     if name == 'x':
         if key == 'twolinks':
             if fixed == 1:
@@ -385,29 +302,6 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 print("Don't use zero!! PLS!")
                 pass
 
-                '''
-                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
-
-                freq_z_when_x = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
-                    [i for i, x in enumerate(dictionary[st[1]]) if x == 1])) / len(
-                    [i for i, x in enumerate(dictionary[st[0]]) if x == 1])
-
-                z = [1 if i < round(freq_z_when_x * freq_x_when_name * length) else 0 for i in
-                     range(round(freq_x_when_name * length))]
-                z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_x * length - 1) else 0 for i in
-                      # 1 is a crunch :(
-                      range(length - round(freq_x_when_name * length))]         
-                      '''
-
-                '''
-                z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
-                x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
-                     range(round(freq_z_when_not_name * length))]
-                x += [
-                    1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0
-                    for i in
-                    range(round(length * (1 - freq_z_when_not_name)))]      - old version
-                    '''
         elif key == 'threelinks':
             if fixed == 1:
                 x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -419,11 +313,6 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         elif key == 'fork':
             x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
             z = dictionary[st[1]].copy()
-            #z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
-            #         range(round(check_frequencies(dictionary)[1] * length))]
-            #z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
-            #        for i in
-            #        range(round(length * (1 - check_frequencies(dictionary)[1])))]
 
         elif key == "nolinks":
             x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -451,6 +340,8 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
                 x = [0] * length
 
+    ###----- Z BLOCK -----###
+
     if name == 'z':
         if key == 'collider':
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
@@ -459,29 +350,17 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             else:
                 z = [0] * length
 
-
         if key == "nolinks":
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             z = [1 if i < round(check_frequencies(dictionary)[1] * length // 2) else 0 for i in range(length // 2)] * 2
 
         if key == "onelink" or key == "twolinks":
             x = dictionary[st[0]].copy()
-            #x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)
             z = dictionary[st[1]].copy()
-            #z = [1 if i < round(freq_z_when_y * check_frequencies(dictionary)[0] * length) else 0 for i in
-            #     range(round(check_frequencies(dictionary)[0] * length))]
-            #z += [1 if i < round(freq_z_when_not_y * round(length * (1 - check_frequencies(dictionary)[0]))) else 0
-            #      for i in
-            #      range(round(length * (1 - check_frequencies(dictionary)[0])))]
 
         if key == 'fork' or key == "threelinks":
             z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
             x = dictionary[st[0]].copy()
-            #x = [1 if i < round(freq_x_when_y * check_frequencies(dictionary)[1] * length) else 0 for i in
-            #     range(round(check_frequencies(dictionary)[1] * length))]
-            #x += [1 if i < round(freq_x_when_not_y * round(length * (1 - check_frequencies(dictionary)[1]))) else 0
-            #      for i in
-            #      range(round(length * (1 - check_frequencies(dictionary)[1])))]
 
     interv_dict[st[1]] = z
     interv_dict[st[0]] = x
@@ -517,12 +396,12 @@ def tanc(lst: list):
 
 
 def smartdatainterv(d: dict, seed=0):
-    '''seed 1:  X Y Z   ->   X Z Y
+    """seed 1:  X Y Z   ->   X Z Y
        seed 2:  X Y Z   ->   Y X Z
        seed 3:  X Y Z   ->   Y Z X
        seed 4:  X Y Z   ->   Z X Y
        seed 5:  X Y Z   ->   Z Y X
-    '''
+    """
 
     tempd = d.copy()
 
@@ -542,12 +421,12 @@ def smartdatainterv(d: dict, seed=0):
 
 
 def smartedgesinterv(l: list, seed=0):
-    '''seed 1:  X Y Z   ->   X Z Y
+    """seed 1:  X Y Z   ->   X Z Y
        seed 2:  X Y Z   ->   Y X Z
        seed 3:  X Y Z   ->   Y Z X
        seed 4:  X Y Z   ->   Z X Y
        seed 5:  X Y Z   ->   Z Y X
-    '''
+    """
 
     if seed == 0 or l == [False]:
         return l
@@ -585,92 +464,16 @@ def smartedgesinterv(l: list, seed=0):
     return templ
 
 
-def minifunc(number):           # where Y will be. optional
-    if (number == 1 or number == 4):
+def minifunc(number):  # where Y will be.      Optional!
+    if number == 1 or number == 4:
         return "Z"
-    if (number == 0 or number == 5):
+    if number == 0 or number == 5:
         return "Y"
-    if (number == 2 or number == 3):
+    if number == 2 or number == 3:
         return "X"
 
 
-def intervente2(dictionary: dict, name='y', fixed=1):
-    '''does an intervention in variable "name" and equal it to "fixed"
-       reutrns the dictionary with new distribution'''
-    st = ['x', 'y', 'z']
-    st.remove(name)  # to have a deal with other 2 variables
-
-    indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # индексы, где Y = 0
-    indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # индексы, где Y = 1
-
-    x_when_name = [dictionary[st[0]][i] for i in indexes_where_name_is_1]  # Xs where y=1
-    x_when_not_name = [dictionary[st[0]][i] for i in indexes_where_name_is_0]  # Xs where y=0
-    z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
-    z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
-
-    # print(z_when_name)
-    # print([i for i in z_when_name if i == 1])
-
-    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)
-    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)
-    freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)
-    freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)
-
-    indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-    indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
-
-    indexes_when_y1_and_z0 = list(set(indexes_where_name_is_1) & set(indexes_where_z0))
-    indexes_when_y1_and_z1 = list(set(indexes_where_name_is_1) & set(indexes_where_z1))
-    indexes_when_y0_and_z0 = list(set(indexes_where_name_is_0) & set(indexes_where_z0))
-    indexes_when_y0_and_z1 = list(set(indexes_where_name_is_0) & set(indexes_where_z1))
-
-    x_when_y1_and_z0 = [dictionary[st[0]][i] for i in indexes_when_y1_and_z0]
-    x_when_y1_and_z1 = [dictionary[st[0]][i] for i in indexes_when_y1_and_z1]
-    x_when_y0_and_z0 = [dictionary[st[0]][i] for i in indexes_when_y0_and_z0]
-    x_when_y0_and_z1 = [dictionary[st[0]][i] for i in indexes_when_y0_and_z1]
-
-    try:
-
-        freqx_when_y1_and_z0 = len([i for i in x_when_y1_and_z0 if i == 1]) / len(x_when_y1_and_z0)
-        freqx_when_y1_and_z1 = len([i for i in x_when_y1_and_z1 if i == 1]) / len(x_when_y1_and_z1)
-        freqx_when_y0_and_z0 = len([i for i in x_when_y0_and_z0 if i == 1]) / len(x_when_y0_and_z0)
-        freqx_when_y0_and_z1 = len([i for i in x_when_y0_and_z1 if i == 1]) / len(x_when_y0_and_z1)
-
-        dictionary[name] = [fixed] * len(dictionary[name])  # заполняем весь Y значением fixed
-
-        if fixed == 1:
-            dictionary[st[1]] = create_list_from_freq(freq_z_when_name, len(dictionary[name]))  # заполняем Z значениями
-            indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-            indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
-            list_for_x_1 = create_list_from_freq(freq_x_when_name, len(indexes_where_z0))
-            list_for_x_2 = create_list_from_freq(freq_x_when_name, len(indexes_where_z1))
-
-            for i in range(len(indexes_where_z0)):
-                dictionary[st[0]][indexes_where_z0[i]] = list_for_x_1[i]
-
-            for i in range(len(indexes_where_z1)):
-                dictionary[st[0]][indexes_where_z1[i]] = list_for_x_2[i]
-
-        if fixed == 0:
-            dictionary[st[1]] = create_list_from_freq(freq_z_when_not_name,
-                                                      len(dictionary[name]))  # заполняем Z значениями
-            indexes_where_z0 = [i for i, x in enumerate(dictionary[st[1]]) if x == 0]
-            indexes_where_z1 = [i for i, x in enumerate(dictionary[st[1]]) if x == 1]
-            list_for_x_1 = create_list_from_freq(freq_x_when_not_name, len(indexes_where_z0))
-            list_for_x_2 = create_list_from_freq(freq_x_when_not_name, len(indexes_where_z1))
-            for i in range(len(indexes_where_z0)):
-                dictionary[st[0]][indexes_where_z0[i]] = list_for_x_1[i]
-
-            for i in range(len(indexes_where_z1)):
-                dictionary[st[0]][indexes_where_z1[i]] = list_for_x_2[i]
-
-    except ZeroDivisionError:
-        return "WRONG 0"
-
-    except IndexError:
-        return "WRONG indexes"
-
-    return dictionary
+###----- TESTS -----###
 
 
 '''
