@@ -128,8 +128,8 @@
 
                                 <!-- A lotteries -->
                                 <td class="lottery-a">
-                                    {{ Constants.lottery_a_hi }} {% trans "tokens with a probability of " %}{{ p }},<br/>
-                                    {{ Constants.lottery_a_lo }} {% trans "tokens otherwise" %}
+                                    {{ Constants.lottery_a_hi }} {% trans "токенов с вероятностью " %}{{ p }},<br/>
+                                    {{ Constants.lottery_a_lo }} {% trans "токенов в обратном случае" %}
                                 </td>
 
                                 <!-- radio select form fields -->
@@ -149,8 +149,8 @@
 
                                 <!-- B lotteries -->
                                 <td class="lottery-b">
-                                    {{ Constants.lottery_b_hi }} {% trans "tokens with a probability of " %}{{ p }},<br/>
-                                    {{ Constants.lottery_b_lo }} {% trans "token otherwise" %}
+                                    {{ Constants.lottery_b_hi }} {% trans "токенов с вероятностью " %}{{ p }},<br/>
+                                    {{ Constants.lottery_b_lo }} {% trans "токенов в обратном случае" %}
                                 </td>
 
                         {% endfor %}
@@ -166,8 +166,9 @@
         <div class="card info">
             <p>
                 {% blocktrans trimmed with option_to_pay=option_to_pay %}
+                Как было написано выше, вами была выбрана опция {{ option_to_pay }} в данной строке.
+                Выигрыш составил {{payoff}}.
 
-                
                 {% endblocktrans %}
             </p>
             <p>

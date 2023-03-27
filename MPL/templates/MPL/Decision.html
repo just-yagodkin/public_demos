@@ -19,7 +19,6 @@
     {% if Constants.small_pies == True or Constants.large_pies == True %}
         <script>
             num_choices = {{ Constants.num_choices|json }};
-
             one_choice = "{{ Constants.one_choice_per_page }}";
             percentage = "{{ Constants.percentage }}";
             large_pies = "{{ Constants.large_pies }}";
@@ -43,7 +42,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Task 3 - Instructions and Choice Table" %}
+    {% trans "Внимательно прочитайте задание и сделайте выбор" %}
 {% endblock %}
 
 
@@ -155,25 +154,24 @@
         {% else %}
         <p>
             {% blocktrans trimmed with n=num_choices %}
-                This is Task 3.  For each row in the Choice Table below, please choose which option, A or B, you would like to play.
-            Each option has two possible payoffs with their chances of occurring.
-            For example, Option A in the first row (Decision 1) has a 1/10 chance (that is, a 10% probability) of a payoff of {{Constants.lottery_a_hi}} tokens,
-            and a 9/10 chance (that is, a 90% probability) of a payoff of {{Constants.lottery_a_lo}} tokens.
+            Для каждой строки в таблице выбора ниже, пожалуйста, выберите, какой вариант, А или В, Вы бы хотели бы чтобы был разыгран.
+            Каждый вариант имеет два возможных выигрыша с указанием шансов их наступления.
+            Например, вариант А в первой строке (Решение 1) имеет шанс 1/10 (то есть вероятность 10%) получить выигрыш в размере {{Constants.lottery_a_hi}} токенов,
+            и 9/10 шансов (то есть вероятность 90%) на выигрыш в {{Constants.lottery_a_lo}} токенов.
             {% endblocktrans %}
         </p>
         <p>
             {% blocktrans trimmed with n=num_choices %}
-                After making your decisions, ONE of the rows in the Choice Table will be randomly picked by the computer.
-            The option you have chosen in that row will then be played by the computer, and the realized payoff will determine your earnings in Task 3.
-            For example, if the computer randomly picks the second row (Decision 2) and you selected Option B in that row,
-            then there is a 2/10 chance that you will earn {{Constants.lottery_b_hi}} tokens in Task 3;
-            and there is an 8/10 chance that you will earn {{Constants.lottery_b_lo}} token in Task 3.
+            После принятия решения компьютер случайным образом выберет ОДНУ из строк таблицы выбора.
+            Выбранный вами вариант в этом ряду будет разыгран компьютером, а реализованный выигрыш определит ваш заработок в этом задании.
+            Например, если компьютер случайным образом выберет второй ряд (Решение 2), а вы выбрали в этом ряду вариант B,
+            то существует вероятность 2/10, что вы заработаете {{Constants.lottery_b_hi}} жетонов в этом задании;
+            и существует 8/10 вероятность того, что вы заработаете {{Constants.lottery_b_lo}} жетонов в этом задании.
             {% endblocktrans %}
         </p>
         <p>
             {% blocktrans trimmed with n=num_choices %}
-                You will learn your earnings from Task 3 at the end of the study. As a reminder, 1 token is worth 10 cents, so every 10 tokens are worth 1 US Dollar.
-            {% endblocktrans %}
+                 {% endblocktrans %}
         </p>
             <div class="card">
                 <table class="table table-striped">
@@ -192,8 +190,8 @@
                                 <td> {{i}} </td>
                                 <!-- A lotteries -->
                                 <td class="lottery-a">
-                                    {{ Constants.lottery_a_hi }} {% trans "tokens with a probability of " %}{{ p }},<br/>
-                                    {{ Constants.lottery_a_lo }} {% trans "token otherwise" %}
+                                    {{ Constants.lottery_a_hi }} {% trans "токенов с вероятностью " %}{{ p }},<br/>
+                                    {{ Constants.lottery_a_lo }} {% trans "токенов в обратном случае" %}
                                 </td>
 
                                 <!-- radio select form fields -->
@@ -204,8 +202,8 @@
 
                                 <!-- B lotteries -->
                                 <td class="lottery-b">
-                                    {{ Constants.lottery_b_hi }} {% trans "tokens with a probability of " %}{{ p }},<br/>
-                                    {{ Constants.lottery_b_lo }} {% trans "token otherwise" %}
+                                    {{ Constants.lottery_b_hi }} {% trans "токенов с вероятностью " %}{{ p }},<br/>
+                                    {{ Constants.lottery_b_lo }} {% trans "токенов в обратном случае" %}
                                 </td>
 
                                 <!-- pie charts for B lotteries -->
@@ -213,7 +211,7 @@
                     </tbody>
                 </table>
             </div>
-Click NEXT to continue once you are ready.
+Нажмите NEXT чтобы продолжить.
         <button class="otree-btn-next btn btn-primary" style="float: right;">Next</button>
 
     {% endif %}

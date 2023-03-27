@@ -1,0 +1,79 @@
+{{ block styles }}
+<link href="{{ static 'bret/css/custom.css' }}" rel="stylesheet"/>
+{{ endblock }}
+
+
+{{ block title }}
+{{ Lexicon.instructions }}
+{{ endblock }}
+
+{{ block content }}
+
+<div class="instructions">
+{{ if de }}
+        <p>
+            Nachfolgend sehen sie eine {{ NUM_ROWS }}x{{ NUM_COLS }}-Matrix, die {{ num_boxes }} Boxen beinhaltet.
+        </p>
+
+        <p>
+            Sobald Sie die Aufgabe durch Klicken des 'Start' Buttons beginnen, wird eine
+            Box pro Sekunde - beginnend in der oberen linken Ecke - gesammelt. Bereits
+            gesammelte Boxen werden mit einem Häkchen markiert. Für jede gesammelte Box
+            erhalten Sie {{ BOX_VALUE }}.
+
+        </p>
+
+        <p>
+            Hinter einer der Boxen ist eine Bombe versteckt, die alles zerstört, was
+    bisher eingesammelt wurde. Die verbleibenden {{ num_nobomb }} Boxen sind
+    jeweils {{ BOX_VALUE }} wert. Sie wissen nicht hinter welcher Box die Bombe
+    versteckt ist. Sie wissen nur, dass sich die Bombe in einer beliebigen Box
+    mit gleicher Wahrscheinlichkeit befindet.
+
+        </p>
+        <p>
+            Ihre Aufgabe besteht darin, den Sammelprozess zu beenden. Dies geschieht
+    durch einen Klick auf den Button 'Stop' zu jeder beliebigen Zeit. Wenn Sie
+    die Box einsammeln, in der sich die Bombe befindet, wird die Bombe
+    explodieren und ihre Auszahlung beträgt null. Wenn Sie die Aufgabe beenden
+    ohne die Bombe einzusammeln erhalten Sie den bis dahin gesammelten Betrag.
+
+        </p>
+        <p>
+            Nachdem Sie die Aufgabe mit 'Stop' beendet haben, können die Boxen durch
+    einen Klick auf den Button 'Auflösen' umgedreht werden. Ein Dollarzeichen
+    oder ein Feuersymbol (für die Bombe) wird auf jeder von Ihnen gesammelten
+    Box angezeigt.
+
+    </p>
+{{ else }}
+        <p>
+            На следующей странице вы увидите {{ NUM_ROWS }}x{{ NUM_COLS }}-матрицу, содержащую.
+            {{ num_boxes }} ящиков на вашем экране.
+        </p>
+        <p>
+            Как только вы начнете выполнение задания, нажав кнопку "Start",
+            один из ящиков будет открываться каждую секунду, начиная с левого верхнего угла.
+            После открытия ящик помечается символом галочки.
+            За каждый открытый ящик вы получаете {{ BOX_VALUE }}.
+        </p>
+        <p>
+            За одним из ящиков скрывается бомба, которая уничтожает доход от остальных открытых ящиков.
+            Оставшиеся {{ num_nobomb }} ящиков стоят {{ BOX_VALUE }} каждый.
+            Вы не знаете, где находится бомба.
+            Вы только знаете, что бомба может находиться в любом месте с равной вероятностью.
+        </p>
+        <p>
+            Ваша задача - выбрать, когда нажать на стоп, то есть выбрать сколько ящиков вы хотите открыть. Для этого нужно в любой момент нажать кнопку "Stop".
+            Если вы случайно вам попадёт тот ящик, в котором находится бомба, бомба взорвется, и вы не заработаете ничего.
+            Если вы остановитесь до того, как наткнётесь на бомбу, вы получите сумму, накопленную на момент остановки.
+        </p>
+        <p>
+            В конце задания ящики открываются нажатием кнопки "Solve".
+            На каждой из собранных вами коробок будет изображен знак доллара или символ огня (для бомбы).
+        </p>
+{{ endif }}
+</div>
+
+{{ next_button }}
+{{ endblock }}
