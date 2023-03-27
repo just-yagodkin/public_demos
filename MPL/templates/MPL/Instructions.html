@@ -1,0 +1,98 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+{# ****************************************************************************************************************** #}
+{# *** SCRIPTS *** #}
+{# ****************************************************************************************************************** #}
+{% block scripts %}
+    {% if Constants.small_pies == True or Constants.large_pies == True %}
+        <script>
+            num_choices = {{ Constants.num_choices|json }};
+
+            one_choice = "{{ Constants.one_choice_per_page }}";
+            percentage = "{{ Constants.percentage }}";
+            large_pies = "{{ Constants.large_pies }}";
+        </script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="{% static 'mpl/js/pie_charts.js' %}"></script>
+    {% endif %}
+
+    {% if Constants.enforce_consistency == True %}
+        {% if Constants.one_choice_per_page == False and Constants.random_order == False %}
+            <script src="{% static 'mpl/js/consistency.js' %}"></script>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    {% trans "Task 3" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="wrapper instructions">
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+                This is Task 3. Click next to start the Task.
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+
+
+{% endblock %}
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Lottery Decisions: Large Pies -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+                This is Task 3. Click next to start the Task.
+            {% endblocktrans %}
+        </p>
+
+
+
+        <button class="otree-btn-next btn btn-primary" style="float: right;">Next</button>
+
+
+
+</div>
+
+
+
+{% endblock %}

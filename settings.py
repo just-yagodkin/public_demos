@@ -192,6 +192,12 @@ SESSION_CONFIGS = [
         app_sequence=['data_to_dgp'],
         num_demo_participants=1,
     ),
+        dict(
+        name='AOT',
+        display_name="surveys",
+        app_sequence=[ 'MPL'],
+        num_demo_participants=1,
+    ),
 
 
     # dict(

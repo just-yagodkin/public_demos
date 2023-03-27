@@ -1,0 +1,225 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+{# ****************************************************************************************************************** #}
+{# *** SCRIPTS *** #}
+{# ****************************************************************************************************************** #}
+{% block scripts %}
+    {% if Constants.small_pies == True or Constants.large_pies == True %}
+        <script>
+            num_choices = {{ Constants.num_choices|json }};
+
+            one_choice = "{{ Constants.one_choice_per_page }}";
+            percentage = "{{ Constants.percentage }}";
+            large_pies = "{{ Constants.large_pies }}";
+        </script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="{% static 'mpl/js/pie_charts.js' %}"></script>
+    {% endif %}
+
+    {% if Constants.enforce_consistency == True %}
+        {% if Constants.one_choice_per_page == False and Constants.random_order == False %}
+            <script src="{% static 'mpl/js/consistency.js' %}"></script>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    {% trans "Task 3 - Instructions and Choice Table" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="wrapper instructions">
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+            Для каждой строки в таблице выбора ниже, пожалуйста, выберите, какой вариант, А или В, Вы бы хотели бы чтобы был разыгран.
+            Каждый вариант имеет два возможных выигрыша с указанием шансов их наступления.
+            Например, вариант А в первой строке (Решение 1) имеет шанс 1/10 (то есть вероятность 10%) получить выигрыш в размере {{Constants.lottery_a_hi}} токенов,
+            и 9/10 шансов (то есть вероятность 90%) на выигрыш в {{Constants.lottery_a_lo}} токенов.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+            После принятия решения компьютер случайным образом выберет ОДНУ из строк таблицы выбора.
+            Выбранный вами вариант в этом ряду будет разыгран компьютером, а реализованный выигрыш определит ваш заработок в этом задании.
+            Например, если компьютер случайным образом выберет второй ряд (Решение 2), а вы выбрали в этом ряду вариант B,
+            то существует вероятность 2/10, что вы заработаете {{Constants.lottery_b_hi}} жетонов в этом задании;
+            и существует 8/10 вероятность того, что вы заработаете {{Constants.lottery_b_lo}} жетонов в этом задании.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+            На следующей странице вы увидите что выбрала система.
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+
+
+{% endblock %}
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+    <div class="wrapper">
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Progress Bar -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        {% if Constants.one_choice_per_page == True and Constants.progress_bar == True %}
+            <label>
+                {% blocktrans trimmed with page=page total=total %}
+                    Page {{ page }} of {{ total }}
+                {% endblocktrans %}
+            </label>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width:{{ progress|json }}%;">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Lottery Decisions: Large Pies -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        {% if Constants.one_choice_per_page == True and Constants.large_pies == True %}
+
+
+
+
+            <div class="card">
+                <table class="table">
+                    <thead>
+                        <tr class="header">
+                            <th> Decision </th>
+                            <th class="center">{% trans "Option A" %}</th>
+                            <th class="center">{% trans "Option B" %}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for i,f,p in choices %}
+                            <tr>
+                                <td class="pie-chart">
+                                            <div id="{{ pies_a }}" class="pie-chart"></div>
+                                </td>
+                                <td class="pie-chart">
+                                            <div id="{{ pies_b }}" class="pie-chart"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center">
+                                    <button name="{{ f }}" value="A" class="btn btn-primary">
+                                        {% trans "Option A" %}
+                                    </button>
+                                </td>
+                                <td class="center">
+                                    <button name="{{ f }}" value="B" class="btn btn-primary">
+                                        {% trans "Option B 2" %}
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Lottery Decisions: Choice List -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        {% else %}
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+                This is Task 3.  For each row in the Choice Table below, please choose which option, A or B, you would like to play.
+            Each option has two possible payoffs with their chances of occurring.
+            For example, Option A in the first row (Decision 1) has a 1/10 chance (that is, a 10% probability) of a payoff of {{Constants.lottery_a_hi}} tokens,
+            and a 9/10 chance (that is, a 90% probability) of a payoff of {{Constants.lottery_a_lo}} tokens.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+                After making your decisions, ONE of the rows in the Choice Table will be randomly picked by the computer.
+            The option you have chosen in that row will then be played by the computer, and the realized payoff will determine your earnings in Task 3.
+            For example, if the computer randomly picks the second row (Decision 2) and you selected Option B in that row,
+            then there is a 2/10 chance that you will earn {{Constants.lottery_b_hi}} tokens in Task 3;
+            and there is an 8/10 chance that you will earn {{Constants.lottery_b_lo}} token in Task 3.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+                You will learn your earnings from Task 3 at the end of the study. As a reminder, 1 token is worth 10 cents, so every 10 tokens are worth 1 US Dollar.
+            {% endblocktrans %}
+        </p>
+            <div class="card">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="header">
+                            <th>Decision </th>
+                            <th class="lottery-a">{% trans "Option A" %}</th>
+                            <th class="formfield"></th>
+                            <th class="lottery-b">{% trans "Option B" %}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for i,f,p in choices %}
+                            <tr>
+                                <td> {{i}} </td>
+                                <!-- A lotteries -->
+                                <td class="lottery-a">
+                                    {{ Constants.lottery_a_hi }} {% trans "tokens with a probability of " %}{{ p }},<br/>
+                                    {{ Constants.lottery_a_lo }} {% trans "token otherwise" %}
+                                </td>
+
+                                <!-- radio select form fields -->
+                                <td class="formfield">
+                                    <input type="radio" name="{{ f }}" value="A" required>
+                                    <input type="radio" name="{{ f }}" value="B" required>
+                                </td>
+
+                                <!-- B lotteries -->
+                                <td class="lottery-b">
+                                    {{ Constants.lottery_b_hi }} {% trans "tokens with a probability of " %}{{ p }},<br/>
+                                    {{ Constants.lottery_b_lo }} {% trans "token otherwise" %}
+                                </td>
+
+                                <!-- pie charts for B lotteries -->
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+Click NEXT to continue once you are ready.
+        <button class="otree-btn-next btn btn-primary" style="float: right;">Next</button>
+
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}
