@@ -30,7 +30,7 @@
 
 
 {{ block title }}
-<dl class="lng-Title" style="text-align:center">Pick the arrows (edges) between variables according the data.</dl>
+<dl class="lng-Title" style="text-align:center">Pick the arrows (edges) between variables according to data.</dl>
 {{ endblock }}
 
 
@@ -337,10 +337,10 @@
 <div class="tg-wrap">
     <table id="freqs" class="table table-striped" style="
 margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-    <col width="10%">
-    <col width="30%">
-    <col width="30%">
-    <col width="30%">
+    <col style="width:10%">
+	<col style="width:30%">
+	<col style="width:30%">
+    <col style="width:30%">
         <tbody>
 
         {% for i in frequenciesobs %}
@@ -351,15 +351,15 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
         </tbody>
 
-    </table>
+    </table></div>
 
 <div class="tg-wrap">
     <table id="freqsint" hidden="true" class="table table-striped" style="
     margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-        <col width="10%">
-        <col width="30%">
-        <col width="30%">
-        <col width="30%">
+        <col style="width:10%">
+	    <col style="width:30%">
+	    <col style="width:30%">
+        <col style="width:30%">
         <tbody>
     
         {% for i in frequenciesint %}
@@ -369,8 +369,39 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tr>
     
         </tbody>
+</table></div>
 
-    </table>
+<div class="tg-wrap">
+<table id="pcharts" class="table table-striped" style="margin: auto; width:60; text-align: center; font-size: 60px; line-height: 0.8">
+    <col style="width:10%">
+	<col style="width:30%">
+	<col style="width:30%">
+    <col style="width:30%">
+    <thead></thead>
+    <tbody><tr>
+        <td></td>
+        <td><center><div id="piechart1" style="width: 50px; height: 50px"></div></center></td>
+        <td><center><div id="piechart2" style="width: 50px; height: 50px"></div></center></td>
+        <td><center><div id="piechart3" style="width: 50px; height: 50px"></div></center></td>
+    </tr></tbody>
+</table>
+</div>
+
+<div class="tg-wrap">
+<table id="pchartsint" class="table table-striped" style="margin: auto; width:60; text-align: center; font-size: 60px; line-height: 0.8">
+    <col style="width:10%">
+	<col style="width:30%">
+	<col style="width:30%">
+    <col style="width:30%">
+    <thead></thead>
+    <tbody><tr>
+        <td></td>
+        <td><center><div id="piechart1int" style="width: 50px; height: 50px"></div></center></td>
+        <td><center><div id="piechart2int" style="width: 50px; height: 50px"></div></center></td>
+        <td><center><div id="piechart3int" style="width: 50px; height: 50px"></div></center></td>
+    </tr></tbody>
+</table>
+</div>
 
 <br>
 
@@ -388,7 +419,104 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         var flag = 0;
 </script>
 
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChartobs);
+
+      function drawChartobs() {
+
+        var data1 = google.visualization.arrayToDataTable([
+          ['Num', 'Occurrence'],
+          ['1',     Number(freqs.rows[0].cells[1].innerText.replace(/\,/g, '.'))],
+          ['0',      1-Number(freqs.rows[0].cells[1].innerText.replace(/\,/g, '.'))]
+        ]);
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Num', 'Occurrence'],
+          ['1',     Number(freqs.rows[0].cells[2].innerText.replace(/\,/g, '.'))],
+          ['0',      1-Number(freqs.rows[0].cells[2].innerText.replace(/\,/g, '.'))]
+        ]);
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Num', 'Occurrence'],
+          ['1',     Number(freqs.rows[0].cells[3].innerText.replace(/\,/g, '.'))],
+          ['0',      1-Number(freqs.rows[0].cells[3].innerText.replace(/\,/g, '.'))]
+        ]);
+
+        var options = {
+          tooltip: { trigger: 'none' },
+          legend: 'none',
+          backgroundColor: 'transparent',
+          pieSliceText: 'none',
+          slices: {
+            0: { color: 'grey' },
+            1: { color: 'skyblue' }
+          },
+          reverseCategories: true
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+        var chart3 = new google.visualization.PieChart(document.getElementById('piechart3'));
+
+        chart1.draw(data1, options);
+        chart2.draw(data2, options);
+        chart3.draw(data3, options);
+      }
+</script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChartint);
+
+      function drawChartint() {
+
+        var data1int = google.visualization.arrayToDataTable([
+          ['Num', 'Occurrence'],
+          ['1',     Number(freqsint.rows[0].cells[1].innerText.replace(/\,/g, '.'))],
+          ['0',      1-Number(freqsint.rows[0].cells[1].innerText.replace(/\,/g, '.'))]
+        ]);
+
+        var data2int = google.visualization.arrayToDataTable([
+          ['Num', 'Occurrence'],
+          ['1',     Number(freqsint.rows[0].cells[2].innerText.replace(/\,/g, '.'))],
+          ['0',      1-Number(freqsint.rows[0].cells[2].innerText.replace(/\,/g, '.'))]
+        ]);
+
+        var data3int = google.visualization.arrayToDataTable([
+          ['Num', 'Occurrence'],
+          ['1',     Number(freqsint.rows[0].cells[3].innerText.replace(/\,/g, '.'))],
+          ['0',      1-Number(freqsint.rows[0].cells[3].innerText.replace(/\,/g, '.'))]
+        ]);
+
+        var options = {
+          tooltip: { trigger: 'none' },
+          legend: 'none',
+          backgroundColor: 'transparent',
+          pieSliceText: 'none',
+          slices: {
+            0: { color: 'grey' },
+            1: { color: 'skyblue' }
+          },
+          reverseCategories: true
+        };
+
+        var chart1int = new google.visualization.PieChart(document.getElementById('piechart1int'));
+        var chart2int = new google.visualization.PieChart(document.getElementById('piechart2int'));
+        var chart3int = new google.visualization.PieChart(document.getElementById('piechart3int'));
+
+        chart1int.draw(data1int, options);
+        chart2int.draw(data2int, options);
+        chart3int.draw(data3int, options);
+      }
+</script>
+
 <div id="cy"></div>
+
 
 <br>
 
@@ -413,6 +541,9 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 <script>
+// KEK
+
+
 function crfunc(b1, b2){
   if (b1){return "0";}
 
@@ -570,7 +701,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -584,8 +715,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartobs();
     });
 
 
@@ -609,7 +741,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -623,8 +755,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartobs();
     });
 
 
@@ -648,7 +781,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -662,8 +795,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartobs();
     });
 
 
@@ -687,7 +821,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -701,8 +835,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartobs();
     });
 
 
@@ -726,7 +861,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -740,8 +875,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartobs();
     });
 
 
@@ -765,7 +901,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -780,8 +916,9 @@ $(document).ready(function () {
            var tab = Array.from(out.slice(1, out.length));
            var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
            out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-           freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+           freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartobs();
     });
 
   }(jQuery));
@@ -810,7 +947,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -824,8 +961,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartint();
     });
 
 
@@ -849,7 +987,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -863,8 +1001,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartint();
     });
 
     $('#filtery_i').on('change', function(){
@@ -885,7 +1024,7 @@ $(document).ready(function () {
              var tab = Array.from(out.slice(1, out.length));
              var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
              out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -899,8 +1038,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartint();
     });
 
     $('#filtery0_i').on('change', function(){
@@ -922,7 +1062,7 @@ $(document).ready(function () {
              var tab = Array.from(out.slice(1, out.length));
              var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
              out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -936,8 +1076,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartint();
     });
 
 
@@ -961,7 +1102,7 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -975,8 +1116,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartint();
     });
 
 
@@ -1000,7 +1142,7 @@ $(document).ready(function () {
              var tab = Array.from(out.slice(1, out.length));
              var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
              out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+             freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
 
 
         }else{
@@ -1014,8 +1156,9 @@ $(document).ready(function () {
             var tab = Array.from(out.slice(1, out.length));
             var transposed_tab =  tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
             out2 = [sum(transposed_tab[0])/transposed_tab[0].length, sum(transposed_tab[1])/transposed_tab[1].length, sum(transposed_tab[2])/transposed_tab[2].length];
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out2[0]  + '</td><td style="width:31%">'+ out2[1]  + '</td><td style="width:31%">' + out2[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out2[0]  + '</td><td style="width:30%">'+ out2[1]  + '</td><td style="width:30%">' + out2[2]  + '</td><td>' ;
         }
+        drawChartint();
     });
 
 }(jQuery));
@@ -1040,6 +1183,8 @@ let toggleX = button => {
        element.removeAttribute("hidden");
        anoth_element.setAttribute( "hidden","hidden");
        button.innerText = 'Force X=1 (DO X)';
+       document.getElementById('pcharts').hidden = false;
+       document.getElementById('pchartsint').hidden = true;
 
 ///////
        if (minifuncy(seed) == "Z"){
@@ -1060,14 +1205,16 @@ let toggleX = button => {
         butx.style.display = "none";
         buty.innerText = "Show Observational";
         buty.style.display = "inline-block";
+        document.getElementById('pcharts').hidden = true;
+        document.getElementById('pchartsint').hidden = false;
         if(flag !== 0){
             xid = document.getElementById('freqsint')
             out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out3[0]  + '</td><td style="width:30%">'+ out3[1]  + '</td><td style="width:30%">' + out3[2]  + '</td><td>' ;
         }
 
         else{
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + freqsintjs[1]  + '</td><td style="width:31%">'+ freqsintjs[2]  + '</td><td style="width:31%">' + freqsintjs[3]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + freqsintjs[1]  + '</td><td style="width:30%">'+ freqsintjs[2]  + '</td><td style="width:30%">' + freqsintjs[3]  + '</td><td>' ;
         }
     }
 }
@@ -1088,6 +1235,8 @@ let toggleY = button => {
         element.removeAttribute("hidden");
         anoth_element.setAttribute("hidden","hidden");
         button.innerText = 'Force Y=1 (DO Y)';
+        document.getElementById('pcharts').hidden = false;
+        document.getElementById('pchartsint').hidden = true;
         freqsint.hidden = true;
         freqs.hidden = false;
         document.getElementById("interv").setAttribute("hidden","hidden");
@@ -1096,7 +1245,7 @@ let toggleY = button => {
 
         ids = document.getElementById('freqs')
         out3 = [$(ids).find('td').eq(1).text(), $(ids).find('td').eq(2).text(),$(ids).find('td').eq(3).text()]
-        freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>';
+        freqs.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out3[0]  + '</td><td style="width:30%">'+ out3[1]  + '</td><td style="width:30%">' + out3[2]  + '</td><td>';
 
         flag=1;
 
@@ -1127,14 +1276,16 @@ let toggleY = button => {
         button.innerText = "Show Observational";
         butz.style.display = "none";
         butx.style.display = "none";
+        document.getElementById('pcharts').hidden = true;
+        document.getElementById('pchartsint').hidden = false;
         if(flag !== 0){
             xid = document.getElementById('freqsint')
             out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out3[0]  + '</td><td style="width:30%">'+ out3[1]  + '</td><td style="width:30%">' + out3[2]  + '</td><td>' ;
         }
 
         else{
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + freqsintjs[1]  + '</td><td style="width:31%">'+ freqsintjs[2]  + '</td><td style="width:31%">' + freqsintjs[3]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + freqsintjs[1]  + '</td><td style="width:30%">'+ freqsintjs[2]  + '</td><td style="width:30%">' + freqsintjs[3]  + '</td><td>' ;
         }
     }
 }
@@ -1155,6 +1306,8 @@ let toggleZ = button => {
         element.removeAttribute("hidden");
         anoth_element.setAttribute( "hidden","hidden");
         button.innerText = 'Force Z=1 (DO Z)';
+        document.getElementById('pcharts').hidden = false;
+        document.getElementById('pchartsint').hidden = true;
 
 ///////
         if (minifuncy(seed) == "Z"){
@@ -1175,14 +1328,16 @@ let toggleZ = button => {
         butx.style.display = "none";
         buty.innerText = "Show Observational";
         buty.style.display = "inline-block";
+        document.getElementById('pcharts').hidden = true;
+        document.getElementById('pchartsint').hidden = false;
         if(flag !== 0){
             xid = document.getElementById('freqsint')
             out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + out3[0]  + '</td><td style="width:31%">'+ out3[1]  + '</td><td style="width:31%">' + out3[2]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + out3[0]  + '</td><td style="width:30%">'+ out3[1]  + '</td><td style="width:30%">' + out3[2]  + '</td><td>' ;
         }
 
         else{
-            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:31%">' + freqsintjs[1]  + '</td><td style="width:31%">'+ freqsintjs[2]  + '</td><td style="width:31%">' + freqsintjs[3]  + '</td><td>' ;
+            freqsint.innerHTML = '<td style="width:10%">'+'freq'+'</td><td style="width:30%">' + freqsintjs[1]  + '</td><td style="width:30%">'+ freqsintjs[2]  + '</td><td style="width:30%">' + freqsintjs[3]  + '</td><td>' ;
         }
     }
 }

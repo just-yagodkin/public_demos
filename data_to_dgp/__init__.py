@@ -274,7 +274,8 @@ class DiagramTask(Page):
                          range(len(output[2]['x']))],
             datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
                          range(len(output[3]['x']))],
-            frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
+            #frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
+            frequenciesobs=["freqtest"] + [0.2, 0.2, 0.3],
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
             frequenciesintz=["freq"] + gf.check_frequencies(output[3]),

@@ -195,7 +195,7 @@ SESSION_CONFIGS = [
         dict(
         name='AOT',
         display_name="surveys",
-        app_sequence=[ 'AOT', 'MPL','bret'],
+        app_sequence=[ 'AOT', 'MPL', 'bret'],
         num_demo_participants=1,
     ),
 
@@ -229,7 +229,9 @@ SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1.00, participation
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
-LANGUAGE_CODE = 'ru'
+
+#LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'          #       "," occures....
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'RUR'
