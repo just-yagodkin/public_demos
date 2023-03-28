@@ -25,7 +25,6 @@
         margin-right: auto;
     }
 </style>
-
 {{ endblock }}
 
 
@@ -35,7 +34,6 @@
 
 
 {{ block content }}
-
 <div class = "lang-container" style="text-align:right">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <span class="material-symbols-outlined" style="position: relative; top: 6px">language</span>
@@ -142,9 +140,6 @@
         </tbody>
     </table>
 </div>
-
-
-<!-- <div>Observational data</div> -->
 
 <table id="interv" hidden="true" class="table table-striped" style="width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="10%">
@@ -337,10 +332,10 @@
 <div class="tg-wrap">
     <table id="freqs" class="table table-striped" style="
 margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-    <col style="width:10%">
-	<col style="width:30%">
-	<col style="width:30%">
-    <col style="width:30%">
+    <col width="10%">
+    <col width="30%">
+	<col width="30%">
+    <col width="30%">
         <tbody>
 
         {% for i in frequenciesobs %}
@@ -356,10 +351,10 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <div class="tg-wrap">
     <table id="freqsint" hidden="true" class="table table-striped" style="
     margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
-        <col style="width:10%">
-	    <col style="width:30%">
-	    <col style="width:30%">
-        <col style="width:30%">
+        <col width="10%">
+	    <col width="30%">
+	    <col width="30%">
+        <col width="30%">
         <tbody>
     
         {% for i in frequenciesint %}
@@ -371,37 +366,24 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         </tbody>
 </table></div>
 
-<div class="tg-wrap">
-<table id="pcharts" class="table table-striped" style="margin: auto; width:60; text-align: center; font-size: 60px; line-height: 0.8">
-    <col style="width:10%">
-	<col style="width:30%">
-	<col style="width:30%">
-    <col style="width:30%">
-    <thead></thead>
-    <tbody><tr>
-        <td></td>
-        <td><center><div id="piechart1" style="width: 50px; height: 50px"></div></center></td>
-        <td><center><div id="piechart2" style="width: 50px; height: 50px"></div></center></td>
-        <td><center><div id="piechart3" style="width: 50px; height: 50px"></div></center></td>
-    </tr></tbody>
-</table>
-</div>
 
-<div class="tg-wrap">
-<table id="pchartsint" class="table table-striped" style="margin: auto; width:60; text-align: center; font-size: 60px; line-height: 0.8">
-    <col style="width:10%">
-	<col style="width:30%">
-	<col style="width:30%">
-    <col style="width:30%">
-    <thead></thead>
-    <tbody><tr>
-        <td></td>
-        <td><center><div id="piechart1int" style="width: 50px; height: 50px"></div></center></td>
-        <td><center><div id="piechart2int" style="width: 50px; height: 50px"></div></center></td>
-        <td><center><div id="piechart3int" style="width: 50px; height: 50px"></div></center></td>
-    </tr></tbody>
+
+
+
+<table id="piechartstab">
+    <tr id="pcharts">
+        <td width="58"></td>
+        <td width="172"><div id="piechart1"></div></td>
+        <td width="172"><div id="piechart2"></div></td>
+        <td width="172"><div id="piechart3"></div></td>
+    </tr>
+    <tr id="pchartsint">
+        <td width="58"></td>
+        <td width="172"><div id="piechart1int"></div></td>
+        <td width="172"><div id="piechart2int"></div></td>
+        <td width="172"><div id="piechart3int"></div></td>
+    </tr>
 </table>
-</div>
 
 <br>
 
@@ -448,6 +430,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         ]);
 
         var options = {
+          height: 50,
           tooltip: { trigger: 'none' },
           legend: 'none',
           backgroundColor: 'transparent',
@@ -457,6 +440,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             1: { color: 'skyblue' }
           },
           reverseCategories: true
+          //chartArea: {left:'50%'}
         };
 
         var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
@@ -469,31 +453,33 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
       }
 </script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChartint);
 
       function drawChartint() {
 
-        var data1int = google.visualization.arrayToDataTable([
+        var data1 = google.visualization.arrayToDataTable([
           ['Num', 'Occurrence'],
           ['1',     Number(freqsint.rows[0].cells[1].innerText.replace(/\,/g, '.'))],
           ['0',      1-Number(freqsint.rows[0].cells[1].innerText.replace(/\,/g, '.'))]
         ]);
 
-        var data2int = google.visualization.arrayToDataTable([
+        var data2 = google.visualization.arrayToDataTable([
           ['Num', 'Occurrence'],
           ['1',     Number(freqsint.rows[0].cells[2].innerText.replace(/\,/g, '.'))],
           ['0',      1-Number(freqsint.rows[0].cells[2].innerText.replace(/\,/g, '.'))]
         ]);
 
-        var data3int = google.visualization.arrayToDataTable([
+        var data3 = google.visualization.arrayToDataTable([
           ['Num', 'Occurrence'],
           ['1',     Number(freqsint.rows[0].cells[3].innerText.replace(/\,/g, '.'))],
           ['0',      1-Number(freqsint.rows[0].cells[3].innerText.replace(/\,/g, '.'))]
         ]);
 
         var options = {
+          height: 50,
           tooltip: { trigger: 'none' },
           legend: 'none',
           backgroundColor: 'transparent',
@@ -503,15 +489,16 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             1: { color: 'skyblue' }
           },
           reverseCategories: true
+          //chartArea: {left:'50%'}
         };
 
         var chart1int = new google.visualization.PieChart(document.getElementById('piechart1int'));
         var chart2int = new google.visualization.PieChart(document.getElementById('piechart2int'));
         var chart3int = new google.visualization.PieChart(document.getElementById('piechart3int'));
 
-        chart1int.draw(data1int, options);
-        chart2int.draw(data2int, options);
-        chart3int.draw(data3int, options);
+        chart1int.draw(data1, options);
+        chart2int.draw(data2, options);
+        chart3int.draw(data3, options);
       }
 </script>
 
@@ -542,6 +529,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 <script>
 // KEK
+document.getElementById('pchartsint').hidden = true;
 
 
 function crfunc(b1, b2){
