@@ -106,7 +106,7 @@ const langArr = {
     "Title":{
         "ru": `Выберите соответствующие стрелки (ребра) между переменными согласно данным.`,
 
-        "en": `Pick the arrows (edges) between variables according the data.`
+        "en": `Pick the arrows (edges) between variables according to data.`
     },
 
     "TrText":{
