@@ -554,7 +554,7 @@ print(check_frequencies(intervente('fork', d['fork'], "z")), "- frequencies agai
 print()
 print()
 
-'''
+
 print(d['threelinks'], "- threelinks")
 print(check_frequencies(d['threelinks']), "- frequencies")
 
@@ -564,4 +564,4 @@ print(check_frequencies(intervente('threelinks', d['threelinks'], "x")), "- freq
 # print(check_frequencies(intervente('threelinks', d['threelinks'], "y")), "- frequencies again")
 # print(intervente('threelinks', d['threelinks'], "z"), "- orange distribution (Z fixed)")
 # print(check_frequencies(intervente('threelinks', d['threelinks'], "z")), "- frequencies again")
-
+'''

@@ -12,7 +12,7 @@
 {{ endblock }}
 
 {{ block title }}
-<dl class = "lng-instruction">Instructions</dl>
+<dl class = "lng-instruction" style="text-align:center">Instructions</dl>
 {{ endblock }}
 
 
@@ -64,12 +64,21 @@
 
 
 <div class = "lang-container" style="text-align:right">
+    <table>
+        <col width="81%">
+        <col width="19%">
+<tr>
+    <td></td>
+    <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <span class="material-symbols-outlined" style="position: relative; top: 6px">language</span>
-    <select class="change-lang" style="border:white">
-        <option value="en">EN</option>
-        <option value="ru">RU</option>
+    <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
+    <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+        <option value="en">English</option>
+        <option value="ru">Russian</option>
     </select>
+    </td>
+</tr>
+</table>
 </div>
 
 
