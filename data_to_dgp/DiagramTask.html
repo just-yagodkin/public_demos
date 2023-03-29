@@ -45,6 +45,8 @@
 
 <br>
 
+
+
 <div class="tg-wrap">
     <table id="menu" class="table table-striped" style="
   margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
@@ -370,18 +372,29 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 
 
-<table id="piechartstab">
-    <tr id="pcharts">
-        <td width="58"></td>
-        <td width="172"><div id="piechart1"></div></td>
-        <td width="172"><div id="piechart2"></div></td>
-        <td width="172"><div id="piechart3"></div></td>
+<table id="pcharts" class="table table-striped">
+        <col width="10%">
+	    <col width="30%">
+	    <col width="30%">
+        <col width="30%">
+    <tr>
+        <td></td>
+        <td><center><div id="piechart1"></div></center></td>
+        <td><center><div id="piechart2"></div></center></td>
+        <td><center><div id="piechart3"></div></center></td>
     </tr>
-    <tr id="pchartsint">
-        <td width="58"></td>
-        <td width="172"><div id="piechart1int"></div></td>
-        <td width="172"><div id="piechart2int"></div></td>
-        <td width="172"><div id="piechart3int"></div></td>
+    </table>
+
+<table id="pchartsint" class="table table-striped">
+        <col width="10%">
+	    <col width="30%">
+	    <col width="30%">
+        <col width="30%">
+    <tr>
+        <td></td>
+        <td><center><div id="piechart1int"></div></center></td>
+        <td><center><div id="piechart2int"></div></center></td>
+        <td><center><div id="piechart3int"></div></center></td>
     </tr>
 </table>
 
@@ -430,6 +443,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         ]);
 
         var options = {
+          width: 50,
           height: 50,
           tooltip: { trigger: 'none' },
           legend: 'none',
@@ -479,6 +493,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         ]);
 
         var options = {
+          width: 50,
           height: 50,
           tooltip: { trigger: 'none' },
           legend: 'none',
@@ -528,7 +543,6 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 <script>
-// KEK
 document.getElementById('pchartsint').hidden = true;
 
 
@@ -1193,8 +1207,9 @@ let toggleX = button => {
         butx.style.display = "none";
         buty.innerText = "Show Observational";
         buty.style.display = "inline-block";
-        document.getElementById('pcharts').hidden = true;
         document.getElementById('pchartsint').hidden = false;
+        document.getElementById('pcharts').hidden = true;
+
         if(flag !== 0){
             xid = document.getElementById('freqsint')
             out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
@@ -1264,8 +1279,9 @@ let toggleY = button => {
         button.innerText = "Show Observational";
         butz.style.display = "none";
         butx.style.display = "none";
-        document.getElementById('pcharts').hidden = true;
         document.getElementById('pchartsint').hidden = false;
+        document.getElementById('pcharts').hidden = true;
+
         if(flag !== 0){
             xid = document.getElementById('freqsint')
             out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
@@ -1316,8 +1332,9 @@ let toggleZ = button => {
         butx.style.display = "none";
         buty.innerText = "Show Observational";
         buty.style.display = "inline-block";
-        document.getElementById('pcharts').hidden = true;
         document.getElementById('pchartsint').hidden = false;
+        document.getElementById('pcharts').hidden = true;
+
         if(flag !== 0){
             xid = document.getElementById('freqsint')
             out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(),$(xid).find('td').eq(3).text()]
