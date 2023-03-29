@@ -98,11 +98,11 @@ class C(BaseConstants):
                                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
                                                          'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
                                                         FORKSEED)
-                             # ,
-                             # 'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                             #                                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                             #                                   'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                             #                                   THREELINKSSEED)
+                             ,
+                             'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                               'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                                                               THREELINKSSEED)
                              }
 
     preinterventional_data = {                  # INTERVENTION ON Y
@@ -155,8 +155,9 @@ class C(BaseConstants):
 
     # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
 
-    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
     # task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "fork"]
+    task_sequence = ['threelinks']
 
 
     SEEDS = []  # SEEDS contains seed for every round
