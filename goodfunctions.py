@@ -26,8 +26,8 @@ d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
      'collider2': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
                    'y': [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
                    'z': [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1]},
-     'threelinks': {'x': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                    'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+     'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
                     'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
      }  # collider2 is optional
 
@@ -258,20 +258,20 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                     for i in
                     range(round(length * (1 - freq_z_when_not_name)))]
 
-        # elif key == 'threelinks':
-        #     if fixed == 1:
-        #         x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
-        #         z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
-        #     else:
-        #         x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
-        #         z = [0] * length
         elif key == 'threelinks':
             if fixed == 1:
-                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-                z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+                x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
+                z = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             else:
-                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+                x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
                 z = [0] * length
+        #elif key == 'threelinks':
+        #    if fixed == 1:
+        #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+        #        z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+        #    else:
+        #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
+        #        z = [0] * length
 
 
         elif key == 'fork':
@@ -310,7 +310,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 print("Don't use zero!! PLS!")
                 pass
 
-        elif key == 'threelinks':
+        elif key == 'threelinks':           # NEED TO CHECK...
             if fixed == 1:
                 x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
                 z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -366,7 +366,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             x = dictionary[st[0]].copy()
             z = dictionary[st[1]].copy()
 
-        if key == 'fork' or key == "threelinks":
+        if key == 'fork' or key == "threelinks":    # NEED TO CHECK threelinks
             z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
             x = dictionary[st[0]].copy()
 
@@ -558,8 +558,8 @@ print()
 print(d['threelinks'], "- threelinks")
 print(check_frequencies(d['threelinks']), "- frequencies")
 
-print(intervente('threelinks', d['threelinks'], "x"), "- orange distribution (X fixed)")
-print(check_frequencies(intervente('threelinks', d['threelinks'], "x")), "- frequencies again")
+print(intervente('threelinks', d['threelinks']), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('threelinks', d['threelinks'])), "- frequencies again")
 # print(intervente('threelinks', d['threelinks'], "y"), "- orange distribution (Y fixed)")
 # print(check_frequencies(intervente('threelinks', d['threelinks'], "y")), "- frequencies again")
 # print(intervente('threelinks', d['threelinks'], "z"), "- orange distribution (Z fixed)")
