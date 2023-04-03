@@ -151,4 +151,14 @@ const langArr = {
         "en": `That is the original dependencies (Data Generation Process)`
     },
 
+    "confstart":{
+        "ru": `Используя бегунок укажит, насколько вы уверены в своем ответе`,
+
+        "en": `Please choose how confident you are using slider`
+    },
+    "conflevel":{
+        "ru": `текущее значение`,
+
+        "en": `Current confidience`
+    },
 }

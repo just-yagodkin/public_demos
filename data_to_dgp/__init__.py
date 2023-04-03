@@ -22,6 +22,8 @@ class C(BaseConstants):
     # COLLIDER2SEED = random.randint(0, 5)
     THREELINKSSEED = random.randint(0, 5)
 
+    conf_range = range(101)
+
     seed = {'collider1': COLLIDER1SEED,
             'nolinks': NOLINKSSEED,
             'onelink': ONELINKSEED,
@@ -159,9 +161,9 @@ class C(BaseConstants):
 
     # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
 
-    # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
     # task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "fork"]
-    task_sequence = ['threelinks']
+    # task_sequence = ['threelinks']
 
 
     SEEDS = []  # SEEDS contains seed for every round
@@ -183,7 +185,13 @@ class Player(BasePlayer):
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
     trainig = models.IntegerField()
-
+    conf_bid = models.IntegerField(initial=-1,
+        choices=[i for i in C.conf_range],
+        # widget=widgets.RadioSelect,
+        )
+    def conf_bid_error_message(player, value):
+        print('value is', value)
+        return 'not an option'
 
 # Functions
 def datatask_output_json(player: Player):
@@ -243,7 +251,8 @@ class Training(Page):
 
 
 class DiagramTask(Page):
-
+    form_model = 'player'
+    form_fields = ['conf_bid']
     def live_method(player, data):
         # player.stored = str(1)
         player.stored = json.dumps(data)
