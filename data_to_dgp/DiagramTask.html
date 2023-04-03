@@ -25,6 +25,42 @@
         margin-right: auto;
     }
 </style>
+<style>
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.5;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 0.7;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>
 {{ endblock }}
 
 
@@ -528,16 +564,19 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 <div id="cy"></div>
 
-
 <br>
 
-<!-- <div align="center">
-    <div class="slidecontainer">
-        <p>
-        <h3 class = "lng-confidence">Choose your confidence</h3></p>
-        <input type="range" min="1" max="10" value="3" class="slider" id="myRange">
+
+
+<div align="center">
+<div class="slidecontainer">
+    <p><h3 class = "lng-confidence">Choose your confidence</h3></p>
+  <input id="fader" name="range1" type="range" step="10" min="0" max="100" value="50" class="slider" style="opacity: 0.5">
+</form>
     </div>
-</div> -->
+    </div>
+
+<br>
 
 
 {{ next_button }}
@@ -552,6 +591,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 <script>
+slider = document.getElementById('fader');
 document.getElementById('pchartsint').hidden = true;
 observ = document.getElementById('observ');
 interv = document.getElementById('interv');
