@@ -9,10 +9,9 @@ Your app description
 
 
 class C(BaseConstants):
-    training = False
     NUM_ROUNDS = 5
 
-    NAME_IN_URL = 'data_to_dgp'
+    NAME_IN_URL = 'data_to_dgp_toshow'
     PLAYERS_PER_GROUP = None
 
     NOLINKSSEED = random.randint(0, 5)
@@ -22,14 +21,11 @@ class C(BaseConstants):
     FORKSEED = random.randint(0, 5)
     THREELINKSSEED = random.randint(0, 5)
 
-    conf_range = range(101)
-
     seed = {'collider1': COLLIDER1SEED,
             'nolinks': NOLINKSSEED,
             'onelink': ONELINKSEED,
             'twolinks': TWOLINKSSEED,
             'fork': FORKSEED,
-            # 'collider2': COLLIDER2SEED,
             'threelinks': THREELINKSSEED
             }
 
@@ -185,13 +181,7 @@ class Player(BasePlayer):
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
     trainig = models.IntegerField()
-    conf_bid = models.IntegerField(initial=-1,
-        choices=[i for i in C.conf_range],
-        # widget=widgets.RadioSelect,
-        )
-    def conf_bid_error_message(player, value):
-        print('value is', value)
-        return 'not an option'
+
 
 # Functions
 def datatask_output_json(player: Player):
@@ -251,8 +241,7 @@ class Training(Page):
 
 
 class DiagramTask(Page):
-    form_model = 'player'
-    form_fields = ['conf_bid']
+
     def live_method(player, data):
         # player.stored = str(1)
         player.stored = json.dumps(data)
@@ -339,7 +328,5 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     pass
 
-if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest]
-else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest]
+
+page_sequence = [Instruction, Training, DiagramTask, DiagramTest]
