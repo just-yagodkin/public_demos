@@ -480,6 +480,52 @@ def minifunc(number):  # where Y will be.      Optional!
     if number == 2 or number == 3:
         return "X"
 
+def userschoice(lst: list):     # lst is a user's form
+    temp = list()
+
+    if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
+               {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
+               {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]:
+        return []  # That's for the case when there are no edges :(
+
+    for dictionary in lst:
+        if dictionary['counter'] == 1:
+            temp.append(dictionary['source'] + dictionary['target'])
+
+    return temp
+
+def dgpchoice(lst: list):     # lst is an original form
+    temp = list()
+
+    if lst == [False]:
+        return []  # That's for the case when there are no edges :(        (nolinks)
+
+    for dictionary in lst:
+        temp.append(dictionary['data']['source'] + dictionary['data']['target'])
+
+    return temp
+
+def fine(user: list, dgp: list):
+    penalty = 0
+
+
+    for str in user:
+        if str not in dgp:
+            if revstring(str) not in dgp:   # user set an edge which is not in original data
+               penalty += 3.25
+            else:                           # user set an edge with wrong direction
+                penalty += 1
+
+    for str in dgp:
+        if str not in user:
+            if revstring(str) not in user:  # user missed an edge
+                penalty += 2
+            # else user has confounded a direction, but we have already counted this case
+
+    return penalty
+
+def accuracy(num):
+    return 10-num
 
 ###----- TESTS -----###
 
