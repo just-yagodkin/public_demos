@@ -2,14 +2,14 @@
     Sie haben sich entschieden {{ boxes_collected }} von {{ boxes_total }} Boxen zu
     sammeln.
     {{ else }}
-    You chose to collect {{ boxes_collected }} out of {{ boxes_total }} boxes.
+    Вы выбрали открыть {{ boxes_collected }} коробок, из всего {{ boxes_total }} коробок.
     {{ endif }}
 
     <br/>
     {{ if de }}
     Die Bombe war hinter der Box in Reihe {{ bomb_row }}, Spalte {{ bomb_col }} versteckt.
     {{ else }}
-    The bomb was hidden behind the box in row {{ bomb_row }}, column {{ bomb_col }}.
+    Бомба находилась на пересечении линии {{ bomb_row }} и столбца {{ bomb_col }}.
     {{ endif }}
     <br/>
     <br/>
@@ -19,8 +19,8 @@
         Boxen.<br/> Entsprechend wurden alle Ihre gesammelten Erträge zerstört und
         Ihre Auszahlung in dieser Aufgabe beträgt {{ payoff }}.
         {{ else }}
-        The bomb was among your {{ boxes_collected }} collected boxes.<br/>
-        Accordingly, all your earnings in this task were destroyed and your payoff amounts to {{ payoff }}.
+        Бомба была среди {{ boxes_collected }} Выбранных коробок.<br/>
+        Выигрыш от остальных коробок сгорает, и составит {{ payoff }}.
         {{ endif }}
     {{ else }}
         {{ if de }}
@@ -29,8 +29,8 @@
         Boxen, sodass sich Ihre Auszahlung in dieser Aufgabe auf <b>{{ payoff }}</b>
         beläuft.
         {{ else }}
-        Your collected boxes did not contain the bomb.<br/>
-        Thus, you receive {{ box_value }} for each of the {{ boxes_collected }} boxes
-        you collected such that your payoff from this task amounts to <b>{{ payoff }}</b>.
+        Вы выбрали коробки которые не содержат бомбы.<br/>
+        Следовательно, за каждую коробку назначен(о) {{ box_value }}. Вы собрали  {{ boxes_collected }} коробок
+        и ваш выигрыш составит <b>{{ payoff }}</b>.
         {{ endif }}
     {{ endif }}

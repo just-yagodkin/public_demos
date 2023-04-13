@@ -111,6 +111,9 @@ class Game(Page):
         'bomb_row',
         'bomb_col',
     ]
+    @staticmethod 
+    def set_pay(player: Player):
+        player.participant.finished = True
 
     @staticmethod
     def vars_for_template(player: Player):

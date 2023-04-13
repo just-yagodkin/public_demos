@@ -51,7 +51,7 @@ class Constants(BaseConstants):
     # if <enforce_consistency = True>, all options "A" above a selected option "A" are automatically selected
     # similarly, all options "B" below a selected option "B" are automatically checked, implying consistent choices
     # note that <enforce_consistency> is only implemented if <one_choice_per_page = False> and <random_order = False>
-    enforce_consistency = False
+    enforce_consistency = True
 
     # depict probabilities as percentage numbers
     # if <percentage = True>, the probability of outcome "high" will be displayed as percentage number

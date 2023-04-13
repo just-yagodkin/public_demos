@@ -203,8 +203,9 @@ SESSION_CONFIGS = [
     dict(
         name='AOT',
         display_name="surveys",
-        app_sequence=['AOT', 'MPL', 'bret'],
+        app_sequence=['AOT', 'MPL', 'bret','payment_info'],
         num_demo_participants=1,
+        
     ),
 
 
@@ -233,7 +234,7 @@ SESSION_CONFIGS = [
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
-SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1.00, participation_fee=0.00, doc="")
+SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=3.00, participation_fee=50.00, doc="")
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

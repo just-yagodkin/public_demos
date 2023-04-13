@@ -2,8 +2,8 @@
     Die nachfolgende Tabelle fasst die Ergebnisse Ihrer Entscheidungen in den
     {{ Constants.num_rounds }} gespielten Runden zusammen.
 {{ else }}
-    The table below summarizes the results of your decisions in the
-    {{ Constants.num_rounds }} rounds played.
+    Таблица ниже суммирует результаты по раунду(ам)
+    {{ Constants.num_rounds }}.
 {{ endif }}
 </div>
 
@@ -44,16 +44,10 @@
             Für Ihre Auszahlung wurde Runde Nr. {{ round_to_pay }} zufällig ausgewählt.<br/>
             Entsprechend beträgt ihre Auszahlung aus dieser Aufgabe {{ total_payoff }}.
         {{ else }}
-            For your payment, round number {{ round_to_pay }} was randomly chosen. <br/>
-            Thus, your final payoff in this task amounts to {{ total_payoff }}.
+            Для  оплаты был выбран раунд {{ round_to_pay }}. <br/>
+            Следовательно, ваша выплата за это задание составит {{ total_payoff }}.
         {{ endif }}
     {{ else }}
-        {{ if de }}
-            Ihre Auszahlung wird durch die Summe aller gesammelten Beträge in allen
-            Runden bestimmt. Dementsprechend beträgt Ihre Auszahlung aus dieser Aufgabe {{ total_payoff }}.
-        {{ else }}
-            Your final payoff is determined by the sum of all payoffs per round
-            such that you final payoff in this task amounts to {{ total_payoff }}.
-        {{ endif }}
+       
     {{ endif }}
     </div>
