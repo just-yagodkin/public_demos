@@ -567,32 +567,18 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <br>
 
 
+<!--
+<div align="center">
+<div class="slidecontainer">
+    <p><h3 class = "lng-confidence">Choose your confidence</h3></p>
+  <input id="fader" name="range1" type="range" step="10" min="0" max="100" value="50" class="slider" style="opacity: 0.5">
+</form>
+    </div>
+    </div>
+
+<br>-->
 
 
-
-
-<div> <p class= "lng-confstart">Please choose how confident you are using slider</p> </div>
-<div >
-
-    <input color= "yellow-300" id='conf_bid' class="form-range" type="range" name="conf_bid" min="0" max="100" step="1"  >
-
-</div>
-
-<div id="result" class="lng-conflevel">Current confidience: <b></b></div>
-<script>
-    $(document).ready(function(){
-        // Read value on page load
-        $("#result b").html($("#conf_bid").val());
-
-        // Read value on change
-        $("#conf_bid").change(function(){
-            $("#result b").html($(this).val());
-        });
-    });        
-</script> 
-
-
-{{ formfield_errors 'conf_bid' }}
 {{ next_button }}
 
 

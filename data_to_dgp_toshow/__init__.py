@@ -9,10 +9,9 @@ Your app description
 
 
 class C(BaseConstants):
-    training = False
-    NUM_ROUNDS = 6
+    NUM_ROUNDS = 5
 
-    NAME_IN_URL = 'data_to_dgp'
+    NAME_IN_URL = 'data_to_dgp_toshow'
     PLAYERS_PER_GROUP = None
 
     NOLINKSSEED = random.randint(0, 5)
@@ -21,8 +20,6 @@ class C(BaseConstants):
     COLLIDER1SEED = random.randint(0, 5)
     FORKSEED = random.randint(0, 5)
     THREELINKSSEED = random.randint(0, 5)
-
-    conf_range = range(101)
 
     seed = {'collider1': COLLIDER1SEED,
             'nolinks': NOLINKSSEED,
@@ -99,18 +96,18 @@ class C(BaseConstants):
                                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
                                                          'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
                                                         FORKSEED)
-        ,
+                             ,
                              'threelinks': gf.smartdatainterv({'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
                                                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                                              THREELINKSSEED)
+                                                               THREELINKSSEED)
                              }
-    # X -> Y ->
-    # |       |
-    # V       V
-    # L>  ->  Z
+                                                        # X -> Y ->
+                                                        # |       |
+                                                        # V       V
+                                                        # L>  ->  Z
 
-    preinterventional_data = {  # INTERVENTION ON Y
+    preinterventional_data = {                  # INTERVENTION ON Y
         'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks']), NOLINKSSEED),
         'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink']), ONELINKSEED),
         'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks']), TWOLINKSSEED),
@@ -120,7 +117,7 @@ class C(BaseConstants):
                                          THREELINKSSEED)
     }
 
-    preinterventionalx_data = {  # INTERVENTION ON X
+    preinterventionalx_data = {                 # INTERVENTION ON X
         'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'x'), NOLINKSSEED),
         'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'x'), ONELINKSEED),
         'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'x'), TWOLINKSSEED),
@@ -131,7 +128,7 @@ class C(BaseConstants):
                                          THREELINKSSEED)
     }
 
-    preinterventionalz_data = {  # INTERVENTION ON Z
+    preinterventionalz_data = {                 # INTERVENTION ON Z
         'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'z'), NOLINKSSEED),
         'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'z'), ONELINKSEED),
         'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'z'), TWOLINKSSEED),
@@ -154,13 +151,16 @@ class C(BaseConstants):
     # interventionalx_data = preinterventionalx_data
     # interventionalz_data = preinterventionalz_data
 
+
     task_sequence_keys = (list(observational_data.keys()))
+
 
     # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
 
-    # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks"]
+    task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
+    # task_sequence = ['onelink', 'twolinks', 'collider1', "nolinks", "fork"]
     # task_sequence = ['threelinks']
+
 
     SEEDS = []  # SEEDS contains seed for every round
     for i in task_sequence:
@@ -181,14 +181,6 @@ class Player(BasePlayer):
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
     trainig = models.IntegerField()
-    conf_bid = models.IntegerField(initial=-1,
-                                   choices=[i for i in C.conf_range],
-                                   # widget=widgets.RadioSelect,
-                                   )
-
-    def conf_bid_error_message(player, value):
-        print('value is', value)
-        return 'not an option'
 
 
 # Functions
@@ -249,8 +241,6 @@ class Training(Page):
 
 
 class DiagramTask(Page):
-    form_model = 'player'
-    form_fields = ['conf_bid']
 
     def live_method(player, data):
         # player.stored = str(1)
@@ -269,7 +259,7 @@ class DiagramTask(Page):
                          range(len(output[2]['x']))],
             datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
                          range(len(output[3]['x']))],
-            # datasetint1=C.interventional_data[C.task_sequence[player.round_number - 1]],
+            #datasetint1=C.interventional_data[C.task_sequence[player.round_number - 1]],
             frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
@@ -300,19 +290,13 @@ class DiagramTest(Page):
         output = datatask_output_json(player)
         store_array = json.loads(player.stored)
         seed = C.SEEDS[player.round_number - 1]
-        edges = benchmark_diagram(player)
+        edges = C.data_edges
         datasetobs = C.observational_data[C.task_sequence[player.round_number - 1]],
         datasetint = C.interventional_data[C.task_sequence[player.round_number - 1]],
         datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
         return dict(
-            ekey=[f'The original sequence is {C.task_sequence}',
-                  f'User did not set cycles: {gf.tanc(store_array)}',
-                  f'User chose {gf.userschoice(store_array)}',
-                  f'DGP was {gf.dgpchoice(edges)}',
-                  f'Penalty is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
-                  f"User's score is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
-                  f'The seed is {seed}'])
+            ekey=[C.task_sequence, gf.tanc(store_array), seed])
 
     @staticmethod
     def js_vars(player):
@@ -345,7 +329,4 @@ class Results(Page):
     pass
 
 
-if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest]
-else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest]
+page_sequence = [Instruction, Training, DiagramTask, DiagramTest]
