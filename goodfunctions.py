@@ -190,8 +190,14 @@ def check_dependencies(dictionary: dict):
 
 def reshuffle(list):
     new_list = list.copy()
-
     return [[x[0], shuffle_coloumns(x[1])] for x in new_list]
+
+def reshuffleold(dictionary: dict):
+    new_dict = dictionary.copy()
+    keys = list(dictionary.keys())
+    for key in keys:
+        shuffle_coloumns(new_dict[key])
+    return new_dict
 
 
 def shuffle_coloumns(dictionary: dict):

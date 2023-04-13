@@ -193,12 +193,12 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
     ),
 
-    # dict(
-    #     name='data_to_dgp_toshow',
-    #     display_name="data to DGP task (to show)",
-    #     app_sequence=['data_to_dgp_toshow'],
-    #     num_demo_participants=1,
-    # ),
+    dict(
+        name='data_to_dgp_toshow',
+        display_name="data to DGP task (to show)",
+        app_sequence=['data_to_dgp_toshow'],
+        num_demo_participants=1,
+    ),
 
     dict(
         name='AOT',

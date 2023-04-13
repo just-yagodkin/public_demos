@@ -139,10 +139,10 @@ class C(BaseConstants):
                                          THREELINKSSEED)
     }
 
-    observational_data = gf.reshuffle(preobservational_data)
-    interventional_data = gf.reshuffle(preinterventional_data)
-    interventionalx_data = gf.reshuffle(preinterventionalx_data)
-    interventionalz_data = gf.reshuffle(preinterventionalz_data)
+    observational_data = gf.reshuffleold(preobservational_data)
+    interventional_data = gf.reshuffleold(preinterventional_data)
+    interventionalx_data = gf.reshuffleold(preinterventionalx_data)
+    interventionalz_data = gf.reshuffleold(preinterventionalz_data)
 
     # SOMETIMES YOU DONT WANT THE DATA TO BE SHUFFLED => UNCOMMENT THE STRINGS BELOW
 
