@@ -466,10 +466,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 <br>
 
-
-
-
-
+<input  id='stored'  name="stored"  >
 
 <div> <p class= "lng-confstart">Please choose how confident you are using slider</p> </div>
 <div >
@@ -478,20 +475,22 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 </div>
 
-<div id="result" class="lng-conflevel">Current confidience: <b></b></div>
+<div> Current confidience: <b></b>  <b id="result" class="lng-conflevel"> </b></b>  </div>
+<p></p>
+
 <script>
     $(document).ready(function(){
         // Read value on page load
-        $("#result b").html($("#conf_bid").val());
+        $("#result").html($("#conf_bid").val());
 
         // Read value on change
         $("#conf_bid").change(function(){
-            $("#result b").html($(this).val());
+            $("#result").html($(this).val());
         });
     });        
 </script> 
 
-
+{{ formfield_errors 'stored' }}
 {{ formfield_errors 'conf_bid' }}
 {{ next_button }}
 
@@ -622,11 +621,22 @@ cy.on('tap', 'edge', function(evt){
     form_data.push(edges[i]._private.data);
   }
   console.log(form_data);
+
+  
+
   liveSend(form_data);
   // sendValue(form_data)
   form_data = [];
+
+
 });
 
+function liveRecv(data) {
+    console.log(data);
+      forminputs.stored.value = data;
+      //formInputs.trainig.value = data; // for server setting
+
+  }
 
 function iterator(array, i) {
   var index=(i+1)% array.length;

@@ -161,6 +161,7 @@ class C(BaseConstants):
     # SEEDS = []  # SEEDS contains seed for every round
     # for i in task_sequence:
     #     SEEDS.append(seed[i])
+ 
 
 class Subsession(BaseSubsession):
     pass
@@ -246,11 +247,24 @@ class Training(Page):
 
 class DiagramTask(Page):
     form_model = 'player'
-    form_fields = ['conf_bid']
+    form_fields = ['conf_bid', 'stored']
 
     def live_method(player, data):
         # player.stored = str(1)
         player.stored = json.dumps(data)
+        # print(json.loads(json.dumps(data))[0]["counter"])
+        return {1: json.loads(json.dumps(data))[1]["counter"]}
+
+
+    def error_message(player, values):
+        solutions = dict(
+            stored=1,
+        )
+        error_messages = dict()
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                error_messages[field_name] = 'Incorrect report'
+        return error_messages
 
     @staticmethod
     def vars_for_template(player):
@@ -288,7 +302,7 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
             # frequenciesintz=["freq"] + gf.check_frequencies(output[3]),
-            seed=C.seed[player.round_number - 1][1])
+            seed=C.seed[player.round_number - 1])
 
 
 class DiagramTest(Page):
@@ -296,7 +310,7 @@ class DiagramTest(Page):
     def vars_for_template(player):
         output = datatask_output_json(player)
         store_array = json.loads(player.stored)
-        seed = C.seed[player.round_number - 1][1]
+        seed = C.seed[player.round_number - 1]
         edges = benchmark_diagram(player)
         datasetobs = C.observational_data[player.round_number - 1][1]
         datasetint = C.interventional_data[player.round_number - 1][1],
