@@ -1141,8 +1141,6 @@ let toggleX = button => {
     freqs.hidden = true;
 
     if (minifuncy(seed) == "X"){var anoth_element = document.getElementById("interv");}
-    if (minifuncx(seed) == "X"){var anoth_element = document.getElementById("intervx");}
-    if (minifuncz(seed) == "X"){var anoth_element = document.getElementById("intervz");}
 
 
     //let anoth_element = document.getElementById("intervx");
@@ -1195,12 +1193,9 @@ let toggleY = button => {
     let hidden2 = element.getAttribute("hidden");
 
 
-    if (minifuncy(seed) == "Y"){var anoth_element = document.getElementById("interv");}
-    if (minifuncx(seed) == "Y"){var anoth_element = document.getElementById("intervx");}
-    if (minifuncz(seed) == "Y"){var anoth_element = document.getElementById("intervz");}
-
-    // let anoth_element = document.getElementById("interv");
+    let anoth_element = document.getElementById("interv");
     let anoth_hidden = anoth_element.getAttribute("hidden");
+
     if (hidden2) {
         element.removeAttribute("hidden");
         anoth_element.setAttribute("hidden","hidden");
@@ -1210,8 +1205,6 @@ let toggleY = button => {
         freqsint.hidden = true;
         freqs.hidden = false;
         document.getElementById("interv").setAttribute("hidden","hidden");
-        document.getElementById("intervx").setAttribute("hidden","hidden");
-        document.getElementById("intervz").setAttribute("hidden","hidden");
 
         ids = document.getElementById('freqs')
         out3 = [$(ids).find('td').eq(1).text(), $(ids).find('td').eq(2).text(),$(ids).find('td').eq(3).text()]
@@ -1267,9 +1260,8 @@ let toggleZ = button => {
     let hidden2 = element.getAttribute("hidden");
     freqsint.hidden = false;
     freqs.hidden = true;
+
     if (minifuncy(seed) == "Z"){var anoth_element = document.getElementById("interv");}
-    if (minifuncx(seed) == "Z"){var anoth_element = document.getElementById("intervx");}
-    if (minifuncz(seed) == "Z"){var anoth_element = document.getElementById("intervz");}
 
     // let anoth_element = document.getElementById("intervz");
     let anoth_hidden = anoth_element.getAttribute("hidden");

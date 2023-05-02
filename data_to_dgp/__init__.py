@@ -161,7 +161,6 @@ class C(BaseConstants):
     # SEEDS = []  # SEEDS contains seed for every round
     # for i in task_sequence:
     #     SEEDS.append(seed[i])
-    print(7)
 
 class Subsession(BaseSubsession):
     pass
@@ -289,7 +288,7 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
             # frequenciesintz=["freq"] + gf.check_frequencies(output[3]),
-            seed=C.seed[player.round_number - 1])
+            seed=C.seed[player.round_number - 1][1])
 
 
 class DiagramTest(Page):
@@ -297,7 +296,7 @@ class DiagramTest(Page):
     def vars_for_template(player):
         output = datatask_output_json(player)
         store_array = json.loads(player.stored)
-        seed = C.seed[player.round_number - 1]
+        seed = C.seed[player.round_number - 1][1]
         edges = benchmark_diagram(player)
         datasetobs = C.observational_data[player.round_number - 1][1]
         datasetint = C.interventional_data[player.round_number - 1][1],
