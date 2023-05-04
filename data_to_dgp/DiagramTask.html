@@ -113,6 +113,8 @@
 
 
 <script>
+
+
                     let seed = js_vars.seed;
                     function minifuncy(number){
                     if (number == 1 || number == 4){return "Z"}
@@ -466,7 +468,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 <br>
 
-<input  id='stored'  name="stored"  >
+<input hidden id='stored'  name="stored" value='[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, {"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]' >
 
 <div> <p class= "lng-confstart">Please choose how confident you are using slider</p> </div>
 <div >
@@ -475,7 +477,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 </div>
 
-<div> Current confidience: <b></b>  <b id="result" class="lng-conflevel"> </b></b>  </div>
+<div style="text-align: center; font-size: 16px; line-height: 0.8"> <p  class="lng-conflevel"> Current confidience:</p> <b id="result"> </b></div>
 <p></p>
 
 <script>
@@ -492,6 +494,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 {{ formfield_errors 'stored' }}
 {{ formfield_errors 'conf_bid' }}
+<br>
 {{ next_button }}
 
 
@@ -510,7 +513,6 @@ observ = document.getElementById('observ');
 interv = document.getElementById('interv');
 intervx = document.getElementById('intervx');
 intervz = document.getElementById('intervz');
-
 
 function crfunc(b1, b2){
   if (b1){return "0";}
@@ -600,11 +602,11 @@ layout.run();
 
 
 
+
 const edge_states = ["",""];
 const edge_colours = ["#ccc","#000"]
 const edge_type = ['dashed','solid' ] 
 const edge_weight = [2,0] 
-
 
 
 cy.on('tap', 'edge', function(evt){
@@ -633,9 +635,8 @@ cy.on('tap', 'edge', function(evt){
 
 function liveRecv(data) {
     console.log(data);
-      forminputs.stored.value = data;
-      //formInputs.trainig.value = data; // for server setting
-
+      //forminputs.stored.value = data;
+      formInputs.stored.value = data; // for server setting
   }
 
 function iterator(array, i) {

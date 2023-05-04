@@ -152,13 +152,13 @@ const langArr = {
     },
 
     "confstart":{
-        "ru": `Используя бегунок укажит, насколько вы уверены в своем ответе`,
+        "ru": `Используя бегунок укажите, насколько вы уверены в своем ответе`,
 
         "en": `Please choose how confident you are using slider`
     },
     "conflevel":{
-        "ru": `текущее значение`,
+        "ru": `Текущее значение:`,
 
-        "en": `Current confidience`
+        "en": `Current confidience:`
     },
 }

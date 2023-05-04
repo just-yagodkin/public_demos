@@ -59,7 +59,7 @@
 </table>
 </div>
 
-<!-- {{ formfield "trainig"  }} -->
+<!-- {{ formfield "training"  }} -->
 
 <br>
 <div >
@@ -72,8 +72,9 @@
   <br />
 </div>
 
-<input  hidden  name="trainig"  />
-{{ formfield_errors 'trainig' }}
+<input  hidden  name="training"  />
+{{ formfield_errors 'training' }}
+<br>
 <div id="cy"></div>
 
 
@@ -195,8 +196,8 @@ cy.on('tap', 'edge', function(evt){
 });
 
 function liveRecv(data) {
-      forminputs.trainig.value = data;
-      //formInputs.trainig.value = data; // for server setting
+      //forminputs.training.value = data;
+      formInputs.training.value = data; // for server setting
       console.log(data)
   }
 
