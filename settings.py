@@ -203,11 +203,10 @@ SESSION_CONFIGS = [
     dict(
         name='AOT',
         display_name="surveys",
-        app_sequence=['AOT', 'MPL', 'bret','payment_info'],
+        app_sequence=['AOT', 'MPL', 'bret', 'payment_info'],
         num_demo_participants=1,
-        
-    ),
 
+    ),
 
     # dict(
     #     name='any_app', 
@@ -239,8 +238,8 @@ SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=3.00, participation
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 
-#LANGUAGE_CODE = 'en'
-LANGUAGE_CODE = 'ru'          #       "," occures....
+# LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'  # "," occures....
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'RUR'
@@ -255,7 +254,6 @@ DEMO_PAGE_TITLE = "Behavecon 2023 Hse "
 
 SECRET_KEY = '4387860144726'
 
-
 ROOMS = [
     dict(
         name='econ101',
@@ -264,7 +262,6 @@ ROOMS = [
     ),
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
 ]
-
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']

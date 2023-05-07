@@ -1,35 +1,33 @@
 {{ block styles }}
 <style>
- .otree-body { 
-    font: 14px helvetica neue, helvetica, arial, sans-serif;
-    max-width:600px
-  }
-  
-  #cy {
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  height: 200px;
-  display: block;
-  }
-  
-  #info {
-    color: #c88;
-    font-size: 2em;
-    width: 800px;
-    height: 200px;
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-  }
+    .otree-body {
+        font: 14px helvetica neue, helvetica, arial, sans-serif;
+        max-width: 600px
+    }
 
+    #cy {
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: 200px;
+        display: block;
+    }
+
+    #info {
+        color: #c88;
+        font-size: 2em;
+        width: 800px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 
 </style>
 
 <head>
 </head>
-
 
 
 {{ endblock }}
@@ -41,177 +39,173 @@
 
 {{ block content }}
 
-<div class = "lang-container" style="text-align:right">
+<div class="lang-container" style="text-align:right">
     <table>
         <col width="81%">
         <col width="19%">
-<tr>
-    <td></td>
-    <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
-    <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
-        <option value="en">Eng</option>
-        <option value="ru">Rus</option>
-    </select>
-    </td>
-</tr>
-</table>
+        <tr>
+            <td></td>
+            <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
+                <link rel="stylesheet"
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+                <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
+                <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+                    <option value="en">Eng</option>
+                    <option value="ru">Rus</option>
+                </select>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <!-- {{ formfield "training"  }} -->
 
 <br>
-<div >
-  <p class="lng-TrText">
-    Lets figure out how to fill the form!
-      Choose (click) the arrows as follows: leave the edge dashed if there is no influence from one variable to another variable and make it solid if there is.
+<div>
+    <p class="lng-TrText">
+        Lets figure out how to fill the form!
+        Choose (click) the arrows as follows: leave the edge dashed if there is no influence from one variable to
+        another variable and make it solid if there is.
         As an example please fill the form for following situation: column Y are dependent from X. Then tap Next.
-  </p>
+    </p>
 
-  <br />
+    <br/>
 </div>
 
-<input  hidden  name="training"  />
+<input hidden name="training"/>
 {{ formfield_errors 'training' }}
 <br>
 <div id="cy"></div>
 
 
-
 {{ next_button }}
 
 
-<script src="{{ static 'global/cytoscape.min.js' }}"> </script>
+<script src="{{ static 'global/cytoscape.min.js' }}"></script>
 
 <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
 
 <script>
     var cy = cytoscape({
-  container: document.getElementById('cy'),
+        container: document.getElementById('cy'),
 
-  boxSelectionEnabled: false,
-  autounselectify: true,
-  wheelSensitivity:0.1,
+        boxSelectionEnabled: false,
+        autounselectify: true,
+        wheelSensitivity: 0.1,
 
-  style: cytoscape.stylesheet()
-
-
-
-    .selector('node')
-      .css({
-        'content': 'data(name)',
-        'text-valign': 'center',
-        'color': 'black',
-        // 'text-outline-width': 2,
-        // 'text-outline-color': undefined,
-        'background-color': '#666'
-      })
-    .selector(':selected')
-      .css({
-        'background-color': 'black',
-        'line-color': 'black',
-        'target-arrow-color': 'black',
-        'source-arrow-color': 'black',
-        'text-outline-color': 'black'
-      })
-    .selector('edge')
-      .css({
-        'width': 2,
-        'line-color': '#ccc',
-        'target-arrow-color': 'black',
-        'target-arrow-shape': 'triangle',
-        'curve-style': 'bezier',
-        'line-style': 'dashed'
-      })
-      .selector('edge[label]')
-      .css({
-        "label": "data(label)",
-        "width": 3
-      })
-      .selector('layout')
-      .css({
-        'name': 'grid',
-        'rows': 1,
-        'cols': 2,
-        'padding': 15,
-      })
-      ,
+        style: cytoscape.stylesheet()
 
 
+            .selector('node')
+            .css({
+                'content': 'data(name)',
+                'text-valign': 'center',
+                'color': 'black',
+                // 'text-outline-width': 2,
+                // 'text-outline-color': undefined,
+                'background-color': '#666'
+            })
+            .selector(':selected')
+            .css({
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'black',
+                'source-arrow-color': 'black',
+                'text-outline-color': 'black'
+            })
+            .selector('edge')
+            .css({
+                'width': 2,
+                'line-color': '#ccc',
+                'target-arrow-color': 'black',
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'bezier',
+                'line-style': 'dashed'
+            })
+            .selector('edge[label]')
+            .css({
+                "label": "data(label)",
+                "width": 3
+            })
+            .selector('layout')
+            .css({
+                'name': 'grid',
+                'rows': 1,
+                'cols': 2,
+                'padding': 15,
+            })
+        ,
 
 
-  elements: {
-    nodes: [
-      // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
-      { data: {counter:0, id: 'X', name: 'X', }, style: { 'background-color': '#c3cec0' } },
-      { data: {counter:0, id: 'Y', name: 'Y', },  style: { 'background-color': '#c3cec0' }},
-      { data: {counter:0, id: 'Z', name: 'Z', },  style: { 'background-color': '#c3cec0' }},
-      // { data: {counter:0, id: 'Z', name: '-', } }
-    ],
-    edges: [
-      { data: {counter:0, weight:0, id: 'XY', source: 'X', target: 'Y', label: ""} },
-      { data: {counter:0, weight:0, id: 'YX', source: 'Y', target: 'X', label: ""} },
-      { data: {counter:0, weight:0, id: 'YZ', source: 'Y', target: 'Z' , label: ""} },
-      { data: {counter:0, weight:0, id: 'XZ', source: 'X', target: 'Z' , label: ""} },
-      { data: {counter:0, weight:0, id: 'ZY', source: 'Z', target: 'Y' , label: ""} },
-      { data: {counter:0, weight:0, id: 'ZX', source: 'Z', target: 'X' , label: ""} },
-      // { data: {counter:0, weight:0, id: 'bc', source: 'Y', target: 'Z', label: "-"} },
-    ]
-  },
+        elements: {
+            nodes: [
+                // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
+                {data: {counter: 0, id: 'X', name: 'X',}, style: {'background-color': '#c3cec0'}},
+                {data: {counter: 0, id: 'Y', name: 'Y',}, style: {'background-color': '#c3cec0'}},
+                {data: {counter: 0, id: 'Z', name: 'Z',}, style: {'background-color': '#c3cec0'}},
+                // { data: {counter:0, id: 'Z', name: '-', } }
+            ],
+            edges: [
+                {data: {counter: 0, weight: 0, id: 'XY', source: 'X', target: 'Y', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'YX', source: 'Y', target: 'X', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'YZ', source: 'Y', target: 'Z', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'XZ', source: 'X', target: 'Z', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'ZY', source: 'Z', target: 'Y', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'ZX', source: 'Z', target: 'X', label: ""}},
+                // { data: {counter:0, weight:0, id: 'bc', source: 'Y', target: 'Z', label: "-"} },
+            ]
+        },
 
 
-});
+    });
 
-var layout = cy.layout({
-  name: 'circle'
-});
+    var layout = cy.layout({
+        name: 'circle'
+    });
 
-layout.run();
+    layout.run();
 
-const edge_states = ["",""];
-const edge_colours = ["#ccc","#000"]
-const edge_type = ['dashed','solid' ]
-const edge_weight = [2,0]
-
-
-
-cy.on('tap', 'edge', function(evt){
-  var ele = evt.target;
-  var edges = cy.edges();
-  var form_data = [];
-  // console.log(iterator(numbers, ele.data('counter'))[0] );
-  ele.data('label', iterator(edge_states, ele.data('counter'))[0]);
-  ele.data('counter', iterator(edge_states, ele.data('counter'))[1]);
-  ele.data('weight', iterator(edge_weight, ele.data('counter'))[0]);
-  ele.style('line-style', edge_type[ele.data('counter')] );
-  ele.style('line-color', edge_colours[ele.data('counter')] );
-  for (var i = 0; i < edges.length; i++) {
-    form_data.push(edges[i]._private.data);
-  }
-  console.log(form_data);
-  liveSend(form_data);
-  // sendValue(form_data)
-  form_data = [];
-});
-
-function liveRecv(data) {
-      //forminputs.training.value = data;
-      formInputs.training.value = data; // for server setting
-      console.log(data)
-  }
+    const edge_states = ["", ""];
+    const edge_colours = ["#ccc", "#000"]
+    const edge_type = ['dashed', 'solid']
+    const edge_weight = [2, 0]
 
 
+    cy.on('tap', 'edge', function (evt) {
+        var ele = evt.target;
+        var edges = cy.edges();
+        var form_data = [];
+        // console.log(iterator(numbers, ele.data('counter'))[0] );
+        ele.data('label', iterator(edge_states, ele.data('counter'))[0]);
+        ele.data('counter', iterator(edge_states, ele.data('counter'))[1]);
+        ele.data('weight', iterator(edge_weight, ele.data('counter'))[0]);
+        ele.style('line-style', edge_type[ele.data('counter')]);
+        ele.style('line-color', edge_colours[ele.data('counter')]);
+        for (var i = 0; i < edges.length; i++) {
+            form_data.push(edges[i]._private.data);
+        }
+        console.log(form_data);
+        liveSend(form_data);
+        // sendValue(form_data)
+        form_data = [];
+    });
 
-function iterator(array, i) {
-  var index=(i+1)% array.length;
-  var value = array[index];
+    function liveRecv(data) {
+        //forminputs.training.value = data;
+        formInputs.training.value = data; // for server setting
+        console.log(data)
+    }
 
-    return [value, index];
-  };
+
+    function iterator(array, i) {
+        var index = (i + 1) % array.length;
+        var value = array[index];
+
+        return [value, index];
+    };
 </script>
 
 <script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
-  {{ endblock }}
+{{ endblock }}

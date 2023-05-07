@@ -461,9 +461,9 @@ def tanc(lst: str):
                 {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""},
                 {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""},
                 {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]) or \
-        (lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
-            {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
-            {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]):
+            (lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
+                     {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
+                     {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]):
         return True  # That's for the case when there are no edges :(
 
     for dictionary in lst:

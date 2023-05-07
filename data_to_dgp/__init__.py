@@ -28,6 +28,8 @@ class C(BaseConstants):
     task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
                      'twolinks', 'collider1', "threelinks", "fork"]
 
+    # task_sequence = ["nolinks", 'onelink']
+
     seed = [[x, random.randint(0, 5)] for x in task_sequence]
 
     # seed = {'collider1': COLLIDER1SEED,
@@ -139,6 +141,9 @@ class C(BaseConstants):
     #                                      THREELINKSSEED)
     # }
 
+    if len(task_sequence) < NUM_ROUNDS:
+        NUM_ROUNDS = len(task_sequence)
+
     observational_data = gf.reshuffle(preobservational_data)
 
     interventional_data = gf.reshuffle(preinterventional_data)
@@ -174,6 +179,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    # accuracies = [0]*C.NUM_ROUNDS
+    ## accuracies = [0] * len(C.task_sequence)
     stored = models.StringField(initial=json.dumps(
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
@@ -187,6 +194,26 @@ class Player(BasePlayer):
     def conf_bid_error_message(player, value):
         print('value is', value)
         return 'not an option'
+
+    feedback = models.StringField(label="Любая обратная связь")
+
+    Aot_1 = models.IntegerField(
+        min=1, max=5,
+        choices=[1, 2, 3, 4, 5],
+        label='Сегодня хорошая погода',
+        widget=widgets.RadioSelectHorizontal)
+
+    Aot_2 = models.IntegerField(
+        min=1, max=5,
+        choices=[1, 2, 3, 4, 5],
+        label='Вы хорошо себя чувствуете',
+        widget=widgets.RadioSelectHorizontal)
+
+    Aot_3 = models.IntegerField(
+        min=1, max=5,
+        choices=[1, 2, 3, 4, 5],
+        label='Вам нравится проводить время на свежем воздухе',
+        widget=widgets.RadioSelectHorizontal)
 
 
 # Functions
@@ -257,19 +284,19 @@ class DiagramTask(Page):
 
     def live_method(player, data):
         player.stored = json.dumps(data)
-        print(player.stored, type(player.stored))
-        print(gf.tanc(player.stored))
+        # print(player.stored, type(player.stored))
+        # print(gf.tanc(player.stored))
         return {1: player.stored}
 
     def error_message(player, values):
-        print(player.stored)
+
         values['stored'] = gf.tanc(player.stored)
         solutions = dict(
             stored=True,
             conf_bid=values['conf_bid']
         )
-        print(values)
-        print(solutions)
+        # print(values)
+        # print(solutions)
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
@@ -327,14 +354,23 @@ class DiagramTest(Page):
         datasetint = C.interventional_data[player.round_number - 1][1],
         # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
+
+        player.payoff = cu(
+            gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
+
+        ##player.accuracies[player.round_number - 1] = cu(
+        ##    gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
                   f'User did not set cycles: {gf.tanc(store_array)}',
                   f'User chose {gf.userschoice(store_array)}',
                   f'DGP was {gf.dgpchoice(edges)}',
                   f'Penalty is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
-                  f"User's score is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
-                  f'The seed is {seed}'])
+                  f"User's score for the round is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
+                  ##f"Total user's score is {sum(player.accuracies)}",
+                  f"Total user's score is {player.participant.payoff}",
+                  f'The seed is {seed}']
+        )
 
     @staticmethod
     def js_vars(player):
@@ -359,6 +395,16 @@ class DiagramTest(Page):
         )
 
 
+class Questionnaire(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
+
+    form_model = 'player'
+    form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
+
+
 class ResultsWaitPage(WaitPage):
     pass
 
@@ -368,6 +414,6 @@ class Results(Page):
 
 
 if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest]
+    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Questionnaire]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest]
+    page_sequence = [Instruction, DiagramTask, DiagramTest, Questionnaire]
