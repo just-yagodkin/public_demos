@@ -2,6 +2,7 @@ from otree.api import *
 import goodfunctions as gf
 import random
 import json
+import ast
 
 doc = """
 Your app description
@@ -9,8 +10,9 @@ Your app description
 
 
 class C(BaseConstants):
-    training = False
+    training = True
     NUM_ROUNDS = 9
+    SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
@@ -24,8 +26,11 @@ class C(BaseConstants):
 
     conf_range = range(101)
 
-    task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink', 'twolinks', 'collider1',"threelinks", "fork" ]
-   
+    task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
+                     'twolinks', 'collider1', "threelinks", "fork"]
+
+    # task_sequence = ["nolinks", 'onelink']
+
     seed = [[x, random.randint(0, 5)] for x in task_sequence]
 
     # seed = {'collider1': COLLIDER1SEED,
@@ -35,27 +40,26 @@ class C(BaseConstants):
     #         'fork': FORKSEED,
     #         'threelinks': THREELINKSSEED
     #         }
-# gf.smartedgesinterv([],int(SEED))
+    # gf.smartedgesinterv([],int(SEED))
     pre_data_edges = {'nolinks': [False],
-                  'onelink': [
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}],
-                  'twolinks': [
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}],
-                  'collider1': [
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}],
-                  'fork': [
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'YX', 'source': 'Y', 'target': 'X', 'label': ""}},
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}],
-                  'threelinks': [
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
-                      {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}],
-                  }
-    
+                      'onelink': [
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}],
+                      'twolinks': [
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}],
+                      'collider1': [
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}],
+                      'fork': [
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'YX', 'source': 'Y', 'target': 'X', 'label': ""}},
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}],
+                      'threelinks': [
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
+                          {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}],
+                      }
 
-    data_edges = [gf.smartedgesinterv(gf.pre_data_edges[x[0]],x[1]) for x in  seed]
+    data_edges = [gf.smartedgesinterv(gf.pre_data_edges[x[0]], x[1]) for x in seed]
 
     original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -76,27 +80,27 @@ class C(BaseConstants):
                                     'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
                                     'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
                      }
-# gf.smartdatainterv(
+    # gf.smartdatainterv(
     pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                            'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                                            'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                             'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                            'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                            'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},        
-                             'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-                                                             'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                             'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},                    
-                             'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                              'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                              'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},           
-                             'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-                                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                         'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
-                             'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                               'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                               'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                             }
-    preobservational_data=[[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]],x[1])] for x in  seed]
+                                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                                 'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                             'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                             'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+                                 'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+                                              'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                              'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
+                                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                                 'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                          'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
+                                 'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+                                 }
+    preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
 
     # X -> Y ->
     # |       |
@@ -113,7 +117,8 @@ class C(BaseConstants):
     #                                      THREELINKSSEED)
     # }
 
-    preinterventional_data = [[x[0],gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in seed]
+    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
+                              seed]
 
     # preinterventionalx_data = {  # INTERVENTION ON X
     #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'x'), NOLINKSSEED),
@@ -136,6 +141,11 @@ class C(BaseConstants):
     #     'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'z'),
     #                                      THREELINKSSEED)
     # }
+
+    if len(task_sequence) < NUM_ROUNDS:
+        NUM_ROUNDS = len(task_sequence)
+
+    edge = NUM_ROUNDS * SHOWING_INFORMATION_EDGE
 
     observational_data = gf.reshuffle(preobservational_data)
 
@@ -161,7 +171,7 @@ class C(BaseConstants):
     # SEEDS = []  # SEEDS contains seed for every round
     # for i in task_sequence:
     #     SEEDS.append(seed[i])
- 
+
 
 class Subsession(BaseSubsession):
     pass
@@ -172,19 +182,42 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    # accuracies = [0]*C.NUM_ROUNDS
+    ## accuracies = [0] * len(C.task_sequence)
     stored = models.StringField(initial=json.dumps(
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
-    trainig = models.IntegerField()
+    training = models.IntegerField()
     conf_bid = models.IntegerField(initial=-1,
                                    choices=[i for i in C.conf_range],
                                    # widget=widgets.RadioSelect,
                                    )
+    buttons = models.StringField()
 
     def conf_bid_error_message(player, value):
         print('value is', value)
         return 'not an option'
+
+    feedback = models.StringField(label="Любая обратная связь")
+
+    Aot_1 = models.IntegerField(
+        min=1, max=5,
+        choices=[1, 2, 3, 4, 5],
+        label='Сегодня хорошая погода',
+        widget=widgets.RadioSelectHorizontal)
+
+    Aot_2 = models.IntegerField(
+        min=1, max=5,
+        choices=[1, 2, 3, 4, 5],
+        label='Вы хорошо себя чувствуете',
+        widget=widgets.RadioSelectHorizontal)
+
+    Aot_3 = models.IntegerField(
+        min=1, max=5,
+        choices=[1, 2, 3, 4, 5],
+        label='Вам нравится проводить время на свежем воздухе',
+        widget=widgets.RadioSelectHorizontal)
 
 
 # Functions
@@ -192,8 +225,8 @@ def datatask_output_json(player: Player):
     num_round = player.round_number - 1
     target_key = C.task_sequence[num_round]
     target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1],
-                        #  C.interventionalx_data[target_key],
-                        #  C.interventionalz_data[target_key]
+                         #  C.interventionalx_data[target_key],
+                         #  C.interventionalz_data[target_key]
                          ]
     return target_vocabulary
 
@@ -219,51 +252,63 @@ class Instruction(Page):
 
 class Training(Page):
     form_model = 'player'
-    form_fields = ['trainig']
+    form_fields = ['training']
 
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
 
     def live_method(player, data):
-        player.trainig = json.loads(json.dumps(data))[0]["counter"]
-        return {1: player.trainig}
-        # json.loads(player.trainig)[0]["counter"]
+        newdata = [data[0]["counter"], data[1]["counter"], data[2]["counter"], data[3]["counter"], data[4]["counter"],
+                   data[5]["counter"]]  ###
+        # 0pos: X -> Y
+        # 1pos: Y -> X
+        # 2pos: Y -> Z
+        # 3pos: X -> Z
+        # 4pos: Z -> Y
+        # 5pos: Z -> X
 
-    # def trainig_error_message(player, value):
-    #     if value != 1:
-    #         return 'Wrong answer'
+        player.training = int((newdata == [1, 0, 0, 0, 0, 0]))  ###  int(TRUE) if X -> Y
+        return {1: player.training}
 
     def error_message(player, values):
         solutions = dict(
-            trainig=1,
+            training=1,
         )
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
-                error_messages[field_name] = 'Incorrect report'
+                error_messages[field_name] = 'Форма заполнена неверно'
         return error_messages
 
 
 class DiagramTask(Page):
     form_model = 'player'
-    form_fields = ['conf_bid', 'stored']
+    form_fields = ['conf_bid', 'stored', 'buttons']
 
     def live_method(player, data):
-        # player.stored = str(1)
         player.stored = json.dumps(data)
-        # print(json.loads(json.dumps(data))[0]["counter"])
-        return {1: json.loads(json.dumps(data))[1]["counter"]}
-
+        # print(player.stored, type(player.stored))
+        # print(gf.tanc(player.stored))
+        return {1: player.stored}
 
     def error_message(player, values):
+
+        values['stored'] = gf.tanc(player.stored)
         solutions = dict(
-            stored=1,
+            stored=True,
+            conf_bid=values['conf_bid'],
+            buttons=values['buttons']
         )
+        #print(values)
+        #print(solutions)
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
-                error_messages[field_name] = 'Incorrect report'
+                error_messages[field_name] = 'В форме присутствует цикл'
+                player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, {"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
+                player.buttons = values['buttons']
+                #print(player.buttons, type(player.buttons))
         return error_messages
 
     @staticmethod
@@ -284,10 +329,41 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
             # frequenciesintz=["freq"] + gf.check_frequencies(output[3])
-            )
+        )
 
     @staticmethod
     def js_vars(player):
+        # if DiagramTask.flag == 1:
+        #     xfilterclick = player.buttons[0]
+        #     x0filterclick = player.buttons[1]
+        #     yfilterclick = player.buttons[2]
+        #     y0filterclick = player.buttons[3]
+        #     zfilterclick = player.buttons[4]
+        #     z0filterclick = player.buttons[5]
+        #     xifilterclick = player.buttons[6]
+        #     x0ifilterclick = player.buttons[7]
+        #     yifilterclick = player.buttons[8]
+        #     y0ifilterclick = player.buttons[9]
+        #     zifilterclick = player.buttons[10]
+        #     z0ifilterclick = player.buttons[11]
+        #     showintclick = player.buttons[12]
+        #     showobsclick = player.buttons[13]
+        # else:
+        #     xfilterclick = 0
+        #     x0filterclick = 0
+        #     yfilterclick = 0
+        #     y0filterclick = 0
+        #     zfilterclick = 0
+        #     z0filterclick = 0
+        #     xifilterclick = 0
+        #     x0ifilterclick = 0
+        #     yifilterclick = 0
+        #     y0ifilterclick = 0
+        #     zifilterclick = 0
+        #     z0ifilterclick = 0
+        #     showintclick = 0
+        #     showobsclick = 0
+        # DiagramTask.flag = 0
         output = datatask_output_json(player)
         return dict(
             datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
@@ -302,28 +378,60 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
             # frequenciesintz=["freq"] + gf.check_frequencies(output[3]),
-            seed=C.seed[player.round_number - 1])
+            seed=C.seed[player.round_number - 1][1],
+            # xfilterclick=xfilterclick,
+            # x0filterclick=x0filterclick,
+            # yfilterclick=yfilterclick,
+            # y0filterclick=y0filterclick,
+            # zfilterclick=zfilterclick,
+            # z0filterclick=z0filterclick,
+            # xifilterclick=xifilterclick,
+            # x0ifilterclick=x0ifilterclick,
+            # yifilterclick=yifilterclick,
+            # y0ifilterclick=y0ifilterclick,
+            # zifilterclick=zifilterclick,
+            # z0ifilterclick=z0ifilterclick,
+            # showintclick=showintclick,
+            # showobsclick=showobsclick
+        )
 
 
 class DiagramTest(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number >= C.edge
+
     @staticmethod
     def vars_for_template(player):
         output = datatask_output_json(player)
-        store_array = json.loads(player.stored)
-        seed = C.seed[player.round_number - 1]
+        store_array = player.stored
+        seed = C.seed[player.round_number - 1][1]
         edges = benchmark_diagram(player)
         datasetobs = C.observational_data[player.round_number - 1][1]
         datasetint = C.interventional_data[player.round_number - 1][1],
+        buttons_were_clicked = json.loads(player.buttons)
         # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
+
+        player.payoff = cu(
+            gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
+
+        ##player.accuracies[player.round_number - 1] = cu(
+        ##    gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
                   f'User did not set cycles: {gf.tanc(store_array)}',
                   f'User chose {gf.userschoice(store_array)}',
                   f'DGP was {gf.dgpchoice(edges)}',
                   f'Penalty is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
-                  f"User's score is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
-                  f'The seed is {seed}'])
+                  f"User's score for the round is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
+                  ##f"Total user's score is {sum(player.accuracies)}",
+                  f"Total user's score is {player.participant.payoff}",
+                  f'The seed is {seed}',
+                  #f'Buttons were clicked {buttons_were_clicked}'
+            ]
+        )
 
     @staticmethod
     def js_vars(player):
@@ -348,6 +456,16 @@ class DiagramTest(Page):
         )
 
 
+class Questionnaire(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
+
+    form_model = 'player'
+    form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
+
+
 class ResultsWaitPage(WaitPage):
     pass
 
@@ -357,6 +475,6 @@ class Results(Page):
 
 
 if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest]
+    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Questionnaire]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest]
+    page_sequence = [Instruction, DiagramTask, DiagramTest, Questionnaire]

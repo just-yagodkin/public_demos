@@ -1,4 +1,5 @@
 import random as rm
+import ast
 
 
 def create_list_from_freq(freq, size=16):
@@ -6,6 +7,7 @@ def create_list_from_freq(freq, size=16):
     ones = [1 if i < num else 0 for i in range(size)]
     rm.shuffle(ones)
     return ones
+
 
 pre_data_edges = {'nolinks': [False],
                   'onelink': [
@@ -24,50 +26,46 @@ pre_data_edges = {'nolinks': [False],
                       {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
                       {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}],
                   }
-    
-
-
 
 original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                 'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                     'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                 'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                     'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-                                  'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                  'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
-                     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                     'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-                              'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                              'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
-                     'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                    'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                    'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                     }
+                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                 'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                             'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                             'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+                 'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+                              'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                              'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
+                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                 'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                          'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
+                 'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+                 }
 # gf.smartdatainterv(
 pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                            'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                                            'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                                         'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                                         'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
                              'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                            'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                            'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},        
+                                         'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                         'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
                              'twolinks': {'x': [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-                                                             'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                             'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},                    
+                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                          'z': [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]},
                              'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                              'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                              'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},           
+                                           'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
                              'fork': {'x': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-                                                         'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                         'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
+                                      'y': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                      'z': [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]},
                              'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                               'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                               'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+                                            'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                            'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
                              }
-
 
 d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -191,6 +189,7 @@ def check_dependencies(dictionary: dict):
 def reshuffle(list):
     new_list = list.copy()
     return [[x[0], shuffle_coloumns(x[1])] for x in new_list]
+
 
 def reshuffleold(dictionary: dict):
     new_dict = dictionary.copy()
@@ -337,14 +336,13 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             else:
                 x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
                 z = [0] * length
-        #elif key == 'threelinks':
+        # elif key == 'threelinks':
         #    if fixed == 1:
         #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
         #        z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
         #    else:
         #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
         #        z = [0] * length
-
 
         elif key == 'fork':
             if fixed == 1:
@@ -382,7 +380,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 print("Don't use zero!! PLS!")
                 pass
 
-        elif key == 'threelinks':           # NEED TO CHECK...
+        elif key == 'threelinks':  # NEED TO CHECK...
             if fixed == 1:
                 x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
                 z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -438,7 +436,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             x = dictionary[st[0]].copy()
             z = dictionary[st[1]].copy()
 
-        if key == 'fork' or key == "threelinks":    # NEED TO CHECK threelinks
+        if key == 'fork' or key == "threelinks":  # NEED TO CHECK threelinks
             z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
             x = dictionary[st[0]].copy()
 
@@ -453,12 +451,19 @@ def revstring(string: str):
     return temp[::-1]
 
 
-def tanc(lst: list):
+def tanc(lst: str):
+    lst = ast.literal_eval(lst)
     temp = list()
 
-    if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
-               {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
-               {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]:
+    if (lst == [{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""},
+                {"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""},
+                {"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""},
+                {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""},
+                {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""},
+                {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]) or \
+            (lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
+                     {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
+                     {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]):
         return True  # That's for the case when there are no edges :(
 
     for dictionary in lst:
@@ -552,7 +557,9 @@ def minifunc(number):  # where Y will be.      Optional!
     if number == 2 or number == 3:
         return "X"
 
-def userschoice(lst: list):     # lst is a user's form
+
+def userschoice(lst: str):  # lst is a user's form
+    lst = ast.literal_eval(lst)
     temp = list()
 
     if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
@@ -566,7 +573,8 @@ def userschoice(lst: list):     # lst is a user's form
 
     return temp
 
-def dgpchoice(lst: list):     # lst is an original form
+
+def dgpchoice(lst: list):  # lst is an original form
     temp = list()
 
     if lst == [False]:
@@ -577,15 +585,15 @@ def dgpchoice(lst: list):     # lst is an original form
 
     return temp
 
+
 def fine(user: list, dgp: list):
     penalty = 0
 
-
     for str in user:
         if str not in dgp:
-            if revstring(str) not in dgp:   # user set an edge which is not in original data
-               penalty += 3.25
-            else:                           # user set an edge with wrong direction
+            if revstring(str) not in dgp:  # user set an edge which is not in original data
+                penalty += 3.25
+            else:  # user set an edge with wrong direction
                 penalty += 1
 
     for str in dgp:
@@ -596,8 +604,10 @@ def fine(user: list, dgp: list):
 
     return penalty
 
+
 def accuracy(num):
-    return 10-num
+    return 10 - num
+
 
 ###----- TESTS -----###
 
