@@ -195,6 +195,10 @@ class Player(BasePlayer):
                                    )
     buttons = models.StringField()
 
+    buttons_before_err = models.StringField()
+
+    cycle_err = models.IntegerField(initial=1)
+
     def conf_bid_error_message(player, value):
         print('value is', value)
         return 'not an option'
@@ -293,7 +297,7 @@ class DiagramTask(Page):
         return {1: player.stored}
 
     def error_message(player, values):
-
+        
         values['stored'] = gf.tanc(player.stored)
         solutions = dict(
             stored=True,
@@ -307,7 +311,11 @@ class DiagramTask(Page):
             if values[field_name] != solutions[field_name]:
                 error_messages[field_name] = 'В форме присутствует цикл'
                 player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, {"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
-                player.buttons = values['buttons']
+                if player.cycle_err:
+
+                    player.buttons_before_err = values['buttons']
+                player.cycle_err = 0
+                
                 #print(player.buttons, type(player.buttons))
         return error_messages
 
