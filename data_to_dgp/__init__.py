@@ -12,6 +12,7 @@ Your app description
 class C(BaseConstants):
     training = True
     NUM_ROUNDS = 9
+    SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
@@ -144,6 +145,8 @@ class C(BaseConstants):
     if len(task_sequence) < NUM_ROUNDS:
         NUM_ROUNDS = len(task_sequence)
 
+    edge = NUM_ROUNDS * SHOWING_INFORMATION_EDGE
+
     observational_data = gf.reshuffle(preobservational_data)
 
     interventional_data = gf.reshuffle(preinterventional_data)
@@ -190,6 +193,7 @@ class Player(BasePlayer):
                                    choices=[i for i in C.conf_range],
                                    # widget=widgets.RadioSelect,
                                    )
+    buttons = models.StringField()
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -280,7 +284,7 @@ class Training(Page):
 
 class DiagramTask(Page):
     form_model = 'player'
-    form_fields = ['conf_bid', 'stored']
+    form_fields = ['conf_bid', 'stored', 'buttons']
 
     def live_method(player, data):
         player.stored = json.dumps(data)
@@ -293,15 +297,18 @@ class DiagramTask(Page):
         values['stored'] = gf.tanc(player.stored)
         solutions = dict(
             stored=True,
-            conf_bid=values['conf_bid']
+            conf_bid=values['conf_bid'],
+            buttons=values['buttons']
         )
-        # print(values)
-        # print(solutions)
+        #print(values)
+        #print(solutions)
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[field_name] = 'В форме присутствует цикл'
                 player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, {"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
+                player.buttons = values['buttons']
+                #print(player.buttons, type(player.buttons))
         return error_messages
 
     @staticmethod
@@ -326,6 +333,37 @@ class DiagramTask(Page):
 
     @staticmethod
     def js_vars(player):
+        # if DiagramTask.flag == 1:
+        #     xfilterclick = player.buttons[0]
+        #     x0filterclick = player.buttons[1]
+        #     yfilterclick = player.buttons[2]
+        #     y0filterclick = player.buttons[3]
+        #     zfilterclick = player.buttons[4]
+        #     z0filterclick = player.buttons[5]
+        #     xifilterclick = player.buttons[6]
+        #     x0ifilterclick = player.buttons[7]
+        #     yifilterclick = player.buttons[8]
+        #     y0ifilterclick = player.buttons[9]
+        #     zifilterclick = player.buttons[10]
+        #     z0ifilterclick = player.buttons[11]
+        #     showintclick = player.buttons[12]
+        #     showobsclick = player.buttons[13]
+        # else:
+        #     xfilterclick = 0
+        #     x0filterclick = 0
+        #     yfilterclick = 0
+        #     y0filterclick = 0
+        #     zfilterclick = 0
+        #     z0filterclick = 0
+        #     xifilterclick = 0
+        #     x0ifilterclick = 0
+        #     yifilterclick = 0
+        #     y0ifilterclick = 0
+        #     zifilterclick = 0
+        #     z0ifilterclick = 0
+        #     showintclick = 0
+        #     showobsclick = 0
+        # DiagramTask.flag = 0
         output = datatask_output_json(player)
         return dict(
             datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
@@ -340,10 +378,30 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
             # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
             # frequenciesintz=["freq"] + gf.check_frequencies(output[3]),
-            seed=C.seed[player.round_number - 1][1])
+            seed=C.seed[player.round_number - 1][1],
+            # xfilterclick=xfilterclick,
+            # x0filterclick=x0filterclick,
+            # yfilterclick=yfilterclick,
+            # y0filterclick=y0filterclick,
+            # zfilterclick=zfilterclick,
+            # z0filterclick=z0filterclick,
+            # xifilterclick=xifilterclick,
+            # x0ifilterclick=x0ifilterclick,
+            # yifilterclick=yifilterclick,
+            # y0ifilterclick=y0ifilterclick,
+            # zifilterclick=zifilterclick,
+            # z0ifilterclick=z0ifilterclick,
+            # showintclick=showintclick,
+            # showobsclick=showobsclick
+        )
 
 
 class DiagramTest(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number >= C.edge
+
     @staticmethod
     def vars_for_template(player):
         output = datatask_output_json(player)
@@ -352,6 +410,7 @@ class DiagramTest(Page):
         edges = benchmark_diagram(player)
         datasetobs = C.observational_data[player.round_number - 1][1]
         datasetint = C.interventional_data[player.round_number - 1][1],
+        buttons_were_clicked = json.loads(player.buttons)
         # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
 
@@ -369,7 +428,9 @@ class DiagramTest(Page):
                   f"User's score for the round is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
                   ##f"Total user's score is {sum(player.accuracies)}",
                   f"Total user's score is {player.participant.payoff}",
-                  f'The seed is {seed}']
+                  f'The seed is {seed}',
+                  #f'Buttons were clicked {buttons_were_clicked}'
+            ]
         )
 
     @staticmethod

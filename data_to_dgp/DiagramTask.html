@@ -116,6 +116,21 @@
                 <script>
 
 
+                    let xfilterclick = js_vars.xfilterclick || 0;
+                    let x0filterclick = js_vars.x0filterclick || 0;
+                    let yfilterclick = js_vars.yfilterclick || 0;
+                    let y0filterclick = js_vars.y0filterclick || 0;
+                    let zfilterclick = js_vars.zfilterclick || 0;
+                    let z0filterclick = js_vars.z0filterclick || 0;
+                    let xifilterclick = js_vars.xifilterclick || 0;
+                    let x0ifilterclick = js_vars.x0ifilterclick || 0;
+                    let yifilterclick = js_vars.yifilterclick || 0;
+                    let y0ifilterclick = js_vars.y0ifilterclick || 0;
+                    let zifilterclick = js_vars.zifilterclick || 0;
+                    let z0ifilterclick = js_vars.z0ifilterclick || 0;
+                    let showintclick = js_vars.showintclick || 0;
+                    let showobsclick = js_vars.showobsclick || 0;
+
                     let seed = js_vars.seed;
 
                     function minifuncy(number) {
@@ -534,6 +549,10 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         id="result"> </b></div>
 <p></p>
 
+<input id='buttons' name="buttons"
+       value='[0,0,0,0,0,0,0,0,0,0,0,0,0,0]'>
+
+
 <script>
     $(document).ready(function () {
         // Read value on page load
@@ -548,6 +567,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 {{ formfield_errors 'stored' }}
 {{ formfield_errors 'conf_bid' }}
+{{ formfield_errors 'buttons' }}
 <br>
 {{ next_button }}
 
@@ -567,6 +587,23 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     interv = document.getElementById('interv');
     intervx = document.getElementById('intervx');
     intervz = document.getElementById('intervz');
+
+    function refresh_values_in_buttons() {
+        document.getElementById('buttons').value = "[" + xfilterclick +
+        "," + x0filterclick +
+        "," + yfilterclick +
+        "," + y0filterclick +
+        "," + zfilterclick +
+        "," + z0filterclick +
+        "," + xifilterclick +
+        "," + x0ifilterclick +
+        "," + yifilterclick +
+        "," + y0ifilterclick +
+        "," + zifilterclick +
+        "," + z0ifilterclick +
+        "," + showintclick +
+        "," + showobsclick + "]"
+    }
 
     function crfunc(b1, b2) {
         if (b1) {
@@ -720,6 +757,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                xfilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable tr').hide();
@@ -765,6 +804,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                x0filterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable tr').hide();
@@ -810,6 +851,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                yfilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable tr').hide();
@@ -855,6 +898,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                y0filterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable tr').hide();
@@ -900,6 +945,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                zfilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable tr').hide();
@@ -945,6 +992,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                z0filterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable tr').hide();
@@ -996,6 +1045,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                xifilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable2 tr').hide();
@@ -1041,6 +1092,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                x0ifilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable2 tr').hide();
@@ -1085,6 +1138,9 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                yifilterclick += 1;
+                refresh_values_in_buttons();
+
                 if (this.checked) {
                     $('.searchable2 tr').hide();
                     document.getElementById('filtery0_i').checked = false;
@@ -1128,6 +1184,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                y0ifilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable2 tr').hide();
@@ -1173,6 +1231,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                zifilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable2 tr').hide();
@@ -1218,6 +1278,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                 var out = [];
                 var tab = 0;
                 var filt_cut = 0;
+                z0ifilterclick += 1;
+                refresh_values_in_buttons();
 
                 if (this.checked) {
                     $('.searchable2 tr').hide();
@@ -1277,6 +1339,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         let anoth_hidden = anoth_element.getAttribute("hidden");
 
         if (hidden2) {
+            showobsclick += 1;
+            refresh_values_in_buttons();
             element.removeAttribute("hidden");
             anoth_element.setAttribute("hidden", "hidden");
             button.innerText = 'Force X=1 (DO X)';
@@ -1293,6 +1357,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             }
 ///////
         } else {
+            showintclick += 1;
+            refresh_values_in_buttons();
             anoth_element.removeAttribute("hidden");
             element.setAttribute("hidden", "hidden");
             button.innerText = "Show Observational";
@@ -1323,6 +1389,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         let anoth_hidden = anoth_element.getAttribute("hidden");
 
         if (hidden2) {
+            showobsclick += 1;
+            refresh_values_in_buttons();
             element.removeAttribute("hidden");
             anoth_element.setAttribute("hidden", "hidden");
             button.innerText = 'Force Y=1 (DO Y)';
@@ -1357,6 +1425,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             }
 ///////
         } else {
+            showintclick += 1;
+            refresh_values_in_buttons();
             freqsint.hidden = false;
             freqs.hidden = true;
             anoth_element.removeAttribute("hidden");
@@ -1391,6 +1461,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         // let anoth_element = document.getElementById("intervz");
         let anoth_hidden = anoth_element.getAttribute("hidden");
         if (hidden2) {
+            showobsclick += 1;
+            refresh_values_in_buttons();
             element.removeAttribute("hidden");
             anoth_element.setAttribute("hidden", "hidden");
             button.innerText = 'Force Z=1 (DO Z)';
@@ -1407,6 +1479,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             }
 ///////
         } else {
+            showintclick += 1;
+            refresh_values_in_buttons();
             anoth_element.removeAttribute("hidden");
             element.setAttribute("hidden", "hidden");
             button.innerText = "Show Observational";
