@@ -1,10 +1,20 @@
 {{ block title }}
-    Page title
+Page title
 {{ endblock }}
 
 {{ block content }}
+<script>
+    let score = js_vars.playerscore;
+</script>
 
-    {{ next_button }}
+<div id="someid">
+</div>
+
+<script>
+    document.getElementById("someid").write(score)
+</script>
+
+{{ next_button }}
 {{ endblock }}
 
 

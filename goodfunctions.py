@@ -606,7 +606,8 @@ def fine(user: list, dgp: list):
 
 
 def accuracy(num):
-    return 10 - num
+    # accuracy is from 0 to 1
+    return (10 - num)*0.1
 
 
 ###----- TESTS -----###
