@@ -11,7 +11,7 @@ Your app description
 
 class C(BaseConstants):
     training = False
-    NUM_ROUNDS = 3
+    NUM_ROUNDS = 2
     SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
@@ -169,7 +169,7 @@ class Player(BasePlayer):
 
     buttons_before_err = models.StringField()
 
-    score = models.FloatField()
+    score = models.FloatField(initial=0)
 
     accuracy = models.FloatField()
 
@@ -352,6 +352,16 @@ class DiagramTest(Page):
         player.payoff = cu(
             gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
 
+        # a = player.in_round(1).score
+        #
+        # b = player.in_round(2).score
+        #
+        # c = player.in_round(3).score
+
+
+        #a = player.round_number
+
+
         ##player.accuracies[player.round_number - 1] = cu(
         ##    gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
         return dict(
@@ -410,9 +420,20 @@ class Results(Page):
         return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
 
     @staticmethod
+    def vars_for_template(player):
+
+        return dict(
+            ekey=[
+                f"player's score in the first round {player.in_round(1).score}",
+                f"player's score in the second round {player.in_round(2).score}",
+                  ]
+        )
+
+    @staticmethod
     def js_vars(player):
         return dict(
-            playerscore=player.score,
+            playerscore1=player.in_round(1).score,
+            playerscore2=player.in_round(2).score,
         )
 
 

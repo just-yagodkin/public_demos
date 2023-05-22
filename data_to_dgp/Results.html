@@ -4,14 +4,14 @@ Page title
 
 {{ block content }}
 <script>
-    let score = js_vars.playerscore;
+    let score1 = js_vars.playerscore1;
+    let score2 = js_vars.playerscore2;
 </script>
 
-<div id="someid">
-</div>
+<div id="someid"></div>
 
 <script>
-    document.getElementById("someid").write(score)
+    document.getElementById("someid").value(score1)
 </script>
 
 {{ next_button }}
