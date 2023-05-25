@@ -296,7 +296,7 @@ class DiagramTest(Page):
         datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
         return dict(
-            ekey=[C.task_sequence, gf.tanc(store_array), seed])
+            ekey=[C.task_sequence, gf.tancold(store_array), seed])
 
     @staticmethod
     def js_vars(player):

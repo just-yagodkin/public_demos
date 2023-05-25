@@ -451,6 +451,27 @@ def revstring(string: str):
     return temp[::-1]
 
 
+def tancold(lst: list):
+    temp = list()
+
+    if lst == [{'data': {'counter': 0, 'id': 'X', 'name': 'X'}, 'style': {'background-color': '#c3cec0'}},
+               {'data': {'counter': 0, 'id': 'Y', 'name': 'Y'}, 'style': {'background-color': '#c3cec0'}},
+               {'data': {'counter': 0, 'id': 'Z', 'name': 'Z'}, 'style': {'background-color': '#c3cec0'}}]:
+        return True  # That's for the case when there are no edges :(
+
+    for dictionary in lst:
+        if dictionary['counter'] == 1:
+            temp.append(dictionary['source'] + dictionary['target'])
+
+    for tpl in temp:
+        if revstring(tpl) in temp:
+            return False
+
+    if (('XY' in temp) and ('YZ' in temp) and ('ZX' in temp)) or (('YX' in temp) and ('XZ' in temp) and ('ZY' in temp)):
+        return False
+
+    return True
+
 def tanc(lst: str):
     lst = ast.literal_eval(lst)
     temp = list()
