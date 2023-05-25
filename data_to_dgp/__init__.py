@@ -10,19 +10,12 @@ Your app description
 
 
 class C(BaseConstants):
-    training = True
-    NUM_ROUNDS = 9
+    training = False
+    NUM_ROUNDS = 2
     SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
-
-    # NOLINKSSEED = random.randint(0, 5)
-    # ONELINKSEED = random.randint(0, 5)
-    # TWOLINKSSEED = random.randint(0, 5)
-    # COLLIDER1SEED = random.randint(0, 5)
-    # FORKSEED = random.randint(0, 5)
-    # THREELINKSSEED = random.randint(0, 5)
 
     conf_range = range(101)
 
@@ -33,14 +26,6 @@ class C(BaseConstants):
 
     seed = [[x, random.randint(0, 5)] for x in task_sequence]
 
-    # seed = {'collider1': COLLIDER1SEED,
-    #         'nolinks': NOLINKSSEED,
-    #         'onelink': ONELINKSEED,
-    #         'twolinks': TWOLINKSSEED,
-    #         'fork': FORKSEED,
-    #         'threelinks': THREELINKSSEED
-    #         }
-    # gf.smartedgesinterv([],int(SEED))
     pre_data_edges = {'nolinks': [False],
                       'onelink': [
                           {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}],
@@ -80,7 +65,7 @@ class C(BaseConstants):
                                     'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
                                     'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
                      }
-    # gf.smartdatainterv(
+
     pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                              'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
                                              'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
@@ -106,16 +91,6 @@ class C(BaseConstants):
     # |       |
     # |       V
     # ▶  ->  Z
-
-    # preinterventional_data = {  # INTERVENTION ON Y
-    #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks']), NOLINKSSEED),
-    #     'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink']), ONELINKSEED),
-    #     'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks']), TWOLINKSSEED),
-    #     'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1']), COLLIDER1SEED),
-    #     'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork']), FORKSEED),
-    #     'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks']),
-    #                                      THREELINKSSEED)
-    # }
 
     preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
                               seed]
@@ -160,17 +135,12 @@ class C(BaseConstants):
     # interventionalx_data = preinterventionalx_data
     # interventionalz_data = preinterventionalz_data
 
-    # task_sequence_keys = (list(observational_data.keys()))
 
     # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
 
     # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
     # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks"]
     # task_sequence = ['threelinks']
-
-    # SEEDS = []  # SEEDS contains seed for every round
-    # for i in task_sequence:
-    #     SEEDS.append(seed[i])
 
 
 class Subsession(BaseSubsession):
@@ -182,20 +152,26 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # accuracies = [0]*C.NUM_ROUNDS
-    ## accuracies = [0] * len(C.task_sequence)
+
     stored = models.StringField(initial=json.dumps(
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
+
     training = models.IntegerField()
+
     conf_bid = models.IntegerField(initial=-1,
                                    choices=[i for i in C.conf_range],
                                    # widget=widgets.RadioSelect,
                                    )
+
     buttons = models.StringField()
 
     buttons_before_err = models.StringField()
+
+    score = models.FloatField(initial=0)
+
+    accuracy = models.FloatField()
 
     cycle_err = models.IntegerField(initial=1)
 
@@ -292,31 +268,38 @@ class DiagramTask(Page):
 
     def live_method(player, data):
         player.stored = json.dumps(data)
-        # print(player.stored, type(player.stored))
-        # print(gf.tanc(player.stored))
         return {1: player.stored}
 
     def error_message(player, values):
-        
+
         values['stored'] = gf.tanc(player.stored)
         solutions = dict(
             stored=True,
             conf_bid=values['conf_bid'],
             buttons=values['buttons']
         )
-        #print(values)
-        #print(solutions)
+
+        # print(solutions)
+
+        player.accuracy = round(
+            gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
+
+        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
+
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[field_name] = 'В форме присутствует цикл'
-                player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, {"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, {"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, {"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
+                player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, ' \
+                                '{"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, ' \
+                                '{"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, ' \
+                                '{"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, ' \
+                                '{"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, ' \
+                                '{"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
                 if player.cycle_err:
-
                     player.buttons_before_err = values['buttons']
                 player.cycle_err = 0
-                
-                #print(player.buttons, type(player.buttons))
+
         return error_messages
 
     @staticmethod
@@ -328,79 +311,23 @@ class DiagramTask(Page):
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            # datasetintx=[(i + 1, output[2]['x'][i], output[2]['y'][i], output[2]['z'][i]) for i in
-            #              range(len(output[2]['x']))],
-            # datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
-            #              range(len(output[3]['x']))],
-            # datasetint1=C.interventional_data[C.task_sequence[player.round_number - 1]],
             frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
-            # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
-            # frequenciesintz=["freq"] + gf.check_frequencies(output[3])
+
         )
 
     @staticmethod
     def js_vars(player):
-        # if DiagramTask.flag == 1:
-        #     xfilterclick = player.buttons[0]
-        #     x0filterclick = player.buttons[1]
-        #     yfilterclick = player.buttons[2]
-        #     y0filterclick = player.buttons[3]
-        #     zfilterclick = player.buttons[4]
-        #     z0filterclick = player.buttons[5]
-        #     xifilterclick = player.buttons[6]
-        #     x0ifilterclick = player.buttons[7]
-        #     yifilterclick = player.buttons[8]
-        #     y0ifilterclick = player.buttons[9]
-        #     zifilterclick = player.buttons[10]
-        #     z0ifilterclick = player.buttons[11]
-        #     showintclick = player.buttons[12]
-        #     showobsclick = player.buttons[13]
-        # else:
-        #     xfilterclick = 0
-        #     x0filterclick = 0
-        #     yfilterclick = 0
-        #     y0filterclick = 0
-        #     zfilterclick = 0
-        #     z0filterclick = 0
-        #     xifilterclick = 0
-        #     x0ifilterclick = 0
-        #     yifilterclick = 0
-        #     y0ifilterclick = 0
-        #     zifilterclick = 0
-        #     z0ifilterclick = 0
-        #     showintclick = 0
-        #     showobsclick = 0
-        # DiagramTask.flag = 0
+
         output = datatask_output_json(player)
         return dict(
             datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            # datasetintx=[(i + 1, output[2]['x'][i], output[2]['y'][i], output[2]['z'][i]) for i in
-            #              range(len(output[2]['x']))],
-            # datasetintz=[(i + 1, output[3]['x'][i], output[3]['y'][i], output[3]['z'][i]) for i in
-            #              range(len(output[3]['x']))],
             frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
             frequenciesint=["freq"] + gf.check_frequencies(output[1]),
-            # frequenciesintx=["freq"] + gf.check_frequencies(output[2]),
-            # frequenciesintz=["freq"] + gf.check_frequencies(output[3]),
             seed=C.seed[player.round_number - 1][1],
-            # xfilterclick=xfilterclick,
-            # x0filterclick=x0filterclick,
-            # yfilterclick=yfilterclick,
-            # y0filterclick=y0filterclick,
-            # zfilterclick=zfilterclick,
-            # z0filterclick=z0filterclick,
-            # xifilterclick=xifilterclick,
-            # x0ifilterclick=x0ifilterclick,
-            # yifilterclick=yifilterclick,
-            # y0ifilterclick=y0ifilterclick,
-            # zifilterclick=zifilterclick,
-            # z0ifilterclick=z0ifilterclick,
-            # showintclick=showintclick,
-            # showobsclick=showobsclick
         )
 
 
@@ -425,6 +352,16 @@ class DiagramTest(Page):
         player.payoff = cu(
             gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
 
+        # a = player.in_round(1).score
+        #
+        # b = player.in_round(2).score
+        #
+        # c = player.in_round(3).score
+
+
+        #a = player.round_number
+
+
         ##player.accuracies[player.round_number - 1] = cu(
         ##    gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
         return dict(
@@ -432,13 +369,11 @@ class DiagramTest(Page):
                   f'User did not set cycles: {gf.tanc(store_array)}',
                   f'User chose {gf.userschoice(store_array)}',
                   f'DGP was {gf.dgpchoice(edges)}',
-                  f'Penalty is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
-                  f"User's score for the round is {gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges)))}",
-                  ##f"Total user's score is {sum(player.accuracies)}",
-                  f"Total user's score is {player.participant.payoff}",
+                  f'Penalty (from 0 to 10) is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
+                  f"User's accuracy (from 0 to 1) for the round is {round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)}",
+                  f"User's score (from 0 to 1) for the round is {round(player.score, 5)}",
                   f'The seed is {seed}',
-                  #f'Buttons were clicked {buttons_were_clicked}'
-            ]
+                  ]
         )
 
     @staticmethod
@@ -479,10 +414,30 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-    pass
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
+
+    @staticmethod
+    def vars_for_template(player):
+
+        return dict(
+            ekey=[
+                f"player's score in the first round {player.in_round(1).score}",
+                f"player's score in the second round {player.in_round(2).score}",
+                  ]
+        )
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            playerscore1=player.in_round(1).score,
+            playerscore2=player.in_round(2).score,
+        )
 
 
 if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Questionnaire]
+    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Questionnaire, Results]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest, Questionnaire]
+    page_sequence = [Instruction, DiagramTask, DiagramTest, Questionnaire, Results]
