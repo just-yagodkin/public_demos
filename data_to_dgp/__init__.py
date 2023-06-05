@@ -14,21 +14,23 @@ class C(BaseConstants):
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 8
-    SHOWING_INFORMATION_EDGE = 0.5  # you will see a feedback only after this percent of rounds
+    SHOWING_INFORMATION_EDGE = 0.51  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
 
     conf_range = range(101)
 
-    task_sequence = ['twolinks', 'onelink', 'collider1', "threelinks", "fork", "threelinks", "nolinks", 'onelink',]
+    task_sequence = ['twolinks', 'onelink', 'collider1', "threelinks", "fork", "threelinks", "nolinks", 'onelink']
 
     # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
     #                  'twolinks', 'collider1', "threelinks", "fork"]
 
     # task_sequence = ["nolinks", 'onelink']
 
-    seed = [[x, random.randint(0, 5)] for x in task_sequence]
+    seed = [(name, random.randint(0, 5)) for name in task_sequence]
+    # seed = [(name, 2) for name in task_sequence]
+    # print(seed)
 
     pre_data_edges = {'nolinks': [False],
                       'onelink': [
@@ -48,7 +50,38 @@ class C(BaseConstants):
                           {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}],
                       }
 
-    data_edges = [gf.smartedgesinterv(gf.pre_data_edges[x[0]], x[1]) for x in seed]
+    a = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}], seed[0][1])
+
+    b = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}], seed[1][1])
+
+    c = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}], seed[2][1])
+
+    d = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}], seed[3][1])
+
+    e = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'YX', 'source': 'Y', 'target': 'X', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}], seed[4][1])
+
+    f = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}], seed[5][1])
+
+    g = gf.smartedgesinterv([False], seed[6][1])
+
+    h = gf.smartedgesinterv([
+        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}], seed[7][1])
+
+    data_edges = [a, b, c, d, e, f, g, h]
+    #print(data_edges)
 
     original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -217,6 +250,7 @@ def benchmark_diagram(player: Player):
     num_round = player.round_number - 1
     # target_key = C.task_sequence[num_round]
     target_vocabulary = C.data_edges[num_round]
+    #print(C.data_edges)
     return target_vocabulary
 
 
@@ -302,6 +336,11 @@ class DiagramTask(Page):
                     player.buttons_before_err = values['buttons']
                 player.cycle_err = 0
 
+        store_array = player.stored
+        edges = benchmark_diagram(player)
+        accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
+        player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
+
         return error_messages
 
     @staticmethod
@@ -345,6 +384,7 @@ class DiagramTest(Page):
         store_array = player.stored
         seed = C.seed[player.round_number - 1][1]
         edges = benchmark_diagram(player)
+        #print(edges)
         datasetobs = C.observational_data[player.round_number - 1][1]
         datasetint = C.interventional_data[player.round_number - 1][1],
         buttons_were_clicked = json.loads(player.buttons)
@@ -352,8 +392,7 @@ class DiagramTest(Page):
         # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
 
         accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
-
-        player.payoff = cu(round(player.score, 5)*C.Bonus+accuracy*C.Round_payoff)
+        player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
 
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
@@ -365,7 +404,7 @@ class DiagramTest(Page):
                   f"User's score (from 0 to 1) for the round is {round(player.score, 5)}",
                   f'The seed is {seed}',
                   ],
-            accuracy = accuracy
+            accuracy=accuracy
         )
 
     @staticmethod
@@ -400,6 +439,7 @@ class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
 
+
 class Questionnaire2(Page):
 
     @staticmethod
@@ -408,6 +448,7 @@ class Questionnaire2(Page):
 
     form_model = 'player'
     form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
+
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -424,8 +465,8 @@ class Results(Page):
         number_of_rounds = C.NUM_ROUNDS
         for i in range(number_of_rounds):
             data[i] = (i + 1, player.in_round(i + 1).accuracy, player.in_round(i + 1).score)
-            sumaccuracy += player.in_round(i + 1).accuracy*C.Round_payoff
-            sumscore += player.in_round(i + 1).score*C.Bonus
+            sumaccuracy += player.in_round(i + 1).accuracy * C.Round_payoff
+            sumscore += player.in_round(i + 1).score * C.Bonus
         player.participant.payoff = sumaccuracy + sumscore
 
     @staticmethod
@@ -451,8 +492,8 @@ class Results(Page):
             ],
             number_of_rounds=number_of_rounds,
             data=data,
-            mean_accuracy = mean_accuracy,
-            total_score = sumscore
+            mean_accuracy=mean_accuracy,
+            total_score=sumscore
         )
 
 

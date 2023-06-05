@@ -65,7 +65,7 @@
 
 
 {{ block title }}
-<dl class="lng-Title" style="text-align:center">Pick the arrows (edges) between variables according to data.</dl>
+<dl class="lng-Title" style="text-align:center">You can read the observation records in the following tables:</dl>
 {{ endblock }}
 
 
@@ -415,10 +415,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <br>
 
 <div>
-    <p class="lng-DtText">Choose (click) the edges as follows: leave it dashed if there is no influence from one
-        variable to another variable, or make it solid if there is.
-        Remember that each variable could be simultaneously ONLY ONE of the following: a) independent b) cause с)
-        effect.
+    <p class="lng-DtText">Please, fill out the form if you assume any relationships between X, Y and Z
     </p>
 </div>
 
@@ -723,8 +720,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
     function liveRecv(data) {
         console.log(data);
-        forminputs.stored.value = data;
-        // formInputs.stored.value = data; // for server setting
+        //forminputs.stored.value = data; // for Gregory
+        formInputs.stored.value = data; // for server setting / for MaxY
     }
 
     function iterator(array, i) {
