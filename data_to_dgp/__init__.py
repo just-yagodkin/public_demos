@@ -397,6 +397,14 @@ class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
 
+class Questionnaire2(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
+
+    form_model = 'player'
+    form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -434,6 +442,6 @@ class Results(Page):
 
 
 if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Questionnaire, Results]
+    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Results]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest, Questionnaire, Results]
+    page_sequence = [Instruction, DiagramTask, DiagramTest, Results]
