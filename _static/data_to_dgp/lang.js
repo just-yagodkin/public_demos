@@ -146,7 +146,7 @@ const langArr = {
     },
 
     "DTestText2":{
-        "ru": `Оригинальный механизм генерации, отвечающий за зависимости был следующим`,
+        "ru": `Оригинальный механизм генерации, отвечающий за зависимости, был следующим`,
 
         "en": `That is the original dependencies (Data Generation Process)`
     },
@@ -160,5 +160,20 @@ const langArr = {
         "ru": `Текущее значение:`,
 
         "en": `Current confidience:`
+    },
+    "Accuracy":{
+        "ru": `Ваша точность за этот раунд:`,
+
+        "en": `Your accuracy for the round is`
+    },
+    "Meanaccuracy":{
+        "ru": `Ваша средняя точность за все раунды:`,
+
+        "en": `Your mean accuracy for the rounds is`
+    },
+    "Totalscore":{
+        "ru": `Сумма Ваших очков:`,
+
+        "en": `Your total score is`
     },
 }

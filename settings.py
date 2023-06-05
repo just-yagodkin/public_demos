@@ -189,7 +189,7 @@ SESSION_CONFIGS = [
     dict(
         name='data_to_dgp',
         display_name="data to DGP task",
-        app_sequence=['data_to_dgp'],
+        app_sequence=['data_to_dgp', 'AOT'],
         num_demo_participants=1,
     ),
 

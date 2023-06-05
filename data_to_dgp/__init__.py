@@ -135,7 +135,6 @@ class C(BaseConstants):
     # interventionalx_data = preinterventionalx_data
     # interventionalz_data = preinterventionalz_data
 
-
     # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
 
     # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
@@ -152,7 +151,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
     stored = models.StringField(initial=json.dumps(
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
@@ -349,31 +347,22 @@ class DiagramTest(Page):
         # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
 
+        accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
+
         player.payoff = cu(
             gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
 
-        # a = player.in_round(1).score
-        #
-        # b = player.in_round(2).score
-        #
-        # c = player.in_round(3).score
-
-
-        #a = player.round_number
-
-
-        ##player.accuracies[player.round_number - 1] = cu(
-        ##    gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
                   f'User did not set cycles: {gf.tanc(store_array)}',
                   f'User chose {gf.userschoice(store_array)}',
                   f'DGP was {gf.dgpchoice(edges)}',
                   f'Penalty (from 0 to 10) is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
-                  f"User's accuracy (from 0 to 1) for the round is {round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)}",
+                  f"User's accuracy (from 0 to 1) for the round is {accuracy}",
                   f"User's score (from 0 to 1) for the round is {round(player.score, 5)}",
                   f'The seed is {seed}',
-                  ]
+                  ],
+            accuracy = accuracy
         )
 
     @staticmethod
@@ -408,6 +397,14 @@ class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
 
+class Questionnaire2(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
+
+    form_model = 'player'
+    form_fields = ['Aot_' + str(x + 1) for x in range(3)] + ['feedback']
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -415,29 +412,36 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
+
     @staticmethod
     def is_displayed(player):
         return player.round_number == min(len(C.task_sequence), C.NUM_ROUNDS)
 
     @staticmethod
     def vars_for_template(player):
+        data = [(0, 0, 0)] * C.NUM_ROUNDS
+        sumaccuracy = 0
+        sumscore = 0
+        number_of_rounds = C.NUM_ROUNDS
+        for i in range(number_of_rounds):
+            data[i] = (i + 1, player.in_round(i + 1).accuracy, player.in_round(i + 1).score)
+            sumaccuracy += player.in_round(i + 1).accuracy
+            sumscore += player.in_round(i + 1).score
 
+        mean_accuracy = round((sumaccuracy / number_of_rounds), 5)
         return dict(
             ekey=[
                 f"player's score in the first round {player.in_round(1).score}",
                 f"player's score in the second round {player.in_round(2).score}",
-                  ]
-        )
-
-    @staticmethod
-    def js_vars(player):
-        return dict(
-            playerscore1=player.in_round(1).score,
-            playerscore2=player.in_round(2).score,
+            ],
+            number_of_rounds=number_of_rounds,
+            data=data,
+            mean_accuracy = mean_accuracy,
+            total_score = sumscore
         )
 
 
 if C.training:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Questionnaire, Results]
+    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Results]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest, Questionnaire, Results]
+    page_sequence = [Instruction, DiagramTask, DiagramTest, Results]
