@@ -13,16 +13,18 @@ class C(BaseConstants):
     training = False
     Bonus = 5
     Round_payoff = 10
-    NUM_ROUNDS = 2
-    SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
+    NUM_ROUNDS = 8
+    SHOWING_INFORMATION_EDGE = 0.5  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
 
     conf_range = range(101)
 
-    task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
-                     'twolinks', 'collider1', "threelinks", "fork"]
+    task_sequence = ['twolinks', 'onelink', 'collider1', "threelinks", "fork", "threelinks", "nolinks", 'onelink',]
+
+    # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
+    #                  'twolinks', 'collider1', "threelinks", "fork"]
 
     # task_sequence = ["nolinks", 'onelink']
 
