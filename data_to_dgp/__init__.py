@@ -11,6 +11,8 @@ Your app description
 
 class C(BaseConstants):
     training = False
+    Bonus = 5
+    Round_payoff = 10
     NUM_ROUNDS = 2
     SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
 
@@ -349,8 +351,7 @@ class DiagramTest(Page):
 
         accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
 
-        player.payoff = cu(
-            gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))))
+        player.payoff = cu(round(player.score, 5)*C.Bonus+accuracy*C.Round_payoff)
 
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
@@ -412,6 +413,18 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
+    @staticmethod
+    def payoff_func(player):
+        data = [(0, 0, 0)] * C.NUM_ROUNDS
+        sumaccuracy = 0
+        sumscore = 0
+        number_of_rounds = C.NUM_ROUNDS
+        number_of_rounds = C.NUM_ROUNDS
+        for i in range(number_of_rounds):
+            data[i] = (i + 1, player.in_round(i + 1).accuracy, player.in_round(i + 1).score)
+            sumaccuracy += player.in_round(i + 1).accuracy*C.Round_payoff
+            sumscore += player.in_round(i + 1).score*C.Bonus
+        player.participant.payoff = sumaccuracy + sumscore
 
     @staticmethod
     def is_displayed(player):

@@ -172,8 +172,8 @@ const langArr = {
         "en": `Your mean accuracy for the rounds is`
     },
     "Totalscore":{
-        "ru": `Сумма Ваших очков:`,
+        "ru": `Сумма выигрыша составила:`,
 
-        "en": `Your total score is`
+        "en": `Your total payoff`
     },
 }
