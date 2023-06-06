@@ -500,6 +500,10 @@ def tanc(lst: str):
 
     return True
 
+def supercrunchfunc(l1: list):
+    for unit in l1:
+        print(smartdatainterv(unit[0], unit[1]))
+        #unit = smartdatainterv(unit[0], unit[1])
 
 def smartdatainterv(d: dict, seed=0):
     """seed 1:  X Y Z   ->   X Z Y
@@ -526,18 +530,19 @@ def smartdatainterv(d: dict, seed=0):
     return tempd
 
 
-def smartedgesinterv(l: list, seed=0):
+def smartedgesinterv(l: list, seed):
     """seed 1:  X Y Z   ->   X Z Y
        seed 2:  X Y Z   ->   Y X Z
        seed 3:  X Y Z   ->   Y Z X
        seed 4:  X Y Z   ->   Z X Y
        seed 5:  X Y Z   ->   Z Y X
     """
+    templ = l.copy()
 
     if seed == 0 or l == [False]:
-        return l
+        return templ
 
-    templ = l.copy()
+
     if seed == 1:
         for d in templ:
             d['data']['id'] = d['data']['id'].replace("Y", "z").replace("Z", "y").upper()

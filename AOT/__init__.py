@@ -43,12 +43,12 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal)
 
     Aot_5 = models.IntegerField(
-        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         label='Оцените Ваш сегодняшний сон. 1-плохо спал(-а); 10-хорошо спал(-а)',
         widget=widgets.RadioSelectHorizontal)
 
     Aot_6 = models.IntegerField(
-        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         label='Оцените Ваш уровень усталости. 1-очень устал(-а); 10-совсем не устал(-а)',
         widget=widgets.RadioSelectHorizontal)
 
@@ -57,7 +57,9 @@ class Player(BasePlayer):
         label='Были ли у Вас курсы по теории вероятностей/статистики/высшей математики?',
         widget=widgets.RadioSelectHorizontal)
 
-    Age = models.StringField(label="Укажите Ваш возраст")
+    Age = models.IntegerField(
+        min=14, max=90,
+        label='Укажите возраст участника')
 
     feedback1 = models.StringField(label="Общие пожелания и комментарии")
 
@@ -65,7 +67,10 @@ class Player(BasePlayer):
 
     feedback3 = models.StringField(label="Какова была Ваша стратегия при выборе ответов?")
 
-    feedback4 = models.StringField(label="Было ли понятно, что нас интересуют причинно-следственные связи?")
+    feedback4 = models.StringField(
+        label="Были ли понятно, что данные с планеты двойника идентичны данным, которые бы можно было получить, проведя на оригинальной планете эксперимент (пересадить часть семян)? (да/нет, что было непонятно?)")
+
+    feedback5 = models.StringField(label="Было ли понятно, что нас интересуют причинно-следственные связи?")
     #
     # Aot_5 = models.IntegerField(
     #     min=1, max=5,
@@ -115,9 +120,10 @@ class MyPage1(Page):
     form_model = 'player'
     form_fields = ['Aot_' + str(x + 1) for x in range(7)] + ['Age']
 
+
 class MyPage2(Page):
     form_model = 'player'
-    form_fields = ['feedback' + str(x + 1) for x in range(4)]
+    form_fields = ['feedback' + str(x + 1) for x in range(5)]
 
 
 class ResultsWaitPage(WaitPage):

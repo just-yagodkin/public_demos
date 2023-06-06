@@ -104,9 +104,9 @@ const langArr = {
     },
 
     "Title":{
-        "ru": `Выберите соответствующие стрелки (ребра) между переменными согласно данным.`,
+        "ru": `Вы можете ознакомиться с записями наблюдений в следующих таблицах:`,
 
-        "en": `Pick the arrows (edges) between variables according to data.`
+        "en": `You can read the observation records in the following tables:`
     },
 
     "TrText":{
@@ -120,11 +120,9 @@ const langArr = {
     },
 
     "DtText":{
-        "ru": `Выберите (нажмите) ребра следующим образом: оставьте его пунктирным, если одна переменная не влияет на другую переменную, или сделайте его сплошным, если влияет.
-            Помните, что каждая переменная может быть ЛИШЬ ОДНИМ из следующих вариантов: а) независимой б) причиной в) следствием.`,
+        "ru": `Пожалуйста, заполните следующую форму, если считаете что между некоторыми из переменных X, Y и Z есть связь. `,
 
-        "en": `Choose (click) the edges as follows: leave it dashed if there is no influence from one variable to another variable, or make it solid if there is.
-            Remember that each variable could be simultaneously ONLY ONE of the following: a) independent b) cause с) effect.`
+        "en": `Please, fill out the form if you assume any relationships between X, Y and Z`
     },
 
     "confidence":{
@@ -134,21 +132,21 @@ const langArr = {
     },
 
     "DTestTitle":{
-        "ru": `Определите зависимости между вершинами.`,
+        "ru": `Решения в последнем раунде:`,
 
-        "en": `Pick the edges and nodes.`
+        "en": `You accuracy in last round:`
     },
 
     "DTestText1":{
-        "ru": `Вы определили следующие связи`,
+        "ru": `То, что было выбрано:`,
 
-        "en": `That what was chosen`
+        "en": `That what was chosen:`
     },
 
     "DTestText2":{
-        "ru": `Оригинальный механизм генерации, отвечающий за зависимости, был следующим`,
+        "ru": `Те зависимости, на основе которых были сгенерированы данные:`,
 
-        "en": `That is the original dependencies (Data Generation Process)`
+        "en": `These dependencies are underlying the basis of the data:`
     },
 
     "confstart":{
