@@ -247,7 +247,7 @@ USE_POINTS = True
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('hse_admin')
+ADMIN_PASSWORD = environ.get('125')
 
 DEMO_PAGE_INTRO_HTML = """ """
 DEMO_PAGE_TITLE = "Behavecon 2023 Hse "
