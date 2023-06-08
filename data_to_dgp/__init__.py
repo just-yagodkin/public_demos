@@ -192,6 +192,8 @@ class Player(BasePlayer):
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
+    
+    stored_check = models.StringField(initial=0)
 
     training = models.IntegerField()
 
@@ -302,9 +304,13 @@ class DiagramTask(Page):
     form_model = 'player'
     form_fields = ['conf_bid', 'stored', 'buttons']
 
+    @staticmethod
     def live_method(player, data):
         player.stored = json.dumps(data)
+        # print(player.stored)
+
         return {1: player.stored}
+
 
     def error_message(player, values):
 
@@ -317,9 +323,9 @@ class DiagramTask(Page):
 
         # print(solutions)
 
-        player.accuracy = round(
-            gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
 
+        player.stored_check=player.stored
+        player.accuracy = round(gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
         player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
 
         error_messages = dict()
@@ -391,7 +397,7 @@ class DiagramTest(Page):
         # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
         # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
 
-        accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
+        accuracy = player.accuracy
         player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
 
         return dict(
@@ -411,7 +417,7 @@ class DiagramTest(Page):
     def js_vars(player):
         benchmark_edges = benchmark_diagram(player)
 
-        store_array = json.loads(player.stored)
+        store_array = json.loads(player.stored_check)
         show_edges = 0
         if benchmark_edges[0]:
             show_edges = 1
