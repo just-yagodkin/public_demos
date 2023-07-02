@@ -1,5 +1,6 @@
 import random as rm
 import ast
+import copy
 
 
 def create_list_from_freq(freq, size=16):
@@ -513,7 +514,7 @@ def smartdatainterv(d: dict, seed=0):
        seed 5:  X Y Z   ->   Z Y X
     """
 
-    tempd = d.copy()
+    tempd = copy.deepcopy(d)
 
     if seed == 0:
         return tempd
@@ -537,11 +538,10 @@ def smartedgesinterv(l: list, seed):
        seed 4:  X Y Z   ->   Z X Y
        seed 5:  X Y Z   ->   Z Y X
     """
-    templ = l.copy()
+    templ = copy.deepcopy(l)
 
     if seed == 0 or l == [False]:
         return templ
-
 
     if seed == 1:
         for d in templ:

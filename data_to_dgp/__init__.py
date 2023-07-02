@@ -2,7 +2,6 @@ from otree.api import *
 import goodfunctions as gf
 import random
 import json
-import ast
 
 doc = """
 Your app description
@@ -14,22 +13,20 @@ class C(BaseConstants):
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 8
-    SHOWING_INFORMATION_EDGE = 0.51 # you will see a feedback only after this percent of rounds
+    SHOWING_INFORMATION_EDGE = 0.51  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
 
     conf_range = range(101)
 
-    task_sequence = ['twolinks', 'onelink', 'collider1', "threelinks", "fork", "threelinks", "nolinks", 'onelink']
+    task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
 
     # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
     #                  'twolinks', 'collider1', "threelinks", "fork"]
 
-    # task_sequence = ["nolinks", 'onelink']
-
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    # seed = [(name, 2) for name in task_sequence]
+    # seed = [(name, 1) for name in task_sequence]
     # print(seed)
 
     pre_data_edges = {'nolinks': [False],
@@ -50,38 +47,10 @@ class C(BaseConstants):
                           {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}],
                       }
 
-    a = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}], seed[0][1])
-
-    b = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}], seed[1][1])
-
-    c = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'ZY', 'source': 'Z', 'target': 'Y', 'label': ""}}], seed[2][1])
-
-    d = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}], seed[3][1])
-
-    e = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'YX', 'source': 'Y', 'target': 'X', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}}], seed[4][1])
-
-    f = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'YZ', 'source': 'Y', 'target': 'Z', 'label': ""}},
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XZ', 'source': 'X', 'target': 'Z', 'label': ""}}], seed[5][1])
-
-    g = gf.smartedgesinterv([False], seed[6][1])
-
-    h = gf.smartedgesinterv([
-        {'data': {'counter': 0, 'weight': 0, 'id': 'XY', 'source': 'X', 'target': 'Y', 'label': ""}}], seed[7][1])
-
-    data_edges = [a, b, c, d, e, f, g, h]
-    #print(data_edges)
+    data_edges = []
+    for i in range(len(seed)):
+        data_edges.append(gf.smartedgesinterv(pre_data_edges[seed[i][0]], seed[i][1]))
+    # print(data_edges)
 
     original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -176,7 +145,6 @@ class C(BaseConstants):
 
     # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
     # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks"]
-    # task_sequence = ['threelinks']
 
 
 class Subsession(BaseSubsession):
@@ -188,11 +156,15 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    userdgp = models.StringField(initial="")
+
+    originaldgp = models.StringField(initial="")
+
     stored = models.StringField(initial=json.dumps(
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Y", "name": "Y"}, "style": {"background-color": "#c3cec0"}},
          {"data": {"counter": 0, "id": "Z", "name": "Z"}, "style": {"background-color": "#c3cec0"}}]))
-    
+
     stored_check = models.StringField(initial=0)
 
     training = models.IntegerField()
@@ -252,7 +224,7 @@ def benchmark_diagram(player: Player):
     num_round = player.round_number - 1
     # target_key = C.task_sequence[num_round]
     target_vocabulary = C.data_edges[num_round]
-    #print(C.data_edges)
+    # print(C.data_edges)
     return target_vocabulary
 
 
@@ -311,7 +283,6 @@ class DiagramTask(Page):
 
         return {1: player.stored}
 
-
     def error_message(player, values):
 
         values['stored'] = gf.tanc(player.stored)
@@ -323,10 +294,12 @@ class DiagramTask(Page):
 
         # print(solutions)
 
-
-        player.stored_check=player.stored
-        player.accuracy = round(gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
+        player.stored_check = player.stored
+        player.accuracy = round(
+            gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
         player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
+        player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
+        player.userdgp = json.dumps(gf.userschoice(player.stored))
 
         error_messages = dict()
         for field_name in solutions:
@@ -390,7 +363,7 @@ class DiagramTest(Page):
         store_array = player.stored
         seed = C.seed[player.round_number - 1][1]
         edges = benchmark_diagram(player)
-        #print(edges)
+        # print(edges)
         datasetobs = C.observational_data[player.round_number - 1][1]
         datasetint = C.interventional_data[player.round_number - 1][1],
         buttons_were_clicked = json.loads(player.buttons)
