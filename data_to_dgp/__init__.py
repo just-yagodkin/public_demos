@@ -9,7 +9,7 @@ Your app description
 
 
 class C(BaseConstants):
-    training = False
+    train = True
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 8
@@ -21,9 +21,6 @@ class C(BaseConstants):
     conf_range = range(101)
 
     task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
-
-    # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink',
-    #                  'twolinks', 'collider1', "threelinks", "fork"]
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
     # seed = [(name, 1) for name in task_sequence]
@@ -91,6 +88,7 @@ class C(BaseConstants):
                                                 'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
                                                 'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
                                  }
+
     preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
 
     # X -> Y ->
@@ -167,7 +165,7 @@ class Player(BasePlayer):
 
     stored_check = models.StringField(initial=0)
 
-    training = models.IntegerField()
+    training = models.BooleanField()
 
     conf_bid = models.IntegerField(initial=-1,
                                    choices=[i for i in C.conf_range],
@@ -258,12 +256,12 @@ class Training(Page):
         # 4pos: Z -> Y
         # 5pos: Z -> X
 
-        player.training = int((newdata == [1, 0, 0, 0, 0, 0]))  ###  int(TRUE) if X -> Y
+        player.training = (newdata == [1, 0, 0, 0, 0, 0])  ###  TRUE if X -> Y
         return {1: player.training}
 
     def error_message(player, values):
         solutions = dict(
-            training=1,
+            training=True,
         )
         error_messages = dict()
         for field_name in solutions:
@@ -274,7 +272,7 @@ class Training(Page):
 
 class DiagramTask(Page):
     form_model = 'player'
-    form_fields = ['conf_bid', 'stored', 'buttons']
+    form_fields = ['stored', 'conf_bid', 'buttons']
 
     @staticmethod
     def live_method(player, data):
@@ -284,6 +282,8 @@ class DiagramTask(Page):
         return {1: player.stored}
 
     def error_message(player, values):
+
+        print(values)
 
         values['stored'] = gf.tanc(player.stored)
         solutions = dict(
@@ -298,6 +298,7 @@ class DiagramTask(Page):
         player.accuracy = round(
             gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
         player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
+
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
         player.userdgp = json.dumps(gf.userschoice(player.stored))
 
@@ -331,8 +332,12 @@ class DiagramTask(Page):
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
-            frequenciesint=["freq"] + gf.check_frequencies(output[1]),
+            frequenciesobs=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[0])[0])))] + [
+                str(float('{:.2f}'.format(gf.check_frequencies(output[0])[1])))] + [
+                               str(float('{:.2f}'.format(gf.check_frequencies(output[0])[2])))],
+            frequenciesint=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[1])[0])))] + [
+                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
+                               str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
 
         )
 
@@ -345,8 +350,12 @@ class DiagramTask(Page):
                         range(len(output[0]['x']))],
             datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
                         range(len(output[1]['x']))],
-            frequenciesobs=["freq"] + gf.check_frequencies(output[0]),
-            frequenciesint=["freq"] + gf.check_frequencies(output[1]),
+            frequenciesobs=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[0])[0])))] + [
+                str(float('{:.2f}'.format(gf.check_frequencies(output[0])[1])))] + [
+                               str(float('{:.2f}'.format(gf.check_frequencies(output[0])[2])))],
+            frequenciesint=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[1])[0])))] + [
+                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
+                               str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             seed=C.seed[player.round_number - 1][1],
         )
 
@@ -476,7 +485,7 @@ class Results(Page):
         )
 
 
-if C.training:
+if C.train:
     page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Results]
 else:
     page_sequence = [Instruction, DiagramTask, DiagramTest, Results]
