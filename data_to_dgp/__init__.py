@@ -450,7 +450,6 @@ class Results(Page):
         sumaccuracy = 0
         sumscore = 0
         number_of_rounds = C.NUM_ROUNDS
-        number_of_rounds = C.NUM_ROUNDS
         for i in range(number_of_rounds):
             data[i] = (i + 1, player.in_round(i + 1).accuracy, player.in_round(i + 1).score)
             sumaccuracy += player.in_round(i + 1).accuracy * C.Round_payoff
