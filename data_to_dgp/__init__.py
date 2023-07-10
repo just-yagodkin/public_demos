@@ -167,20 +167,26 @@ class Player(BasePlayer):
 
     training = models.BooleanField()
 
+    conf_init = models.IntegerField()
+
     conf_bid = models.IntegerField(initial=-1,
                                    choices=[i for i in C.conf_range],
                                    # widget=widgets.RadioSelect,
                                    )
 
+    conf_bid_is_random = models.IntegerField(initial=1)
+
     buttons = models.StringField()
 
-    buttons_before_err = models.StringField()
+    buttons_before_err = models.StringField(initial='[0,0,0,0,0,0,0,0,0,0,0,0,0,0]')
+
+    err_counter = models.IntegerField(initial=0)
 
     score = models.FloatField(initial=0)
 
     accuracy = models.FloatField()
 
-    cycle_err = models.IntegerField(initial=1)
+    cycle_err = models.IntegerField(initial=0)
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -272,7 +278,7 @@ class Training(Page):
 
 class DiagramTask(Page):
     form_model = 'player'
-    form_fields = ['stored', 'conf_bid', 'buttons']
+    form_fields = ['conf_init', 'stored', 'conf_bid', 'buttons']
 
     @staticmethod
     def live_method(player, data):
@@ -287,12 +293,29 @@ class DiagramTask(Page):
 
         values['stored'] = gf.tanc(player.stored)
         solutions = dict(
+            conf_init=values['conf_init'],
             stored=True,
             conf_bid=values['conf_bid'],
             buttons=values['buttons']
         )
 
         # print(solutions)
+        if values['stored'] != solutions['stored']:
+            player.cycle_err = 1
+        else:
+            player.cycle_err = 0
+
+        # Converting string to list
+        res = json.loads(values['buttons']).copy()
+        res_before_errors = json.loads(player.buttons_before_err).copy()
+
+        for i in range(12):
+            res[i] += res_before_errors[i]
+
+        #print(res)
+
+        if values['conf_init'] != values['conf_bid']:
+            player.conf_bid_is_random = 0
 
         player.stored_check = player.stored
         player.accuracy = round(
@@ -303,18 +326,25 @@ class DiagramTask(Page):
         player.userdgp = json.dumps(gf.userschoice(player.stored))
 
         error_messages = dict()
-        for field_name in solutions:
-            if values[field_name] != solutions[field_name]:
-                error_messages[field_name] = 'В форме присутствует цикл'
-                player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, ' \
-                                '{"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, ' \
-                                '{"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, ' \
-                                '{"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, ' \
-                                '{"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, ' \
-                                '{"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
-                if player.cycle_err:
-                    player.buttons_before_err = values['buttons']
-                player.cycle_err = 0
+
+        if player.cycle_err == 1:
+            error_messages['stored'] = 'В форме присутствует цикл'
+            player.err_counter += 1
+            player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, ' \
+                            '{"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, ' \
+                            '{"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, ' \
+                            '{"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, ' \
+                            '{"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, ' \
+                            '{"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
+            player.buttons_before_err = json.dumps(res)
+            player.buttons = json.dumps([0] * 12)
+            player.cycle_err = 0
+
+        else:
+            player.buttons = json.dumps(res)
+            print(json.dumps(res))
+
+
 
         store_array = player.stored
         edges = benchmark_diagram(player)
@@ -338,7 +368,6 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[1])[0])))] + [
                 str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
-
         )
 
     @staticmethod

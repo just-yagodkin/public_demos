@@ -526,7 +526,18 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         chart2int.draw(data2, options);
         chart3int.draw(data3, options);
     }
+
+
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+    }
+    confnum = getRandomIntInclusive(0,20)*5
+
+
 </script>
+
 
 <div id="cy"></div>
 
@@ -541,6 +552,16 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 </div>
 
+<script>
+    document.getElementById("conf_bid").value = confnum
+</script>
+
+<input hidden="hidden" id='conf_init' name="conf_init">
+
+<script>
+    document.getElementById("conf_init").value = confnum
+</script>
+
 <div style="text-align: center; font-size: 16px; line-height: 0.8"><p class="lng-conflevel"> Current confidience:</p> <b
         id="result"> </b></div>
 <p></p>
@@ -550,6 +571,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
 
 <script>
+
     $(document).ready(function () {
         // Read value on page load
         $("#result").html($("#conf_bid").val());
@@ -559,8 +581,9 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             $("#result").html($(this).val());
         });
     });
-</script>
 
+</script>
+{{ formfield_errors 'conf_init'}}
 {{ formfield_errors 'stored' }}
 {{ formfield_errors 'conf_bid' }}
 {{ formfield_errors 'buttons' }}
