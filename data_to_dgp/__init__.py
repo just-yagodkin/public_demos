@@ -27,10 +27,11 @@ class C(BaseConstants):
     random.shuffle(basis2)
     random.shuffle(basis3)
 
+    while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
+        random.shuffle(basis2)
 
     task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
     improved_task_sequence = basis1 + basis2 + basis3
-
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
     # seed = [(name, 1) for name in task_sequence]
@@ -265,7 +266,7 @@ class Instruction(Page):
 
 
 class Training(Page):
-    print(C.improved_task_sequence)
+    #print(C.improved_task_sequence)
     form_model = 'player'
     form_fields = ['training']
 
