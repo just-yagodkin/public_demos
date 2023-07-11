@@ -33,7 +33,7 @@ class C(BaseConstants):
     task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
     improved_task_sequence = basis1 + basis2 + basis3
 
-    seed = [(name, random.randint(0, 5)) for name in task_sequence]
+    seed = [(name, random.randint(0, 5)) for name in improved_task_sequence]
     # seed = [(name, 1) for name in task_sequence]
     # print(seed)
 
