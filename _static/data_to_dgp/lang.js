@@ -4,6 +4,41 @@ const langArr = {
         "en": "Instructions"
     },
 
+    "Tab":{
+        "ru": "Вы можете озакномиться с содержимым таблиц ниже:",
+        "en": "You can read the observation records in the following tables:"
+    },
+
+    "tab1":{
+        "ru": "Прежде чем перейти к заданию, давайте рассмотрим демонстрационный материал.",
+        "en": "Before we move on to the task itself, let's look at the demonstration material."
+    },
+
+    "tab2":{
+        "ru": "Перед вами две таблицы с наблюдениями. И для простоты в них выписаны наблюдения только для X и Y. Таблица справа, это таблица для планеты-близнеца (все зёрна переменной X зрелые).",
+        "en": "He we have two tables with observations. For simplicity, only the observations for X and Y are written out in them. The table on the right is the table for the twin planet (all grains of variable X are mature)."
+    },
+
+    "tab3":{
+        "ru": "В данном демонстрационном материале, для того чтобы вам было легче познакомиться с задачей сделаны два упрощения. Все зрелые зерна выделены цветом. Все клумбы находятся не над каменистыми почвами. ",
+        "en": "In this demo, to make it easier for you to familiarize yourself with the problem, two simplifications are made. All mature grains are highlighted in color. All beds are not over rocky soils. "
+    },
+
+    "tab4":{
+        "ru": "Пожалуйста заполните форму ответа, в соответствии с вашими предположениями о том, какие зависимости между сильными и слабыми растениями следуют из данных таблиц.",
+        "en": "Please fill in the answer form according to your assumptions about what relationships between strong and weak plants follow from these tables."
+    },
+
+    "tab12":{
+        "ru": "Это последний демо-материал перед переходом к заданию. В нем представлены точно такие-же наблюдения какие демонстрировались прошлый раз, с двумя отличиями.",
+        "en": "This is the last demo material before moving on to the task. It presents exactly the same observations as the last demo, with two differences."
+    },
+
+    "tab22":{
+        "ru": "Первое: зрелые семена так же расположены по тем же номерам клумб, но больше нет выделения цветом. Второе: клумба №1 в таблице слева и клумба №3 в таблице справа теперь находятся на каменистых почвах. Обратите внимание, что хоть номера клумб и не совпадают, количество зрелых семян распределённое по каменистым клумбам всегда одинаковое на обоих планетах.",
+        "en": "First, the mature seeds are still arranged by the same bed numbers, but there is no more color selection. Second, bed 1 in the table on the left and bed 3 in the table on the right are now on rocky soils. Note that although the bed numbers are not the same, the number of mature seeds distributed on the rocky beds is always the same on both planets."
+    },
+
     "carSlide1String1":{
         "ru": "Ваша сессия состоит из "+js_vars.num_rounds+" раундов.  В каждом раунде Вам предстоит выполнять типовые задания, цель и структура которых, не меняется от раунда к раунду.",
         "en": "The session consists of "+js_vars.num_rounds+" rounds. In each round you will be asked to perform identical tasks that do not differ in structure or purpose."
