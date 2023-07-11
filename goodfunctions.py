@@ -636,6 +636,33 @@ def accuracy(num):
     return (10 - num)*0.1
 
 
+def directional_error(user: list, dgp: list):
+    count = 0
+
+    for str in user:
+        if str not in dgp:
+            if revstring(str) in dgp:  # user set an edge which is not in original data
+                count += 1
+
+    return count
+
+
+def structure_error(user: list, dgp: list):
+    count = 0
+
+    for str in user:
+        if str not in dgp:
+            if revstring(str) not in dgp:  # user set an edge which is not in original data
+                count += 1
+
+    for str in dgp:
+        if str not in user:
+            if revstring(str) not in user:  # user missed an edge
+                count += 1
+
+    return count
+
+
 ###----- TESTS -----###
 
 

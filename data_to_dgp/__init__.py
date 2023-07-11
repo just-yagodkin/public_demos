@@ -154,9 +154,16 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    dgptype = models.StringField(initial="")
+
     userdgp = models.StringField(initial="")
 
     originaldgp = models.StringField(initial="")
+
+    dir_error = models.IntegerField(initial=0)
+    struct_error = models.IntegerField(initial=0)
+    error_counter = models.IntegerField(initial=0)
+    edges_num = models.IntegerField()
 
     stored = models.StringField(initial=json.dumps(
         [{"data": {"counter": 0, "id": "X", "name": "X"}, "style": {"background-color": "#c3cec0"}},
@@ -180,11 +187,11 @@ class Player(BasePlayer):
 
     buttons_before_err = models.StringField(initial='[0,0,0,0,0,0,0,0,0,0,0,0,0,0]')
 
-    err_counter = models.IntegerField(initial=0)
-
     score = models.FloatField(initial=0)
 
     accuracy = models.FloatField()
+
+    err_counter = models.IntegerField(initial=0)
 
     cycle_err = models.IntegerField(initial=0)
 
@@ -253,6 +260,7 @@ class Training(Page):
         return player.round_number == 1
 
     def live_method(player, data):
+
         newdata = [data[0]["counter"], data[1]["counter"], data[2]["counter"], data[3]["counter"], data[4]["counter"],
                    data[5]["counter"]]  ###
         # 0pos: X -> Y
@@ -279,6 +287,7 @@ class Training(Page):
 class DiagramTask(Page):
     form_model = 'player'
     form_fields = ['conf_init', 'stored', 'conf_bid', 'buttons']
+
 
     @staticmethod
     def live_method(player, data):
@@ -324,6 +333,12 @@ class DiagramTask(Page):
 
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
         player.userdgp = json.dumps(gf.userschoice(player.stored))
+        player.dgptype = C.task_sequence[player.round_number - 1]
+
+        player.dir_error = gf.directional_error(json.loads(player.userdgp), json.loads(player.originaldgp))
+        player.struct_error = gf.structure_error(json.loads(player.userdgp), json.loads(player.originaldgp))
+        player.error_counter = player.dir_error + player.struct_error
+        player.edges_num = len(json.loads(player.originaldgp))
 
         error_messages = dict()
 
@@ -341,8 +356,9 @@ class DiagramTask(Page):
             player.cycle_err = 0
 
         else:
+            #player.buttons = "abacaba"
             player.buttons = json.dumps(res)
-            print(json.dumps(res))
+            print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
 
 
 
