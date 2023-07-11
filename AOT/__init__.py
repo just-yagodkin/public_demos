@@ -33,7 +33,7 @@ class Player(BasePlayer):
 
     Aot_3 = models.IntegerField(
         min=1, max=10,
-        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         label='Голодны ли Вы сейчас? 1-совсем не голоден(-на); 10-очень голоден(-на)',
         widget=widgets.RadioSelectHorizontal)
 
@@ -65,12 +65,15 @@ class Player(BasePlayer):
 
     feedback2 = models.StringField(label="Были ли понятны инструкции? Если нет, то что было непонятно?")
 
-    feedback3 = models.StringField(label="Какова была Ваша стратегия при выборе ответов?")
+    feedback3 = models.StringField(
+        label="Считаете ли вы что между двумя таблицами (данные с оригинальной планетой и планеты близнеца соответственно) есть разница, если да то в чём?")
 
-    feedback4 = models.StringField(
+    feedback4 = models.StringField(label="Какова была Ваша стратегия при выборе ответов?")
+
+    feedback5 = models.StringField(
         label="Были ли понятно, что данные с планеты двойника идентичны данным, которые бы можно было получить, проведя на оригинальной планете эксперимент (пересадить часть семян)? (да/нет, что было непонятно?)")
 
-    feedback5 = models.StringField(label="Было ли понятно, что нас интересуют причинно-следственные связи?")
+    feedback6 = models.StringField(label="Было ли понятно, что нас интересуют причинно-следственные связи?")
     #
     # Aot_5 = models.IntegerField(
     #     min=1, max=5,
@@ -123,7 +126,7 @@ class MyPage1(Page):
 
 class MyPage2(Page):
     form_model = 'player'
-    form_fields = ['feedback' + str(x + 1) for x in range(5)]
+    form_fields = ['feedback' + str(x + 1) for x in range(6)]
 
 
 class ResultsWaitPage(WaitPage):

@@ -20,11 +20,24 @@ class C(BaseConstants):
 
     conf_range = range(101)
 
+    basis1 = ["nolinks", "onelink", "twolinks", "collider1", "fork", "threelinks"]
+    basis2 = ["nolinks", "onelink", "twolinks", "collider1", "fork", "threelinks"]
+    basis3 = ["nolinks", "onelink", "twolinks", "collider1", "fork", "threelinks"]
+    random.shuffle(basis1)
+    random.shuffle(basis2)
+    random.shuffle(basis3)
+
+
     task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
+    improved_task_sequence = basis1 + basis2 + basis3
+
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
     # seed = [(name, 1) for name in task_sequence]
     # print(seed)
+
+    pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
+                   'right': {'x': [1, 1, 1, 1, 1, 1, 1, 1], 'y': [1, 1, 1, 1, 1, 1, 1, 1]}}
 
     pre_data_edges = {'nolinks': [False],
                       'onelink': [
@@ -252,6 +265,7 @@ class Instruction(Page):
 
 
 class Training(Page):
+    print(C.improved_task_sequence)
     form_model = 'player'
     form_fields = ['training']
 
@@ -284,10 +298,27 @@ class Training(Page):
         return error_messages
 
 
+class Training2(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
+
+    @staticmethod
+    def vars_for_template(player):
+        left = C.pretraining['left']
+        right = C.pretraining['right']
+
+        return dict(
+            datasetobs=[(i + 1, left['x'][i], left['y'][i]) for i in range(len(left['x']))],
+            datasetint=[(i + 1, right['x'][i], right['y'][i]) for i in range(len(right['x']))],
+            frequenciesobs=["freq"] + ['0.5'] + ['0.75'],
+            frequenciesint=["freq"] + ['1'] + ['1']
+        )
+
+
 class DiagramTask(Page):
     form_model = 'player'
     form_fields = ['conf_init', 'stored', 'conf_bid', 'buttons']
-
 
     @staticmethod
     def live_method(player, data):
@@ -321,7 +352,7 @@ class DiagramTask(Page):
         for i in range(12):
             res[i] += res_before_errors[i]
 
-        #print(res)
+        # print(res)
 
         if values['conf_init'] != values['conf_bid']:
             player.conf_bid_is_random = 0
@@ -356,11 +387,9 @@ class DiagramTask(Page):
             player.cycle_err = 0
 
         else:
-            #player.buttons = "abacaba"
+            # player.buttons = "abacaba"
             player.buttons = json.dumps(res)
             print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
-
-
 
         store_array = player.stored
         edges = benchmark_diagram(player)
@@ -530,6 +559,6 @@ class Results(Page):
 
 
 if C.train:
-    page_sequence = [Instruction, Training, DiagramTask, DiagramTest, Results]
+    page_sequence = [Instruction, Training, Training2, DiagramTask, DiagramTest, Results]
 else:
     page_sequence = [Instruction, DiagramTask, DiagramTest, Results]
