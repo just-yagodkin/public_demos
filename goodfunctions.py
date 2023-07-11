@@ -1,5 +1,6 @@
 import random as rm
 import ast
+import copy
 
 
 def create_list_from_freq(freq, size=16):
@@ -513,7 +514,7 @@ def smartdatainterv(d: dict, seed=0):
        seed 5:  X Y Z   ->   Z Y X
     """
 
-    tempd = d.copy()
+    tempd = copy.deepcopy(d)
 
     if seed == 0:
         return tempd
@@ -537,11 +538,10 @@ def smartedgesinterv(l: list, seed):
        seed 4:  X Y Z   ->   Z X Y
        seed 5:  X Y Z   ->   Z Y X
     """
-    templ = l.copy()
+    templ = copy.deepcopy(l)
 
     if seed == 0 or l == [False]:
         return templ
-
 
     if seed == 1:
         for d in templ:
@@ -634,6 +634,33 @@ def fine(user: list, dgp: list):
 def accuracy(num):
     # accuracy is from 0 to 1
     return (10 - num)*0.1
+
+
+def directional_error(user: list, dgp: list):
+    count = 0
+
+    for str in user:
+        if str not in dgp:
+            if revstring(str) in dgp:  # user set an edge which is not in original data
+                count += 1
+
+    return count
+
+
+def structure_error(user: list, dgp: list):
+    count = 0
+
+    for str in user:
+        if str not in dgp:
+            if revstring(str) not in dgp:  # user set an edge which is not in original data
+                count += 1
+
+    for str in dgp:
+        if str not in user:
+            if revstring(str) not in user:  # user missed an edge
+                count += 1
+
+    return count
 
 
 ###----- TESTS -----###
