@@ -367,6 +367,376 @@
         return [value, index];
     };
 </script>
+<script>
+    function crfunc(b1, b2) {
+            if (b1) {
+                return "0";
+            } else if (b2) {
+                return "1";
+            } else {
+                return "-1";
+            }
+        }
+    
+    
+        $(document).ready(function () {
+            (function ($) {
+                $('#filter').keyup(function () {
+    
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.searchable tr').hide();
+                    $('.searchable tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+    
+                });
+    
+    
+                $('#filterx').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable tr').hide();
+                        document.getElementById('filterx0').checked = false;
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked))
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+    
+                });
+    
+    
+                $('#filterx0').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable tr').hide();
+                        document.getElementById('filterx').checked = false;
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
+                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+    
+                });
+    
+    
+                $('#filtery').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable tr').hide();
+                        document.getElementById('filtery0').checked = false;
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
+                                $(this).find('td').eq(2).text() !== "0");
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+    
+                });
+    
+    
+                $('#filtery0').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable tr').hide();
+                        document.getElementById('filtery').checked = false;
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
+                                $(this).find('td').eq(2).text() !== "1");
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(), $(this).find('td').eq(3).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+                });
+    
+    
+            }(jQuery));
+        });
+    
+    
+    $(document).ready(function () {
+            (function ($) {
+                $('#filterx_i').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable2 tr').hide();
+                        document.getElementById('filterx0_i').checked = false;
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+                });
+    
+    
+                $('#filterx0_i').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable2 tr').hide();
+                        document.getElementById('filterx_i').checked = false;
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
+                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+                });
+    
+                $('#filtery_i').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable2 tr').hide();
+                        document.getElementById('filtery0_i').checked = false;
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
+                                $(this).find('td').eq(2).text() !== "0");
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+                });
+    
+                $('#filtery0_i').on('change', function () {
+                    var out = [];
+                    var tab = 0;
+                    var filt_cut = 0;
+    
+                    if (this.checked) {
+                        $('.searchable2 tr').hide();
+                        document.getElementById('filtery_i').checked = false;
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
+                                $(this).find('td').eq(2).text() !== "1");
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+    
+    
+                    } else {
+                        $('.searchable2 tr').filter(function () {
+                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
+                            if (filt_cut) {
+                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                            }
+                            ;
+                            return (filt_cut)
+                        }).show();
+    
+                        var tab = Array.from(out.slice(1, out.length));
+                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                    }
+                });
+            }(jQuery));
+        });
+    
+    </script>
 
 <script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
