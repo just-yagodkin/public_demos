@@ -233,7 +233,7 @@ SESSION_CONFIGS = [
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
-SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=5.00, participation_fee=00.00, doc="")
+SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=3.00, participation_fee=00.00, doc="")
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -247,7 +247,7 @@ USE_POINTS = True
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = '125'
+# ADMIN_PASSWORD = '125'
 
 DEMO_PAGE_INTRO_HTML = """ """
 DEMO_PAGE_TITLE = "Behavecon 2023 Hse "
