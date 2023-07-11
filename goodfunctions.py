@@ -695,7 +695,7 @@ print(check_frequencies(intervente('nolinks', d['nolinks'], "z")), "- frequencie
 
 print()
 print()
-'''
+
 
 print(d['twolinks'], "- twolinks")
 print(check_frequencies(d['twolinks']), "- frequencies")
@@ -735,7 +735,7 @@ print(check_frequencies(intervente('fork', d['fork'], "y")), "- frequencies agai
 # print(intervente('fork', d['fork'], "z"), "- orange distribution (Z fixed)")
 # print(check_frequencies(intervente('fork', d['fork'], "z")), "- frequencies again")
 
-'''
+
 print()
 print()
 
