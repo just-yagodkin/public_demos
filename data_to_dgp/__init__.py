@@ -9,7 +9,7 @@ Your app description
 
 
 class C(BaseConstants):
-    train = True
+    train = False
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
