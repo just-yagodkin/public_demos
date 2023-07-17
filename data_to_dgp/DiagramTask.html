@@ -393,7 +393,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="30%">
     <col width="30%">
     <tr>
-        <td id="colorsint" style="font-size: 12px; line-height: 0.8; position: relative; right: -15px; bottom: -5px"></td>
+        <td id="colorsint"
+            style="font-size: 12px; line-height: 0.8; position: relative; right: -15px; bottom: -5px"></td>
         <td>
             <center>
                 <div id="piechart1int"></div>
@@ -425,8 +426,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     var freqsintjs = js_vars.frequenciesint;
     var freqsobs = js_vars.frequenciesobs;
     var flag = 0;
-    document.getElementById('colors').innerHTML = '<div id="rectangle" style="width: 14px; height: 13px; background: skyblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1</div><br><div id="rectangle" style="width: 14px; height: 13px; background: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-0</div>'
-    document.getElementById('colorsint').innerHTML = '<div id="rectangle" style="width: 14px; height: 13px; background: skyblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1</div><br><div id="rectangle" style="width: 14px; height: 13px; background: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-0</div>'
+    document.getElementById('colors').innerHTML = '<div id="rectangle" style="width: 14px; height: 14px; background: skyblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:1</div><br><div id="rectangle" style="width: 14px; height: 14px; background: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:0</div>'
+    document.getElementById('colorsint').innerHTML = '<div id="rectangle" style="width: 14px; height: 14px; background: skyblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:1</div><br><div id="rectangle" style="width: 14px; height: 14px; background: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:0</div>'
 
     //document.getElementById('colors').innerHTML = "🟦-1 <br> ⬛️-0"
 
@@ -538,7 +539,8 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
-    confnum = getRandomIntInclusive(0,20)*5
+
+    confnum = getRandomIntInclusive(0, 20) * 5
 
 
 </script>
@@ -1537,21 +1539,23 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 </script>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-<a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    SHOW INSTRUCTIONS
-  </a>
+    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+       aria-expanded="false" aria-controls="collapseExample">
+        SHOW INSTRUCTIONS
+    </a>
 </div>
-  <div class="collapse" id="collapseExample">
-    <div id = "presentation" style="text-align: center">
-        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div class="collapse" id="collapseExample">
+    <div id="presentation" style="text-align: center">
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000"
+                frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true"
+                webkitallowfullscreen="true"></iframe>
     </div>
-  </div>
+</div>
 
 <script>
-    if (window.location.hash == '#en'){
+    if (window.location.hash == '#en') {
         document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
-    }
-    else if(window.location.hash == '#ru'){
+    } else if (window.location.hash == '#ru') {
         document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
     }
     console.log(window.location.hash)

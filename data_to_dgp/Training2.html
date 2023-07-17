@@ -57,25 +57,23 @@
 <br>
 <br>
 
-<dl class="lng-tab12">This is the last demo material before moving on to the task. It presents exactly the same observations as the last demo, with two differences.</dl>
-<dl class="lng-tab22">First, the mature seeds are still arranged by the same bed numbers, but there is no more color selection. Second, bed 1 in the table on the left and bed 3 in the table on the right are now on rocky soils. Note that although the bed numbers are not the same, the number of mature seeds distributed on the rocky beds is always the same on both planets.</dl>
-
-
-
+<dl class="lng-tab12">This is the last demo material before moving on to the task. It presents exactly the same
+    observations as the last demo, with two differences.
+</dl>
+<dl class="lng-tab22">First, the mature seeds are still arranged by the same bed numbers, but there is no more color
+    selection. Second, bed 1 in the table on the left and bed 3 in the table on the right are now on rocky soils. Note
+    that although the bed numbers are not the same, the number of mature seeds distributed on the rocky beds is always
+    the same on both planets.
+</dl>
 
 
 <br>
-<table style="width:100%;">
+<table style="width: 100%;border: inherit">
     <tr>
-        <td  style="border:15px solid white;">
+        <td style="border-right: 40px solid white">
+            <table id="observ" class="table"
+                   style="line-height: 0.8; width: 100%; border-radius: 25px 25px 25px 25px;background-color: #f2f2f2; border: white">
 
-
-
-
-            <table id="observ" class="table table-striped" style="line-height: 0.8;">
-                <col style="width:20%">
-                <col style="width:40%">
-                <col style="width:40%">
                 <tbody class="searchable">
                 <tr style="text-align: center">
                     <td class="searchable"></td>
@@ -93,7 +91,7 @@
 
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>1</td>
                     <td style="text-align: center">1</td>
                     <td style="text-align: center">0</td>
@@ -105,7 +103,7 @@
                     <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>3</td>
                     <td style="text-align: center">1</td>
                     <td style="text-align: center">1</td>
@@ -117,7 +115,7 @@
                     <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>5</td>
                     <td style="text-align: center">0</td>
                     <td style="text-align: center">1</td>
@@ -129,7 +127,7 @@
                     <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>7</td>
                     <td style="text-align: center">0</td>
                     <td style="text-align: center">0</td>
@@ -144,9 +142,9 @@
             </table>
         </td>
 
-
-        <td style="border:15px solid white;">
-            <table id="interv" class="table table-striped" style="line-height: 0.8;">
+        <td>
+            <table id="interv" class="table"
+                   style="line-height: 0.8; width: 100%; border-radius: 25px 25px 25px 25px;background-color: #f2f2f2; border: white">
 
                 <tbody class="searchable2">
                 <tr style="text-align: center">
@@ -166,7 +164,7 @@
                         <div class="input-group"><span class="input-group-addon"></span>
 
                 </tr>
-                <tr>
+                <tr style="background-color: white">
                     <td>1</td>
                     <td style="text-align: center">1</td>
                     <td style="text-align: center">1</td>
@@ -178,7 +176,7 @@
                     <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>3</td>
                     <td style="text-align: center">1</td>
                     <td style="text-align: center">0</td>
@@ -190,7 +188,7 @@
                     <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>5</td>
                     <td style="text-align: center">1</td>
                     <td style="text-align: center">1</td>
@@ -202,7 +200,7 @@
                     <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>7</td>
                     <td style="text-align: center">1</td>
                     <td style="text-align: center">1</td>
@@ -215,13 +213,10 @@
                 </tr>
             </table>
         </td>
-
-
-    </tr>
 </table>
 
 <script>
-function crfunc(b1, b2) {
+    function crfunc(b1, b2) {
         if (b1) {
             return "0";
         } else if (b2) {
@@ -420,7 +415,7 @@ function crfunc(b1, b2) {
     });
 
 
-$(document).ready(function () {
+    $(document).ready(function () {
         (function ($) {
             $('#filterx_i').on('change', function () {
                 var out = [];
@@ -596,21 +591,23 @@ $(document).ready(function () {
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+       aria-expanded="false" aria-controls="collapseExample">
         SHOW INSTRUCTIONS
-      </a>
+    </a>
+</div>
+<div class="collapse" id="collapseExample" style="justify-content: center">
+    <div id="presentation" style="text-align: center">
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000"
+                frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true"
+                webkitallowfullscreen="true"></iframe>
     </div>
-      <div class="collapse" id="collapseExample" style="justify-content: center">
-        <div id = "presentation" style="text-align: center">
-            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-        </div>
-      </div>
+</div>
 
 <script>
-    if (window.location.hash == '#en'){
+    if (window.location.hash == '#en') {
         document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
-    }
-    else if(window.location.hash == '#ru'){
+    } else if (window.location.hash == '#ru') {
         document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
     }
     console.log(window.location.hash)

@@ -16,7 +16,7 @@ const langArr = {
 
     "tab2":{
         "ru": "Перед вами две таблицы с наблюдениями. И для простоты в них выписаны наблюдения только для X и Y. Таблица справа, это таблица для планеты-близнеца (все зёрна переменной X зрелые).",
-        "en": "He we have two tables with observations. For simplicity, only the observations for X and Y are written out in them. The table on the right is the table for the twin planet (all grains of variable X are mature)."
+        "en": "Here we have two tables with observations. For simplicity, only the observations for X and Y are written out in them. The table on the right is the table for the twin planet (all grains of variable X are mature)."
     },
 
     "tab3":{
