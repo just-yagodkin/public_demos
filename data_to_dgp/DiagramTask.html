@@ -332,7 +332,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tbody>
 
         {% for i in frequenciesobs %}
-        <td class="searchable3">{{ i }}</td>
+        <td class="searchable3" style="text-align: center">{{ i }}</td>
         {% endfor %}
         </tr>
         <tr>
@@ -352,7 +352,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tbody>
 
         {% for i in frequenciesint %}
-        <td class="searchable3">{{ i }}</td>
+        <td class="searchable3" style="text-align: center">{{ i }}</td>
         {% endfor %}
         </tr>
         <tr>
@@ -368,7 +368,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="30%">
     <col width="30%">
     <tr>
-        <td></td>
+        <td id="colors" style="font-size: 12px; line-height: 0.8; position: relative; right: -15px; bottom: -5px"></td>
         <td>
             <center>
                 <div id="piechart1"></div>
@@ -393,7 +393,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     <col width="30%">
     <col width="30%">
     <tr>
-        <td></td>
+        <td id="colorsint" style="font-size: 12px; line-height: 0.8; position: relative; right: -15px; bottom: -5px"></td>
         <td>
             <center>
                 <div id="piechart1int"></div>
@@ -425,6 +425,11 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     var freqsintjs = js_vars.frequenciesint;
     var freqsobs = js_vars.frequenciesobs;
     var flag = 0;
+    document.getElementById('colors').innerHTML = '<div id="rectangle" style="width: 14px; height: 13px; background: skyblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1</div><br><div id="rectangle" style="width: 14px; height: 13px; background: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-0</div>'
+    document.getElementById('colorsint').innerHTML = '<div id="rectangle" style="width: 14px; height: 13px; background: skyblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1</div><br><div id="rectangle" style="width: 14px; height: 13px; background: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-0</div>'
+
+    //document.getElementById('colors').innerHTML = "🟦-1 <br> ⬛️-0"
+
 </script>
 
 
@@ -796,7 +801,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -813,7 +818,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartobs();
             });
@@ -843,7 +848,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -860,7 +865,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartobs();
             });
@@ -890,7 +895,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -907,7 +912,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartobs();
             });
@@ -937,7 +942,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -954,7 +959,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartobs();
             });
@@ -984,7 +989,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1001,7 +1006,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartobs();
             });
@@ -1031,7 +1036,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1049,7 +1054,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartobs();
             });
@@ -1084,7 +1089,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1101,7 +1106,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartint();
             });
@@ -1131,7 +1136,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1148,7 +1153,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartint();
             });
@@ -1177,7 +1182,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1194,7 +1199,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartint();
             });
@@ -1223,7 +1228,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1240,7 +1245,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartint();
             });
@@ -1270,7 +1275,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1287,7 +1292,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartint();
             });
@@ -1317,7 +1322,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
 
 
                 } else {
@@ -1334,7 +1339,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
                     var tab = Array.from(out.slice(1, out.length));
                     var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
                     out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length, sum(transposed_tab[2]) / transposed_tab[2].length];
-                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td><td>';
+                    freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out2[0].toFixed(2) + '</td><td style="width:30%">' + out2[1].toFixed(2) + '</td><td style="width:30%">' + out2[2].toFixed(2) + '</td>';
                 }
                 drawChartint();
             });
@@ -1391,9 +1396,9 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             if (flag !== 0) {
                 xid = document.getElementById('freqsint')
                 out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(), $(xid).find('td').eq(3).text()]
-                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td><td>';  // если поставить здесь toFixed(2) то полетит кнопка
+                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td>';  // если поставить здесь toFixed(2) то полетит кнопка
             } else {
-                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + freqsintjs[1] + '</td><td style="width:30%">' + freqsintjs[2] + '</td><td style="width:30%">' + freqsintjs[3] + '</td><td>';
+                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + freqsintjs[1] + '</td><td style="width:30%">' + freqsintjs[2] + '</td><td style="width:30%">' + freqsintjs[3] + '</td>';
             }
         }
     }
@@ -1421,7 +1426,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 
             ids = document.getElementById('freqs')
             out3 = [$(ids).find('td').eq(1).text(), $(ids).find('td').eq(2).text(), $(ids).find('td').eq(3).text()]
-            freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td><td>';  //если здесь поставить .toFixed(2) то полетит кнопка
+            freqs.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td>';  //если здесь поставить .toFixed(2) то полетит кнопка
 
             flag = 1;
 
@@ -1459,9 +1464,9 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             if (flag !== 0) {
                 xid = document.getElementById('freqsint')
                 out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(), $(xid).find('td').eq(3).text()]
-                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td><td>';
+                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td>';
             } else {
-                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + freqsintjs[1] + '</td><td style="width:30%">' + freqsintjs[2] + '</td><td style="width:30%">' + freqsintjs[3] + '</td><td>';
+                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + freqsintjs[1] + '</td><td style="width:30%">' + freqsintjs[2] + '</td><td style="width:30%">' + freqsintjs[3] + '</td>';
             }
         }
     }
@@ -1513,9 +1518,9 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             if (flag !== 0) {
                 xid = document.getElementById('freqsint')
                 out3 = [$(xid).find('td').eq(1).text(), $(xid).find('td').eq(2).text(), $(xid).find('td').eq(3).text()]
-                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td><td>';         // если поставить здесь .toFixed(2) то полетит кнопка
+                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + out3[0] + '</td><td style="width:30%">' + out3[1] + '</td><td style="width:30%">' + out3[2] + '</td>';         // если поставить здесь .toFixed(2) то полетит кнопка
             } else {
-                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + freqsintjs[1] + '</td><td style="width:30%">' + freqsintjs[2] + '</td><td style="width:30%">' + freqsintjs[3] + '</td><td>';
+                freqsint.innerHTML = '<td style="width:10%">' + 'freq' + '</td><td style="width:30%">' + freqsintjs[1] + '</td><td style="width:30%">' + freqsintjs[2] + '</td><td style="width:30%">' + freqsintjs[3] + '</td>';
             }
         }
     }
@@ -1537,12 +1542,19 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
   </a>
 </div>
   <div class="collapse" id="collapseExample">
-    <div style="text-align: center">
+    <div id = "presentation" style="text-align: center">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
     </div>
   </div>
 
-
-
+<script>
+    if (window.location.hash == '#en'){
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    else if(window.location.hash == '#ru'){
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    console.log(window.location.hash)
+</script>
 
 {{ endblock }}
