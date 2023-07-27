@@ -39,7 +39,7 @@
 
 {{ block content }}
 
-<div class="lang-container" style="text-align:right">
+<tr class="lang-container" style="text-align:right">
     <table>
         <col width="81%">
         <col width="19%">
@@ -56,7 +56,7 @@
             </td>
         </tr>
     </table>
-</div>
+</tr>
 
 <!-- {{ formfield "training"  }} -->
 
@@ -64,9 +64,15 @@
 <br>
 
 <dl class="lng-tab1">Before we move on to the task itself, let's look at the demonstration material.</dl>
-<dl class="lng-tab2">Here we have two tables with observations. For simplicity, only the observations for X and Y are written out in them. The table on the right is the table for the twin planet (all grains of variable X are mature).</dl>
-<dl class="lng-tab3">In this demo, to make it easier for you to familiarize yourself with the problem, two simplifications are made. All mature grains are highlighted in color. All beds are not over rocky soils.</dl>
-<dl class="lng-tab4">Please fill in the answer form according to your assumptions about what relationships between strong and weak plants follow from these tables.</dl>
+<dl class="lng-tab2">Here we have two tables with observations. For simplicity, only the observations for X and Y are
+    written out in them. The table on the right is the table for the twin planet (all grains of variable X are mature).
+</dl>
+<dl class="lng-tab3">In this demo, to make it easier for you to familiarize yourself with the problem, two
+    simplifications are made. All mature grains are highlighted in color. All beds are not over rocky soils.
+</dl>
+<dl class="lng-tab4">Please fill in the answer form according to your assumptions about what relationships between
+    strong and weak plants follow from these tables.
+</dl>
 
 <!--
 <br>
@@ -82,14 +88,12 @@
 </div>-->
 
 <br>
-<table style="width:100%;">
+
+<table style="width: 100%;border: inherit">
     <tr>
-        <td  style="border:15px solid white;">
-
-
-
-
-            <table id="observ" class="table table-striped" style="line-height: 0.8;">
+        <td style="border-right: 40px solid white">
+            <table id="observ" class="table"
+                   style="line-height: 0.8; width: 100%; border-radius: 25px 25px 25px 25px;background-color: #f2f2f2; border: white">
 
                 <tbody class="searchable">
                 <tr style="text-align: center">
@@ -108,60 +112,60 @@
 
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>2</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>3</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>4</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>5</td>
-                    <td>0</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="text-align: center">0</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>6</td>
-                    <td>0</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="text-align: center">0</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>7</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td style="text-align: center">0</td>
+                    <td style="text-align: center">0</td>
                 </tr>
 
                 <tr>
                     <td>8</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td style="text-align: center">0</td>
+                    <td style="text-align: center">0</td>
                 </tr>
 
             </table>
         </td>
 
-
-        <td style="border:15px solid white;">
-            <table id="interv" class="table table-striped" style="line-height: 0.8;">
+        <td>
+            <table id="interv" class="table"
+                   style="line-height: 0.8; width: 100%; border-radius: 25px 25px 25px 25px;background-color: #f2f2f2; border: white">
 
                 <tbody class="searchable2">
                 <tr style="text-align: center">
@@ -181,59 +185,57 @@
                         <div class="input-group"><span class="input-group-addon"></span>
 
                 </tr>
-                <tr>
+                <tr style="background-color: white">
                     <td>1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>2</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>3</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>4</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>5</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>6</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
                 </tr>
 
-                <tr>
+                <tr style="background-color: white">
                     <td>7</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
                 </tr>
 
                 <tr>
                     <td>8</td>
-                    <td style="font-weight: bold; color: #d9534f; font-size: 140%">1</td>
-                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
                 </tr>
             </table>
         </td>
-
-
-    </tr>
 </table>
+
 
 <input hidden name="training"/>
 {{ formfield_errors 'training' }}
@@ -369,387 +371,399 @@
 </script>
 <script>
     function crfunc(b1, b2) {
-            if (b1) {
-                return "0";
-            } else if (b2) {
-                return "1";
-            } else {
-                return "-1";
-            }
+        if (b1) {
+            return "0";
+        } else if (b2) {
+            return "1";
+        } else {
+            return "-1";
         }
-    
-    
-        $(document).ready(function () {
-            (function ($) {
-                $('#filter').keyup(function () {
-    
-                    var rex = new RegExp($(this).val(), 'i');
-                    $('.searchable tr').hide();
-                    $('.searchable tr').filter(function () {
-                        return rex.test($(this).text());
-                    }).show();
-    
-                });
-    
-    
-                $('#filterx').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable tr').hide();
-                        document.getElementById('filterx0').checked = false;
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
-                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked))
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-    
-                });
-    
-    
-                $('#filterx0').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable tr').hide();
-                        document.getElementById('filterx').checked = false;
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
-                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-    
-                });
-    
-    
-                $('#filtery').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable tr').hide();
-                        document.getElementById('filtery0').checked = false;
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
-                                $(this).find('td').eq(2).text() !== "0");
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-    
-                });
-    
-    
-                $('#filtery0').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable tr').hide();
-                        document.getElementById('filtery').checked = false;
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
-                                $(this).find('td').eq(2).text() !== "1");
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(), $(this).find('td').eq(3).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-                });
-    
-    
-            }(jQuery));
-        });
-    
-    
+    }
+
+
     $(document).ready(function () {
-            (function ($) {
-                $('#filterx_i').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable2 tr').hide();
-                        document.getElementById('filterx0_i').checked = false;
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
-                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-                });
-    
-    
-                $('#filterx0_i').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable2 tr').hide();
-                        document.getElementById('filterx_i').checked = false;
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
-                                $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-                });
-    
-                $('#filtery_i').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable2 tr').hide();
-                        document.getElementById('filtery0_i').checked = false;
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
-                                $(this).find('td').eq(2).text() !== "0");
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-                });
-    
-                $('#filtery0_i').on('change', function () {
-                    var out = [];
-                    var tab = 0;
-                    var filt_cut = 0;
-    
-                    if (this.checked) {
-                        $('.searchable2 tr').hide();
-                        document.getElementById('filtery_i').checked = false;
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
-                                $(this).find('td').eq(2).text() !== "1");
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-    
-    
-                    } else {
-                        $('.searchable2 tr').filter(function () {
-                            filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
-                            if (filt_cut) {
-                                out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
-                            }
-                            ;
-                            return (filt_cut)
-                        }).show();
-    
-                        var tab = Array.from(out.slice(1, out.length));
-                        var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
-                        out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
-                        freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
-                    }
-                });
-            }(jQuery));
-        });
-    
-    </script>
+        (function ($) {
+            $('#filter').keyup(function () {
+
+                var rex = new RegExp($(this).val(), 'i');
+                $('.searchable tr').hide();
+                $('.searchable tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+
+            });
+
+
+            $('#filterx').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filterx0').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked))
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+
+            });
+
+
+            $('#filterx0').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filterx').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+
+            });
+
+
+            $('#filtery').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filtery0').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
+                            $(this).find('td').eq(2).text() !== "0");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+
+            });
+
+
+            $('#filtery0').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filtery').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
+                            $(this).find('td').eq(2).text() !== "1");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(), $(this).find('td').eq(3).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+
+        }(jQuery));
+    });
+
+
+    $(document).ready(function () {
+        (function ($) {
+            $('#filterx_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filterx0_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+
+            $('#filterx0_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filterx_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+            $('#filtery_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filtery0_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
+                            $(this).find('td').eq(2).text() !== "0");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+            $('#filtery0_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filtery_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
+                            $(this).find('td').eq(2).text() !== "1");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+        }(jQuery));
+    });
+
+</script>
 
 <script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
 <script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+       aria-expanded="false" aria-controls="collapseExample">
         SHOW INSTRUCTIONS
-      </a>
+    </a>
+</div>
+<div class="collapse" id="collapseExample" style="justify-content: center">
+    <div id="presentation" style="text-align: center">
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000"
+                frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true"
+                webkitallowfullscreen="true"></iframe>
     </div>
-      <div class="collapse" id="collapseExample">
-        <div style="text-align: center">
-            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-        </div>
-      </div>
+</div>
+
+<script>
+    if (window.location.hash == '#en') {
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    } else if (window.location.hash == '#ru') {
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    console.log(window.location.hash)
+</script>
 
 {{ endblock }}
