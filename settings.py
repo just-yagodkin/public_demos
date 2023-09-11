@@ -202,8 +202,8 @@ SESSION_CONFIGS = [
 
     dict(
         name='AOT',
-        display_name="surveys",
-        app_sequence=['AOT', 'MPL', 'bret', 'payment_info'],
+        display_name="trains with oth",
+        app_sequence=['trains', 'AOT', 'MPL', 'bret', 'payment_info'],
         num_demo_participants=1,
 
     ),

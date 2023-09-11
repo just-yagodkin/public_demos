@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task. Period {{ view.round_number }} out of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+    <!-- {{ form.task.errors }} -->
+    <div class="card" style="width: 64%;">
+        <div class="card-body">
+            <h5 class="card-title">Instructions:</h5>
+            To win click anywhere on the green field while it is in within the arc
+        </div>
+    </div>
+    <div id="p5cont"></div>
+
+    <input type="hidden" name="task" value="False" id="id_task" name="task"/>
+
+
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css">
+{% endblock %}
+{% block scripts %}
+
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+    <script>
+        var speed = {{ Constants.speed|json }};
+        var choose_difficulty = false;
+        var chosen_arc_id = {{player.difficulty|json  }};
+
+        ;
+
+    </script>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+    <link rel="preload" href="{% static 'js/dist/train.js' %}" as="script">
+    <script src="{% static 'js/dist/train.js' %}"></script>
+
+{% endblock %}
