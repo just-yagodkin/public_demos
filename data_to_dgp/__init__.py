@@ -10,6 +10,7 @@ Your app description
 
 class C(BaseConstants):
     train = False
+    treatment = True
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
@@ -30,8 +31,8 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    # task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
-    task_sequence = basis1 + basis2 + basis3
+    task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
+    # task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
     # seed = [(name, 1) for name in task_sequence]
@@ -109,9 +110,16 @@ class C(BaseConstants):
     # |       |
     # |       V
     # ▶  ->  Z
-
-    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
-                              seed]
+    # [f(x) if x is not None else '' for x in xs]
+    if treatment:
+        preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])]
+                                  if (x[0] in ['nolinks', 'fork', 'threelinks'])
+                                  else [x[0],
+                                        gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])]
+                                  for x in seed]
+    else:
+        preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
+                                  seed]
 
     # preinterventionalx_data = {  # INTERVENTION ON X
     #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'x'), NOLINKSSEED),
@@ -266,7 +274,7 @@ class Instruction(Page):
 
 
 class Training(Page):
-    #print(C.improved_task_sequence)
+    # print(C.improved_task_sequence)
     form_model = 'player'
     form_fields = ['training']
 
@@ -432,6 +440,8 @@ class DiagramTask(Page):
                 str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             seed=C.seed[player.round_number - 1][1],
+            treatment=C.treatment,
+            dgptype=C.task_sequence[player.round_number - 1]
         )
 
 

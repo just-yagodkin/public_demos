@@ -319,8 +319,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
                      range(round(freq_z_when_name * length))]
                 x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0
-                      for i
-                      in
+                      for i in
                       range(round(length * (1 - freq_z_when_name)))]
             else:
                 z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
@@ -330,6 +329,9 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                     1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0
                     for i in
                     range(round(length * (1 - freq_z_when_not_name)))]
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
         elif key == 'threelinks':
             if fixed == 1:
@@ -338,6 +340,9 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             else:
                 x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
                 z = [0] * length
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
         # elif key == 'threelinks':
         #    if fixed == 1:
         #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -361,10 +366,16 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                      range(round(freq_x_when_not_name * length))]
                 z += [1 if i < round(freq_z_when_not_name * round(length * (1 - freq_x_when_not_name))) else 0 for i in
                       range(round(length * (1 - freq_x_when_not_name)))]
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
         else:
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
     ###----- X BLOCK -----###
 
@@ -372,12 +383,17 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         if key == 'twolinks':
             if fixed == 1:
                 x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
-
                 z = [1 if i < round(freq_z_when_y * freq_x_when_name * length) else 0 for i in
                      range(round(freq_x_when_name * length))]
+
                 z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_y * length - 1) else 0 for i in
                       # 1 is a crunch :(
                       range(length - round(freq_x_when_name * length))]
+
+                interv_dict[st[1]] = z
+                interv_dict[st[0]] = x
+                return interv_dict
+
             else:
                 print("Don't use zero!! PLS!")
                 pass
@@ -412,6 +428,11 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 z += [
                     1 if i < round(check_frequencies(dictionary)[2] * round(length * (1 - freq_x_when_not_name))) else 0
                     for i in range(round(length * (1 - freq_x_when_not_name)))]
+
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
+
         elif key == "collider":
             if fixed == 1:
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
@@ -419,6 +440,10 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             else:
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
                 x = [0] * length
+
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
     ###----- Z BLOCK -----###
 
@@ -442,8 +467,8 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
             x = dictionary[st[0]].copy()
 
-    interv_dict[st[1]] = z
-    interv_dict[st[0]] = x
+    #interv_dict[st[1]] = z
+    #interv_dict[st[0]] = x
 
     return interv_dict
 

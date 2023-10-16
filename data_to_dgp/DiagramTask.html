@@ -133,16 +133,20 @@
                     let showobsclick = js_vars.showobsclick || 0;
 
                     let seed = js_vars.seed;
-
-                    function minifuncy(number) {
-                        if (number == 1 || number == 4) {
-                            return "Z"
+                    let treatment = js_vars.treatment;
+                    let dgptype = js_vars.dgptype;
+                    console.log(dgptype)
+                    function minifuncy(number, tr, type) {
+                        console.log(tr, type)
+                        if (tr && (type === 'onelink' || type === 'twolinks' || type === 'collider1')){
+                            if (number === 3 || number === 5) {return "Z"}
+                            if (number === 0 || number === 1) {return "X"}
+                            if (number === 2 || number === 4) {return "Y"}
                         }
-                        if (number == 0 || number == 5) {
-                            return "Y"
-                        }
-                        if (number == 2 || number == 3) {
-                            return "X"
+                        else{
+                            if (number === 1 || number === 4) {return "Z"}
+                            if (number === 0 || number === 5) {return "Y"}
+                            if (number === 2 || number === 3) {return "X"}
                         }
                     }
 
@@ -174,7 +178,7 @@
                     butx = document.getElementById("myButtonX");
                     butx.innerText = 'Force X=1 (DO X)';
                     //if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
-                    if (minifuncy(seed) == 'X') {
+                    if (minifuncy(seed, treatment, dgptype) == 'X') {
                         butx.style.display = "inline-block";
                     }
                 </script>
@@ -196,7 +200,7 @@
                     buty = document.getElementById("myButtonY");
                     buty.innerText = 'Force Y=1 (DO Y)';
                     //if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
-                    if (minifuncy(seed) == 'Y') {
+                    if (minifuncy(seed, treatment, dgptype) == 'Y') {
                         buty.style.display = "inline-block";
                     }
 
@@ -219,7 +223,7 @@
                     butz = document.getElementById("myButtonZ");
                     butz.innerText = 'Force Z=1 (DO Z)';
                     //if (minifuncx(seed) == 'Z' || minifuncy(seed) == 'Z' || minifuncz(seed) == 'Z'){butz.style.display = "inline-block";}
-                    if (minifuncy(seed) == 'Z') {
+                    if (minifuncy(seed, treatment, dgptype) == 'Z') {
                         butz.style.display = "inline-block";
                     }
 
@@ -1357,7 +1361,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         freqsint.hidden = false;
         freqs.hidden = true;
 
-        if (minifuncy(seed) == "X") {
+        if (minifuncy(seed, treatment, dgptype) == "X") {
             var anoth_element = document.getElementById("interv");
         }
 
@@ -1375,11 +1379,11 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             document.getElementById('pchartsint').hidden = true;
 
 ///////
-            if (minifuncy(seed) == "Z") {
+            if (minifuncy(seed, treatment, dgptype) == "Z") {
                 butz.style.display = "inline-block";
             }
 
-            if (minifuncy(seed) == "X") {
+            if (minifuncy(seed, treatment, dgptype) == "X") {
                 butx.style.display = "inline-block";
             }
 ///////
@@ -1436,16 +1440,16 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             butz.innerText = "Force Z=1 (DO Z)";
             butx.innerText = "Force X=1 (DO X)";
 
-            if (minifuncy(seed) == "Z") {
+            if (minifuncy(seed, treatment, dgptype) == "Z") {
                 butz.style.display = "inline-block";
             }
 
-            if (minifuncy(seed) == "X") {
+            if (minifuncy(seed, treatment, dgptype) == "X") {
                 butx.style.display = "inline-block";
             }
 
 ///////
-            if (minifuncy(seed) == "Y") {
+            if (minifuncy(seed, treatment, dgptype) == "Y") {
                 buty.style.display = "inline-block";
             } else {
                 buty.style.display = "none";
@@ -1481,7 +1485,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         freqsint.hidden = false;
         freqs.hidden = true;
 
-        if (minifuncy(seed) == "Z") {
+        if (minifuncy(seed, treatment, dgptype) == "Z") {
             var anoth_element = document.getElementById("interv");
         }
 
@@ -1497,11 +1501,11 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             document.getElementById('pchartsint').hidden = true;
 
 ///////
-            if (minifuncy(seed) == "Z") {
+            if (minifuncy(seed, treatment, dgptype) == "Z") {
                 butz.style.display = "inline-block";
             }
 
-            if (minifuncy(seed) == "X") {
+            if (minifuncy(seed, treatment, dgptype) == "X") {
                 butx.style.display = "inline-block";
             }
 ///////
