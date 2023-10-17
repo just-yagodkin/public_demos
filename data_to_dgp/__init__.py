@@ -2,6 +2,7 @@ from otree.api import *
 import goodfunctions as gf
 import random
 import json
+import itertools
 
 doc = """
 Your app description
@@ -121,27 +122,6 @@ class C(BaseConstants):
         preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
                                   seed]
 
-    # preinterventionalx_data = {  # INTERVENTION ON X
-    #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'x'), NOLINKSSEED),
-    #     'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'x'), ONELINKSEED),
-    #     'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'x'), TWOLINKSSEED),
-    #     'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1'], 'x'),
-    #                                     COLLIDER1SEED),
-    #     'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork'], 'x'), FORKSEED),
-    #     'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'x'),
-    #                                      THREELINKSSEED)
-    # }
-
-    # preinterventionalz_data = {  # INTERVENTION ON Z
-    #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'z'), NOLINKSSEED),
-    #     'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'z'), ONELINKSEED),
-    #     'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'z'), TWOLINKSSEED),
-    #     'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1'], 'z'),
-    #                                     COLLIDER1SEED),
-    #     'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork'], 'z'), FORKSEED),
-    #     'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'z'),
-    #                                      THREELINKSSEED)
-    # }
 
     if len(task_sequence) < NUM_ROUNDS:
         NUM_ROUNDS = len(task_sequence)
@@ -217,6 +197,8 @@ class Player(BasePlayer):
 
     cycle_err = models.IntegerField(initial=0)
 
+    time_pressure = models.BooleanField()
+
     def conf_bid_error_message(player, value):
         print('value is', value)
         return 'not an option'
@@ -241,6 +223,10 @@ class Player(BasePlayer):
         label='Вам нравится проводить время на свежем воздухе',
         widget=widgets.RadioSelectHorizontal)
 
+def creating_session(subsession):
+    pressures = itertools.cycle([True, False])
+    for player in subsession.get_players():
+        player.time_pressure = next(pressures)
 
 # Functions
 def datatask_output_json(player: Player):
