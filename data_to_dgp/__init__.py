@@ -131,11 +131,10 @@ class C(BaseConstants):
 
     observational_data = gf.reshuffle(preobservational_data)
 
-    random_state = random.randint(0, 1000)
-    interventional_data = gf.reshuffle(preinterventional_data, random_state=random_state)
+    interventional_data = gf.reshuffle(preinterventional_data)
     print(interventional_data)
 
-    interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment, random_state=random_state)
+    interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
     print(interventional_data_treatment)
 
     # interventionalx_data = gf.reshuffle(preinterventionalx_data)

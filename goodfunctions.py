@@ -188,9 +188,9 @@ def check_dependencies(dictionary: dict):
 #         shuffle_coloumns(new_dict[key])
 #     return new_dict
 
-def reshuffle(lst, random_state=42):
+def reshuffle(lst):
     new_list = lst.copy()
-    return [[x[0], shuffle_coloumns(x[1], random_state=random_state)] for x in new_list]
+    return [[x[0], shuffle_coloumns(x[1])] for x in new_list]
 
 
 def reshuffleold(dictionary: dict):
@@ -201,12 +201,12 @@ def reshuffleold(dictionary: dict):
     return new_dict
 
 
-def shuffle_coloumns(dictionary: dict, random_state=42):
+def shuffle_coloumns(dictionary: dict):
     """influence on dictionary(tabs) and shuffle coloumn(strings)
        returns the shuffled dictionary"""
 
     shufflelist = [i for i in range(len(dictionary[list(dictionary.keys())[0]]))]  # list(dictionary.keys())[0] = 'x'
-    rm.Random(random_state).shuffle(shufflelist)
+    rm.shuffle(shufflelist)
     tempx, tempy, tempz = [dictionary[list(dictionary.keys())[i]].copy() for i in range(3)]
     for i in range(len(shufflelist)):
         dictionary[list(dictionary.keys())[0]][shufflelist[i]] = tempx[i]  # list(dictionary.keys())[0] = 'x'
