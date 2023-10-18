@@ -11,11 +11,11 @@ Your app description
 
 class C(BaseConstants):
     train = False
-    treatment = True
+    # treatment = True
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
-    SHOWING_INFORMATION_EDGE = 0.32  # you will see a feedback only after this percent of rounds
+    SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
@@ -32,7 +32,7 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
+    task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "threelinks", "nolinks", "onelink"]
     # task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
@@ -112,15 +112,16 @@ class C(BaseConstants):
     # |       V
     # ▶  ->  Z
     # [f(x) if x is not None else '' for x in xs]
-    if treatment:
-        preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])]
-                                  if (x[0] in ['nolinks', 'fork', 'threelinks'])
-                                  else [x[0],
-                                        gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])]
-                                  for x in seed]
-    else:
-        preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
-                                  seed]
+
+    preinterventional_data_treatment = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])]
+                                        if (x[0] in ['nolinks', 'twolinks', 'collider1'])
+                                        else [x[0],
+                                              gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]], name='x'),
+                                                                 x[1])]
+                                        for x in seed]
+
+    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
+                              seed]
 
 
     if len(task_sequence) < NUM_ROUNDS:
@@ -130,7 +131,13 @@ class C(BaseConstants):
 
     observational_data = gf.reshuffle(preobservational_data)
 
-    interventional_data = gf.reshuffle(preinterventional_data)
+    random_state = random.randint(0, 1000)
+    interventional_data = gf.reshuffle(preinterventional_data, random_state=random_state)
+    print(interventional_data)
+
+    interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment, random_state=random_state)
+    print(interventional_data_treatment)
+
     # interventionalx_data = gf.reshuffle(preinterventionalx_data)
     # interventionalz_data = gf.reshuffle(preinterventionalz_data)
 
@@ -140,11 +147,6 @@ class C(BaseConstants):
     # interventional_data = preinterventional_data
     # interventionalx_data = preinterventionalx_data
     # interventionalz_data = preinterventionalz_data
-
-    # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
-
-    # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks"]
 
 
 class Subsession(BaseSubsession):
@@ -197,7 +199,7 @@ class Player(BasePlayer):
 
     cycle_err = models.IntegerField(initial=0)
 
-    time_pressure = models.BooleanField()
+    treatment = models.BooleanField()
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -223,19 +225,22 @@ class Player(BasePlayer):
         label='Вам нравится проводить время на свежем воздухе',
         widget=widgets.RadioSelectHorizontal)
 
+
 def creating_session(subsession):
-    pressures = itertools.cycle([True, False])
+    treatments = itertools.cycle([True, False])
     for player in subsession.get_players():
-        player.time_pressure = next(pressures)
+        player.treatment = next(treatments)
+
 
 # Functions
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
     target_key = C.task_sequence[num_round]
-    target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1],
-                         #  C.interventionalx_data[target_key],
-                         #  C.interventionalz_data[target_key]
-                         ]
+    if player.treatment:
+        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_treatment[num_round][1]]
+    else:
+        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1]]
+
     return target_vocabulary
 
 
@@ -426,7 +431,7 @@ class DiagramTask(Page):
                 str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             seed=C.seed[player.round_number - 1][1],
-            treatment=C.treatment,
+            treatment=player.treatment,
             dgptype=C.task_sequence[player.round_number - 1]
         )
 
@@ -443,12 +448,16 @@ class DiagramTest(Page):
         store_array = player.stored
         seed = C.seed[player.round_number - 1][1]
         edges = benchmark_diagram(player)
+        treatment = player.treatment
         # print(edges)
         datasetobs = C.observational_data[player.round_number - 1][1]
-        datasetint = C.interventional_data[player.round_number - 1][1],
+
+        if treatment:
+            datasetint = C.interventional_data[player.round_number - 1][1]
+        else:
+            datasetint = C.interventional_data_treatment[player.round_number - 1][1]
+
         buttons_were_clicked = json.loads(player.buttons)
-        # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
-        # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
 
         accuracy = player.accuracy
         player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
@@ -462,6 +471,7 @@ class DiagramTest(Page):
                   f"User's accuracy (from 0 to 1) for the round is {accuracy}",
                   f"User's score (from 0 to 1) for the round is {round(player.score, 5)}",
                   f'The seed is {seed}',
+                  f'Treatment = {treatment}'
                   ],
             accuracy=accuracy
         )
