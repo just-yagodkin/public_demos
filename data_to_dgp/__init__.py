@@ -1,3 +1,5 @@
+import copy
+
 from otree.api import *
 import goodfunctions as gf
 import random
@@ -10,12 +12,12 @@ Your app description
 
 
 class C(BaseConstants):
-    train = False
-    # treatment = True
+    train = True
+    treatment = True
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
-    SHOWING_INFORMATION_EDGE = 0  # you will see a feedback only after this percent of rounds
+    SHOWING_INFORMATION_EDGE = 0.32  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
@@ -32,11 +34,11 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "threelinks", "nolinks", "onelink"]
+    task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
     # task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    # seed = [(name, 1) for name in task_sequence]
+    #seed = [(name, 2) for name in task_sequence]
     # print(seed)
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
@@ -74,9 +76,9 @@ class C(BaseConstants):
                      'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                   'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                     'collider1': {'x': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+                                   'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
+                                   'z': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
                      'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
@@ -85,44 +87,38 @@ class C(BaseConstants):
                                     'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
                      }
 
-    pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                                 'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                             'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                             'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                                 'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                              'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                              'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                                 'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                 'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                                 }
+    pre_preobservational_data = copy.deepcopy(original_data)
 
     preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
+
+    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
+                              seed]
 
     # X -> Y ->
     # |       |
     # |       V
     # ▶  ->  Z
-    # [f(x) if x is not None else '' for x in xs]
 
-    preinterventional_data_treatment = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])]
-                                        if (x[0] in ['nolinks', 'twolinks', 'collider1'])
-                                        else [x[0],
-                                              gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]], name='x'),
-                                                                 x[1])]
-                                        for x in seed]
+    preinterventional_data_treatment = [
+        [x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] if (
+                x[0] not in ['onelink', 'twolinks', 'collider1']) else [x[0], gf.smartdatainterv(
+            gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])] for x in seed]
 
-    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
-                              seed]
+    # preinterventional_data_treatment = copy.deepcopy(preinterventional_data)
+    #
+    # for i in range(len(preinterventional_data_treatment)):
+    #     if (preinterventional_data_treatment[i][0] == 'onelink' or preinterventional_data_treatment[i][0] == 'twolinks'
+    #             or preinterventional_data_treatment[i][0] == 'collider1'):
+    #         preinterventional_data_treatment[i][1] = gf.smartdatainterv(
+    #             gf.intervente(preinterventional_data_treatment[i][0],
+    #                           gf.original_data[preinterventional_data_treatment[i][0]], name='x'),
+    #             preinterventional_data_treatment[i][1])
 
+
+    # print()
+    # print(preinterventional_data_treatment)
+    # print()
+    # print(preinterventional_data)
 
     if len(task_sequence) < NUM_ROUNDS:
         NUM_ROUNDS = len(task_sequence)
@@ -132,10 +128,7 @@ class C(BaseConstants):
     observational_data = gf.reshuffle(preobservational_data)
 
     interventional_data = gf.reshuffle(preinterventional_data)
-    print(interventional_data)
-
     interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
-    print(interventional_data_treatment)
 
     # interventionalx_data = gf.reshuffle(preinterventionalx_data)
     # interventionalz_data = gf.reshuffle(preinterventionalz_data)
@@ -194,11 +187,15 @@ class Player(BasePlayer):
 
     accuracy = models.FloatField()
 
-    err_counter = models.IntegerField(initial=0)
+    err_counter = models.IntegerField(initial=0)  # ошибок всего
 
-    cycle_err = models.IntegerField(initial=0)
+    cycle_err = models.IntegerField(initial=0)  # есть ли ошибка цикла прямо здесь и сейчас
 
     treatment = models.BooleanField()
+
+    node = models.StringField(initial='')
+
+    seed = models.IntegerField(initial=0)
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -226,9 +223,10 @@ class Player(BasePlayer):
 
 
 def creating_session(subsession):
-    treatments = itertools.cycle([True, False])
-    for player in subsession.get_players():
-        player.treatment = next(treatments)
+    if C.treatment:
+        treatments = itertools.cycle([False, True])
+        for player in subsession.get_players():
+            player.treatment = next(treatments)
 
 
 # Functions
@@ -348,7 +346,7 @@ class DiagramTask(Page):
         res = json.loads(values['buttons']).copy()
         res_before_errors = json.loads(player.buttons_before_err).copy()
 
-        for i in range(12):
+        for i in range(12):  # 12 = num of buttons
             res[i] += res_before_errors[i]
 
         # print(res)
@@ -362,8 +360,16 @@ class DiagramTask(Page):
         player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
 
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
+
         player.userdgp = json.dumps(gf.userschoice(player.stored))
         player.dgptype = C.task_sequence[player.round_number - 1]
+
+        player.seed = C.seed[player.round_number - 1][1]
+
+        if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
+            player.node = gf.wherex(C.seed[player.round_number - 1][1])
+        else:
+            player.node = gf.wherey(C.seed[player.round_number - 1][1])
 
         player.dir_error = gf.directional_error(json.loads(player.userdgp), json.loads(player.originaldgp))
         player.struct_error = gf.structure_error(json.loads(player.userdgp), json.loads(player.originaldgp))
@@ -386,9 +392,8 @@ class DiagramTask(Page):
             player.cycle_err = 0
 
         else:
-            # player.buttons = "abacaba"
             player.buttons = json.dumps(res)
-            print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
+            #print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
 
         store_array = player.stored
         edges = benchmark_diagram(player)
@@ -412,6 +417,9 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[1])[0])))] + [
                 str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
+            treatment=player.treatment,
+            seed=C.seed[player.round_number - 1][1],
+            dgptype=C.task_sequence[player.round_number - 1]
         )
 
     @staticmethod

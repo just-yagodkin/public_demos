@@ -433,11 +433,12 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             interv_dict[st[0]] = x
             return interv_dict
 
-        elif key == "collider":
+        elif key == "collider1":
             if fixed == 1:
-                z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
-                x = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
+                z = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+                x = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
             else:
+                print('doenst work!')
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
                 x = [0] * length
 
@@ -448,7 +449,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
     ###----- Z BLOCK -----###
 
     if name == 'z':
-        if key == 'collider':
+        if key == 'collider1':
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             if fixed == 1:
                 z = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
@@ -628,6 +629,21 @@ def userschoice(lst: str):  # lst is a user's form
 
     return temp
 
+def wherey(seed : int):
+    if seed in [1, 4]:
+        return "Z"
+    if seed in [0, 5]:
+        return "Y"
+    if seed in [2, 3]:
+        return "X"
+
+def wherex(seed : int):
+    if seed in [3, 5]:
+        return "Z"
+    if seed in [0, 1]:
+        return "X"
+    if seed in [2, 4]:
+        return "Y"
 
 def dgpchoice(lst: list):  # lst is an original form
     temp = list()
