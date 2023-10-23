@@ -224,7 +224,7 @@ class Player(BasePlayer):
 
 def creating_session(subsession):
     if C.treatment:
-        treatments = itertools.cycle([False, True])
+        treatments = itertools.cycle([False, True, True])
         for player in subsession.get_players():
             player.treatment = next(treatments)
 
