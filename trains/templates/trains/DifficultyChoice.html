@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Choosing difficulty. Period {{ view.round_number }} out of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+    <!-- {{ form.difficulty.errors }} -->
+    <div class="card" style="width: 64%;">
+        <div class="card-body" >
+            <h5 class="card-title">Instructions:</h5>
+            Click on the arc length which you prefer:
+        </div>
+    </div>
+    <div id="p5cont"></div>
+    <input type="hidden"  name="difficulty" value="0" id="id_difficulty"/>
+    {% next_button %}
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        var speed = 0.01;
+        var choose_difficulty = true;
+
+    </script>
+    <link rel="preload" href="{% static 'js/dist/train.js' %}" as="script">
+    <script src="{% static 'js/dist/train.js' %}"></script>
+
+{% endblock %}
