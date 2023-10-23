@@ -1,7 +1,10 @@
+import copy
+
 from otree.api import *
 import goodfunctions as gf
 import random
 import json
+import itertools
 
 doc = """
 Your app description
@@ -9,7 +12,8 @@ Your app description
 
 
 class C(BaseConstants):
-    train = False
+    train = True
+    treatment = True
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
@@ -30,11 +34,11 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    # task_sequence = ["twolinks", "onelink", "collider1", "threelinks", "fork", "threelinks", "nolinks", "onelink"]
-    task_sequence = basis1 + basis2 + basis3
+    task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
+    # task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    # seed = [(name, 1) for name in task_sequence]
+    #seed = [(name, 2) for name in task_sequence]
     # print(seed)
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
@@ -72,9 +76,9 @@ class C(BaseConstants):
                      'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                   'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                     'collider1': {'x': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+                                   'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
+                                   'z': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
                      'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
@@ -83,57 +87,38 @@ class C(BaseConstants):
                                     'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
                      }
 
-    pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                                 'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                             'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                             'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                                 'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                              'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                              'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                                 'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                 'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                                 }
+    pre_preobservational_data = copy.deepcopy(original_data)
 
     preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
+
+    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
+                              seed]
 
     # X -> Y ->
     # |       |
     # |       V
     # ▶  ->  Z
 
-    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
-                              seed]
+    preinterventional_data_treatment = [
+        [x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] if (
+                x[0] not in ['onelink', 'twolinks', 'collider1']) else [x[0], gf.smartdatainterv(
+            gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])] for x in seed]
 
-    # preinterventionalx_data = {  # INTERVENTION ON X
-    #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'x'), NOLINKSSEED),
-    #     'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'x'), ONELINKSEED),
-    #     'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'x'), TWOLINKSSEED),
-    #     'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1'], 'x'),
-    #                                     COLLIDER1SEED),
-    #     'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork'], 'x'), FORKSEED),
-    #     'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'x'),
-    #                                      THREELINKSSEED)
-    # }
+    # preinterventional_data_treatment = copy.deepcopy(preinterventional_data)
+    #
+    # for i in range(len(preinterventional_data_treatment)):
+    #     if (preinterventional_data_treatment[i][0] == 'onelink' or preinterventional_data_treatment[i][0] == 'twolinks'
+    #             or preinterventional_data_treatment[i][0] == 'collider1'):
+    #         preinterventional_data_treatment[i][1] = gf.smartdatainterv(
+    #             gf.intervente(preinterventional_data_treatment[i][0],
+    #                           gf.original_data[preinterventional_data_treatment[i][0]], name='x'),
+    #             preinterventional_data_treatment[i][1])
 
-    # preinterventionalz_data = {  # INTERVENTION ON Z
-    #     'nolinks': gf.smartdatainterv(gf.intervente('nolinks', original_data['nolinks'], 'z'), NOLINKSSEED),
-    #     'onelink': gf.smartdatainterv(gf.intervente('onelink', original_data['onelink'], 'z'), ONELINKSEED),
-    #     'twolinks': gf.smartdatainterv(gf.intervente('twolinks', original_data['twolinks'], 'z'), TWOLINKSSEED),
-    #     'collider1': gf.smartdatainterv(gf.intervente('collider', original_data['collider1'], 'z'),
-    #                                     COLLIDER1SEED),
-    #     'fork': gf.smartdatainterv(gf.intervente('fork', original_data['fork'], 'z'), FORKSEED),
-    #     'threelinks': gf.smartdatainterv(gf.intervente('threelinks', original_data['threelinks'], 'z'),
-    #                                      THREELINKSSEED)
-    # }
+
+    # print()
+    # print(preinterventional_data_treatment)
+    # print()
+    # print(preinterventional_data)
 
     if len(task_sequence) < NUM_ROUNDS:
         NUM_ROUNDS = len(task_sequence)
@@ -143,6 +128,8 @@ class C(BaseConstants):
     observational_data = gf.reshuffle(preobservational_data)
 
     interventional_data = gf.reshuffle(preinterventional_data)
+    interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
+
     # interventionalx_data = gf.reshuffle(preinterventionalx_data)
     # interventionalz_data = gf.reshuffle(preinterventionalz_data)
 
@@ -152,11 +139,6 @@ class C(BaseConstants):
     # interventional_data = preinterventional_data
     # interventionalx_data = preinterventionalx_data
     # interventionalz_data = preinterventionalz_data
-
-    # IF YOU DONT WANT ROUNDS TO BE SHUFFLED, UNCOMMENT THE STRING BELOW
-
-    # task_sequence = random.sample(task_sequence_keys, len(task_sequence_keys))
-    # task_sequence = ["nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks", "nolinks", 'onelink', 'twolinks', 'collider1', "fork", "threelinks"]
 
 
 class Subsession(BaseSubsession):
@@ -205,9 +187,15 @@ class Player(BasePlayer):
 
     accuracy = models.FloatField()
 
-    err_counter = models.IntegerField(initial=0)
+    err_counter = models.IntegerField(initial=0)  # ошибок всего
 
-    cycle_err = models.IntegerField(initial=0)
+    cycle_err = models.IntegerField(initial=0)  # есть ли ошибка цикла прямо здесь и сейчас
+
+    treatment = models.BooleanField()
+
+    node = models.StringField(initial='')
+
+    seed = models.IntegerField(initial=0)
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -234,14 +222,22 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal)
 
 
+def creating_session(subsession):
+    if C.treatment:
+        treatments = itertools.cycle([False, True])
+        for player in subsession.get_players():
+            player.treatment = next(treatments)
+
+
 # Functions
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
     target_key = C.task_sequence[num_round]
-    target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1],
-                         #  C.interventionalx_data[target_key],
-                         #  C.interventionalz_data[target_key]
-                         ]
+    if player.treatment:
+        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_treatment[num_round][1]]
+    else:
+        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1]]
+
     return target_vocabulary
 
 
@@ -266,7 +262,7 @@ class Instruction(Page):
 
 
 class Training(Page):
-    #print(C.improved_task_sequence)
+    # print(C.improved_task_sequence)
     form_model = 'player'
     form_fields = ['training']
 
@@ -350,7 +346,7 @@ class DiagramTask(Page):
         res = json.loads(values['buttons']).copy()
         res_before_errors = json.loads(player.buttons_before_err).copy()
 
-        for i in range(12):
+        for i in range(12):  # 12 = num of buttons
             res[i] += res_before_errors[i]
 
         # print(res)
@@ -364,8 +360,16 @@ class DiagramTask(Page):
         player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
 
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
+
         player.userdgp = json.dumps(gf.userschoice(player.stored))
         player.dgptype = C.task_sequence[player.round_number - 1]
+
+        player.seed = C.seed[player.round_number - 1][1]
+
+        if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
+            player.node = gf.wherex(C.seed[player.round_number - 1][1])
+        else:
+            player.node = gf.wherey(C.seed[player.round_number - 1][1])
 
         player.dir_error = gf.directional_error(json.loads(player.userdgp), json.loads(player.originaldgp))
         player.struct_error = gf.structure_error(json.loads(player.userdgp), json.loads(player.originaldgp))
@@ -388,9 +392,8 @@ class DiagramTask(Page):
             player.cycle_err = 0
 
         else:
-            # player.buttons = "abacaba"
             player.buttons = json.dumps(res)
-            print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
+            #print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
 
         store_array = player.stored
         edges = benchmark_diagram(player)
@@ -414,6 +417,9 @@ class DiagramTask(Page):
             frequenciesint=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[1])[0])))] + [
                 str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
+            treatment=player.treatment,
+            seed=C.seed[player.round_number - 1][1],
+            dgptype=C.task_sequence[player.round_number - 1]
         )
 
     @staticmethod
@@ -432,6 +438,8 @@ class DiagramTask(Page):
                 str(float('{:.2f}'.format(gf.check_frequencies(output[1])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             seed=C.seed[player.round_number - 1][1],
+            treatment=player.treatment,
+            dgptype=C.task_sequence[player.round_number - 1]
         )
 
 
@@ -447,12 +455,16 @@ class DiagramTest(Page):
         store_array = player.stored
         seed = C.seed[player.round_number - 1][1]
         edges = benchmark_diagram(player)
+        treatment = player.treatment
         # print(edges)
         datasetobs = C.observational_data[player.round_number - 1][1]
-        datasetint = C.interventional_data[player.round_number - 1][1],
+
+        if treatment:
+            datasetint = C.interventional_data[player.round_number - 1][1]
+        else:
+            datasetint = C.interventional_data_treatment[player.round_number - 1][1]
+
         buttons_were_clicked = json.loads(player.buttons)
-        # datasetintx = C.interventionalx_data[C.task_sequence[player.round_number - 1]],
-        # datasetintz = C.interventionalz_data[C.task_sequence[player.round_number - 1]]
 
         accuracy = player.accuracy
         player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
@@ -466,6 +478,7 @@ class DiagramTest(Page):
                   f"User's accuracy (from 0 to 1) for the round is {accuracy}",
                   f"User's score (from 0 to 1) for the round is {round(player.score, 5)}",
                   f'The seed is {seed}',
+                  f'Treatment = {treatment}'
                   ],
             accuracy=accuracy
         )

@@ -29,45 +29,45 @@ pre_data_edges = {'nolinks': [False],
                   }
 
 original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                 'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                     'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                 'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                 'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                     'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                  'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                  'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                     'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                 'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                             'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                             'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+                 'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                              'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                     'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                    'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                    'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                     }
+                              'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
+                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                 'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                          'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                 'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+                 }
 
 # gf.smartdatainterv(
 pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                             'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                             'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                                 'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                             'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                             'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                                 'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                              'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                              'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                               'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                                 'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                         'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+                                         'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
+                             'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                         'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                                         'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
+                             'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                           'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                 'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                                'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                                'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                                 }
+                                          'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
+                             'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
+                             'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                      'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                      'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                             'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                                            'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                                            'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+                             }
 
 d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -188,8 +188,8 @@ def check_dependencies(dictionary: dict):
 #         shuffle_coloumns(new_dict[key])
 #     return new_dict
 
-def reshuffle(list):
-    new_list = list.copy()
+def reshuffle(lst):
+    new_list = lst.copy()
     return [[x[0], shuffle_coloumns(x[1])] for x in new_list]
 
 
@@ -319,8 +319,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
                      range(round(freq_z_when_name * length))]
                 x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0
-                      for i
-                      in
+                      for i in
                       range(round(length * (1 - freq_z_when_name)))]
             else:
                 z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
@@ -330,6 +329,9 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                     1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0
                     for i in
                     range(round(length * (1 - freq_z_when_not_name)))]
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
         elif key == 'threelinks':
             if fixed == 1:
@@ -338,6 +340,9 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             else:
                 x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
                 z = [0] * length
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
         # elif key == 'threelinks':
         #    if fixed == 1:
         #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
@@ -361,10 +366,16 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                      range(round(freq_x_when_not_name * length))]
                 z += [1 if i < round(freq_z_when_not_name * round(length * (1 - freq_x_when_not_name))) else 0 for i in
                       range(round(length * (1 - freq_x_when_not_name)))]
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
         else:
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
     ###----- X BLOCK -----###
 
@@ -372,12 +383,17 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         if key == 'twolinks':
             if fixed == 1:
                 x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
-
                 z = [1 if i < round(freq_z_when_y * freq_x_when_name * length) else 0 for i in
                      range(round(freq_x_when_name * length))]
+
                 z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_y * length - 1) else 0 for i in
                       # 1 is a crunch :(
                       range(length - round(freq_x_when_name * length))]
+
+                interv_dict[st[1]] = z
+                interv_dict[st[0]] = x
+                return interv_dict
+
             else:
                 print("Don't use zero!! PLS!")
                 pass
@@ -412,18 +428,28 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
                 z += [
                     1 if i < round(check_frequencies(dictionary)[2] * round(length * (1 - freq_x_when_not_name))) else 0
                     for i in range(round(length * (1 - freq_x_when_not_name)))]
-        elif key == "collider":
+
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
+
+        elif key == "collider1":
             if fixed == 1:
-                z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
-                x = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
+                z = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+                x = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
             else:
+                print('doenst work!')
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
                 x = [0] * length
+
+            interv_dict[st[1]] = z
+            interv_dict[st[0]] = x
+            return interv_dict
 
     ###----- Z BLOCK -----###
 
     if name == 'z':
-        if key == 'collider':
+        if key == 'collider1':
             x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
             if fixed == 1:
                 z = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
@@ -442,8 +468,8 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
             z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
             x = dictionary[st[0]].copy()
 
-    interv_dict[st[1]] = z
-    interv_dict[st[0]] = x
+    # interv_dict[st[1]] = z
+    # interv_dict[st[0]] = x
 
     return interv_dict
 
@@ -474,6 +500,7 @@ def tancold(lst: list):
 
     return True
 
+
 def tanc(lst: str):
     lst = ast.literal_eval(lst)
     temp = list()
@@ -502,10 +529,12 @@ def tanc(lst: str):
 
     return True
 
+
 def supercrunchfunc(l1: list):
     for unit in l1:
         print(smartdatainterv(unit[0], unit[1]))
-        #unit = smartdatainterv(unit[0], unit[1])
+        # unit = smartdatainterv(unit[0], unit[1])
+
 
 def smartdatainterv(d: dict, seed=0):
     """seed 1:  X Y Z   ->   X Z Y
@@ -600,6 +629,21 @@ def userschoice(lst: str):  # lst is a user's form
 
     return temp
 
+def wherey(seed : int):
+    if seed in [1, 4]:
+        return "Z"
+    if seed in [0, 5]:
+        return "Y"
+    if seed in [2, 3]:
+        return "X"
+
+def wherex(seed : int):
+    if seed in [3, 5]:
+        return "Z"
+    if seed in [0, 1]:
+        return "X"
+    if seed in [2, 4]:
+        return "Y"
 
 def dgpchoice(lst: list):  # lst is an original form
     temp = list()
@@ -634,7 +678,7 @@ def fine(user: list, dgp: list):
 
 def accuracy(num):
     # accuracy is from 0 to 1
-    return (10 - num)*0.1
+    return (10 - num) * 0.1
 
 
 def directional_error(user: list, dgp: list):
@@ -710,20 +754,19 @@ print(check_frequencies(intervente('twolinks', d['twolinks'], "y")), "- frequenc
 print()
 print()
 
-
 print(d['collider1'], "- collider")
 print(check_frequencies(d['collider1']), "- frequencies")
 
-# print(intervente('collider', d['collider1'], "x"), "- orange distribution (X fixed)")
-# print(check_frequencies(intervente('collider', d['collider1'], "x")), "- frequencies again")
+print(intervente('collider', d['collider1'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('collider', d['collider1'], "x")), "- frequencies again")
 print(intervente('collider', d['collider1'], "y"), "- orange distribution (Y fixed)")
 print(check_frequencies(intervente('collider', d['collider1'], "y")), "- frequencies again")
+
 # print(intervente('collider', d['collider1'], "z"), "- orange distribution (Z fixed)")
 # print(check_frequencies(intervente('collider', d['collider1'], "z")), "- frequencies again")
 
 print()
 print()
-
 
 print(d['fork'], "- fork")
 print(check_frequencies(d['fork']), "- frequencies")

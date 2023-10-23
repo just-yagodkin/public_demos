@@ -178,7 +178,7 @@ const langArr = {
     "IReadTheSlides":{
         "ru": `С помощью стрелочек < >, Я внимательно прочитал все слайды и понимаю задание.`,
 
-        "en": `Using < > elements, I carefully read all slides and understand the task.`,
+        "en": `Using < > elements, carefully read all slides and understand the task.`,
 
         "ge": `Ich benutze < > Elemente, lese alle Folien sorgfältig und verstehe die Aufgabe.`,
     },
