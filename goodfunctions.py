@@ -37,8 +37,8 @@ original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 
                  'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'collider1': {'x': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+                               'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
                                'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
                  'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                           'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -49,25 +49,7 @@ original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 
                  }
 
 # gf.smartdatainterv(
-pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                         'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                                         'z': [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]},
-                             'onelink': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                         'y': [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                                         'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1]},
-                             'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                             'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                           'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                           'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
-                             'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                      'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                      'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                             'threelinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                            'y': [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-                                            'z': [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
-                             }
+pre_preobservational_data = copy.deepcopy(original_data)
 
 d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -78,8 +60,8 @@ d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
      'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                   'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+     'collider1': {'x': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+                   'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
                    'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
      'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -252,7 +234,6 @@ def check_frequencies(dictionary: dict, t=(1, 1, 1)):  # [P(x=1), P(y=1), P(z=1)
     """shows how often "1" occurs
        returns triplet(list) of frquencies
        """
-
     length = 16
     freqx = 0
     freqy = 0
@@ -308,7 +289,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         [i for i, x in enumerate(dictionary[st[0]]) if x == 0])) / len(
         [i for i, x in enumerate(dictionary[st[1]]) if x == 0])
 
-    interv_dict[name] = [fixed] * length  # fill Y with fixed value
+    interv_dict[name] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # fill Y with fixed value
 
     ###----- Y BLOCK -----###
 
@@ -436,7 +417,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
         elif key == "collider1":
             if fixed == 1:
                 z = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
-                x = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+                x = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
             else:
                 print('doenst work!')
                 z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
@@ -629,7 +610,8 @@ def userschoice(lst: str):  # lst is a user's form
 
     return temp
 
-def wherey(seed : int):
+
+def wherey(seed: int):
     if seed in [1, 4]:
         return "Z"
     if seed in [0, 5]:
@@ -637,13 +619,15 @@ def wherey(seed : int):
     if seed in [2, 3]:
         return "X"
 
-def wherex(seed : int):
+
+def wherex(seed: int):
     if seed in [3, 5]:
         return "Z"
     if seed in [0, 1]:
         return "X"
     if seed in [2, 4]:
         return "Y"
+
 
 def dgpchoice(lst: list):  # lst is an original form
     temp = list()
@@ -754,13 +738,14 @@ print(check_frequencies(intervente('twolinks', d['twolinks'], "y")), "- frequenc
 print()
 print()
 
+
 print(d['collider1'], "- collider")
 print(check_frequencies(d['collider1']), "- frequencies")
 
-print(intervente('collider', d['collider1'], "x"), "- orange distribution (X fixed)")
-print(check_frequencies(intervente('collider', d['collider1'], "x")), "- frequencies again")
-print(intervente('collider', d['collider1'], "y"), "- orange distribution (Y fixed)")
-print(check_frequencies(intervente('collider', d['collider1'], "y")), "- frequencies again")
+print(intervente('collider1', d['collider1'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('collider1', d['collider1'], "x")), "- frequencies again")
+print(intervente('collider1', d['collider1'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('collider1', d['collider1'], "y")), "- frequencies again")
 
 # print(intervente('collider', d['collider1'], "z"), "- orange distribution (Z fixed)")
 # print(check_frequencies(intervente('collider', d['collider1'], "z")), "- frequencies again")
