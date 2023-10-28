@@ -575,4 +575,4 @@ class Results(Page):
 if C.train:
     page_sequence = [Instruction, Training, Training2, DiagramTask, DiagramTest, Results]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest, Results]
+    page_sequence = [DiagramTask, DiagramTest, Results]
