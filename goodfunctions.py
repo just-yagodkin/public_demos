@@ -205,14 +205,19 @@ def shuffle_coloumns(dictionary: dict):
     """influence on dictionary(tabs) and shuffle coloumn(strings)
        returns the shuffled dictionary"""
 
-    shufflelist = [i for i in range(len(dictionary[list(dictionary.keys())[0]]))]  # list(dictionary.keys())[0] = 'x'
-    rm.shuffle(shufflelist)
-    tempx, tempy, tempz = [copy.deepcopy(dictionary[list(dictionary.keys())[i]]) for i in range(3)]
-    for i in range(len(shufflelist)):
-        dictionary[list(dictionary.keys())[0]][shufflelist[i]] = tempx[i]  # list(dictionary.keys())[0] = 'x'
-        dictionary[list(dictionary.keys())[1]][shufflelist[i]] = tempy[i]  # list(dictionary.keys())[1] = 'y'
-        dictionary[list(dictionary.keys())[2]][shufflelist[i]] = tempz[i]  # list(dictionary.keys())[2] = 'z'
-    return dictionary
+    x = copy.deepcopy(dictionary['x'])
+    y = copy.deepcopy(dictionary['y'])
+    z = copy.deepcopy(dictionary['z'])
+
+    tuples = list(zip(x, y, z))
+    rm.shuffle(tuples)
+
+    newx, newy, newz = zip(*tuples)
+    newdict = {'x': newx,
+               'y': newy,
+               'z': newz}
+
+    return newdict
 
 
 def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 & z=1), P(y=1 & z=1)]
@@ -419,11 +424,6 @@ def tanc(lst: str):
 
     return True
 
-
-def supercrunchfunc(l1: list):
-    for unit in l1:
-        print(smartdatainterv(unit[0], unit[1]))
-        # unit = smartdatainterv(unit[0], unit[1])
 
 
 def smartdatainterv(d: dict, seed=0):
