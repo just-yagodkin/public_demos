@@ -115,11 +115,11 @@ class C(BaseConstants):
     #             preinterventional_data_treatment[i][1])
 
 
-    print(preobservational_data)
-    print()
-    print(preinterventional_data_treatment)
-    print()
-    print(preinterventional_data)
+    # print(preobservational_data)
+    # print()
+    # print(preinterventional_data_treatment)
+    # print()
+    # print(preinterventional_data)
 
 
     if len(task_sequence) < NUM_ROUNDS:
