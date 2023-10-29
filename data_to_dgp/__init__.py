@@ -38,7 +38,7 @@ class C(BaseConstants):
     # task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    #seed = [(name, 2) for name in task_sequence]
+    # seed = [(name, 0) for name in task_sequence]
     # print(seed)
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
@@ -115,10 +115,12 @@ class C(BaseConstants):
     #             preinterventional_data_treatment[i][1])
 
 
-    # print()
-    # print(preinterventional_data_treatment)
-    # print()
-    # print(preinterventional_data)
+    print(preobservational_data)
+    print()
+    print(preinterventional_data_treatment)
+    print()
+    print(preinterventional_data)
+
 
     if len(task_sequence) < NUM_ROUNDS:
         NUM_ROUNDS = len(task_sequence)
