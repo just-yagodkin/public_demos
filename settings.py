@@ -196,7 +196,7 @@ SESSION_CONFIGS = [
     dict(
         name='data_to_dgp_quiz',
         display_name="data to DGP task quiz",
-        app_sequence=['quiz', 'data_to_dgp'],
+        app_sequence=['quiz', 'data_to_dgp', 'AOT'],
         num_demo_participants=1,
     ),
 
