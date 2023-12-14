@@ -6,7 +6,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'quiz'
+    NAME_IN_URL = 'quiz_eng'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
 
@@ -62,7 +62,7 @@ class Player(BasePlayer):
 
     q_8 = models.StringField(
         choices=["Rocky soils are found in beds with the same numbers.",
-                 "The number of strong and weak links are the same, but different types of seeds may be strong or weak compared to the original planet.",",
+                 "The number of strong and weak links are the same, but different types of seeds may be strong or weak compared to the original planet.",
                  "The same number of mature seeds are planted on rocky soils as on the original planet."],
         label='8.   Complete the sentence correctly: on the twin planet',
         widget=widgets.RadioSelectHorizontal)
