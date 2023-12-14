@@ -6,7 +6,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'quiz'
+    NAME_IN_URL = 'quizeng'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
 
