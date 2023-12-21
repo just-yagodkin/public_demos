@@ -35,18 +35,18 @@ class Player(BasePlayer):
         
         Cons_3 = models.StringField(blank=True,
         choices=["Yes", "No"],
-        label='Optionally, agreement to transfer data to the cooperation partners: I request and herewith simultaneously consent to data transfer from the MPI for Biological Cybernetics encrypted database to the project related collaborators:',
+        label='Optionally, agreement to transfer data to the cooperation partners: I request and herewith simultaneously consent to data transfer from hosting online server to the project related collabors (for example, the University of Tübingen, New York University)',
         widget=widgets.RadioSelect)
 
-        Cons_4 = models.StringField(blank=True,
-        choices=["Yes",],
-        label='inside of the Max-Planck-Society and affiliated research institutes',
-        widget=widgets.RadioSelect)
+        # Cons_4 = models.StringField(blank=True,
+        # choices=["Yes",],
+        # label='inside of the Max-Planck-Society and affiliated research institutes',
+        # widget=widgets.RadioSelect)
 
-        Cons_5 = models.StringField(blank=True,
-        choices=["Yes",],
-        label='at partnering institutions (for example, the University of Tübingen, New York University)',
-        widget=widgets.RadioSelect)
+        # Cons_5 = models.StringField(blank=True,
+        # choices=["Yes",],
+        # label='at partnering institutions (for example, the University of Tübingen, New York University)',
+        # widget=widgets.RadioSelect)
 
     
 
@@ -58,6 +58,6 @@ class consentpage(Page):
     form_fields = ['Cons_1'] 
 class dataprotection(Page):
     form_model = 'player'
-    form_fields = ['Cons_2'] +['Cons_3'] +['Cons_4'] +['Cons_5'] 
-
+    form_fields = ['Cons_2'] +['Cons_3'] 
+# +['Cons_4'] +['Cons_5'] 
 page_sequence = [consentpage,dataprotection]

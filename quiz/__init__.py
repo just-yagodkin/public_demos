@@ -88,7 +88,7 @@ class Quiz(Page):
             values['q_5'] != 'Seed Y on bed 3 did not germinate because it is on stony soil, it is weak and immature.' or
             values['q_6'] != 'Z->Y, X->Y, X->Z' or
             values['q_7'] != "Will germinate if it's mature" or
-            values['q_8'] != "The same number (but not the bed's allocation) of mature seeds are planted on rocky soils as on the original planet."
+            values['q_8'] != "The same number of mature seeds are planted on rocky soils as on the original planet."
         ):
             return 'the responses contain a mistake(s)'
 
