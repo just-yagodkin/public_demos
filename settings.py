@@ -194,10 +194,17 @@ SESSION_CONFIGS = [
     ),
 
     dict(
-        name='data_to_dgp_toshow',
-        display_name="data to DGP task (to show)",
-        app_sequence=['data_to_dgp_toshow'],
+        name='data_to_dgp_quiz',
+        display_name="data to DGP task quiz",
+        app_sequence=['quizeng', 'data_to_dgp', 'AOT'],
         num_demo_participants=1,
+    ),
+
+    dict(
+        name='data_to_dgp_eng',
+        display_name="data to DGP ENG",
+        app_sequence=['consent', 'quiz', 'data_to_dgp', "survey_eng"],
+        num_demo_participants=2,
     ),
 
     dict(
@@ -233,21 +240,22 @@ SESSION_CONFIGS = [
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
-SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=3.00, participation_fee=00.00, doc="")
+SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=0.09, participation_fee=00.00, doc="")
 
 # ISO-639 code
-# for example: de, fr, ja, ko, zh-hans
+# for example: de, fr, ja, ko,'ru', zh-hans
 
-# LANGUAGE_CODE = 'en'
-LANGUAGE_CODE = 'ru'  # "," occures....
+LANGUAGE_CODE = 'en'
+# LANGUAGE_CODE = 'ru'  # "," occures....
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'RUR'
+# REAL_WORLD_CURRENCY_CODE = 'RUR'
+REAL_WORLD_CURRENCY_CODE = 'EUR'
 USE_POINTS = True
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
-# ADMIN_PASSWORD = '125'
+# ADMIN_PASSWORD = '1325'
 
 DEMO_PAGE_INTRO_HTML = """ """
 DEMO_PAGE_TITLE = "Behavecon 2023 Hse "

@@ -12,7 +12,7 @@ Your app description
 
 
 class C(BaseConstants):
-    train = True
+    train = False
     treatment = True
     Bonus = 5
     Round_payoff = 10
@@ -34,12 +34,12 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
-    # task_sequence = basis1 + basis2 + basis3
+    # task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
+    task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    #seed = [(name, 2) for name in task_sequence]
-    # print(seed)
+    # если надо зафиксировать сид, то надо раскоментить строочку ниже
+    # seed = [(name, 0) for name in task_sequence]
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
                    'right': {'x': [1, 1, 1, 1, 1, 1, 1, 1], 'y': [1, 1, 1, 1, 1, 1, 1, 1]}}
@@ -65,7 +65,6 @@ class C(BaseConstants):
     data_edges = []
     for i in range(len(seed)):
         data_edges.append(gf.smartedgesinterv(pre_data_edges[seed[i][0]], seed[i][1]))
-    # print(data_edges)
 
     original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                  'y': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -76,9 +75,9 @@ class C(BaseConstants):
                      'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                   'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                     'collider1': {'x': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+                     'collider1': {'x': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
                                    'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
-                                   'z': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
+                                   'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
                      'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'z': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
@@ -104,21 +103,6 @@ class C(BaseConstants):
                 x[0] not in ['onelink', 'twolinks', 'collider1']) else [x[0], gf.smartdatainterv(
             gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])] for x in seed]
 
-    # preinterventional_data_treatment = copy.deepcopy(preinterventional_data)
-    #
-    # for i in range(len(preinterventional_data_treatment)):
-    #     if (preinterventional_data_treatment[i][0] == 'onelink' or preinterventional_data_treatment[i][0] == 'twolinks'
-    #             or preinterventional_data_treatment[i][0] == 'collider1'):
-    #         preinterventional_data_treatment[i][1] = gf.smartdatainterv(
-    #             gf.intervente(preinterventional_data_treatment[i][0],
-    #                           gf.original_data[preinterventional_data_treatment[i][0]], name='x'),
-    #             preinterventional_data_treatment[i][1])
-
-
-    # print()
-    # print(preinterventional_data_treatment)
-    # print()
-    # print(preinterventional_data)
 
     if len(task_sequence) < NUM_ROUNDS:
         NUM_ROUNDS = len(task_sequence)
@@ -126,19 +110,19 @@ class C(BaseConstants):
     edge = NUM_ROUNDS * SHOWING_INFORMATION_EDGE
 
     observational_data = gf.reshuffle(preobservational_data)
-
     interventional_data = gf.reshuffle(preinterventional_data)
     interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
 
-    # interventionalx_data = gf.reshuffle(preinterventionalx_data)
-    # interventionalz_data = gf.reshuffle(preinterventionalz_data)
-
-    # SOMETIMES YOU DONT WANT THE DATA TO BE SHUFFLED => UNCOMMENT THE STRINGS BELOW
-
+    # если надо, чтобы строки не шафлились раскоментируйте 3 строчки ниже
     # observational_data = preobservational_data
     # interventional_data = preinterventional_data
-    # interventionalx_data = preinterventionalx_data
-    # interventionalz_data = preinterventionalz_data
+    # interventional_data_treatment = preinterventional_data_treatment
+
+    # print(observational_data)
+    # print()
+    # print(interventional_data_treatment)
+    # print()
+    # print(interventional_data)
 
 
 class Subsession(BaseSubsession):
@@ -224,7 +208,7 @@ class Player(BasePlayer):
 
 def creating_session(subsession):
     if C.treatment:
-        treatments = itertools.cycle([False, True])
+        treatments = itertools.cycle([False, True, True])
         for player in subsession.get_players():
             player.treatment = next(treatments)
 
@@ -237,6 +221,9 @@ def datatask_output_json(player: Player):
         target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_treatment[num_round][1]]
     else:
         target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1]]
+
+    # print(target_vocabulary)
+    # print('Я ТУТ!!!!!!!!!!!!!')
 
     return target_vocabulary
 
@@ -393,7 +380,7 @@ class DiagramTask(Page):
 
         else:
             player.buttons = json.dumps(res)
-            #print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
+            # print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
 
         store_array = player.stored
         edges = benchmark_diagram(player)
@@ -406,11 +393,23 @@ class DiagramTask(Page):
     def vars_for_template(player):
         output = datatask_output_json(player)
 
+        datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
+        datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
+
+        # choices = [(1, "X-сильное, Y-слабое"),
+        #            (2, "Y-сильное, X-слабое"),
+        #            (3, "X и Y нейтральные по отношению друг к другу"),
+        #            (4, "Y-сильное, Z-слабое"),
+        #            (5, "Z-сильное, Y-слабое"),
+        #            (6, "Y и Z нейтральные по отношению друг к другу"),
+        #            (7, "X-сильное, Z-слабое"),
+        #            (8, "Z-сильное, X-слабое"),
+        #            (9, "X и Z нейтральные по отношению друг к другу")]
+        # print(datasetobs)
+
         return dict(
-            datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
-                        range(len(output[0]['x']))],
-            datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
-                        range(len(output[1]['x']))],
+            datasetobs=datasetobs,
+            datasetint=datasetint,
             frequenciesobs=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[0])[0])))] + [
                 str(float('{:.2f}'.format(gf.check_frequencies(output[0])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[0])[2])))],
@@ -419,18 +418,19 @@ class DiagramTask(Page):
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             treatment=player.treatment,
             seed=C.seed[player.round_number - 1][1],
-            dgptype=C.task_sequence[player.round_number - 1]
+            dgptype=C.task_sequence[player.round_number - 1],
+            # choices=choices
         )
 
     @staticmethod
     def js_vars(player):
-
         output = datatask_output_json(player)
+        datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
+        datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
+
         return dict(
-            datasetobs=[(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in
-                        range(len(output[0]['x']))],
-            datasetint=[(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in
-                        range(len(output[1]['x']))],
+            datasetobs=datasetobs,
+            datasetint=datasetint,
             frequenciesobs=["freq"] + [str(float('{:.2f}'.format(gf.check_frequencies(output[0])[0])))] + [
                 str(float('{:.2f}'.format(gf.check_frequencies(output[0])[1])))] + [
                                str(float('{:.2f}'.format(gf.check_frequencies(output[0])[2])))],
@@ -575,4 +575,4 @@ class Results(Page):
 if C.train:
     page_sequence = [Instruction, Training, Training2, DiagramTask, DiagramTest, Results]
 else:
-    page_sequence = [Instruction, DiagramTask, DiagramTest, Results]
+    page_sequence = [DiagramTask, DiagramTest, Results]

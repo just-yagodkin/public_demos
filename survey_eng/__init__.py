@@ -6,7 +6,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'AOT'
+    NAME_IN_URL = 'survey_eng'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
 
@@ -20,60 +20,57 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    Aot_1 = models.StringField(
-        choices=["Не помню/Не писал", "0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90",
-                 "91-100"],
-        label='Укажите какой у Вас был балл ЕГЭ по математике',
-        widget=widgets.RadioSelectHorizontal)
+    Aot_1 = models.StringField(blank=True,   
+        label='If you remember, indicate what your grade was in your school math final exam.')
 
     Aot_2 = models.StringField(
-        choices=["Муж.", "Жен.", "Иное"],
-        label='Выберите гендер участника',
+        choices=["Male.", "Female.", "Oth.", "Prefer not disclose"],
+        label='Select the gender of the participant',
         widget=widgets.RadioSelectHorizontal)
 
     Aot_3 = models.IntegerField(
         min=1, max=10,
         choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        label='Голодны ли Вы сейчас? 1-совсем не голоден(-на); 10-очень голоден(-на)',
+        label='Are you hungry now? 1-not at all hungry; 10-very hungry',
         widget=widgets.RadioSelectHorizontal)
 
     Aot_4 = models.StringField(
-        choices=["8-10", "10-12", "12-14", "14-16", "16-18", "18-20", "20-22"],
-        label='Укажите время суток эксперимента',
+        choices=["8-10am", "10-12am", "0-2pm", "2-4pm", "4-6pm", "6-8pm", "8-10pm"],
+        label='Specify the time of day of the experiment',
         widget=widgets.RadioSelectHorizontal)
 
     Aot_5 = models.IntegerField(
         choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        label='Оцените Ваш сегодняшний сон. 1-плохо спал(-а); 10-хорошо спал(-а)',
+        label='Rate sleep today from 1-didn nott sleep well to 10-good sleep.',
         widget=widgets.RadioSelectHorizontal)
 
     Aot_6 = models.IntegerField(
         choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        label='Оцените Ваш уровень усталости. 1-очень устал(-а); 10-совсем не устал(-а)',
+        label='Rate your level of tiredness. 1 - very tired; 10 - not tired at all',
         widget=widgets.RadioSelectHorizontal)
 
     Aot_7 = models.StringField(
-        choices=["Ничего из этого не было", "Был только один курс", "Было только два курса", "Все курсы были"],
-        label='Были ли у Вас курсы по теории вероятностей/статистики/высшей математики?',
+        choices=["None of these were", "There was only one course", "There were only two courses", "All courses were"],
+        label='Did you have any courses in probability theory/statistics/higher math?',
         widget=widgets.RadioSelectHorizontal)
 
     Age = models.IntegerField(
         min=14, max=90,
-        label='Укажите возраст участника')
+        label='Indicate the age of the participant')
 
-    feedback1 = models.StringField(label="Общие пожелания и комментарии")
+    feedback1 = models.StringField(label="general suggestions and wishes")
 
-    feedback2 = models.StringField(label="Были ли понятны инструкции? Если нет, то что было непонятно?")
+    feedback2 = models.StringField(label="Were instructions clear?  If not, what was unclear? ")
 
     feedback3 = models.StringField(
-        label="Считаете ли вы что между двумя таблицами (данные с оригинальной планетой и планеты близнеца соответственно) есть разница, если да то в чём?")
+        label=" Do you think there is a difference between the two tables (data from the original planet and the twin planet respectively), if so what is the difference?")
 
-    feedback4 = models.StringField(label="Какова была Ваша стратегия при выборе ответов?")
+    feedback4 = models.StringField(label="What was your strategy in selecting your answers?")
 
     feedback5 = models.StringField(
-        label="Были ли понятно, что данные с планеты двойника идентичны данным, которые бы можно было получить, проведя на оригинальной планете эксперимент (пересадить часть семян)? (да/нет, что было непонятно?)")
+        label=" Was it clear that the data from the twin planet was identical to the data that would have been obtained by conducting an experiment (transplanting some of the seeds) on the original planet? (yes/no, what was unclear?)")
 
-    feedback6 = models.StringField(label="Было ли понятно, что нас интересуют причинно-следственные связи?")
+    feedback6 = models.StringField(label="Was it clear that our intention was to study causal-effect relationships understanding?")
     
      # Aot_5 = models.IntegerField(
     #     min=1, max=5,

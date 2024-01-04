@@ -37,8 +37,8 @@ original_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 
                  'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                               'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                 'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                               'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 'collider1': {'x': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+                               'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
                                'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
                  'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                           'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -58,8 +58,8 @@ pre_preobservational_data = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 
                              'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                           'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                           'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-                             'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                                           'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                             'collider1': {'x': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+                                           'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
                                            'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
                              'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                       'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -78,8 +78,8 @@ d = {'nolinks': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
      'twolinks': {'x': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                   'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                   'z': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]},
-     'collider1': {'x': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                   'y': [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+     'collider1': {'x': [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+                   'y': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
                    'z': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]},
      'fork': {'x': [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
               'y': [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -189,12 +189,12 @@ def check_dependencies(dictionary: dict):
 #     return new_dict
 
 def reshuffle(lst):
-    new_list = lst.copy()
+    new_list = copy.deepcopy(lst)
     return [[x[0], shuffle_coloumns(x[1])] for x in new_list]
 
 
 def reshuffleold(dictionary: dict):
-    new_dict = dictionary.copy()
+    new_dict = copy.deepcopy(dictionary)
     keys = list(dictionary.keys())
     for key in keys:
         shuffle_coloumns(new_dict[key])
@@ -205,14 +205,19 @@ def shuffle_coloumns(dictionary: dict):
     """influence on dictionary(tabs) and shuffle coloumn(strings)
        returns the shuffled dictionary"""
 
-    shufflelist = [i for i in range(len(dictionary[list(dictionary.keys())[0]]))]  # list(dictionary.keys())[0] = 'x'
-    rm.shuffle(shufflelist)
-    tempx, tempy, tempz = [dictionary[list(dictionary.keys())[i]].copy() for i in range(3)]
-    for i in range(len(shufflelist)):
-        dictionary[list(dictionary.keys())[0]][shufflelist[i]] = tempx[i]  # list(dictionary.keys())[0] = 'x'
-        dictionary[list(dictionary.keys())[1]][shufflelist[i]] = tempy[i]  # list(dictionary.keys())[1] = 'y'
-        dictionary[list(dictionary.keys())[2]][shufflelist[i]] = tempz[i]  # list(dictionary.keys())[2] = 'z'
-    return dictionary
+    x = copy.deepcopy(dictionary['x'])
+    y = copy.deepcopy(dictionary['y'])
+    z = copy.deepcopy(dictionary['z'])
+
+    tuples = list(zip(x, y, z))
+    rm.shuffle(tuples)
+
+    newx, newy, newz = zip(*tuples)
+    newdict = {'x': newx,
+               'y': newy,
+               'z': newz}
+
+    return newdict
 
 
 def check_coop_frequencies(dictionary: dict, t=(1, 1)):  # [P(x=1 & y=1), P(x=1 & z=1), P(y=1 & z=1)]
@@ -275,201 +280,91 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
        reutrns the copy of new dictionary with new distribution
        """
 
-    interv_dict = dictionary.copy()
+    interv_dict = copy.deepcopy(dictionary)
 
     length = 16
     st = ['x', 'y', 'z']
     st.remove(name)  # to have a deal with other 2 variables
 
-    indexes_where_name_is_0 = [i for i, x in enumerate(dictionary[name]) if x == 0]  # indexes where Y = 0
-    indexes_where_name_is_1 = [i for i, x in enumerate(dictionary[name]) if x == 1]  # indexes where Y = 1
+    interv_dict[name] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # fill Y with fixed value
 
-    x_when_name = [dictionary[st[0]][i] for i in indexes_where_name_is_1]  # Xs where y=1
-    x_when_not_name = [dictionary[st[0]][i] for i in indexes_where_name_is_0]  # Xs where y=0
-    z_when_name = [dictionary[st[1]][i] for i in indexes_where_name_is_1]  # Zs where y=1
-    z_when_not_name = [dictionary[st[1]][i] for i in indexes_where_name_is_0]  # Zs where y=0
-
-    freq_z_when_name = len([i for i in z_when_name if i == 1]) / len(z_when_name)  # freq z if y = 1
-    freq_z_when_not_name = len([i for i in z_when_not_name if i == 1]) / len(z_when_not_name)  # freq z if y = 0
-    freq_x_when_name = len([i for i in x_when_name if i == 1]) / len(x_when_name)  # freq x if y = 1
-    freq_x_when_not_name = len([i for i in x_when_not_name if i == 1]) / len(x_when_not_name)  # freq x if y = 0
-
-    freq_z_when_y = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
-        [i for i, x in enumerate(dictionary[st[1]]) if x == 1])) / len(
-        [i for i, x in enumerate(dictionary[st[0]]) if x == 1])
-    freq_z_when_not_y = len(set([i for i, x in enumerate(dictionary[st[0]]) if x == 1]) & set(
-        [i for i, x in enumerate(dictionary[st[1]]) if x == 0])) / len(
-        [i for i, x in enumerate(dictionary[st[0]]) if x == 0])
-
-    freq_x_when_y = len(set([i for i, x in enumerate(dictionary[st[1]]) if x == 1]) & set(
-        [i for i, x in enumerate(dictionary[st[0]]) if x == 1])) / len(
-        [i for i, x in enumerate(dictionary[st[1]]) if x == 1])
-    freq_x_when_not_y = len(set([i for i, x in enumerate(dictionary[st[1]]) if x == 1]) & set(
-        [i for i, x in enumerate(dictionary[st[0]]) if x == 0])) / len(
-        [i for i, x in enumerate(dictionary[st[1]]) if x == 0])
-
-    interv_dict[name] = [fixed] * length  # fill Y with fixed value
-
-    ###----- Y BLOCK -----###
+    ###----- Y BLOCK -----### (control)
 
     if name == 'y':
+
+        if key == 'nolinks':
+            # z
+            interv_dict[st[1]] = [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+
+            # x
+            interv_dict[st[0]] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        if key == 'onelink':
+            # z
+            interv_dict[st[1]] = [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]
+
+            # x
+            interv_dict[st[0]] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+
         if key == 'twolinks':
-            if fixed == 1:
-                z = [1 if i < round(freq_z_when_name * length) else 0 for i in range(length)]
-                x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_name * length) else 0 for i in
-                     range(round(freq_z_when_name * length))]
-                x += [1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_name))) else 0
-                      for i in
-                      range(round(length * (1 - freq_z_when_name)))]
-            else:
-                z = [1 if i < round(freq_z_when_not_name * length) else 0 for i in range(length)]
-                x = [1 if i < round(check_frequencies(dictionary)[0] * freq_z_when_not_name * length) else 0 for i in
-                     range(round(freq_z_when_not_name * length))]
-                x += [
-                    1 if i < round(check_frequencies(dictionary)[0] * round(length * (1 - freq_z_when_not_name))) else 0
-                    for i in
-                    range(round(length * (1 - freq_z_when_not_name)))]
-            interv_dict[st[1]] = z
-            interv_dict[st[0]] = x
-            return interv_dict
+            # z
+            interv_dict[st[1]] = [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1]
 
-        elif key == 'threelinks':
-            if fixed == 1:
-                x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-                z = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-            else:
-                x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-                z = [0] * length
-            interv_dict[st[1]] = z
-            interv_dict[st[0]] = x
-            return interv_dict
-        # elif key == 'threelinks':
-        #    if fixed == 1:
-        #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-        #        z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-        #    else:
-        #        x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-        #        z = [0] * length
+            # x
+            interv_dict[st[0]] = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-        elif key == 'fork':
-            if fixed == 1:
-                x = [1 if i < round(freq_x_when_name * length) else 0 for i in
-                     range(length)]
-                z = [1 if i < round(freq_z_when_name * freq_x_when_name * length) else 0 for i in
-                     range(round(freq_x_when_name * length))]
-                z += [1 if i < round(freq_z_when_name * round(length * (1 - freq_x_when_name))) else 0 for i in
-                      range(round(length * (1 - freq_x_when_name)))]
-            else:
-                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in
-                     range(length)]
-                z = [1 if i < round(freq_z_when_not_name * freq_x_when_not_name * length) else 0 for i in
-                     range(round(freq_x_when_not_name * length))]
-                z += [1 if i < round(freq_z_when_not_name * round(length * (1 - freq_x_when_not_name))) else 0 for i in
-                      range(round(length * (1 - freq_x_when_not_name)))]
-            interv_dict[st[1]] = z
-            interv_dict[st[0]] = x
-            return interv_dict
+        if key == 'collider1':
+            # z
+            interv_dict[st[1]] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
 
-        else:
-            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-            z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
-            interv_dict[st[1]] = z
-            interv_dict[st[0]] = x
-            return interv_dict
+            # x
+            interv_dict[st[0]] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
 
-    ###----- X BLOCK -----###
+        if key == 'collider1':
+            # z
+            interv_dict[st[1]] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+
+            # x
+            interv_dict[st[0]] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+
+        if key == 'fork':
+            # z
+            interv_dict[st[1]] = [1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]
+
+            # x
+            interv_dict[st[0]] = [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1]
+
+        if key == 'threelinks':
+            # z
+            interv_dict[st[1]] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+            # x
+            interv_dict[st[0]] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    ###----- X BLOCK -----### (treatment)
 
     if name == 'x':
+
+        if key == 'onelink':
+            # z
+            interv_dict[st[1]] = [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+
+            # y
+            interv_dict[st[0]] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+
         if key == 'twolinks':
-            if fixed == 1:
-                x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
-                z = [1 if i < round(freq_z_when_y * freq_x_when_name * length) else 0 for i in
-                     range(round(freq_x_when_name * length))]
+            # z
+            interv_dict[st[1]] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
 
-                z += [1 if i < round((1 - freq_x_when_name) * freq_z_when_y * length - 1) else 0 for i in
-                      # 1 is a crunch :(
-                      range(length - round(freq_x_when_name * length))]
+            # y
+            interv_dict[st[0]] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-                interv_dict[st[1]] = z
-                interv_dict[st[0]] = x
-                return interv_dict
-
-            else:
-                print("Don't use zero!! PLS!")
-                pass
-
-        elif key == 'threelinks':  # NEED TO CHECK...
-            if fixed == 1:
-                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-                z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-            else:
-                x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-                z = [0] * length
-
-        elif key == 'fork':
-            x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-            z = dictionary[st[1]].copy()
-
-        elif key == "nolinks":
-            x = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-            z = [1 if i < round(check_frequencies(dictionary)[2] * length // 2) else 0 for i in range(length // 2)] * 2
-
-        elif key == "onelink":
-            if fixed == 1:
-                x = [1 if i < round(freq_x_when_name * length) else 0 for i in range(length)]
-                z = [1 if i < round(check_frequencies(dictionary)[2] * freq_x_when_name * length) else 0 for i in
-                     range(round(freq_x_when_name * length))]
-                z += [1 if i < round(check_frequencies(dictionary)[2] * round(length * (1 - freq_x_when_name))) else 0
-                      for i in range(round(length * (1 - freq_x_when_name)))]
-            else:
-                x = [1 if i < round(freq_x_when_not_name * length) else 0 for i in range(length)]
-                z = [1 if i < round(check_frequencies(dictionary)[2] * freq_x_when_not_name * length) else 0 for i in
-                     range(round(freq_x_when_not_name * length))]
-                z += [
-                    1 if i < round(check_frequencies(dictionary)[2] * round(length * (1 - freq_x_when_not_name))) else 0
-                    for i in range(round(length * (1 - freq_x_when_not_name)))]
-
-            interv_dict[st[1]] = z
-            interv_dict[st[0]] = x
-            return interv_dict
-
-        elif key == "collider1":
-            if fixed == 1:
-                z = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
-                x = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
-            else:
-                print('doenst work!')
-                z = [1 if i < round(check_frequencies(dictionary)[2] * length) else 0 for i in range(length)]
-                x = [0] * length
-
-            interv_dict[st[1]] = z
-            interv_dict[st[0]] = x
-            return interv_dict
-
-    ###----- Z BLOCK -----###
-
-    if name == 'z':
         if key == 'collider1':
-            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-            if fixed == 1:
-                z = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-            else:
-                z = [0] * length
+            # z
+            interv_dict[st[1]] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
 
-        if key == "nolinks":
-            x = [1 if i < round(check_frequencies(dictionary)[0] * length) else 0 for i in range(length)]
-            z = [1 if i < round(check_frequencies(dictionary)[1] * length // 2) else 0 for i in range(length // 2)] * 2
-
-        if key == "onelink" or key == "twolinks":
-            x = dictionary[st[0]].copy()
-            z = dictionary[st[1]].copy()
-
-        if key == 'fork' or key == "threelinks":  # NEED TO CHECK threelinks
-            z = [1 if i < round(check_frequencies(dictionary)[1] * length) else 0 for i in range(length)]
-            x = dictionary[st[0]].copy()
-
-    # interv_dict[st[1]] = z
-    # interv_dict[st[0]] = x
+            # y
+            interv_dict[st[0]] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
 
     return interv_dict
 
@@ -529,11 +424,6 @@ def tanc(lst: str):
 
     return True
 
-
-def supercrunchfunc(l1: list):
-    for unit in l1:
-        print(smartdatainterv(unit[0], unit[1]))
-        # unit = smartdatainterv(unit[0], unit[1])
 
 
 def smartdatainterv(d: dict, seed=0):
@@ -629,7 +519,8 @@ def userschoice(lst: str):  # lst is a user's form
 
     return temp
 
-def wherey(seed : int):
+
+def wherey(seed: int):
     if seed in [1, 4]:
         return "Z"
     if seed in [0, 5]:
@@ -637,13 +528,15 @@ def wherey(seed : int):
     if seed in [2, 3]:
         return "X"
 
-def wherex(seed : int):
+
+def wherex(seed: int):
     if seed in [3, 5]:
         return "Z"
     if seed in [0, 1]:
         return "X"
     if seed in [2, 4]:
         return "Y"
+
 
 def dgpchoice(lst: list):  # lst is an original form
     temp = list()
@@ -757,10 +650,10 @@ print()
 print(d['collider1'], "- collider")
 print(check_frequencies(d['collider1']), "- frequencies")
 
-print(intervente('collider', d['collider1'], "x"), "- orange distribution (X fixed)")
-print(check_frequencies(intervente('collider', d['collider1'], "x")), "- frequencies again")
-print(intervente('collider', d['collider1'], "y"), "- orange distribution (Y fixed)")
-print(check_frequencies(intervente('collider', d['collider1'], "y")), "- frequencies again")
+print(intervente('collider1', d['collider1'], "x"), "- orange distribution (X fixed)")
+print(check_frequencies(intervente('collider1', d['collider1'], "x")), "- frequencies again")
+print(intervente('collider1', d['collider1'], "y"), "- orange distribution (Y fixed)")
+print(check_frequencies(intervente('collider1', d['collider1'], "y")), "- frequencies again")
 
 # print(intervente('collider', d['collider1'], "z"), "- orange distribution (Z fixed)")
 # print(check_frequencies(intervente('collider', d['collider1'], "z")), "- frequencies again")
