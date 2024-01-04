@@ -136,17 +136,29 @@
                     let treatment = js_vars.treatment;
                     let dgptype = js_vars.dgptype;
                     console.log(dgptype)
+
                     function minifuncy(number, tr, type) {
                         console.log(tr, type)
-                        if (tr && (type == 'onelink' || type == 'twolinks' || type == 'collider1')){
-                            if (number === 3 || number === 5) {return "Z"}
-                            if (number === 0 || number === 1) {return "X"}
-                            if (number === 2 || number === 4) {return "Y"}
-                        }
-                        else{
-                            if (number === 1 || number === 4) {return "Z"}
-                            if (number === 0 || number === 5) {return "Y"}
-                            if (number === 2 || number === 3) {return "X"}
+                        if (tr && (type == 'onelink' || type == 'twolinks' || type == 'collider1')) {
+                            if (number === 3 || number === 5) {
+                                return "Z"
+                            }
+                            if (number === 0 || number === 1) {
+                                return "X"
+                            }
+                            if (number === 2 || number === 4) {
+                                return "Y"
+                            }
+                        } else {
+                            if (number === 1 || number === 4) {
+                                return "Z"
+                            }
+                            if (number === 0 || number === 5) {
+                                return "Y"
+                            }
+                            if (number === 2 || number === 3) {
+                                return "X"
+                            }
                         }
                     }
 
@@ -274,12 +286,12 @@
         </td>
     </tr>
     {% for i, x, y, z in datasetint %}
-    <tr>
-        <td>{{ i }}</td>
-        <td>{{ x }}</td>
-        <td>{{ y }}</td>
-        <td>{{ z }}</td>
-    </tr>
+        <tr>
+            <td>{{ i }}</td>
+            <td>{{ x }}</td>
+            <td>{{ y }}</td>
+            <td>{{ z }}</td>
+        </tr>
     {% endfor %}
 </table>
 
@@ -317,12 +329,12 @@
         </td>
     </tr>
     {% for i, x, y, z in datasetobs %}
-    <tr>
-        <td>{{ i }}</td>
-        <td>{{ x }}</td>
-        <td>{{ y }}</td>
-        <td>{{ z }}</td>
-    </tr>
+        <tr>
+            <td>{{ i }}</td>
+            <td>{{ x }}</td>
+            <td>{{ y }}</td>
+            <td>{{ z }}</td>
+        </tr>
     {% endfor %}
 </table>
 
@@ -337,7 +349,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tbody>
 
         {% for i in frequenciesobs %}
-        <td class="searchable3" style="text-align: center">{{ i }}</td>
+            <td class="searchable3" style="text-align: center">{{ i }}</td>
         {% endfor %}
         </tr>
         <tr>
@@ -357,7 +369,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tbody>
 
         {% for i in frequenciesint %}
-        <td class="searchable3" style="text-align: center">{{ i }}</td>
+            <td class="searchable3" style="text-align: center">{{ i }}</td>
         {% endfor %}
         </tr>
         <tr>
@@ -581,6 +593,231 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <input hidden="hidden" id='buttons' name="buttons"
        value='[0,0,0,0,0,0,0,0,0,0,0,0,0,0]'>
 
+<div class="card">
+    <table class="table table-striped">
+        <thead style="background-color: #dddddd">
+        <tr class="header">
+            <th colspan="2" style="text-align: center">What can not to be</th>
+            <th colspan="2" style="text-align: center">Accroding the data</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="header" style="background-color: #dddddd; border-color: #111111">
+            <th style="text-align: center">Scheme</th>
+            <th style="text-align: center">Description</th>
+            <th style="text-align: right; font-weight: normal">Can <u>not</u> be</th>
+            <th style="text-align: center; font-weight: normal">Not enough information</th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/1.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>X - сильное, Y - слабое</th>
+            <th style="text-align: right"><input type="radio" value="html1" id="html1" name="topic1"/></th>
+            <th style="text-align: center"><input type="radio" value="html12" id="html12" name="topic1"/></th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/2.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>X - слабое, Y - сильное</th>
+            <th style="text-align: right"><input type="radio" value="html2" id="html2" name="topic2"/></th>
+            <th style="text-align: center"><input type="radio" value="html22" id="html22" name="topic2"/></th>
+        </tr>
+        <tr style="border-color: #111111">
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/3.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>X и Y нейтральные относительно друг друга</th>
+            <th style="text-align: right"><input type="radio" value="html3" id="html3" name="topic3"/></th>
+            <th style="text-align: center"><input type="radio" value="html32" id="html32" name="topic3"/></th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/4.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>X - сильное, Z - слабое</th>
+            <th style="text-align: right"><input type="radio" value="html4" id="html4" name="topic4"/></th>
+            <th style="text-align: center"><input type="radio" value="html42" id="html42" name="topic4"/></th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/5.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>Z - слабое, X - сильное</th>
+            <th style="text-align: right"><input type="radio" value="html5" id="html5" name="topic5"/></th>
+            <th style="text-align: center"><input type="radio" value="html52" id="html52" name="topic5"/></th>
+        </tr>
+        <tr style="border-color: #111111">
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/6.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>X и Z нейтральные относительно друг друга</th>
+            <th style="text-align: right"><input type="radio" value="html6" id="html6" name="topic6"/></th>
+            <th style="text-align: center"><input type="radio" value="html62" id="html62" name="topic6"/></th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/7.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>Y - сильное, Z - слабое</th>
+            <th style="text-align: right"><input type="radio" value="html7" id="html7" name="topic7"/></th>
+            <th style="text-align: center"><input type="radio" value="html72" id="html72" name="topic7"/></th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/8.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>Z - слабое, Y - сильное</th>
+            <th style="text-align: right"><input type="radio" value="html8" id="html8" name="topic8"/></th>
+            <th style="text-align: center"><input type="radio" value="html82" id="html82" name="topic8"/></th>
+        </tr>
+        <tr>
+            <th><img src="https://github.com/just-yagodkin/GitTest/blob/master/9.png?raw=true"></th>
+            <th style="font-weight: normal; text-align: center"><br>Y и Z нейтральные относительно друг друга</th>
+            <th style="text-align: right"><input type="radio" value="html9" id="html9" name="topic9"/></th>
+            <th style="text-align: center"><input type="radio" value="html92" id="html92" name="topic9"/></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<input id='radio_buttons' name="radio_buttons"
+       value='[0,0,0,0,0,0,0,0,0]'>
+
+<script>
+
+    function radio_buttons() {
+        document.getElementById('radio_buttons').value = "[" + Number(document.getElementById('html1').checked) +
+            "," + Number(document.getElementById('html2').checked) +
+            "," + Number(document.getElementById('html3').checked) +
+            "," + Number(document.getElementById('html4').checked) +
+            "," + Number(document.getElementById('html5').checked) +
+            "," + Number(document.getElementById('html6').checked) +
+            "," + Number(document.getElementById('html7').checked) +
+            "," + Number(document.getElementById('html8').checked) +
+            "," + Number(document.getElementById('html9').checked) + "]"
+    }
+
+    $(document).ready(function () {
+        (function ($) {
+            $('#html1').on('change', function () {
+                if (this.checked && (document.getElementById('html2').checked == true)){
+                    document.getElementById('html3').checked = false;
+                }
+                if (this.checked && (document.getElementById('html3').checked == true)){
+                    document.getElementById('html2').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html2').on('change', function () {
+                if (this.checked && (document.getElementById('html1').checked == true)){
+                    document.getElementById('html3').checked = false;
+                }
+                if (this.checked && (document.getElementById('html3').checked == true)){
+                    document.getElementById('html1').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html3').on('change', function () {
+                if (this.checked && (document.getElementById('html1').checked == true)){
+                    document.getElementById('html2').checked = false;
+                }
+                if (this.checked && (document.getElementById('html2').checked == true)){
+                    document.getElementById('html1').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html4').on('change', function () {
+                if (this.checked && (document.getElementById('html5').checked == true)){
+                    document.getElementById('html6').checked = false;
+                }
+                if (this.checked && (document.getElementById('html6').checked == true)){
+                    document.getElementById('html5').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html5').on('change', function () {
+                if (this.checked && (document.getElementById('html4').checked == true)){
+                    document.getElementById('html6').checked = false;
+                }
+                if (this.checked && (document.getElementById('html6').checked == true)){
+                    document.getElementById('html4').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html6').on('change', function () {
+                if (this.checked && (document.getElementById('html4').checked == true)){
+                    document.getElementById('html5').checked = false;
+                }
+                if (this.checked && (document.getElementById('html5').checked == true)){
+                    document.getElementById('html4').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html7').on('change', function () {
+                if (this.checked && (document.getElementById('html8').checked == true)){
+                    document.getElementById('html9').checked = false;
+                }
+                if (this.checked && (document.getElementById('html9').checked == true)){
+                    document.getElementById('html8').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html8').on('change', function () {
+                if (this.checked && (document.getElementById('html7').checked == true)){
+                    document.getElementById('html9').checked = false;
+                }
+                if (this.checked && (document.getElementById('html9').checked == true)){
+                    document.getElementById('html7').checked = false;
+                }
+                radio_buttons();
+            });
+
+            $('#html9').on('change', function () {
+                if (this.checked && (document.getElementById('html7').checked == true)){
+                    document.getElementById('html8').checked = false;
+                }
+                if (this.checked && (document.getElementById('html8').checked == true)){
+                    document.getElementById('html7').checked = false;
+                }
+                radio_buttons();
+            });
+
+
+
+            $('#html12').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html22').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html32').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html42').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html52').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html62').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html72').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html82').on('change', function () {
+                radio_buttons();
+            });
+
+            $('#html92').on('change', function () {
+                radio_buttons();
+            });
+
+
+        }(jQuery));
+    });
+</script>
 
 <script>
 
