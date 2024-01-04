@@ -396,6 +396,15 @@ class DiagramTask(Page):
         datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
         datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
 
+        # choices = [(1, "X-сильное, Y-слабое"),
+        #            (2, "Y-сильное, X-слабое"),
+        #            (3, "X и Y нейтральные по отношению друг к другу"),
+        #            (4, "Y-сильное, Z-слабое"),
+        #            (5, "Z-сильное, Y-слабое"),
+        #            (6, "Y и Z нейтральные по отношению друг к другу"),
+        #            (7, "X-сильное, Z-слабое"),
+        #            (8, "Z-сильное, X-слабое"),
+        #            (9, "X и Z нейтральные по отношению друг к другу")]
         # print(datasetobs)
 
         return dict(
@@ -409,7 +418,8 @@ class DiagramTask(Page):
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             treatment=player.treatment,
             seed=C.seed[player.round_number - 1][1],
-            dgptype=C.task_sequence[player.round_number - 1]
+            dgptype=C.task_sequence[player.round_number - 1],
+            # choices=choices
         )
 
     @staticmethod
