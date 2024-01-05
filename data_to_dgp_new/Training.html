@@ -1,0 +1,772 @@
+{{ block styles }}
+<style>
+    .otree-body {
+        font: 14px helvetica neue, helvetica, arial, sans-serif;
+        max-width: 600px
+    }
+
+    #cy {
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: 200px;
+        display: block;
+    }
+
+    #info {
+        color: #c88;
+        font-size: 2em;
+        width: 800px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+</style>
+
+<head>
+</head>
+
+
+{{ endblock }}
+
+
+{{ block title }}
+<dl class="lng-Title" style="text-align:center">Pick the arrows (edges) between variables according to data.</dl>
+{{ endblock }}
+
+{{ block content }}
+
+<tr class="lang-container" style="text-align:right">
+    <table>
+        <col width="81%">
+        <col width="19%">
+        <tr>
+            <td></td>
+            <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
+                <link rel="stylesheet"
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+                <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
+                <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+                    <option value="en">Eng</option>
+                    <option value="ge">Ger</option>
+                    <option value="ru">Rus</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</tr>
+
+<!-- {{ formfield "training"  }} -->
+
+<br>
+<br>
+
+<dl class="lng-tab1">Before we move on to the task itself, let's look at the demonstration material.</dl>
+<dl class="lng-tab2">Here we have two tables with observations. For simplicity, only the observations for X and Y are
+    written out in them. The table on the right is the table for the twin planet (all grains of variable X are mature).
+</dl>
+<dl class="lng-tab3">In this demo, to make it easier for you to familiarize yourself with the problem, two
+    simplifications are made. All mature grains are highlighted in color. All beds are not over rocky soils.
+</dl>
+<dl class="lng-tab4">Please fill in the answer form according to your assumptions about what relationships between
+    strong and weak plants follow from these tables.
+</dl>
+
+<!--
+<br>
+<div>
+    <p class="lng-TrText">
+        Lets figure out how to fill the form!
+        Choose (click) the arrows as follows: leave the edge dashed if there is no influence from one variable to
+        another variable and make it solid if there is.
+        As an example please fill the form for following situation: column Y are dependent from X. Then tap Next.
+    </p>
+
+    <br/>
+</div>-->
+
+<br>
+
+<table style="width: 100%;border: inherit">
+    <tr>
+        <td style="border-right: 40px solid white">
+            <table id="observ" class="table"
+                   style="line-height: 0.8; width: 100%; border-radius: 25px 25px 25px 25px;background-color: #f2f2f2; border: white">
+
+                <tbody class="searchable">
+                <tr style="text-align: center">
+                    <td class="searchable"></td>
+                    <td class="searchable">X
+                        <br/>
+                        <label><input id="filterx" type="checkbox">1</label>
+                        <label><input id="filterx0" type="checkbox">0</label>
+                        <div class="input-group"><span class="input-group-addon"></span>
+
+                    </td>
+                    <td class="searchable">Y
+                        <br/>
+                        <label><input id="filtery" type="checkbox">1</label>
+                        <label><input id="filtery0" type="checkbox">0</label>
+
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>3</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>5</td>
+                    <td style="text-align: center">0</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td style="text-align: center">0</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>7</td>
+                    <td style="text-align: center">0</td>
+                    <td style="text-align: center">0</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td style="text-align: center">0</td>
+                    <td style="text-align: center">0</td>
+                </tr>
+
+            </table>
+        </td>
+
+        <td>
+            <table id="interv" class="table"
+                   style="line-height: 0.8; width: 100%; border-radius: 25px 25px 25px 25px;background-color: #f2f2f2; border: white">
+
+                <tbody class="searchable2">
+                <tr style="text-align: center">
+                    <td class="searchable2"></td>
+                    <td class="searchable2">X
+                        <br/>
+                        <label><input id="filterx_i" type="checkbox">1</label>
+                        <label><input id="filterx0_i" type="checkbox">0</label>
+                        <div class="input-group"><span class="input-group-addon"></span>
+
+
+                    </td>
+                    <td class="searchable2">Y
+                        <br/>
+                        <label><input id="filtery_i" type="checkbox">1</label>
+                        <label><input id="filtery0_i" type="checkbox">0</label>
+                        <div class="input-group"><span class="input-group-addon"></span>
+
+                </tr>
+                <tr style="background-color: white">
+                    <td>1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>3</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>5</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
+                </tr>
+
+                <tr style="background-color: white">
+                    <td>7</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td style="font-weight: bold; color: #d9534f; font-size: 160%; text-align: center">1</td>
+                    <td style="text-align: center">1</td>
+                </tr>
+            </table>
+        </td>
+</table>
+
+
+<input hidden name="training"/>
+{{ formfield_errors 'training' }}
+<br>
+<div id="cy"></div>
+
+
+{{ next_button }}
+
+
+<script src="{{ static 'global/cytoscape.min.js' }}"></script>
+
+<script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+
+<script>
+    var cy = cytoscape({
+        container: document.getElementById('cy'),
+
+        boxSelectionEnabled: false,
+        autounselectify: true,
+        wheelSensitivity: 0.01,
+
+        style: cytoscape.stylesheet()
+
+
+            .selector('node')
+            .css({
+                'content': 'data(name)',
+                'text-valign': 'center',
+                'color': 'black',
+                // 'text-outline-width': 2,
+                // 'text-outline-color': undefined,
+                'background-color': '#666'
+            })
+            .selector(':selected')
+            .css({
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'black',
+                'source-arrow-color': 'black',
+                'text-outline-color': 'black'
+            })
+            .selector('edge')
+            .css({
+                'width': 2,
+                'line-color': '#ccc',
+                'target-arrow-color': 'black',
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'bezier',
+                'line-style': 'dashed'
+            })
+            .selector('edge[label]')
+            .css({
+                "label": "data(label)",
+                "width": 3
+            })
+            .selector('layout')
+            .css({
+                'name': 'grid',
+                'rows': 1,
+                'cols': 2,
+                'padding': 15,
+            })
+        ,
+
+
+        elements: {
+            nodes: [
+                // { style: {'border-color': "red"}, data: {counter:0, id: 'a', name: '-', } },
+                {data: {counter: 0, id: 'X', name: 'X',}, style: {'background-color': '#c3cec0'}},
+                {data: {counter: 0, id: 'Y', name: 'Y',}, style: {'background-color': '#c3cec0'}},
+                {data: {counter: 0, id: 'Z', name: 'Z',}, style: {'background-color': '#c3cec0'}},
+                // { data: {counter:0, id: 'Z', name: '-', } }
+            ],
+            edges: [
+                {data: {counter: 0, weight: 0, id: 'XY', source: 'X', target: 'Y', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'YX', source: 'Y', target: 'X', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'YZ', source: 'Y', target: 'Z', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'XZ', source: 'X', target: 'Z', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'ZY', source: 'Z', target: 'Y', label: ""}},
+                {data: {counter: 0, weight: 0, id: 'ZX', source: 'Z', target: 'X', label: ""}},
+                // { data: {counter:0, weight:0, id: 'bc', source: 'Y', target: 'Z', label: "-"} },
+            ]
+        },
+
+
+    });
+
+    var layout = cy.layout({
+        name: 'circle'
+    });
+
+    layout.run();
+
+    const edge_states = ["", ""];
+    const edge_colours = ["#ccc", "#000"]
+    const edge_type = ['dashed', 'solid']
+    const edge_weight = [2, 0]
+
+
+    cy.on('tap', 'edge', function (evt) {
+        var ele = evt.target;
+        var edges = cy.edges();
+        var form_data = [];
+        // console.log(iterator(numbers, ele.data('counter'))[0] );
+        ele.data('label', iterator(edge_states, ele.data('counter'))[0]);
+        ele.data('counter', iterator(edge_states, ele.data('counter'))[1]);
+        ele.data('weight', iterator(edge_weight, ele.data('counter'))[0]);
+        ele.style('line-style', edge_type[ele.data('counter')]);
+        ele.style('line-color', edge_colours[ele.data('counter')]);
+        for (var i = 0; i < edges.length; i++) {
+            form_data.push(edges[i]._private.data);
+        }
+        console.log(form_data);
+        liveSend(form_data);
+        // sendValue(form_data)
+        form_data = [];
+    });
+
+    function liveRecv(data) {
+        //forminputs.training.value = data;
+        formInputs.training.value = data; // for server setting
+        console.log(data)
+    }
+
+
+    function iterator(array, i) {
+        var index = (i + 1) % array.length;
+        var value = array[index];
+
+        return [value, index];
+    };
+</script>
+<script>
+    function crfunc(b1, b2) {
+        if (b1) {
+            return "0";
+        } else if (b2) {
+            return "1";
+        } else {
+            return "-1";
+        }
+    }
+
+
+    $(document).ready(function () {
+        (function ($) {
+            $('#filter').keyup(function () {
+
+                var rex = new RegExp($(this).val(), 'i');
+                $('.searchable tr').hide();
+                $('.searchable tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+
+            });
+
+
+            $('#filterx').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filterx0').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked))
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+
+            });
+
+
+            $('#filterx0').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filterx').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery').checked, document.getElementById('filtery0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+
+            });
+
+
+            $('#filtery').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filtery0').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
+                            $(this).find('td').eq(2).text() !== "0");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+
+            });
+
+
+            $('#filtery0').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable tr').hide();
+                    document.getElementById('filtery').checked = false;
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked) &&
+                            $(this).find('td').eq(2).text() !== "1");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text(), $(this).find('td').eq(3).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx').checked, document.getElementById('filterx0').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqs.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+
+        }(jQuery));
+    });
+
+
+    $(document).ready(function () {
+        (function ($) {
+            $('#filterx_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filterx0_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "0" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+
+            $('#filterx0_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filterx_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== "1" &&
+                            $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_i').checked, document.getElementById('filtery0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+            $('#filtery_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filtery0_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
+                            $(this).find('td').eq(2).text() !== "0");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+
+            $('#filtery0_i').on('change', function () {
+                var out = [];
+                var tab = 0;
+                var filt_cut = 0;
+
+                if (this.checked) {
+                    $('.searchable2 tr').hide();
+                    document.getElementById('filtery_i').checked = false;
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked) &&
+                            $(this).find('td').eq(2).text() !== "1");
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+
+
+                } else {
+                    $('.searchable2 tr').filter(function () {
+                        filt_cut = ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_i').checked, document.getElementById('filterx0_i').checked));
+                        if (filt_cut) {
+                            out.push([$(this).find('td').eq(1).text(), $(this).find('td').eq(2).text()])
+                        }
+                        ;
+                        return (filt_cut)
+                    }).show();
+
+                    var tab = Array.from(out.slice(1, out.length));
+                    var transposed_tab = tab[0].map((_, colIndex) => tab.map(row => row[colIndex]));
+                    out2 = [sum(transposed_tab[0]) / transposed_tab[0].length, sum(transposed_tab[1]) / transposed_tab[1].length];
+                    freqsint.innerHTML = '<td style="width:20%">' + 'freq' + '</td><td style="width:40%">' + out2[0].toFixed(2) + '</td><td style="width:40%">' + out2[1].toFixed(2) + '</td><td>';
+                }
+            });
+        }(jQuery));
+    });
+
+</script>
+
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+       aria-expanded="false" aria-controls="collapseExample">
+        SHOW INSTRUCTIONS
+    </a>
+</div>
+<div class="collapse" id="collapseExample" style="justify-content: center">
+    <div id="presentation" style="text-align: center">
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000"
+                frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true"
+                webkitallowfullscreen="true"></iframe>
+    </div>
+</div>
+
+<script>
+    if (window.location.hash == '#en') {
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    } else if (window.location.hash == '#ru') {
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    } else if (window.location.hash == '#ge') {
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRwuxhtykR989WCmpwYXDcjfLoRNWreTlX_et7ZGwomclVNuTrdK_d0Yw4qM5vpOjNWCg5ZAn9Kg30V/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    console.log(window.location.hash)
+</script>
+
+{{ endblock }}

@@ -1,0 +1,244 @@
+
+$(document).ready(function () {
+  (function ($) {
+    $('#filterx_ix').on('change', function(){
+        if(this.checked){
+            $('.searchable4 tr').hide();
+            document.getElementById('filterx0_ix').checked = false;
+            $('.searchable4 tr').filter(function() {
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+        }else{
+            $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+        }
+
+
+    });
+
+
+    $('#filterx0_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filterx_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+         document.getElementById('filtery0_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery0_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filtery_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_ix').checked, document.getElementById('filterz0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filterz0_ix').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz0_ix').on('change', function(){
+
+    if(this.checked){
+        $('.searchable4 tr').hide();
+        document.getElementById('filterz_i').checked = false;
+        $('.searchable4 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
+        }).show();
+    }else{
+        $('.searchable4 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_ix').checked, document.getElementById('filterx0_ix').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_ix').checked, document.getElementById('filtery0_ix').checked ))
+            }).show();
+    }
+    });
+}(jQuery));
+});
+
+$(document).ready(function () {
+  (function ($) {
+    $('#filterx_iz').on('change', function(){
+        if(this.checked){
+            $('.searchable5 tr').hide();
+            document.getElementById('filterx0_iz').checked = false;
+            $('.searchable5 tr').filter(function() {
+                return ($(this).find('td').eq(1).text() !== "0" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+        }else{
+            $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+        }
+
+
+    });
+
+
+    $('#filterx0_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filterx_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== "1" &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+         document.getElementById('filtery0_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== "0" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filtery0_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filtery_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== "1" &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== crfunc(document.getElementById('filterz_iz').checked, document.getElementById('filterz0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filterz0_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== "0")
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ))
+            }).show();
+    }
+
+
+    });
+
+    $('#filterz0_iz').on('change', function(){
+
+    if(this.checked){
+        $('.searchable5 tr').hide();
+        document.getElementById('filterz_iz').checked = false;
+        $('.searchable5 tr').filter(function() {
+            return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ) &&
+                        $(this).find('td').eq(3).text() !== "1")
+        }).show();
+    }else{
+        $('.searchable5 tr').filter(function() {
+               return ($(this).find('td').eq(1).text() !== crfunc(document.getElementById('filterx_iz').checked, document.getElementById('filterx0_iz').checked ) &&
+                        $(this).find('td').eq(2).text() !== crfunc(document.getElementById('filtery_iz').checked, document.getElementById('filtery0_iz').checked ))
+            }).show();
+    }
+    });
+}(jQuery));
+});

@@ -1,0 +1,118 @@
+{{ block styles }}
+<style>
+    .tb {
+        border-collapse: collapse;
+        width: 300px;
+    }
+
+    .tb th, .tb td {
+        padding: 5px;
+        border: solid 1px #777;
+    }
+
+    .tb th {
+        background-color: lightblue;
+    }
+</style>
+{{ endblock }}
+
+{{ block title }}
+Results
+{{ endblock }}
+
+{{ block content }}
+
+<div class="lang-container" style="text-align:right">
+    <table>
+        <col width="88%">
+        <col width="12%">
+        <tr>
+            <td></td>
+            <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
+                <link rel="stylesheet"
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+                <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
+                <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+                    <option value="en">Eng</option>
+                    <option value="ge">Ger</option>
+                    <option value="ru">Rus</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<br>
+<br>
+
+<table id="scores" class="tb" style="margin:auto">
+
+
+    <tr>
+        <th>Round</th>
+        <th>Accuracy</th>
+        <th>Your score</th>
+    </tr>
+
+    {% for i, a, score in data %}
+    <tr>
+        <td>{{ i }}</td>
+        <td>{{ a }}</td>
+        <td>{{ score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+
+
+<table style="margin:auto">
+    <tr>
+        <td>
+            <h5 class="lng-Meanaccuracy" style="text-align:right">
+                Your mean accuracy is</h5>
+
+<!--            перевод не работает((-->
+
+        </td>
+        <td>
+            <h5 style="text-align:left"><b>&nbsp;{{mean_accuracy}}</b></h5>
+        </td>
+
+    </tr>
+</table>
+
+
+
+<table style="margin:auto">
+    <tr>
+        <td>
+            <h5 class="lng-Totalscore" style="text-align:right">
+                Your total payoff</h5>
+
+<!--            перевод не работает((-->
+
+        </td>
+        <td>
+            <h5 style="text-align:left"><b>&nbsp;{{participant.payoff_plus_participation_fee}}</b></h5>
+        </td>
+
+    </tr>
+</table>
+
+
+<br>
+
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
+<script>
+</script>
+
+{{ next_button }}
+{{ endblock }}
+
+

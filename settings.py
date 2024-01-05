@@ -215,6 +215,13 @@ SESSION_CONFIGS = [
 
     ),
 
+    dict(
+        name='data_to_dgp_new_design',
+        display_name="data to DGP task new design",
+        app_sequence=['data_to_dgp_new', 'AOT'],
+        num_demo_participants=1,
+    ),
+
     # dict(
     #     name='any_app', 
     #     app_sequence=['any_app',], 
