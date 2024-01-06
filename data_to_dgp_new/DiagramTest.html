@@ -1,0 +1,278 @@
+{{ block styles }}
+<style>
+    .otree-body {
+        font: 14px helvetica neue, helvetica, arial, sans-serif;
+    }
+
+    #cy {
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: 200px;
+        display: block;
+    }
+
+    #cy2 {
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: 200px;
+        display: block;
+    }
+
+    #info {
+        color: #c88;
+        font-size: 2em;
+        width: 800px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+{{ endblock }}
+
+{{ block title }}
+<dl class="lng-DTestTitle" style="text-align:center">You accuracy in last round:</dl>
+{{ endblock }}
+
+{{ block content }}
+
+<div class="lang-container" style="text-align:right">
+    <table>
+        <col width="88%">
+        <col width="12%">
+        <tr>
+            <td></td>
+            <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
+                <link rel="stylesheet"
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+                <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
+                <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+                    <option value="en">Eng</option>
+                    <option value="ge">Ger</option>
+                    <option value="ru">Rus</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br>
+<div>
+    <h5 class="lng-DTestText1">That what was chosen:</h5>
+
+    <br/>
+</div>
+<div id="cy"></div>
+<br/>
+<h5 class="lng-DTestText2">These dependencies are underlying the basis of the data:</h5>
+
+<br/>
+<div id="cy2"></div>
+
+<br>
+<table style="margin:auto">
+    <tr>
+        <td>
+            <h5 class="lng-Accuracy" style="text-align:right">
+                Your accuracy for the round is</h5>
+        </td>
+        <td>
+            <h5 style="text-align:left"><b>&nbsp;{{accuracy}}</b></h5>
+        </td>
+
+    </tr>
+</table>
+<br>
+
+{{ next_button }}
+
+
+<script src="{{ static 'global/cytoscape.min.js' }}"></script>
+
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
+
+<script>
+    let array_edge = [];
+    var myStringArray = js_vars.edges;
+    var arrayLength = myStringArray.length;
+    for (var i = 0; i < arrayLength; i++) {
+
+        // console.log(myStringArray[i]);
+
+        if (myStringArray[i].counter == 1) array_edge.push({data: myStringArray[i]});
+    }
+
+    var cy = cytoscape({
+        container: document.getElementById('cy'),
+
+        boxSelectionEnabled: false,
+        autounselectify: true,
+        wheelSensitivity: 0.01,
+
+        style: cytoscape.stylesheet()
+
+            .selector('node')
+            .css({
+                'content': 'data(name)',
+                'text-valign': 'center',
+                'color': 'black',
+                // 'text-outline-width': 2,
+                // 'text-outline-color': undefined,
+                'background-color': '#666'
+            })
+            .selector(':selected')
+            .css({
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'black',
+                'source-arrow-color': 'black',
+                'text-outline-color': 'black'
+            })
+            .selector('edge')
+            .css({
+                'width': 2,
+                'line-color': '#ccc',
+                'target-arrow-color': 'black',
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'bezier',
+                'line-style': 'solid'
+            })
+            .selector('edge[label]')
+            .css({
+                "label": "data(label)",
+                "width": 3
+            })
+            .selector('layout')
+            .css({
+                'name': 'circle',
+                'rows': 3,
+                'cols': 2,
+                'padding': 10,
+            })
+        ,
+
+        elements: {
+            nodes: js_vars.nodes,
+            edges: array_edge
+        },
+    });
+
+
+    var layout = cy.layout({
+        name: 'circle'
+    });
+    layout.run();
+
+    elements_revised = {}
+
+    if (js_vars.show_edges_template == 1) {
+        elements_revised = {
+            nodes: js_vars.nodes,
+            edges: js_vars.edges_original
+        }
+    } else {
+        elements_revised = {
+            nodes: js_vars.nodes
+        };
+    }
+
+    var cy2 = cytoscape({
+        container: document.getElementById('cy2'),
+
+        boxSelectionEnabled: false,
+        autounselectify: true,
+        wheelSensitivity: 0.01,
+
+        style: cytoscape.stylesheet()
+
+
+            .selector('node')
+            .css({
+                'content': 'data(name)',
+                'text-valign': 'center',
+                'color': 'black',
+                // 'text-outline-width': 2,
+                // 'text-outline-color': undefined,
+                'background-color': '#666'
+            })
+            .selector(':selected')
+            .css({
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'black',
+                'source-arrow-color': 'black',
+                'text-outline-color': 'black'
+            })
+            .selector('edge')
+            .css({
+                'width': 2,
+                'line-color': '#ccc',
+                'target-arrow-color': 'black',
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'bezier',
+                'line-style': 'solid'
+            })
+            .selector('edge[label]')
+            .css({
+                "label": "data(label)",
+                "width": 3
+            })
+            .selector('layout')
+            .css({
+                'name': 'circle',
+                'rows': 3,
+                'cols': 2,
+                'padding': 10,
+            })
+        ,
+
+
+        elements: elements_revised,
+
+    });
+
+
+    var layout2 = cy2.layout({
+        name: 'circle'
+    });
+    layout2.run();
+    // edges: [
+    //       { data: {counter:0, weight:0, id: 'XY', source: 'X', target: 'Y', label: ""} },
+    //       { data: {counter:0, weight:0, id: 'YX', source: 'Y', target: 'X', label: ""} },
+    //       { data: {counter:0, weight:0, id: 'YZ', source: 'Y', target: 'Z' , label: ""} },
+    //       { data: {counter:0, weight:0, id: 'XZ', source: 'X', target: 'Z' , label: ""} },
+    //       { data: {counter:0, weight:0, id: 'ZY', source: 'Z', target: 'Y' , label: ""} },
+    //       { data: {counter:0, weight:0, id: 'ZX', source: 'Z', target: 'X' , label: ""} },
+    //       // { data: {counter:0, weight:0, id: 'bc', source: 'P', target: 'S', label: ""} },
+    //     ]
+    //   },
+
+</script>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        SHOW INSTRUCTIONS
+      </a>
+    </div>
+      <div class="collapse" id="collapseExample">
+        <div id = "presentation" style="text-align: center">
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        </div>
+      </div>
+
+<script>
+    if (window.location.hash == '#en'){
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    else if(window.location.hash == '#ru'){
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    console.log(window.location.hash)
+</script>
+
+{{ endblock }}
