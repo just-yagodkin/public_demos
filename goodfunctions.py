@@ -600,6 +600,12 @@ def structure_error(user: list, dgp: list):
 
     return count
 
+def has_do(dgp_name: str) -> bool:
+    do_0_list = ['nolinks', 'collider1', 'fork']
+    if dgp_name in do_0_list:
+        return False
+    return True
+
 
 ###----- TESTS -----###
 
