@@ -17,8 +17,7 @@ class C(BaseConstants):
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
-    SHOWING_INFORMATION_EDGE = 0.32  # you will see a feedback only after this percent of rounds
-
+    SHOWING_INFORMATION_EDGE = 2  # you will see a feedback only after this percent of rounds
     NAME_IN_URL = 'data_to_dgp_new'
     PLAYERS_PER_GROUP = None
 
@@ -38,8 +37,6 @@ class C(BaseConstants):
     task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    # если надо зафиксировать сид, то надо раскоментить строочку ниже
-    # seed = [(name, 0) for name in task_sequence]
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
                    'right': {'x': [1, 1, 1, 1, 1, 1, 1, 1], 'y': [1, 1, 1, 1, 1, 1, 1, 1]}}
@@ -113,17 +110,6 @@ class C(BaseConstants):
     interventional_data = gf.reshuffle(preinterventional_data)
     interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
 
-    # если надо, чтобы строки не шафлились раскоментируйте 3 строчки ниже
-    # observational_data = preobservational_data
-    # interventional_data = preinterventional_data
-    # interventional_data_treatment = preinterventional_data_treatment
-
-    # print(observational_data)
-    # print()
-    # print(interventional_data_treatment)
-    # print()
-    # print(interventional_data)
-
 
 class Subsession(BaseSubsession):
     pass
@@ -135,14 +121,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     dgptype = models.StringField(initial="")
-
     userdgp = models.StringField(initial="")
-
     originaldgp = models.StringField(initial="")
 
-    dir_error = models.IntegerField(initial=0)
-    struct_error = models.IntegerField(initial=0)
-    error_counter = models.IntegerField(initial=0)
     edges_num = models.IntegerField()
 
     stored = models.StringField(initial=json.dumps(
@@ -165,22 +146,14 @@ class Player(BasePlayer):
 
     buttons = models.StringField()
 
-    buttons_before_err = models.StringField(initial='[0,0,0,0,0,0,0,0,0,0,0,0,0,0]')
-
     radio_buttons = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
 
     score = models.FloatField(initial=0)
 
     accuracy = models.FloatField()
 
-    err_counter = models.IntegerField(initial=0)  # ошибок всего
-
-    cycle_err = models.IntegerField(initial=0)  # есть ли ошибка цикла прямо здесь и сейчас
-
-    treatment = models.BooleanField()
-
+    treatment = models.StringField()
     node = models.StringField(initial='')
-
     seed = models.IntegerField(initial=0)
 
     def conf_bid_error_message(player, value):
@@ -209,8 +182,11 @@ class Player(BasePlayer):
 
 
 def creating_session(subsession):
+    # 'g' is for green, 'y' is for yellow, 's' is for silver
+    possible_treatments = ('gys', 'gsy', 'ysg', 'ygs', 'syg', 'sgy')
+
     if C.treatment:
-        treatments = itertools.cycle([False, True, True])
+        treatments = itertools.cycle(possible_treatments)
         for player in subsession.get_players():
             player.treatment = next(treatments)
 
@@ -224,9 +200,6 @@ def datatask_output_json(player: Player):
     else:
         target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1]]
 
-    # print(target_vocabulary)
-    # print('Я ТУТ!!!!!!!!!!!!!')
-
     return target_vocabulary
 
 
@@ -234,7 +207,7 @@ def benchmark_diagram(player: Player):
     num_round = player.round_number - 1
     # target_key = C.task_sequence[num_round]
     target_vocabulary = C.data_edges[num_round]
-    # print(C.data_edges)
+
     return target_vocabulary
 
 
@@ -327,17 +300,10 @@ class DiagramTask(Page):
         )
 
         # print(solutions)
-        if values['stored'] != solutions['stored']:
-            player.cycle_err = 1
-        else:
-            player.cycle_err = 0
 
         # Converting string to list
         res = json.loads(values['buttons']).copy()
-        res_before_errors = json.loads(player.buttons_before_err).copy()
 
-        for i in range(12):  # 12 = num of buttons
-            res[i] += res_before_errors[i]
 
         # print(res)
 
@@ -361,29 +327,9 @@ class DiagramTask(Page):
         else:
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
 
-        player.dir_error = gf.directional_error(json.loads(player.userdgp), json.loads(player.originaldgp))
-        player.struct_error = gf.structure_error(json.loads(player.userdgp), json.loads(player.originaldgp))
-        player.error_counter = player.dir_error + player.struct_error
         player.edges_num = len(json.loads(player.originaldgp))
 
         error_messages = dict()
-
-        if player.cycle_err == 1:
-            error_messages['stored'] = 'В форме присутствует цикл'
-            player.err_counter += 1
-            player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
-            player.buttons_before_err = json.dumps(res)
-            player.buttons = json.dumps([0] * 12)
-            player.cycle_err = 0
-
-        else:
-            player.buttons = json.dumps(res)
-            # print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
 
         store_array = player.stored
         edges = benchmark_diagram(player)
