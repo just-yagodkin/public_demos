@@ -377,6 +377,7 @@ class DiagramTask(Page):
         datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
         datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
         dgptype = C.task_sequence[player.round_number - 1]
+        color = gf.take_color(player.treatment, player.round_number-1)
 
         return dict(
             datasetobs=datasetobs,
@@ -390,7 +391,8 @@ class DiagramTask(Page):
             seed=C.seed[player.round_number - 1][1],
             treatment=player.treatment,
             dgptype=dgptype,
-            forcebutton=gf.has_do(dgptype, gf.take_color(player.treatment, player.round_number-1))
+            color=color,
+            forcebutton=gf.has_do(dgptype, color)
         )
 
 

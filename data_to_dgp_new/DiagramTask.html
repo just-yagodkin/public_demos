@@ -135,55 +135,37 @@
                     let treatment = js_vars.treatment;
                     let dgptype = js_vars.dgptype;
                     let show_forcebutton = js_vars.forcebutton;
+                    let color = js_vars.color;
+
                     console.log(dgptype)
 
                     function minifuncy(number, tr, type) {
                         console.log(tr, type)
-                        if (tr && (type == 'onelink' || type == 'twolinks' || type == 'collider1')) {
-                            if (number === 3 || number === 5) {
-                                return "Z"
-                            }
-                            if (number === 0 || number === 1) {
-                                return "X"
-                            }
-                            if (number === 2 || number === 4) {
-                                return "Y"
-                            }
-                        } else {
-                            if (number === 1 || number === 4) {
-                                return "Z"
-                            }
-                            if (number === 0 || number === 5) {
-                                return "Y"
-                            }
-                            if (number === 2 || number === 3) {
-                                return "X"
-                            }
-                        }
+                        if (color === 'y'){
+                            if (number === 3 || number === 5) {return "Z"}
+                            if (number === 0 || number === 1) {return "X"}
+                            if (number === 2 || number === 4) {return "Y"}
+                        } else if (color === 's'){
+                            if (number === 1 || number === 4) {return "Z"}
+                            if (number === 0 || number === 5) {return "Y"}
+                            if (number === 2 || number === 3) {return "X"}
+                        } else if (color === 'g' && (type == 'onelink' || type == 'twolinks' || type == 'threelinks')){
+                            if (number === 0 || number === 2) {return "Z"}
+                            if (number === 4 || number === 5) {return "X"}
+                            if (number === 1 || number === 3) {return "Y"}
+                        } else {return null}
                     }
 
                     function minifuncx(number) {
-                        if (number == 3 || number == 5) {
-                            return "Z"
-                        }
-                        if (number == 0 || number == 1) {
-                            return "X"
-                        }
-                        if (number == 2 || number == 4) {
-                            return "Y"
-                        }
+                        if (number == 3 || number == 5) {return "Z"}
+                        if (number == 0 || number == 1) {return "X"}
+                        if (number == 2 || number == 4) {return "Y"}
                     }
 
                     function minifuncz(number) {
-                        if (number == 0 || number == 2) {
-                            return "Z"
-                        }
-                        if (number == 4 || number == 5) {
-                            return "X"
-                        }
-                        if (number == 1 || number == 3) {
-                            return "Y"
-                        }
+                        if (number == 0 || number == 2) {return "Z"}
+                        if (number == 4 || number == 5) {return "X"}
+                        if (number == 1 || number == 3) {return "Y"}
                     }
 
 
