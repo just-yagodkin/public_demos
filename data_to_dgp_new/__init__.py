@@ -326,7 +326,7 @@ class DiagramTask(Page):
             radio_buttons=values['radio_buttons']
         )
 
-        #print(solutions["radio_buttons"])
+        # print(solutions)
         if values['stored'] != solutions['stored']:
             player.cycle_err = 1
         else:
