@@ -88,9 +88,9 @@ class C(BaseConstants):
     preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
 
     # silver = old control
-    preinterventional_data_silver = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'silver'), x[1])] for x in seed]
-    preinterventional_data_yellow = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'yellow'), x[1])] for x in seed]
-    preinterventional_data_green = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'green'), x[1])] for x in seed]
+    preinterventional_data_silver = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 's'), x[1])] for x in seed]
+    preinterventional_data_yellow = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'y'), x[1])] for x in seed]
+    preinterventional_data_green = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'g'), x[1])] for x in seed]
 
 
     if len(task_sequence) < NUM_ROUNDS:
@@ -102,7 +102,6 @@ class C(BaseConstants):
     interventional_data_silver = gf.reshuffle(preinterventional_data_silver)
     interventional_data_yellow = gf.reshuffle(preinterventional_data_yellow)
     interventional_data_green = gf.reshuffle(preinterventional_data_green)
-
 
 class Subsession(BaseSubsession):
     pass
@@ -210,6 +209,7 @@ def datatask_output_json(player: Player):
             target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
         if player.treatment[2] == 'g':
             target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
+
 
     return target_vocabulary
 

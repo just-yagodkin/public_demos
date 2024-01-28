@@ -372,8 +372,7 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
 
 def color_intervente(key: str,
                      dictionary: dict,
-                     color='s'
-                     ):
+                     color='s'):
 
     interv_dict = copy.deepcopy(dictionary)
 
