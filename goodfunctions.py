@@ -286,7 +286,8 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
     st = ['x', 'y', 'z']
     st.remove(name)  # to have a deal with other 2 variables
 
-    interv_dict[name] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # fill Y with fixed value
+    # fill Y with fixed value
+    interv_dict[name] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     ###----- Y BLOCK -----### (control)
 
@@ -368,6 +369,70 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
 
     return interv_dict
 
+
+def color_intervente(key: str,
+                     dictionary: dict,
+                     color='s'
+                     ):
+
+    interv_dict = copy.deepcopy(dictionary)
+
+    if color == 's':
+        interv_dict['y'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        if key == 'nolinks':
+            interv_dict['z'] = [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+            interv_dict['x'] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+        if key == 'onelink':
+            interv_dict['z'] = [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]
+            interv_dict['x'] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+        if key == 'twolinks':
+            interv_dict['z'] = [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1]
+            interv_dict['x'] = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        if key == 'collider1':
+            interv_dict['z'] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            interv_dict['x'] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+        if key == 'fork':
+            interv_dict['z'] = [1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]
+            interv_dict['x'] = [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1]
+        if key == 'threelinks':
+            interv_dict['z'] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+            interv_dict['x'] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    if color == 'y':
+        interv_dict['x'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        if key == 'nolinks':
+            interv_dict['z'] = [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+            interv_dict['y'] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+        if key == 'onelink':
+            interv_dict['z'] = [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+            interv_dict['y'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+        if key == 'twolinks':
+            interv_dict['z'] = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+            interv_dict['y'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        if key == 'collider1':
+            interv_dict['z'] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            interv_dict['y'] = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+        if key == 'fork':
+            pass
+        if key == 'threelinks':
+            interv_dict['z'] = [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]
+            interv_dict['y'] = [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]
+
+    if color == 'g':
+        if key == 'nolinks':
+            pass
+        if key == 'onelink':
+            interv_dict['z'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        if key == 'twolinks':
+            interv_dict['z'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        if key == 'collider1':
+            pass
+        if key == 'fork':
+            pass
+        if key == 'threelinks':
+            interv_dict['z'] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+    return interv_dict
 
 def revstring(string: str):
     temp = "%s" % string
@@ -600,12 +665,19 @@ def structure_error(user: list, dgp: list):
 
     return count
 
-def has_do(dgp_name: str) -> bool:
+def has_do(dgp_name: str, color: str) -> bool:
     do_0_list = ['nolinks', 'collider1', 'fork']
-    if dgp_name in do_0_list:
+    if (dgp_name in do_0_list) and (color == 'g'):
         return False
     return True
 
+def take_color(treatment: str, round: int):
+    if 0 <= round <= 5:
+        return treatment[0]
+    if 6 <= round <= 11:
+        return treatment[1]
+    if 12 <= round <= 17:
+        return treatment[2]
 
 ###----- TESTS -----###
 

@@ -87,18 +87,10 @@ class C(BaseConstants):
 
     preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
 
-    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
-                              seed]
-
-    # X -> Y ->
-    # |       |
-    # |       V
-    # ▶  ->  Z
-
-    preinterventional_data_treatment = [
-        [x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] if (
-                x[0] not in ['onelink', 'twolinks', 'collider1']) else [x[0], gf.smartdatainterv(
-            gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])] for x in seed]
+    # silver = old control
+    preinterventional_data_silver = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'silver'), x[1])] for x in seed]
+    preinterventional_data_yellow = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'yellow'), x[1])] for x in seed]
+    preinterventional_data_green = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'green'), x[1])] for x in seed]
 
 
     if len(task_sequence) < NUM_ROUNDS:
@@ -107,8 +99,9 @@ class C(BaseConstants):
     edge = NUM_ROUNDS * SHOWING_INFORMATION_EDGE
 
     observational_data = gf.reshuffle(preobservational_data)
-    interventional_data = gf.reshuffle(preinterventional_data)
-    interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
+    interventional_data_silver = gf.reshuffle(preinterventional_data_silver)
+    interventional_data_yellow = gf.reshuffle(preinterventional_data_yellow)
+    interventional_data_green = gf.reshuffle(preinterventional_data_green)
 
 
 class Subsession(BaseSubsession):
@@ -194,11 +187,29 @@ def creating_session(subsession):
 # Functions
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
-    target_key = C.task_sequence[num_round]
-    if player.treatment:
-        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_treatment[num_round][1]]
-    else:
-        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1]]
+    if num_round <= 5:
+        if player.treatment[0] == 's':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_silver[num_round][1]]
+        if player.treatment[0] == 'y':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
+        if player.treatment[0] == 'g':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
+
+    if 5 < num_round <= 11:
+        if player.treatment[1] == 's':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_silver[num_round][1]]
+        if player.treatment[1] == 'y':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
+        if player.treatment[1] == 'g':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
+
+    if 11 < num_round <= 17:
+        if player.treatment[2] == 's':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_silver[num_round][1]]
+        if player.treatment[2] == 'y':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
+        if player.treatment[2] == 'g':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
 
     return target_vocabulary
 
@@ -345,17 +356,6 @@ class DiagramTask(Page):
         datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
         datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
 
-        # choices = [(1, "X-сильное, Y-слабое"),
-        #            (2, "Y-сильное, X-слабое"),
-        #            (3, "X и Y нейтральные по отношению друг к другу"),
-        #            (4, "Y-сильное, Z-слабое"),
-        #            (5, "Z-сильное, Y-слабое"),
-        #            (6, "Y и Z нейтральные по отношению друг к другу"),
-        #            (7, "X-сильное, Z-слабое"),
-        #            (8, "Z-сильное, X-слабое"),
-        #            (9, "X и Z нейтральные по отношению друг к другу")]
-        # print(datasetobs)
-
         return dict(
             datasetobs=datasetobs,
             datasetint=datasetint,
@@ -376,6 +376,7 @@ class DiagramTask(Page):
         output = datatask_output_json(player)
         datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
         datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
+        dgptype = C.task_sequence[player.round_number - 1]
 
         return dict(
             datasetobs=datasetobs,
@@ -388,7 +389,8 @@ class DiagramTask(Page):
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             seed=C.seed[player.round_number - 1][1],
             treatment=player.treatment,
-            dgptype=C.task_sequence[player.round_number - 1]
+            dgptype=dgptype,
+            forcebutton=gf.has_do(dgptype, gf.take_color(player.treatment, player.round_number-1))
         )
 
 
@@ -409,7 +411,7 @@ class DiagramTest(Page):
         datasetobs = C.observational_data[player.round_number - 1][1]
 
         if treatment:
-            datasetint = C.interventional_data[player.round_number - 1][1]
+            datasetint = C.interventional_data_silver[player.round_number - 1][1]
         else:
             datasetint = C.interventional_data_treatment[player.round_number - 1][1]
 

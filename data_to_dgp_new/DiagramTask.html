@@ -116,7 +116,6 @@
 
                 <script>
 
-
                     let xfilterclick = js_vars.xfilterclick || 0;
                     let x0filterclick = js_vars.x0filterclick || 0;
                     let yfilterclick = js_vars.yfilterclick || 0;
@@ -135,6 +134,7 @@
                     let seed = js_vars.seed;
                     let treatment = js_vars.treatment;
                     let dgptype = js_vars.dgptype;
+                    let show_forcebutton = js_vars.forcebutton;
                     console.log(dgptype)
 
                     function minifuncy(number, tr, type) {
@@ -190,7 +190,7 @@
                     butx = document.getElementById("myButtonX");
                     butx.innerText = 'Force X=1 (DO X)';
                     //if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
-                    if (minifuncy(seed, treatment, dgptype) == 'X') {
+                    if (minifuncy(seed, treatment, dgptype) == 'X' && show_forcebutton) {
                         butx.style.display = "inline-block";
                     }
                 </script>
@@ -212,7 +212,7 @@
                     buty = document.getElementById("myButtonY");
                     buty.innerText = 'Force Y=1 (DO Y)';
                     //if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
-                    if (minifuncy(seed, treatment, dgptype) == 'Y') {
+                    if (minifuncy(seed, treatment, dgptype) == 'Y' && show_forcebutton) {
                         buty.style.display = "inline-block";
                     }
 
@@ -235,7 +235,7 @@
                     butz = document.getElementById("myButtonZ");
                     butz.innerText = 'Force Z=1 (DO Z)';
                     //if (minifuncx(seed) == 'Z' || minifuncy(seed) == 'Z' || minifuncz(seed) == 'Z'){butz.style.display = "inline-block";}
-                    if (minifuncy(seed, treatment, dgptype) == 'Z') {
+                    if (minifuncy(seed, treatment, dgptype) == 'Z' && show_forcebutton) {
                         butz.style.display = "inline-block";
                     }
 
