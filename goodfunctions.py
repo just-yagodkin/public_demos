@@ -373,7 +373,6 @@ def intervente(key: str, dictionary: dict, name='y', fixed=1):
 def color_intervente(key: str,
                      dictionary: dict,
                      color='s'):
-
     interv_dict = copy.deepcopy(dictionary)
 
     if color == 's':
@@ -433,6 +432,7 @@ def color_intervente(key: str,
 
     return interv_dict
 
+
 def revstring(string: str):
     temp = "%s" % string
     return temp[::-1]
@@ -487,7 +487,6 @@ def tanc(lst: str):
         return False
 
     return True
-
 
 
 def smartdatainterv(d: dict, seed=0):
@@ -664,11 +663,13 @@ def structure_error(user: list, dgp: list):
 
     return count
 
+
 def has_do(dgp_name: str, color: str) -> bool:
     do_0_list = ['nolinks', 'collider1', 'fork']
     if (dgp_name in do_0_list) and (color == 'g'):
         return False
     return True
+
 
 def take_color(treatment: str, round: int):
     if 0 <= round <= 5:
@@ -677,6 +678,82 @@ def take_color(treatment: str, round: int):
         return treatment[1]
     if 12 <= round <= 17:
         return treatment[2]
+
+
+def right_answers(key: str, color: str):
+    if color == 'g':
+        if key == 'nolinks':
+            # Все стрелки невозможны
+            return [1, 1, 0, 1, 1, 0, 1, 1, 0]
+        if key == 'onelink':
+            return [0, 0, 1, 1, 1, 0, 1, 1, 0]
+        if key == 'twolinks':
+            return [0, 0, 1, 1, 1, 0, 0, 1, 1]
+        if key == 'collider1':
+            # Не уверен, но вроде так
+            return [0, 1, 1, 1, 1, 0, 1, 0, 1]
+        if key == 'fork':
+            # репорт коллайдера ведет к правильному ответу
+            return [0, 0, 1, 1, 1, 0, 0, 0, 1]
+        if key == 'threelinks':
+            # Все ноды связаны
+            return [0, 0, 1, 0, 0, 1, 0, 0, 1]
+
+    if color == 'y':
+        if key == 'nolinks':
+            return [1, 1, 0, 1, 1, 0, 1, 1, 0]
+        # onelink, twolinks, collider восстанавливаются однозначно, ответы такие же как для silver
+        if key == 'onelink':
+            return [0, 1, 1, 1, 1, 0, 1, 1, 0]
+        if key == 'twolinks':
+            return [0, 1, 1, 1, 1, 0, 0, 1, 1]
+        if key == 'collider1':
+            return [0, 1, 1, 1, 1, 0, 1, 0, 1]
+        if key == 'fork':
+            return [1, 0, 1, 1, 1, 0, 0, 0, 1]
+        if key == 'threelinks':
+            return [0, 1, 1, 0, 1, 1, 0, 0, 1]
+
+    if color == 's':
+        if key == 'nolinks':
+            # Все стрелки невозможны
+            return [1, 1, 0, 1, 1, 0, 1, 1, 0]
+        if key == 'onelink':
+            return [0, 1, 1, 1, 1, 0, 1, 1, 0]
+        if key == 'twolinks':
+            return [0, 1, 1, 1, 1, 0, 0, 1, 1]
+        if key == 'collider1':
+            return [0, 1, 1, 1, 1, 0, 1, 0, 1]
+        if key == 'fork':
+            return [1, 0, 1, 1, 1, 0, 0, 1, 1]
+        if key == 'threelinks':
+            # Все ноды связаны
+            return [0, 1, 1, 0, 1, 1, 0, 1, 1]
+
+
+def right_answers_after_seed(answers: list, seed: int):
+    """seed 1:  X Y Z   ->   X Z Y
+       seed 2:  X Y Z   ->   Y X Z
+       seed 3:  X Y Z   ->   Y Z X
+       seed 4:  X Y Z   ->   Z X Y
+       seed 5:  X Y Z   ->   Z Y X
+    """
+    # print(answers)
+    # print(type(answers))
+
+    if seed == 0:
+        return answers
+    if seed == 1:  #
+        return answers[3:6] + answers[:3] + [answers[7]] + [answers[6]] + [answers[8]]
+    if seed == 2:  #
+        return [answers[1]] + [answers[0]] + [answers[2]] + answers[6:9] + answers[3:6]
+    if seed == 3:  #
+        return answers[6:9] + [answers[1]] + [answers[0]] + [answers[2]] + [answers[4]] + [answers[3]] + [answers[5]]
+    if seed == 4:  #
+        return [answers[4]] + [answers[3]] + [answers[5]] + [answers[7]] + [answers[6]] + [answers[8]] + answers[:3]
+    if seed == 5:
+        return [answers[7]] + [answers[6]] + [answers[8]] + [answers[4]] + [answers[3]] + [answers[5]] + [answers[1]] + [answers[0]] + [answers[2]]
+
 
 ###----- TESTS -----###
 

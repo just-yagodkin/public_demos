@@ -139,6 +139,7 @@ class Player(BasePlayer):
     buttons = models.StringField()
 
     radio_buttons = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
+    right_answers = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
 
     score = models.FloatField(initial=0)
 
@@ -310,8 +311,6 @@ class DiagramTask(Page):
             radio_buttons=values['radio_buttons']
         )
 
-        # print(solutions)
-
         # Converting string to list
         res = json.loads(values['buttons']).copy()
 
@@ -322,9 +321,6 @@ class DiagramTask(Page):
             player.conf_bid_is_random = 0
 
         player.stored_check = player.stored
-        player.accuracy = round(
-            gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
-        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
 
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
 
@@ -333,6 +329,8 @@ class DiagramTask(Page):
 
         player.seed = C.seed[player.round_number - 1][1]
 
+
+        #TODO это какая-то лажа, скорее всего тут надо переделать или убрать
         if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
             player.node = gf.wherex(C.seed[player.round_number - 1][1])
         else:
@@ -342,9 +340,14 @@ class DiagramTask(Page):
 
         error_messages = dict()
 
-        store_array = player.stored
-        edges = benchmark_diagram(player)
-        accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
+        player.right_answers = str(gf.right_answers(player.dgptype, gf.take_color(player.treatment, player.round_number-1)))
+        right_answers_after_seed = gf.right_answers_after_seed(json.loads(player.right_answers), player.seed)
+        radio_buttons = json.loads(player.radio_buttons)
+        accuracy = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
+        player.accuracy = accuracy
+
+        #TODO как считать скор? и по совместительству пэйофф
+        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
         player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
 
         return error_messages
