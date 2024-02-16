@@ -116,7 +116,6 @@
 
                 <script>
 
-
                     let xfilterclick = js_vars.xfilterclick || 0;
                     let x0filterclick = js_vars.x0filterclick || 0;
                     let yfilterclick = js_vars.yfilterclick || 0;
@@ -135,62 +134,45 @@
                     let seed = js_vars.seed;
                     let treatment = js_vars.treatment;
                     let dgptype = js_vars.dgptype;
+                    let show_forcebutton = js_vars.forcebutton;
+                    let color = js_vars.color;
+
                     console.log(dgptype)
 
                     function minifuncy(number, tr, type) {
                         console.log(tr, type)
-                        if (tr && (type == 'onelink' || type == 'twolinks' || type == 'collider1')) {
-                            if (number === 3 || number === 5) {
-                                return "Z"
-                            }
-                            if (number === 0 || number === 1) {
-                                return "X"
-                            }
-                            if (number === 2 || number === 4) {
-                                return "Y"
-                            }
-                        } else {
-                            if (number === 1 || number === 4) {
-                                return "Z"
-                            }
-                            if (number === 0 || number === 5) {
-                                return "Y"
-                            }
-                            if (number === 2 || number === 3) {
-                                return "X"
-                            }
-                        }
+                        if (color === 'y'){
+                            if (number === 3 || number === 5) {return "Z"}
+                            if (number === 0 || number === 1) {return "X"}
+                            if (number === 2 || number === 4) {return "Y"}
+                        } else if (color === 's'){
+                            if (number === 1 || number === 4) {return "Z"}
+                            if (number === 0 || number === 5) {return "Y"}
+                            if (number === 2 || number === 3) {return "X"}
+                        } else if (color === 'g' && (type == 'onelink' || type == 'twolinks' || type == 'threelinks')){
+                            if (number === 0 || number === 2) {return "Z"}
+                            if (number === 4 || number === 5) {return "X"}
+                            if (number === 1 || number === 3) {return "Y"}
+                        } else {return null}
                     }
 
                     function minifuncx(number) {
-                        if (number == 3 || number == 5) {
-                            return "Z"
-                        }
-                        if (number == 0 || number == 1) {
-                            return "X"
-                        }
-                        if (number == 2 || number == 4) {
-                            return "Y"
-                        }
+                        if (number == 3 || number == 5) {return "Z"}
+                        if (number == 0 || number == 1) {return "X"}
+                        if (number == 2 || number == 4) {return "Y"}
                     }
 
                     function minifuncz(number) {
-                        if (number == 0 || number == 2) {
-                            return "Z"
-                        }
-                        if (number == 4 || number == 5) {
-                            return "X"
-                        }
-                        if (number == 1 || number == 3) {
-                            return "Y"
-                        }
+                        if (number == 0 || number == 2) {return "Z"}
+                        if (number == 4 || number == 5) {return "X"}
+                        if (number == 1 || number == 3) {return "Y"}
                     }
 
 
                     butx = document.getElementById("myButtonX");
                     butx.innerText = 'Force X=1 (DO X)';
                     //if (minifuncx(seed) == 'X' || minifuncy(seed) == 'X' || minifuncz(seed) == 'X'){butx.style.display = "inline-block";}
-                    if (minifuncy(seed, treatment, dgptype) == 'X') {
+                    if (minifuncy(seed, treatment, dgptype) == 'X' && show_forcebutton) {
                         butx.style.display = "inline-block";
                     }
                 </script>
@@ -212,7 +194,7 @@
                     buty = document.getElementById("myButtonY");
                     buty.innerText = 'Force Y=1 (DO Y)';
                     //if (minifuncx(seed) == 'Y' || minifuncy(seed) == 'Y' || minifuncz(seed) == 'Y'){buty.style.display = "inline-block";}
-                    if (minifuncy(seed, treatment, dgptype) == 'Y') {
+                    if (minifuncy(seed, treatment, dgptype) == 'Y' && show_forcebutton) {
                         buty.style.display = "inline-block";
                     }
 
@@ -235,7 +217,7 @@
                     butz = document.getElementById("myButtonZ");
                     butz.innerText = 'Force Z=1 (DO Z)';
                     //if (minifuncx(seed) == 'Z' || minifuncy(seed) == 'Z' || minifuncz(seed) == 'Z'){butz.style.display = "inline-block";}
-                    if (minifuncy(seed, treatment, dgptype) == 'Z') {
+                    if (minifuncy(seed, treatment, dgptype) == 'Z' && show_forcebutton) {
                         butz.style.display = "inline-block";
                     }
 
@@ -563,7 +545,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 </script>
 
 
-{#<div id="cy"></div>#}
+<div hidden="hidden" id="cy"></div>
 
 <br>
 
@@ -583,59 +565,59 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tr class="header" style="background-color: #dddddd; border-color: #111111">
             <th style="text-align: center">Scheme</th>
             <th style="text-align: center">Description</th>
-            <th style="text-align: right; font-weight: normal">Can <u>not</u> be</th>
-            <th style="text-align: center; font-weight: normal">Not enough information</th>
+            <th style="text-align: right; font-weight: normal">Can <u>not be</u></th>
+            <th style="text-align: center; font-weight: normal">Can <u>not exclude</u></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/00329147b228249189b54dc530e80d762a362ae0/1.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/1.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>X - сильное, Y - слабое</th>
             <th style="text-align: right"><input type="radio" value="html1" id="html1" name="topic1"/></th>
             <th style="text-align: center"><input type="radio" value="html12" id="html12" name="topic1" checked/></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/00329147b228249189b54dc530e80d762a362ae0/2.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/2.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>X - слабое, Y - сильное</th>
             <th style="text-align: right"><input type="radio" value="html2" id="html2" name="topic2"/></th>
             <th style="text-align: center"><input type="radio" value="html22" id="html22" name="topic2" checked/></th>
         </tr>
         <tr style="border-color: #111111">
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/3.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/3.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>X и Y нейтральные относительно друг друга</th>
             <th style="text-align: right"><input type="radio" value="html3" id="html3" name="topic3"/></th>
             <th style="text-align: center"><input type="radio" value="html32" id="html32" name="topic3" checked/></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/4.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/4.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>X - сильное, Z - слабое</th>
             <th style="text-align: right"><input type="radio" value="html4" id="html4" name="topic4"/></th>
             <th style="text-align: center"><input type="radio" value="html42" id="html42" name="topic4" checked/></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/5.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/5.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>Z - слабое, X - сильное</th>
             <th style="text-align: right"><input type="radio" value="html5" id="html5" name="topic5"/></th>
             <th style="text-align: center"><input type="radio" value="html52" id="html52" name="topic5" checked/></th>
         </tr>
         <tr style="border-color: #111111">
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/6.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/6.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>X и Z нейтральные относительно друг друга</th>
             <th style="text-align: right"><input type="radio" value="html6" id="html6" name="topic6"/></th>
             <th style="text-align: center"><input type="radio" value="html62" id="html62" name="topic6" checked/></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/7.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/7.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>Y - сильное, Z - слабое</th>
             <th style="text-align: right"><input type="radio" value="html7" id="html7" name="topic7"/></th>
             <th style="text-align: center"><input type="radio" value="html72" id="html72" name="topic7" checked/></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/8.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/8.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>Z - слабое, Y - сильное</th>
             <th style="text-align: right"><input type="radio" value="html8" id="html8" name="topic8"/></th>
             <th style="text-align: center"><input type="radio" value="html82" id="html82" name="topic8" checked/></th>
         </tr>
         <tr>
-            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/3f264a96871c916924e261da58cbf90c0960d12f/9.svg" width="150" height="85"></th>
+            <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitTest/4adac65bcf4923f072b94977ce5d77050ca5b742/9.svg" width="150" height="85"></th>
             <th style="font-weight: normal; text-align: center"><br>Y и Z нейтральные относительно друг друга</th>
             <th style="text-align: right"><input type="radio" value="html9" id="html9" name="topic9"/></th>
             <th style="text-align: center"><input type="radio" value="html92" id="html92" name="topic9" checked/></th>
@@ -644,7 +626,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     </table>
 </div>
 
-<input id='radio_buttons' name="radio_buttons"
+<input hidden="hidden" id='radio_buttons' name="radio_buttons"
        value='[0,0,0,0,0,0,0,0,0]'>
 
 <script>
@@ -795,7 +777,6 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         }(jQuery));
     });
 </script>
-
 
 <div><p class="lng-confstart">Please choose how confident you are using slider</p></div>
 

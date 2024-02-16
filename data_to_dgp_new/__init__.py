@@ -17,8 +17,7 @@ class C(BaseConstants):
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
-    SHOWING_INFORMATION_EDGE = 0.32  # you will see a feedback only after this percent of rounds
-
+    SHOWING_INFORMATION_EDGE = 2  # you will see a feedback only after this percent of rounds
     NAME_IN_URL = 'data_to_dgp_new'
     PLAYERS_PER_GROUP = None
 
@@ -38,8 +37,6 @@ class C(BaseConstants):
     task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(0, 5)) for name in task_sequence]
-    # если надо зафиксировать сид, то надо раскоментить строочку ниже
-    # seed = [(name, 0) for name in task_sequence]
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
                    'right': {'x': [1, 1, 1, 1, 1, 1, 1, 1], 'y': [1, 1, 1, 1, 1, 1, 1, 1]}}
@@ -90,18 +87,10 @@ class C(BaseConstants):
 
     preobservational_data = [[x[0], gf.smartdatainterv(gf.pre_preobservational_data[x[0]], x[1])] for x in seed]
 
-    preinterventional_data = [[x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] for x in
-                              seed]
-
-    # X -> Y ->
-    # |       |
-    # |       V
-    # ▶  ->  Z
-
-    preinterventional_data_treatment = [
-        [x[0], gf.smartdatainterv(gf.intervente(x[0], gf.original_data[x[0]]), x[1])] if (
-                x[0] not in ['onelink', 'twolinks', 'collider1']) else [x[0], gf.smartdatainterv(
-            gf.intervente(x[0], gf.original_data[x[0]], name='x'), x[1])] for x in seed]
+    # silver = old control
+    preinterventional_data_silver = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 's'), x[1])] for x in seed]
+    preinterventional_data_yellow = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'y'), x[1])] for x in seed]
+    preinterventional_data_green = [[x[0], gf.smartdatainterv(gf.color_intervente(x[0], gf.original_data[x[0]], 'g'), x[1])] for x in seed]
 
 
     if len(task_sequence) < NUM_ROUNDS:
@@ -110,20 +99,9 @@ class C(BaseConstants):
     edge = NUM_ROUNDS * SHOWING_INFORMATION_EDGE
 
     observational_data = gf.reshuffle(preobservational_data)
-    interventional_data = gf.reshuffle(preinterventional_data)
-    interventional_data_treatment = gf.reshuffle(preinterventional_data_treatment)
-
-    # если надо, чтобы строки не шафлились раскоментируйте 3 строчки ниже
-    # observational_data = preobservational_data
-    # interventional_data = preinterventional_data
-    # interventional_data_treatment = preinterventional_data_treatment
-
-    # print(observational_data)
-    # print()
-    # print(interventional_data_treatment)
-    # print()
-    # print(interventional_data)
-
+    interventional_data_silver = gf.reshuffle(preinterventional_data_silver)
+    interventional_data_yellow = gf.reshuffle(preinterventional_data_yellow)
+    interventional_data_green = gf.reshuffle(preinterventional_data_green)
 
 class Subsession(BaseSubsession):
     pass
@@ -135,14 +113,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     dgptype = models.StringField(initial="")
-
     userdgp = models.StringField(initial="")
-
     originaldgp = models.StringField(initial="")
 
-    dir_error = models.IntegerField(initial=0)
-    struct_error = models.IntegerField(initial=0)
-    error_counter = models.IntegerField(initial=0)
     edges_num = models.IntegerField()
 
     stored = models.StringField(initial=json.dumps(
@@ -165,22 +138,15 @@ class Player(BasePlayer):
 
     buttons = models.StringField()
 
-    buttons_before_err = models.StringField(initial='[0,0,0,0,0,0,0,0,0,0,0,0,0,0]')
-
     radio_buttons = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
+    right_answers = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
 
     score = models.FloatField(initial=0)
 
     accuracy = models.FloatField()
 
-    err_counter = models.IntegerField(initial=0)  # ошибок всего
-
-    cycle_err = models.IntegerField(initial=0)  # есть ли ошибка цикла прямо здесь и сейчас
-
-    treatment = models.BooleanField()
-
+    treatment = models.StringField()
     node = models.StringField(initial='')
-
     seed = models.IntegerField(initial=0)
 
     def conf_bid_error_message(player, value):
@@ -209,8 +175,11 @@ class Player(BasePlayer):
 
 
 def creating_session(subsession):
+    # 'g' is for green, 'y' is for yellow, 's' is for silver
+    possible_treatments = ('gys', 'gsy', 'ysg', 'ygs', 'syg', 'sgy')
+
     if C.treatment:
-        treatments = itertools.cycle([False, True, True])
+        treatments = itertools.cycle(possible_treatments)
         for player in subsession.get_players():
             player.treatment = next(treatments)
 
@@ -218,14 +187,30 @@ def creating_session(subsession):
 # Functions
 def datatask_output_json(player: Player):
     num_round = player.round_number - 1
-    target_key = C.task_sequence[num_round]
-    if player.treatment:
-        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_treatment[num_round][1]]
-    else:
-        target_vocabulary = [C.observational_data[num_round][1], C.interventional_data[num_round][1]]
+    if num_round <= 5:
+        if player.treatment[0] == 's':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_silver[num_round][1]]
+        if player.treatment[0] == 'y':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
+        if player.treatment[0] == 'g':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
 
-    # print(target_vocabulary)
-    # print('Я ТУТ!!!!!!!!!!!!!')
+    if 5 < num_round <= 11:
+        if player.treatment[1] == 's':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_silver[num_round][1]]
+        if player.treatment[1] == 'y':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
+        if player.treatment[1] == 'g':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
+
+    if 11 < num_round <= 17:
+        if player.treatment[2] == 's':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_silver[num_round][1]]
+        if player.treatment[2] == 'y':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
+        if player.treatment[2] == 'g':
+            target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
+
 
     return target_vocabulary
 
@@ -234,7 +219,7 @@ def benchmark_diagram(player: Player):
     num_round = player.round_number - 1
     # target_key = C.task_sequence[num_round]
     target_vocabulary = C.data_edges[num_round]
-    # print(C.data_edges)
+
     return target_vocabulary
 
 
@@ -326,18 +311,9 @@ class DiagramTask(Page):
             radio_buttons=values['radio_buttons']
         )
 
-        #print(solutions["radio_buttons"])
-        if values['stored'] != solutions['stored']:
-            player.cycle_err = 1
-        else:
-            player.cycle_err = 0
-
         # Converting string to list
         res = json.loads(values['buttons']).copy()
-        res_before_errors = json.loads(player.buttons_before_err).copy()
 
-        for i in range(12):  # 12 = num of buttons
-            res[i] += res_before_errors[i]
 
         # print(res)
 
@@ -345,9 +321,6 @@ class DiagramTask(Page):
             player.conf_bid_is_random = 0
 
         player.stored_check = player.stored
-        player.accuracy = round(
-            gf.accuracy(gf.fine(gf.userschoice(player.stored), gf.dgpchoice(benchmark_diagram(player)))), 12)
-        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
 
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
 
@@ -356,38 +329,25 @@ class DiagramTask(Page):
 
         player.seed = C.seed[player.round_number - 1][1]
 
+
+        #TODO это какая-то лажа, скорее всего тут надо переделать или убрать
         if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
             player.node = gf.wherex(C.seed[player.round_number - 1][1])
         else:
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
 
-        player.dir_error = gf.directional_error(json.loads(player.userdgp), json.loads(player.originaldgp))
-        player.struct_error = gf.structure_error(json.loads(player.userdgp), json.loads(player.originaldgp))
-        player.error_counter = player.dir_error + player.struct_error
         player.edges_num = len(json.loads(player.originaldgp))
 
         error_messages = dict()
 
-        if player.cycle_err == 1:
-            error_messages['stored'] = 'В форме присутствует цикл'
-            player.err_counter += 1
-            player.stored = '[{"counter": 0, "weight": 0, "id": "XY", "source": "X", "target": "Y", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "YX", "source": "Y", "target": "X", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "YZ", "source": "Y", "target": "Z", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "XZ", "source": "X", "target": "Z", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "ZY", "source": "Z", "target": "Y", "label": ""}, ' \
-                            '{"counter": 0, "weight": 0, "id": "ZX", "source": "Z", "target": "X", "label": ""}]'
-            player.buttons_before_err = json.dumps(res)
-            player.buttons = json.dumps([0] * 12)
-            player.cycle_err = 0
+        player.right_answers = str(gf.right_answers(player.dgptype, gf.take_color(player.treatment, player.round_number-1)))
+        right_answers_after_seed = gf.right_answers_after_seed(json.loads(player.right_answers), player.seed)
+        radio_buttons = json.loads(player.radio_buttons)
+        accuracy = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
+        player.accuracy = accuracy
 
-        else:
-            player.buttons = json.dumps(res)
-            # print(json.dumps(res), "А ТУТ ВСЕ ПРАВИЛЬНО)")
-
-        store_array = player.stored
-        edges = benchmark_diagram(player)
-        accuracy = round(gf.accuracy(gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))), 4)
+        #TODO как считать скор? и по совместительству пэйофф
+        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
         player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
 
         return error_messages
@@ -398,17 +358,6 @@ class DiagramTask(Page):
 
         datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
         datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
-
-        # choices = [(1, "X-сильное, Y-слабое"),
-        #            (2, "Y-сильное, X-слабое"),
-        #            (3, "X и Y нейтральные по отношению друг к другу"),
-        #            (4, "Y-сильное, Z-слабое"),
-        #            (5, "Z-сильное, Y-слабое"),
-        #            (6, "Y и Z нейтральные по отношению друг к другу"),
-        #            (7, "X-сильное, Z-слабое"),
-        #            (8, "Z-сильное, X-слабое"),
-        #            (9, "X и Z нейтральные по отношению друг к другу")]
-        # print(datasetobs)
 
         return dict(
             datasetobs=datasetobs,
@@ -430,6 +379,8 @@ class DiagramTask(Page):
         output = datatask_output_json(player)
         datasetobs = [(i + 1, output[0]['x'][i], output[0]['y'][i], output[0]['z'][i]) for i in range(16)]
         datasetint = [(i + 1, output[1]['x'][i], output[1]['y'][i], output[1]['z'][i]) for i in range(16)]
+        dgptype = C.task_sequence[player.round_number - 1]
+        color = gf.take_color(player.treatment, player.round_number-1)
 
         return dict(
             datasetobs=datasetobs,
@@ -442,7 +393,9 @@ class DiagramTask(Page):
                                str(float('{:.2f}'.format(gf.check_frequencies(output[1])[2])))],
             seed=C.seed[player.round_number - 1][1],
             treatment=player.treatment,
-            dgptype=C.task_sequence[player.round_number - 1]
+            dgptype=dgptype,
+            color=color,
+            forcebutton=gf.has_do(dgptype, color)
         )
 
 
@@ -463,7 +416,7 @@ class DiagramTest(Page):
         datasetobs = C.observational_data[player.round_number - 1][1]
 
         if treatment:
-            datasetint = C.interventional_data[player.round_number - 1][1]
+            datasetint = C.interventional_data_silver[player.round_number - 1][1]
         else:
             datasetint = C.interventional_data_treatment[player.round_number - 1][1]
 
