@@ -356,6 +356,9 @@
 </script>
 
 <script>
+
+    console.log(typeof right_answers_list)
+
     p_ans_1 = document.getElementById("html1")
     p_ans_2 = document.getElementById("html2")
     p_ans_3 = document.getElementById("html3")
@@ -365,6 +368,15 @@
     p_ans_7 = document.getElementById("html7")
     p_ans_8 = document.getElementById("html8")
     p_ans_9 = document.getElementById("html9")
+    p_ans_12 = document.getElementById("html12")
+    p_ans_22 = document.getElementById("html22")
+    p_ans_32 = document.getElementById("html32")
+    p_ans_42 = document.getElementById("html42")
+    p_ans_52 = document.getElementById("html52")
+    p_ans_62 = document.getElementById("html62")
+    p_ans_72 = document.getElementById("html72")
+    p_ans_82 = document.getElementById("html82")
+    p_ans_92 = document.getElementById("html92")
 
     ans_1 = document.getElementById("html1_right")
     ans_2 = document.getElementById("html2_right")
@@ -376,6 +388,9 @@
     ans_8 = document.getElementById("html8_right")
     ans_9 = document.getElementById("html9_right")
 
+
+
+
     p_ans_1.checked = Boolean(parseInt(player_answers[0]));
     p_ans_2.checked = Boolean(parseInt(player_answers[1]));
     p_ans_3.checked = Boolean(parseInt(player_answers[2]));
@@ -385,7 +400,25 @@
     p_ans_7.checked = Boolean(parseInt(player_answers[6]));
     p_ans_8.checked = Boolean(parseInt(player_answers[7]));
     p_ans_9.checked = Boolean(parseInt(player_answers[8]));
+    p_ans_12.checked = !Boolean(parseInt(player_answers[0]));
+    p_ans_22.checked = !Boolean(parseInt(player_answers[1]));
+    p_ans_32.checked = !Boolean(parseInt(player_answers[2]));
+    p_ans_42.checked = !Boolean(parseInt(player_answers[3]));
+    p_ans_52.checked = !Boolean(parseInt(player_answers[4]));
+    p_ans_62.checked = !Boolean(parseInt(player_answers[5]));
+    p_ans_72.checked = !Boolean(parseInt(player_answers[6]));
+    p_ans_82.checked = !Boolean(parseInt(player_answers[7]));
+    p_ans_92.checked = !Boolean(parseInt(player_answers[8]));
 
+    console.log(p_ans_1.checked)
+    console.log(p_ans_2.checked)
+    console.log(p_ans_3.checked)
+    console.log(p_ans_4.checked)
+    console.log(p_ans_5.checked)
+    console.log(p_ans_6.checked)
+    console.log(p_ans_7.checked)
+    console.log(p_ans_8.checked)
+    console.log(p_ans_9.checked)
 
     ans_1.checked = Boolean(parseInt(right_answers_list[0]));
     ans_2.checked = Boolean(parseInt(right_answers_list[1]));

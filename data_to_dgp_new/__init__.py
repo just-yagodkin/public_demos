@@ -443,8 +443,8 @@ class DiagramTest(Page):
     def js_vars(player):
         benchmark_edges = benchmark_diagram(player)
 
-        right_answers_list = player.right_answers
-        player_answers = player.radio_buttons
+        right_answers_list = json.loads(player.right_answers)
+        player_answers = json.loads(player.radio_buttons)
 
         store_array = json.loads(player.stored_check)
         show_edges = 0
