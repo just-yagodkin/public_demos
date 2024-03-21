@@ -17,7 +17,7 @@ class C(BaseConstants):
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
-    SHOWING_INFORMATION_EDGE = 2  # you will see a feedback only after this percent of rounds
+    SHOWING_INFORMATION_EDGE = 0.0  # you will see a feedback only after this percent of rounds
     NAME_IN_URL = 'data_to_dgp_new'
     PLAYERS_PER_GROUP = None
 
@@ -443,6 +443,9 @@ class DiagramTest(Page):
     def js_vars(player):
         benchmark_edges = benchmark_diagram(player)
 
+        right_answers_list = json.loads(player.right_answers)
+        player_answers = json.loads(player.radio_buttons)
+
         store_array = json.loads(player.stored_check)
         show_edges = 0
         if benchmark_edges[0]:
@@ -458,7 +461,9 @@ class DiagramTest(Page):
             ],
             edges=store_array,
             edges_original=benchmark_edges,
-            show_edges_template=show_edges
+            show_edges_template=show_edges,
+            right_answers_list=right_answers_list,
+            player_answers=player_answers
         )
 
 
