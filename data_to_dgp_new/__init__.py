@@ -366,9 +366,9 @@ class DiagramTask(Page):
         player.backtransform_userdgp_exclude = gf.transfom_userdgp(s=player.userdgp_exclude,
                                                                    seed=C.seed[player.round_number - 1][1])
 
-        #TODO как считать скор? и по совместительству пэйофф
-        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
-        player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
+        # сейчас accuracy - это штраф (кол-во несовпадений)
+        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9) ** 2, 5) # score от 0 до 1
+        player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return error_messages
 
@@ -442,8 +442,8 @@ class DiagramTest(Page):
 
         buttons_were_clicked = json.loads(player.buttons)
 
-        accuracy = player.accuracy
-        player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
+        accuracy = 9 - player.accuracy
+        player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
