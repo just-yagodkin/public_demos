@@ -583,6 +583,26 @@ def userschoice(lst: str):  # lst is a user's form
     return temp
 
 
+def transfom_userdgp(s, seed):
+    if seed == 0:
+        return s
+
+    if seed == 1:
+        return s.replace("Y", "z").replace("Z", "y").upper()
+
+    if seed == 2:
+        return s.replace("Y", "x").replace("X", "y").upper()
+
+    if seed == 3:
+        return s.replace("X", "z").replace("Y", "x").replace("Z", "y").upper()
+
+    if seed == 4:
+        return s.replace("X", "y").replace("Y", "z").replace("Z", "x").upper()
+
+    if seed == 5:
+        return s.replace("Z", "x").replace("X", "z").upper()
+
+
 def wherey(seed: int):
     if seed in [1, 4]:
         return "Z"

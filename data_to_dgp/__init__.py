@@ -137,6 +137,7 @@ class Player(BasePlayer):
     dgptype = models.StringField(initial="")
 
     userdgp = models.StringField(initial="")
+    backtransform_userdgp = models.StringField(initial="")
 
     originaldgp = models.StringField(initial="")
 
@@ -349,6 +350,9 @@ class DiagramTask(Page):
         player.originaldgp = json.dumps(gf.dgpchoice(benchmark_diagram(player)))
 
         player.userdgp = json.dumps(gf.userschoice(player.stored))
+        player.backtransform_userdgp = gf.transfom_userdgp(s=player.userdgp,
+                                                           seed=C.seed[player.round_number - 1][1])
+
         player.dgptype = C.task_sequence[player.round_number - 1]
 
         player.seed = C.seed[player.round_number - 1][1]
