@@ -367,7 +367,9 @@ class DiagramTask(Page):
                                                                    seed=C.seed[player.round_number - 1][1])
 
         # сейчас accuracy - это штраф (кол-во несовпадений)
-        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9) ** 2, 5) # score от 0 до 1
+        # предлагаю кстати отказаться от ^2
+        # player.score = 1 - round((values['conf_bid'] * 0.01 - (9 - player.accuracy) ** 2 / 9), 5)  # score от 0 до 1
+        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9) , 5) # score от 0 до 1
         player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return error_messages
