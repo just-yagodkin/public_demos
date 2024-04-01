@@ -92,6 +92,9 @@
 
 <br>
 
+<h4 hidden="hidden" id="twin planet" style="text-align: center;">
+Twin Planet (Планета Близнец)
+</h4>
 
 <div class="tg-wrap" style="border-radius: 50px 50px 0 0; background-color: #f2f2f2;">
     <table id="menu" class="table" style="
@@ -116,6 +119,7 @@
 
                 <script>
 
+                    twin_planet = document.getElementById("twin planet");
                     let xfilterclick = js_vars.xfilterclick || 0;
                     let x0filterclick = js_vars.x0filterclick || 0;
                     let yfilterclick = js_vars.yfilterclick || 0;
@@ -1595,6 +1599,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             element.removeAttribute("hidden");
             anoth_element.setAttribute("hidden", "hidden");
             button.innerText = 'Force X=1 (DO X)';
+            twin_planet.hidden = true;
             document.getElementById('pcharts').hidden = false;
             document.getElementById('pchartsint').hidden = true;
 
@@ -1616,6 +1621,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             butz.style.display = "none";
             butx.style.display = "none";
             buty.innerText = "Show Observational";
+            twin_planet.hidden = false;
             buty.style.display = "inline-block";
             document.getElementById('pchartsint').hidden = false;
             document.getElementById('pcharts').hidden = true;
@@ -1645,6 +1651,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             element.removeAttribute("hidden");
             anoth_element.setAttribute("hidden", "hidden");
             button.innerText = 'Force Y=1 (DO Y)';
+            twin_planet.hidden = true;
             document.getElementById('pcharts').hidden = false;
             document.getElementById('pchartsint').hidden = true;
             freqsint.hidden = true;
@@ -1683,6 +1690,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             anoth_element.removeAttribute("hidden");
             element.setAttribute("hidden", "hidden");
             button.innerText = "Show Observational";
+            twin_planet.hidden = false;
             butz.style.display = "none";
             butx.style.display = "none";
             document.getElementById('pchartsint').hidden = false;
@@ -1717,6 +1725,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             element.removeAttribute("hidden");
             anoth_element.setAttribute("hidden", "hidden");
             button.innerText = 'Force Z=1 (DO Z)';
+            twin_planet.hidden = true;
             document.getElementById('pcharts').hidden = false;
             document.getElementById('pchartsint').hidden = true;
 
@@ -1738,6 +1747,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
             butz.style.display = "none";
             butx.style.display = "none";
             buty.innerText = "Show Observational";
+            twin_planet.hidden = false;
             buty.style.display = "inline-block";
             document.getElementById('pchartsint').hidden = false;
             document.getElementById('pcharts').hidden = true;
