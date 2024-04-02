@@ -17,7 +17,7 @@ class C(BaseConstants):
     Bonus = 5
     Round_payoff = 10
     NUM_ROUNDS = 18
-    SHOWING_INFORMATION_EDGE = 0.32  # you will see a feedback only after this percent of rounds
+    SHOWING_INFORMATION_EDGE = 0.0  # you will see a feedback only after this percent of rounds
 
     NAME_IN_URL = 'data_to_dgp'
     PLAYERS_PER_GROUP = None
