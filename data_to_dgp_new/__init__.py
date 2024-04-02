@@ -114,6 +114,8 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     dgptype = models.StringField(initial="")
     userdgp = models.StringField(initial="")
+    userdgp_exclude = models.StringField(initial="")
+    backtransform_userdgp_exclude = models.StringField(initial="")
     originaldgp = models.StringField(initial="")
 
     edges_num = models.IntegerField()
@@ -140,6 +142,7 @@ class Player(BasePlayer):
 
     radio_buttons = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
     right_answers = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
+    right_answers_after_seed = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
 
     score = models.FloatField(initial=0)
 
@@ -341,14 +344,33 @@ class DiagramTask(Page):
         error_messages = dict()
 
         player.right_answers = str(gf.right_answers(player.dgptype, gf.take_color(player.treatment, player.round_number-1)))
+
         right_answers_after_seed = gf.right_answers_after_seed(json.loads(player.right_answers), player.seed)
-        radio_buttons = json.loads(player.radio_buttons)
+        player.right_answers_after_seed = json.dumps(right_answers_after_seed)
+
+        # radio_buttons = json.loads(player.radio_buttons)
+        radio_buttons = json.loads(solutions['radio_buttons'])
         accuracy = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
         player.accuracy = accuracy
 
-        #TODO как считать скор? и по совместительству пэйофф
-        player.score = 1 - round((values['conf_bid'] * 0.01 - player.accuracy) ** 2, 5)
-        player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
+        temp = ['XY', 'YX', 'NXY', 'XZ', 'ZX', 'NXZ', 'YZ', 'ZY', 'NYZ']
+        userdgp_exclude = []
+        for i in range(len(radio_buttons)):
+            if radio_buttons[i] == 1:
+                userdgp_exclude.append(temp[i])
+
+
+
+        player.userdgp_exclude = json.dumps(userdgp_exclude)
+
+        player.backtransform_userdgp_exclude = gf.transfom_userdgp(s=player.userdgp_exclude,
+                                                                   seed=C.seed[player.round_number - 1][1])
+
+        # сейчас accuracy - это штраф (кол-во несовпадений)
+        # предлагаю кстати отказаться от ^2
+        # player.score = 1 - round((values['conf_bid'] * 0.01 - (9 - player.accuracy) ** 2 / 9), 5)  # score от 0 до 1
+        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9) , 5) # score от 0 до 1
+        player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return error_messages
 
@@ -422,8 +444,8 @@ class DiagramTest(Page):
 
         buttons_were_clicked = json.loads(player.buttons)
 
-        accuracy = player.accuracy
-        player.payoff = cu(round(player.score, 5) * C.Bonus + accuracy * C.Round_payoff)
+        accuracy = 9 - player.accuracy
+        player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',

@@ -280,4 +280,74 @@ const langArr = {
 
         "ge": `Ihre Gesamtauszahlung`,
     },
+    
+    "XsYw":{
+        "ru": `X - сильное, Y - слабое`,
+        "en": `X - strong, Y - weak`,
+        "ge": `X - starken, Y - schwache`,
+    },
+
+    "XwYs":{
+        "ru": `X - слабое, Y - сильное`,
+        "en": `X - weak, Y - strong`,
+        "ge": `X - schwache, Y - starken`,
+    },
+
+    "XYid":{
+        "ru": `X и Y нейтральные относительно друг друга`,
+        "en": `X and Y are neutral relative to each other`,
+        "ge": `X und Y sind relativ zueinander neutral`,
+    },
+
+    "XsZw":{
+        "ru": `X - сильное, Z - слабое`,
+        "en": `X - strong, Z - weak`,
+        "ge": `X - starken, Z - schwache`,
+    },
+
+    "XwZs":{
+        "ru": `X - слабое, Z - сильное`,
+        "en": `X - weak, Z - strong`,
+        "ge": `X - schwache, Z - starken`,
+    },
+
+    "XZid":{
+        "ru": `X и Z нейтральные относительно друг друга`,
+        "en": `X and Z are neutral relative to each other`,
+        "ge": `X und Z sind relativ zueinander neutral`,
+    },
+
+    "YsZw":{
+        "ru": `Y - сильное, Z - слабое`,
+        "en": `Y - strong, Z - weak`,
+        "ge": `Y - starken, Z - schwache`,
+    },
+
+    "YwZs":{
+        "ru": `Y - слабое, Z - сильное`,
+        "en": `Y - weak, Z - strong`,
+        "ge": `Y - schwache, Z - starken`,
+    },
+
+    "YZid":{
+        "ru": `Y и Z нейтральные относительно друг друга`,
+        "en": `Y and Z are neutral relative to each other`,
+        "ge": `Y und Z sind relativ zueinander neutral`,
+    },
+
+    "TwinPlanet":{
+        "ru": `Планета Близнец`,
+
+        "en": `Twin Planet`,
+
+        "ge": `Planet Zwillinge`,
+    },
+
+    "example":{
+        "ru": `russs`,
+
+        "en": `ennnn`,
+
+        "ge": `geee`,
+    },
 }
