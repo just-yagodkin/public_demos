@@ -703,51 +703,63 @@ def take_color(treatment: str, round: int):
 def right_answers(key: str, color: str):
     if color == 'g':
         if key == 'nolinks':
-            # Все стрелки невозможны
+            # checked
             return [1, 1, 0, 1, 1, 0, 1, 1, 0]
         if key == 'onelink':
+            # checked
             return [0, 0, 1, 1, 1, 0, 1, 1, 0]
         if key == 'twolinks':
-            return [0, 0, 1, 1, 1, 0, 0, 1, 1]
+            # checked
+            return [0, 1, 1, 1, 1, 0, 0, 1, 1]
         if key == 'collider1':
-            # Не уверен, но вроде так
+            # checked (need check)
             return [0, 1, 1, 1, 1, 0, 1, 0, 1]
         if key == 'fork':
-            # репорт коллайдера ведет к правильному ответу
+            # checked (need check)
             return [0, 0, 1, 1, 1, 0, 0, 0, 1]
         if key == 'threelinks':
-            # Все ноды связаны
-            return [0, 0, 1, 0, 0, 1, 0, 0, 1]
+            # checked
+            return [0, 0, 1, 0, 1, 1, 0, 1, 1]
 
     if color == 'y':
         if key == 'nolinks':
+            # checked
             return [1, 1, 0, 1, 1, 0, 1, 1, 0]
         # onelink, twolinks, collider восстанавливаются однозначно, ответы такие же как для silver
         if key == 'onelink':
+            # checked
             return [0, 1, 1, 1, 1, 0, 1, 1, 0]
         if key == 'twolinks':
+            # checked
             return [0, 1, 1, 1, 1, 0, 0, 1, 1]
         if key == 'collider1':
+            # checked
             return [0, 1, 1, 1, 1, 0, 1, 0, 1]
         if key == 'fork':
+            # checked (need check)
             return [1, 0, 1, 1, 1, 0, 0, 0, 1]
         if key == 'threelinks':
+            # checked
             return [0, 1, 1, 0, 1, 1, 0, 0, 1]
 
     if color == 's':
         if key == 'nolinks':
-            # Все стрелки невозможны
+            # checked
             return [1, 1, 0, 1, 1, 0, 1, 1, 0]
         if key == 'onelink':
+            # checked
             return [0, 1, 1, 1, 1, 0, 1, 1, 0]
         if key == 'twolinks':
+            # checked
             return [0, 1, 1, 1, 1, 0, 0, 1, 1]
         if key == 'collider1':
+            # checked
             return [0, 1, 1, 1, 1, 0, 1, 0, 1]
         if key == 'fork':
+            # checked
             return [1, 0, 1, 1, 1, 0, 0, 1, 1]
         if key == 'threelinks':
-            # Все ноды связаны
+            # checked
             return [0, 1, 1, 0, 1, 1, 0, 1, 1]
 
 

@@ -219,7 +219,8 @@ SESSION_CONFIGS = [
         name='data_to_dgp_new_design',
         display_name="data to DGP task new design",
         # app_sequence=['data_to_dgp_new', 'AOT'],
-        app_sequence=["consent", "quiz", "data_to_dgp_new", "survey_eng"],
+        app_sequence=[#"quiz",
+                      "data_to_dgp_new", "survey_eng"],
         num_demo_participants=1,
     ),
 

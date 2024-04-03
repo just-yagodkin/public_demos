@@ -343,11 +343,51 @@ const langArr = {
         "ge": `Planet Zwillinge`,
     },
 
-    "example":{
-        "ru": `russs`,
+    "Whatcanttobe":{
+        "ru": `Чего <u>не</u> может быть`,
 
-        "en": `ennnn`,
+        "en": `What can <u>not</u> to be`,
 
-        "ge": `geee`,
+        "ge": `Das kann <u>nicht</u> sein`,
+    },
+
+    "According":{
+        "ru": `Согласно данным`,
+
+        "en": `According the data`,
+
+        "ge": `entsprechend den Daten`,
+    },
+
+    "Scheme":{
+        "ru": `Схема`,
+
+        "en": `Scheme`,
+
+        "ge": `Planen`,
+    },
+
+    "Description":{
+        "ru": `Описание`,
+
+        "en": `Description`,
+
+        "ge": `Beschreibung`,
+    },
+
+    "Cantbe":{
+        "ru": `<u>Не</u> может быть`,
+
+        "en": `Can <u>not</u> to be`,
+
+        "ge": `Kann <u>nicht</u> sein`,
+    },
+
+    "Cantexclude":{
+        "ru": `<u>Нельзя</u> исключать`,
+
+        "en": `Can <u>not</u> exclude`,
+
+        "ge": `Kann <u>nicht</u> ausgeschlossen werden`,
     },
 }
