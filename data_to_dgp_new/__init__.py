@@ -332,13 +332,6 @@ class DiagramTask(Page):
 
         player.seed = C.seed[player.round_number - 1][1]
 
-
-        #TODO это какая-то лажа, скорее всего тут надо переделать или убрать
-        if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
-            player.node = gf.wherex(C.seed[player.round_number - 1][1])
-        else:
-            player.node = gf.wherey(C.seed[player.round_number - 1][1])
-
         if gf.take_color(player.treatment, player.round_number - 1) == 's':
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
         elif gf.take_color(player.treatment, player.round_number - 1) == 'y':
