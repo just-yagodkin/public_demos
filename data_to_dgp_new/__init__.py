@@ -339,6 +339,16 @@ class DiagramTask(Page):
         else:
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
 
+        if gf.take_color(player.treatment, player.round_number - 1) == 's':
+            player.node = gf.wherey(C.seed[player.round_number - 1][1])
+        elif gf.take_color(player.treatment, player.round_number - 1) == 'y':
+            player.node = gf.wherex(C.seed[player.round_number - 1][1])
+        elif gf.take_color(player.treatment, player.round_number - 1) == 'g' and player.dgptype in ['onelink', 'twolinks', 'threelinks']:
+            player.node = gf.wherez(C.seed[player.round_number - 1][1])
+        else:
+            player.node = 'N'
+
+
         player.edges_num = len(json.loads(player.originaldgp))
 
         error_messages = dict()

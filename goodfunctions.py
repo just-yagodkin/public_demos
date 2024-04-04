@@ -620,6 +620,14 @@ def wherex(seed: int):
     if seed in [2, 4]:
         return "Y"
 
+def wherez(seed: int):
+    if seed in [0, 2]:
+        return "Z"
+    if seed in [4, 5]:
+        return "X"
+    if seed in [1, 3]:
+        return "Y"
+
 
 def dgpchoice(lst: list):  # lst is an original form
     temp = list()
