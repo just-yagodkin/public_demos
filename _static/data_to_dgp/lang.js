@@ -206,11 +206,11 @@ const langArr = {
     },
 
     "DtText":{
-        "ru": `Пожалуйста, заполните следующую форму, если считаете что между некоторыми из переменных X, Y и Z есть связь. `,
+        "ru": `Пожалуйста, заполните форму ниже`,
 
-        "en": `Please, fill out the form if you assume any relationships between X, Y and Z`,
+        "en": `Please fill in the form below`,
 
-        "ge": `Bitte füllen Sie das Formular aus, wenn Sie eine Beziehung zwischen X, Y und Z vermuten`,
+        "ge": `Bitte füllen Sie das untenstehende Formular aus`,
     },
 
     "confidence":{
@@ -222,11 +222,11 @@ const langArr = {
     },
 
     "DTestTitle":{
-        "ru": `Решения в последнем раунде:`,
+        "ru": `Результаты предыдущего раунда:`,
 
-        "en": `You accuracy in last round:`,
+        "en": `Results of previous round:`,
 
-        "ge": `Ihre Genauigkeit in der letzten Runde:`,
+        "ge": `Ergebnisse der vorherigen Runde:`,
     },
 
     "DTestText1":{
@@ -389,5 +389,21 @@ const langArr = {
         "en": `Can <u>not</u> exclude`,
 
         "ge": `Kann <u>nicht</u> ausgeschlossen werden`,
+    },
+
+    "Youranswers":{
+        "ru": `Ваши ответы`,
+
+        "en": `Your answers`,
+
+        "ge": `Deine Antworten`,
+    },
+
+    "Rightanswers":{
+        "ru": `Правильные ответы`,
+
+        "en": `Right answers`,
+
+        "ge": `Richtige Antworten`,
     },
 }
