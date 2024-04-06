@@ -33,10 +33,10 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    # task_sequence = ["onelink", "twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
-    task_sequence = basis1 + basis2 + basis3
+    task_sequence = ["twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
+    # task_sequence = basis1 + basis2 + basis3
 
-    seed = [(name, random.randint(0, 5)) for name in task_sequence]
+    seed = [(name, random.randint(1, 1)) for name in task_sequence]
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
                    'right': {'x': [1, 1, 1, 1, 1, 1, 1, 1], 'y': [1, 1, 1, 1, 1, 1, 1, 1]}}
@@ -332,12 +332,15 @@ class DiagramTask(Page):
 
         player.seed = C.seed[player.round_number - 1][1]
 
-
-        #TODO это какая-то лажа, скорее всего тут надо переделать или убрать
-        if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
-            player.node = gf.wherex(C.seed[player.round_number - 1][1])
-        else:
+        if gf.take_color(player.treatment, player.round_number - 1) == 's':
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
+        elif gf.take_color(player.treatment, player.round_number - 1) == 'y':
+            player.node = gf.wherex(C.seed[player.round_number - 1][1])
+        elif gf.take_color(player.treatment, player.round_number - 1) == 'g' and player.dgptype in ['onelink', 'twolinks', 'threelinks']:
+            player.node = gf.wherez(C.seed[player.round_number - 1][1])
+        else:
+            player.node = 'N'
+
 
         player.edges_num = len(json.loads(player.originaldgp))
 
@@ -465,7 +468,7 @@ class DiagramTest(Page):
     def js_vars(player):
         benchmark_edges = benchmark_diagram(player)
 
-        right_answers_list = json.loads(player.right_answers)
+        right_answers_list = json.loads(player.right_answers_after_seed)
         player_answers = json.loads(player.radio_buttons)
 
         store_array = json.loads(player.stored_check)

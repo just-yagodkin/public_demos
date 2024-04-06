@@ -6,7 +6,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'quiz_eng'
+    NAME_IN_URL = 'quiz'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
 
@@ -21,50 +21,50 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     q_1 = models.StringField(
-        choices=["Seeds do not grow", "Immature and weak immature seeds do not grow",
-                 "Only weak seeds don't grow"],
-        label='1.   On the rocky soils',
+        choices=["Семена не растут.", "Не растут незрелые и слабые незрелые семена.",
+                 "Не растут только слабые семена."],
+        label='1.   На каменистых почвах',
         widget=widgets.RadioSelectHorizontal)
 
     q_2 = models.StringField(
         choices=["12", "16", "8"],
-        label='2.   How many of the beds can be on rocky soil?',
+        label='2.   Сколько из 16 клумб могут быть на каменистой почве?',
         widget=widgets.RadioSelectHorizontal)
 
     q_3 = models.StringField(
-        choices=['It is immature', 'It is weak', 'It is immature or/and it is weak'],
-        label='3.  List all the possible explanations  why the seed did not germinate',
+        choices=['Оно незрелое', 'Оно слабое', 'Оно не зрелое и/или слабое'],
+        label='3.   Назовите все возможные причины того, что семя не проросло.',
         widget=widgets.RadioSelectHorizontal)
 
     q_4 = models.StringField(
-        choices=["X is weak and Y is strong", "X is strong and Y is weak", "X is neither strong nor weak Y is strong",
-                 "X is neither strong nor weak Y is neither strong nor weak."],
-        label='4.  Consider a simplified problem (see Table 1) where observations of only 2 seed types are demonstrated, located only over sandy soils, and all mature seeds are known and labeled orange. Then the dependencies between seed types will be:',
+        choices=["X слабое и Y сильное.", "X сильное и Y слабое.", "X не сильное и не слабое Y сильное.",
+                 "X не сильное и не слабое Y не сильное и не слабое."],
+        label='4.   Рассмотрим упрощённую задачу (см. Таблицу 1), где продемонстрированы наблюдения только 2-х типов семян, расположенных только над песчаными почвами, и все зрелые семена известны и помечены оранжевым цветом. Тогда зависимости между типами семян будут:',
         widget=widgets.RadioSelectHorizontal)
 
     q_5 = models.StringField(
-    choices=['Seed Y in flowerbed 7 has germinated on the twin planet (right) because it is strong.',
-                 'Seed Y on bed 7 did not germinate on planet (left) because it is weak.',
-                 'Seed Y on bed 3 did not germinate because it is on stony soil, it is weak and immature.'],
-        label='5.   Consider now, exactly the same observations (see Table 2), but two differences bring them back closer to the unsimplified assignment. The first: the mature seeds are similarly arranged by the same bed numbers, but there is no longer any highlighting by colour. Two: bed number 1 in the table on the left and bed number 3 in the table on the right are now on rocky soils. Note that although the bed numbers are not the same, the number of mature seeds distributed on the rocky beds is always the same on both planets. Choose the correct statement:',
-          widget=widgets.RadioSelectHorizontal)
+        choices=['Семя Y на клумбе 7 проросло на планете близнеце (справа), потому что оно сильное.',
+                 'Семя Y на клумбе 7 не проросло на планете (слева), потому что оно слабое.',
+                 'Семя Y на клумбе 3 не проросло, потому что оно на каменистой почве, оно слабое и незрелое.'],
+        label='5.   Рассмотрим теперь, точно такие же наблюдения (см. Таблицу 2), но два отличия приближают их обратно к не упрощённому заданию. Первое: зрелые семена так же расположены по тем же номерам клумб, но больше нет выделения цветом. Второе: клумба №1 в таблице слева и клумба №3 в таблице справа теперь находятся на каменистых почвах. Обратите внимание, что хоть номера клумб и не совпадают, количество зрелых семян, распределённое по каменистым клумбам всегда одинаковое на обоих планетах. Выберете правильное утверждение:',
+        widget=widgets.RadioSelectHorizontal)
 
     q_6 = models.StringField(
         choices=['Z->Y, Y->X, X->Y', 'Z->Y, X->Y, X->Z', 'X->Y, X->Z, Y->X'],
-        label='6. If it is already known that Y is strong with respect to Z and Z is strong with respect to X choose the item that lists all the relationships between strong and weak seeds that cannot be:',
+        label='6.   Если уже известно, что Y сильное по отношению к Z, а Z cильное по отношению к X выберете пункт, в котором перечислены вся связи между сильными и слабыми семенами, которых не может быть:',
         widget=widgets.RadioSelectHorizontal)
 
     q_7 = models.StringField(
-        choices=["Will germinate if it's mature", "Will germinate if it's not on rocky soil",
-                 "Will not germinate if it's on sandy soil"],
-        label='7.   Complete the sentence correctly: neutral (neither strong nor weak) seed:',
+        choices=["Прорастёт если оно зрелое.", "Прорастёт если оно не на каменистой почве.",
+                 "Не прорастёт если оно на песчаной почве."],
+        label='7.   Завершите фразу корректно: нейтральное (не сильное и не слабое) семя:',
         widget=widgets.RadioSelectHorizontal)
 
     q_8 = models.StringField(
-        choices=["Rocky soils are found in beds with the same numbers.",
-                 "The number of strong and weak links are the same, but different types of seeds may be strong or weak compared to the original planet.",
-                 "The same number of mature seeds are planted on rocky soils as on the original planet."],
-        label='8.   Complete the sentence correctly: on the twin planet',
+        choices=["Каменистые почвы находятся в клумбах с такими же номерами.",
+                 "Количество сильных и слабых связей одинаково, но разные типы семян могут быть сильными или слабыми в сравнении с оригинальной планетой.",
+                 "То же количество зрелых семян посажено на каменистых почвах, что и на планете-оригинале."],
+        label='8.   Завершите фразу корректно: на планете двойнике',
         widget=widgets.RadioSelectHorizontal)
 
 
@@ -81,16 +81,16 @@ class Quiz(Page):
     @staticmethod
     def error_message(player, values):
         #print('values is', values)
-        if (values['q_1'] != "Immature and weak immature seeds do not grow" or
+        if (values['q_1'] != "Не растут незрелые и слабые незрелые семена." or
             values['q_2'] != "8" or
-            values['q_3'] != 'It is immature or/and it is weak' or
-            values['q_4'] != "X is strong and Y is weak" or
-            values['q_5'] != 'Seed Y on bed 3 did not germinate because it is on stony soil, it is weak and immature.' or
+            values['q_3'] != 'Оно не зрелое и/или слабое' or
+            values['q_4'] != "X сильное и Y слабое." or
+            values['q_5'] != 'Семя Y на клумбе 3 не проросло, потому что оно на каменистой почве, оно слабое и незрелое.' or
             values['q_6'] != 'Z->Y, X->Y, X->Z' or
-            values['q_7'] != "Will germinate if it's mature" or
-            values['q_8'] != "The same number of mature seeds are planted on rocky soils as on the original planet."
+            values['q_7'] != "Прорастёт если оно зрелое." or
+            values['q_8'] != "То же количество зрелых семян посажено на каменистых почвах, что и на планете-оригинале."
         ):
-            return 'the responses contain a mistake(s)'
+            return 'В ответах есть ошибка'
 
 
 

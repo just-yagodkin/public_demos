@@ -196,14 +196,14 @@ SESSION_CONFIGS = [
     dict(
         name='data_to_dgp_quiz',
         display_name="data to DGP task quiz",
-        app_sequence=['quizeng', 'data_to_dgp', 'AOT'],
+        app_sequence=['quiz', 'data_to_dgp', 'AOT'],
         num_demo_participants=1,
     ),
 
     dict(
         name='data_to_dgp_eng',
         display_name="data to DGP ENG",
-        app_sequence=['consent', 'quiz', 'data_to_dgp', "survey_eng"],
+        app_sequence=['consent', 'quizeng', 'data_to_dgp', "survey_eng"],
         num_demo_participants=2,
     ),
 
@@ -219,7 +219,15 @@ SESSION_CONFIGS = [
         name='data_to_dgp_new_design',
         display_name="data to DGP task new design",
         # app_sequence=['data_to_dgp_new', 'AOT'],
-        app_sequence=["consent", "quiz", "data_to_dgp_new", "survey_eng"],
+        app_sequence=[#"quiz",
+                      "data_to_dgp_new", "survey_eng"],
+        num_demo_participants=1,
+    ),
+
+    dict(
+        name='data_to_dgp_new_design_inverse',
+        display_name="data to DGP task new design + Inverse",
+        app_sequence=["quiz_inverse", "data_to_dgp_new", "survey_eng"],
         num_demo_participants=1,
     ),
 
