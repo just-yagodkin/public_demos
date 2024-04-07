@@ -397,7 +397,7 @@ class DiagramTask(Page):
             treatment=player.treatment,
             seed=C.seed[player.round_number - 1][1],
             dgptype=C.task_sequence[player.round_number - 1],
-            # choices=choices
+            round_number=player.round_number
         )
 
     @staticmethod

@@ -110,6 +110,7 @@
 
 {{ block title }}
 <dl class="lng-Title" style="text-align:center">You can read the observation records in the following tables:</dl>
+<dl style="text-align:center">Round {{ round_number }}</dl>
 {{ endblock }}
 
 
@@ -463,7 +464,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <br>
 
 <div>
-    <p class="lng-DtText">Please fill in the form below
+    <p class="lng-DtText" style="font-size:150%">Please fill in the form below
     </p>
 </div>
 
@@ -826,7 +827,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     });
 </script>
 
-<div><p class="lng-confstart">Please choose how confident you are using slider</p></div>
+<div><p class="lng-confstart" style="font-size:150%">Please choose how confident you are using slider</p></div>
 
 <input color="yellow-300" id='conf_bid' class="form-range" type="range" name="conf_bid" min="0" max="100" step="5">
 
