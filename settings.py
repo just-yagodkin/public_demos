@@ -227,7 +227,7 @@ SESSION_CONFIGS = [
     dict(
         name='data_to_dgp_new_design_inverse',
         display_name="data to DGP task new design + Inverse",
-        app_sequence=["quiz_inverse", "data_to_dgp_new", "survey_eng"],
+        app_sequence=["quiz_inverse_rus", "data_to_dgp_new", "survey_eng"],
         num_demo_participants=1,
     ),
 
