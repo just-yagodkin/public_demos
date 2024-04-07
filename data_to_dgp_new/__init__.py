@@ -151,6 +151,7 @@ class Player(BasePlayer):
     treatment = models.StringField()
     node = models.StringField(initial='')
     seed = models.IntegerField(initial=0)
+    round_num = models.IntegerField(initial=0)
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -316,9 +317,9 @@ class DiagramTask(Page):
 
         # Converting string to list
         res = json.loads(values['buttons']).copy()
-
-
         # print(res)
+
+        player.round_num = player.round_number
 
         if values['conf_init'] != values['conf_bid']:
             player.conf_bid_is_random = 0
@@ -372,7 +373,7 @@ class DiagramTask(Page):
         # сейчас accuracy - это штраф (кол-во несовпадений)
         # предлагаю кстати отказаться от ^2
         # player.score = 1 - round((values['conf_bid'] * 0.01 - (9 - player.accuracy) ** 2 / 9), 5)  # score от 0 до 1
-        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9) , 5) # score от 0 до 1
+        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9), 4) # score от 0 до 1
         player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return error_messages

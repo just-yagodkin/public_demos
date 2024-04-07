@@ -391,6 +391,22 @@ const langArr = {
         "ge": `Kann <u>nicht</u> ausgeschlossen werden`,
     },
 
+    "Cantbe2":{
+        "ru": `<u>Не</u> может быть`,
+
+        "en": `Can <u>not</u> to be`,
+
+        "ge": `Kann <u>nicht</u> sein`,
+    },
+
+    "Cantexclude2":{
+        "ru": `<u>Нельзя</u> исключать`,
+
+        "en": `Can <u>not</u> exclude`,
+
+        "ge": `Kann <u>nicht</u> ausgeschlossen werden`,
+    },
+
     "Youranswers":{
         "ru": `Ваши ответы`,
 
