@@ -46,7 +46,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
 
     q_4 = models.StringField(
-        choices=["It is immature (a property of Y itself).",
+        choices=["It is immature (a property of Y itself)",
                  "It is weak (Influence of another strong immature Seed)",
                  "It is immature and/or weak"],
         label='4.   Name all possible reasons why seed Y did not germinate',
@@ -60,9 +60,9 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
 
     q_6 = models.StringField(
-        choices=["Z->Y, Y->X, X->Y",
-                 "Z->Y, X->Y, X->Z",
-                 "X->Y, X->Z, Y->X"],
+        choices=["Z🡢Y, Y🡢X, X🡢Y",
+                 "Z🡢Y, X🡢Y, X🡢Z",
+                 "X🡢Y, X🡢Z, Y🡢X"],
         label='6.   If you already know that Y is strong in relation to Z, and Z is strong in relation to X, select the item that lists all the connections between strong and weak seeds that cannot exist:',
         widget=widgets.RadioSelect)
 
@@ -99,11 +99,11 @@ class Quiz(Page):
             values['q_3'] != 'X=1 can, in the first flowerbed/row, change the state of immature Y, initially equal to 0, to Y=1, and at the same time, X=1 can, in the second flowerbed/row, change the state of mature Y, initially equal to 1, to Y=0' or
             values['q_4'] != "It is immature and/or weak" or
             values['q_5'] != 'X is weak and Y is strong' or
-            values['q_6'] != "Z->Y, X->Y, X->Z" or
+            values['q_6'] != "Z🡢Y, X🡢Y, X🡢Z" or
             values['q_7'] != "will germinate if it is mature" or
             values['q_8'] != "the same number of mature seeds are planted on rocky soils as on the original planet"
         ):
-            return 'В ответах есть ошибка'
+            return 'A mistake is in answers'
 
 
 

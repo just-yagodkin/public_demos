@@ -1,0 +1,231 @@
+{{ block styles }}
+<style>
+    .otree-body {
+        font: 14px helvetica neue, helvetica, arial, sans-serif;
+
+        /* background-color: #686666;     */
+    }
+
+</style>
+
+
+{{ endblock }}
+
+{{ block title }}
+<dl class="lng-instruction" style="text-align:center">Instructions</dl>
+{{ endblock }}
+
+
+{{ block content }}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 4 Carousel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .otree-body {
+            max-width: 750px;
+            font: 14px helvetica neue, helvetica, arial, sans-serif;
+
+        }
+
+        .carousel {
+            margin-top: 50px;
+
+        }
+
+        .carousel-inner {
+            height: 280px;
+
+        }
+
+        .carousel-caption {
+            color: #fff;
+            top: 50%;
+        }
+
+        .carousel-item {
+            margin-left: 80px;
+            width: 80%;
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev /*, .carousel-indicators */
+        {
+            filter: invert(100%);
+        }
+
+        .carousel-indicators {
+            filter: invert(100%);
+        }
+
+
+    </style>
+
+
+</head>
+
+
+<div class="lang-container" style="text-align:right">
+    <table>
+        <col width="81%">
+        <col width="19%">
+        <tr>
+            <td></td>
+            <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
+                <link rel="stylesheet"
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+                <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
+                <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+                    <option value="en">Eng</option>
+                    <option value="ge">Ger</option>
+                    <option value="ru">Rus</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<br>
+<div id = "presentation" style="text-align: center">
+    <!--<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+-->
+</div>
+
+<script>
+    if (window.location.hash == '#en'){
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    else if(window.location.hash == '#ru'){
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    else if(window.location.hash == '#ge') {
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRwuxhtykR989WCmpwYXDcjfLoRNWreTlX_et7ZGwomclVNuTrdK_d0Yw4qM5vpOjNWCg5ZAn9Kg30V/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+    }
+    console.log(window.location.hash)
+</script>
+
+<!-- hover the cursor on slide to stop switching  -->
+<!--
+
+<br>
+<div class="container">
+    <div id="carouselContent" class="carousel slide" data-interval="false">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators active" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <li class="lng-carSlide1String1">The session consists of {{C.NUM_ROUNDS}} rounds.
+                    In each round you will be asked to perform identical tasks that do not differ
+                    in structure or purpose.
+                </li>
+                <li class="lng-carSlide1String2">Inside each assignment you will be given sets of data, which are
+                    divided
+                    into columns (3 columns in total). Each column contains 16 rows.
+                    The value of a row in each column can take the values 0 and 1.
+                    Each such value is the result of a random <i>choice</i> of the system,
+                    but the frequency of their occurence depends on
+                    mechanism assigned to each column.
+                </li>
+                <li class="lng-carSlide1String3">If the columns are dependent, then in one of them certain values have
+                    been randomly selected, and in the other one the <b>generation frequency</b> on the corresponding
+                    rows has changed. For example, if Y is dependent on X, it may happen that column Y generates a one
+                    more often (or less often) on those rows that were also ones in column X.
+                </li>
+            </div>
+            <div class="carousel-item">
+
+                <li class="lng-carSlide2String1">However, in each round, you will not know if there is a dependency
+                    between columns, and in what sequence they were generated (if there is no dependency, then it does
+                    not matter).
+                    You will only observe data sets (a table with three columns X, Y and Z) generated after the system
+                    runs the mechanisms.
+                </li>
+                <li class="lng-carSlide2String2">In each task you will have the opportunity to start the generation
+                    process again as follows: the values in one of the columns (you will always know which one) will be
+                    changed to ones first, and then the values in the other columns will be determined. This operation
+                    will be called &quot;DO &lt;column name&gt;&quot; and there will be a separate blue button for it.
+                </li>
+            </div>
+
+            <div class="carousel-item">
+                <li class="lng-carSlide3String1">One of the table controls (filter) will allow you to display only the
+                    values that one particular column takes. But these will be the same values that were originally
+                    generated by the system and only their display in the table will change. This operation will be
+                    available for each column. To do this, you will need to check the box next to the value 0 or 1 under
+                    the column name.
+                </li>
+                <li class="lng-carSlide3String2">The task of each round is to determine whether the frequency of
+                    generation of each column depends on the mechanisms in the other columns.
+                </li>
+                <li class="lng-carSlide3String3">In this task, the generation sequence <b>cannot be</b> longer than
+                    three steps, i.e. there cannot be dependency cycles between columns. This eliminates situations
+                    where, for example, column X is dependent on Y, Y is dependent on Z and Z is dependent on X, or
+                    where X is dependent on Y and Y is dependent on X.
+                </li>
+            </div>
+            <div class="carousel-item">
+                <li class="lng-carSlide4String1">It follows from the previous paragraph that only one of the following
+                    statements can be true at a time: each column generation mechanism can either influence or be
+                    dependent on the other one, or two mechanisms do not influence each other.
+                </li>
+                <li class="lng-carSlide4String2">The frequencies in each column in this assignment will be generated in
+                    such a way that it does not matter whether 16 rows or 16,000 rows are provided for their analysis,
+                    all patterns will hold.
+                </li>
+                <li class="lng-carSlide4String3">Your answer in each round, will need to be entered into a graphical
+                    form. In it, each column name will have two incoming and two outgoing arrows (edges). If you think
+                    one of the columns depends on the other, you will need to click on the arrow to make it active, then
+                    the dotted line will change to a solid line.
+                </li>
+            </div>
+            <div class="carousel-item">
+                <img src="https://github.com/just-yagodkin/GitTest/blob/master/datatodgp.gif?raw=true" width="500px"/>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+-->
+<br>
+<br>
+
+<button id="lng-IReadTheSlides" class="btn btn-warning btn-lg btn-block">
+    Using < > elements, carefully read all slides and understand the task.
+</button>
+
+<script src="{{ static  'data_to_dgp/lang.js'  }}"></script>
+<script src="{{ static  'data_to_dgp/utils.js'  }}"></script>
+
+
+<!-- <script>
+
+$(document).ready(function () {
+    $("#carouselContent").carousel({  pause: "hover" });
+
+  });
+</script> -->
+
+{{ endblock }}
+
+
+
+
+
+

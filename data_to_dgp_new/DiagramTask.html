@@ -110,6 +110,7 @@
 
 {{ block title }}
 <dl class="lng-Title" style="text-align:center">You can read the observation records in the following tables:</dl>
+<dl style="text-align:center">Round {{ round_number }}</dl>
 {{ endblock }}
 
 
@@ -463,7 +464,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
 <br>
 
 <div>
-    <p class="lng-DtText">Please, fill out the form if you assume any relationships between X, Y and Z
+    <p class="lng-DtText" style="font-size:150%">Please fill in the form below
     </p>
 </div>
 
@@ -613,62 +614,62 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
         <tr class="header" style="background-color: #dddddd; border-color: #111111">
             <th class="lng-Scheme" style="text-align: center">Scheme</th>
             <th class="lng-Description" style="text-align: center">Description</th>
-            <th class="lng-Cantbe" style="text-align: right; font-weight: normal;color: rgb(153 102 0)">Can <u>not</u> to be</th>
-            <th class="lng-Cantexclude" style="text-align: center; font-weight: normal;color: rgb(51 204 204)">Can <u>not</u> exclude</th>
+            <th class="lng-Cantbe" style="text-align: right; font-weight: normal;color: rgb(153 102 0); font-size:120%">Can <u>not</u> to be</th>
+            <th class="lng-Cantexclude" style="text-align: center; font-weight: normal;color: rgb(51 204 204); font-size:120%">Can <u>not</u> exclude</th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/1.svg" width="150" height="85"></th>
-            <th class="lng-XsYw" style="font-weight: normal; text-align: center"><br>X - сильное, Y - слабое</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio"  value="html1" id="html1" name="topic1"/> </th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio" value="html12" id="html12" name="topic1" checked/></th>
+            <th class="lng-XsYw" style="font-weight: normal; text-align: center; font-size:125%"><br>X - сильное, Y - слабое</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html1" id="html1" name="topic1"/> </th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio" value="html12" id="html12" name="topic1" checked/></th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/2.svg" width="150" height="85"></th>
-            <th class="lng-XwYs" style="font-weight: normal; text-align: center"><br>X - слабое, Y - сильное</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html2" id="html2" name="topic2"/></th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio" value="html22" id="html22" name="topic2" checked/></th>
+            <th class="lng-XwYs" style="font-weight: normal; text-align: center; font-size:125%"><br>X - слабое, Y - сильное</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html2" id="html2" name="topic2"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio" value="html22" id="html22" name="topic2" checked/></th>
         </tr>
         <tr style="border-color: #111111">
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/3.svg" width="150" height="85"></th>
-            <th class="lng-XYid" style="font-weight: normal; text-align: center"><br>X и Y нейтральные относительно друг друга</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html3" id="html3" name="topic3"/></th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio" value="html32" id="html32" name="topic3" checked/></th>
+            <th class="lng-XYid" style="font-weight: normal; text-align: center; font-size:125%"><br>X и Y нейтральные относительно друг друга</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html3" id="html3" name="topic3"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio" value="html32" id="html32" name="topic3" checked/></th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/4.svg" width="150" height="85"></th>
-            <th class="lng-XsZw" style="font-weight: normal; text-align: center"><br>X - сильное, Z - слабое</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html4" id="html4" name="topic4"/></th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio" value="html42" id="html42" name="topic4" checked/></th>
+            <th class="lng-XsZw" style="font-weight: normal; text-align: center; font-size:125%"><br>X - сильное, Z - слабое</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html4" id="html4" name="topic4"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio" value="html42" id="html42" name="topic4" checked/></th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/5.svg" width="150" height="85"></th>
-            <th class="lng-XwZs" style="font-weight: normal; text-align: center"><br>X - слабое, Z - сильное</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html5" id="html5" name="topic5"/></th>
-            <th style="text-align: center"><label><input type="radio"  class="blue-radio" value="html52" id="html52" name="topic5" checked/></th>
+            <th class="lng-XwZs" style="font-weight: normal; text-align: center; font-size:125%"><br>X - слабое, Z - сильное</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html5" id="html5" name="topic5"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio"  class="blue-radio" value="html52" id="html52" name="topic5" checked/></th>
         </tr>
         <tr style="border-color: #111111">
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/6.svg" width="150" height="85"></th>
-            <th class="lng-XZid" style="font-weight: normal; text-align: center"><br>X и Z нейтральные относительно друг друга</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html6" id="html6" name="topic6"/></th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio" value="html62" id="html62" name="topic6" checked/></th>
+            <th class="lng-XZid" style="font-weight: normal; text-align: center; font-size:125%"><br>X и Z нейтральные относительно друг друга</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html6" id="html6" name="topic6"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio" value="html62" id="html62" name="topic6" checked/></th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/7.svg" width="150" height="85"></th>
-            <th class="lng-YsZw" style="font-weight: normal; text-align: center"><br>Y - сильное, Z - слабое</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html7" id="html7" name="topic7"/></th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio" value="html72" id="html72" name="topic7" checked/></th>
+            <th class="lng-YsZw" style="font-weight: normal; text-align: center; font-size:125%"><br>Y - сильное, Z - слабое</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html7" id="html7" name="topic7"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio" value="html72" id="html72" name="topic7" checked/></th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/8.svg" width="150" height="85"></th>
-            <th class="lng-YwZs" style="font-weight: normal; text-align: center"><br>Y - слабое, Z - сильное</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html8" id="html8" name="topic8"/></th>
-            <th style="text-align: center"><label><input type="radio"  class="blue-radio" value="html82" id="html82" name="topic8" checked/></th>
+            <th class="lng-YwZs" style="font-weight: normal; text-align: center; font-size:125%"><br>Y - слабое, Z - сильное</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html8" id="html8" name="topic8"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio"  class="blue-radio" value="html82" id="html82" name="topic8" checked/></th>
         </tr>
         <tr>
             <th><img src="https://raw.githubusercontent.com/just-yagodkin/GitStorage/9617c5d359069976bfbbb30fe171ec203c979e7b/9.svg" width="150" height="85"></th>
-            <th class="lng-YZid" style="font-weight: normal; text-align: center"><br>Y и Z нейтральные относительно друг друга</th>
-            <th style="text-align: right"><label><input type="radio" class="red-radio" value="html9" id="html9" name="topic9"/></th>
-            <th style="text-align: center"><label><input type="radio" class="blue-radio"  value="html92" id="html92" name="topic9" checked/></th>
+            <th class="lng-YZid" style="font-weight: normal; text-align: center; font-size:125%"><br>Y и Z нейтральные относительно друг друга</th>
+            <th style="text-align: right; font-size:175%"><label><input type="radio" class="red-radio" value="html9" id="html9" name="topic9"/></th>
+            <th style="text-align: center; font-size:175%"><label><input type="radio" class="blue-radio"  value="html92" id="html92" name="topic9" checked/></th>
         </tr>
         </tbody>
     </table>
@@ -826,7 +827,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     });
 </script>
 
-<div><p class="lng-confstart">Please choose how confident you are using slider</p></div>
+<div><p class="lng-confstart" style="font-size:150%">Please choose how confident you are using slider</p></div>
 
 <input color="yellow-300" id='conf_bid' class="form-range" type="range" name="conf_bid" min="0" max="100" step="5">
 
