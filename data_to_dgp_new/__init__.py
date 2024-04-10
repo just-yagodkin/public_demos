@@ -34,7 +34,7 @@ class C(BaseConstants):
         random.shuffle(basis2)
 
     task_sequence = ["twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
-    # task_sequence = basis1 + basis2 + basis3
+    task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(1, 1)) for name in task_sequence]
 
