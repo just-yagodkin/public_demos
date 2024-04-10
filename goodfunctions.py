@@ -718,7 +718,7 @@ def right_answers(key: str, color: str):
             return [0, 0, 1, 1, 1, 0, 1, 1, 0]
         if key == 'twolinks':
             # checked
-            return [0, 1, 1, 1, 1, 0, 0, 1, 1]
+            return [0, 0, 1, 1, 1, 0, 0, 1, 1]
         if key == 'collider1':
             # checked (need check)
             return [0, 1, 1, 1, 1, 0, 1, 0, 1]
