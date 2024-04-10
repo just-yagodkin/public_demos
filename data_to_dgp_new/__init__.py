@@ -33,7 +33,7 @@ class C(BaseConstants):
     while basis2[0] == basis1[5] or basis2[5] == basis3[0]:
         random.shuffle(basis2)
 
-    task_sequence = ["twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
+    # task_sequence = ["twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
     task_sequence = basis1 + basis2 + basis3
 
     seed = [(name, random.randint(1, 1)) for name in task_sequence]
@@ -144,9 +144,9 @@ class Player(BasePlayer):
     right_answers = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
     right_answers_after_seed = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
 
+    penalty = models.IntegerField(initial=0)
+    accuracy = models.IntegerField(initial=0)
     score = models.FloatField(initial=0)
-
-    accuracy = models.FloatField()
 
     treatment = models.StringField()
     node = models.StringField(initial='')
@@ -354,8 +354,13 @@ class DiagramTask(Page):
 
         # radio_buttons = json.loads(player.radio_buttons)
         radio_buttons = json.loads(solutions['radio_buttons'])
-        accuracy = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
+        penalty = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
+        player.penalty = penalty
+
+        accuracy = 9 - penalty
         player.accuracy = accuracy
+
+        print(accuracy)
 
         temp = ['XY', 'YX', 'NXY', 'XZ', 'ZX', 'NXZ', 'YZ', 'ZY', 'NYZ']
         userdgp_exclude = []
@@ -363,18 +368,18 @@ class DiagramTask(Page):
             if radio_buttons[i] == 1:
                 userdgp_exclude.append(temp[i])
 
-
-
         player.userdgp_exclude = json.dumps(userdgp_exclude)
 
         player.backtransform_userdgp_exclude = gf.transfom_userdgp(s=player.userdgp_exclude,
                                                                    seed=C.seed[player.round_number - 1][1])
 
-        # сейчас accuracy - это штраф (кол-во несовпадений)
         # предлагаю кстати отказаться от ^2
         # player.score = 1 - round((values['conf_bid'] * 0.01 - (9 - player.accuracy) ** 2 / 9), 5)  # score от 0 до 1
-        player.score = 1 - round((values['conf_bid'] * 0.01 - (9-player.accuracy)/9), 4) # score от 0 до 1
-        player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
+
+        # score от 0 до 1
+        score = 1 - abs(values['conf_bid'] * 0.01 - player.accuracy/9)
+        player.score = round(score, 4)
+        player.payoff = cu(score * C.Bonus + C.Round_payoff)
 
         return error_messages
 
@@ -448,7 +453,7 @@ class DiagramTest(Page):
 
         buttons_were_clicked = json.loads(player.buttons)
 
-        accuracy = 9 - player.accuracy
+        accuracy = player.accuracy
         player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return dict(
@@ -456,9 +461,8 @@ class DiagramTest(Page):
                   f'User did not set cycles: {gf.tanc(store_array)}',
                   f'User chose {gf.userschoice(store_array)}',
                   f'DGP was {gf.dgpchoice(edges)}',
-                  f'Penalty (from 0 to 10) is equal to {gf.fine(gf.userschoice(store_array), gf.dgpchoice(edges))}',
-                  f"User's accuracy (from 0 to 1) for the round is {accuracy}",
-                  f"User's score (from 0 to 1) for the round is {round(player.score, 5)}",
+                  f"User's accuracy (from 0 to 9) for the round is {accuracy}",
+                  f"User's score (from 0 to 1) for the round is {round(player.score, 4)}",
                   f'The seed is {seed}',
                   f'Treatment = {treatment}'
                   ],
