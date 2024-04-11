@@ -18,7 +18,7 @@
     #info {
         color: #c88;
         font-size: 2em;
-        width: 800px;
+        width: 600;
         height: 200px;
         display: block;
         margin-left: auto;
@@ -105,38 +105,51 @@
       transform: scale(1);
     }
 </style>
+
+
 {{ endblock }}
 
 
+
+
+
 {{ block title }}
-<dl class="lng-Title" style="text-align:center">You can read the observation records in the following tables:</dl>
-<dl style="text-align:center">Round {{ round_number }}</dl>
+
+
+
 {{ endblock }}
 
 
 {{ block content }}
-<div class="lang-container" style="text-align:right">
-    <table>
-        <col width="81%">
-        <col width="19%">
-        <tr>
-            <td></td>
-            <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px">
-                <link rel="stylesheet"
-                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
-                <span class="material-symbols-outlined" style="position: relative; top: 3px;">language</span>
-                <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
-                    <option value="en">Eng</option>
-                    <option value="ge">Ger</option>
-                    <option value="ru">Rus</option>
-                </select>
-            </td>
-        </tr>
-    </table>
+        <table style="width: 100%;">
+            <col width="83%">
+            <col width="17%">
+            <tr>
+                <td></td>
+                <td style="border-radius: 8px; border: 1px solid #000; display: block; height: 34px;">
+                    <link rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+                    <span class="material-symbols-outlined" style="position: relative; top: 3px;font-size: 24px">language</span>
+                    <select class="change-lang" style="border: 1px solid white; position: relative; bottom: 3px;">
+                        <option value="en">Eng</option>
+                        <option value="ge">Ger</option>
+                        <option value="ru">Rus</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+
+
+
+<div style="text-align:center"> 
+    <span  class="lng-Round" style="text-align:center;font-size: 20px;">Planet </span >  
+    <span style="text-align:center;font-size: 20px;" >{{ round_number }}</span >
 </div>
 
-<br>
+<dl class="lng-Title" style="text-align:center;font-size: 20px;">You can read the observation records in the following tables:</dl>
 
+<br>
 <h4 class="lng-TwinPlanet" hidden="hidden" id="twin planet" style="text-align: center;">
 Twin Planet
 </h4>
@@ -1837,7 +1850,7 @@ margin: auto; width:60; text-align: center; font-size: 12px; line-height: 0.8;">
     if (window.location.hash == '#en') {
         document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuckfWy0p_GyPx5ENCW_-EN226UAqVcbrxA7GxTxjmhtZ-itGAz1PSgeqSDQgfyiWP-fovuntr5WxN/embed?start=false&loop=true&delayms=60000" frameBorder="0" width="720" height="441" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
     } else if (window.location.hash == '#ru') {
-        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfpoIUoXDowaEcC6CMAdC47D0FIHAROL9VAEuM55wTIt00YLXAiStHxL6C2j1aEBJdndxuwwzjw55R/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
+        document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQuRy8R1oYvUeHeUNeBG1QkilrLQhry6MP8cgEnshJoEc9-y8CU3fjaBbnBoL4RIusxQQ1n2H55bWCN/embed?start=false&loop=false&delayms=6000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
     } else if (window.location.hash == '#ge') {
         document.getElementById("presentation").innerHTML = '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRwuxhtykR989WCmpwYXDcjfLoRNWreTlX_et7ZGwomclVNuTrdK_d0Yw4qM5vpOjNWCg5ZAn9Kg30V/embed?start=false&loop=true&delayms=60000" frameborder="0" width="720" height="441" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'
     }

@@ -259,6 +259,14 @@ const langArr = {
 
         "ge": `Derzeitige Vertrautheit:`,
     },
+    "Round":{
+        "ru": `Планета `,
+
+        "en": `Planet `,
+
+        "ge": `Planet `,
+    },
+
     "Accuracy":{
         "ru": `Ваша точность за этот раунд:`,
 
