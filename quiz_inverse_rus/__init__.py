@@ -139,15 +139,15 @@ class Quiz(Page):
     def error_message(player, values):
         #print('values is', values)
         if (values['q_1'] != '1' or
-            # values['q_1_2'] != "Нет" or
+            values['q_1_2'] != "" or #
             values['q_1_3'] != '1' or
-            # values['q_1_4'] != "Нет" or
-            # values['q_1_5'] != "Нет" or
+            values['q_1_4'] != "" or #
+            values['q_1_5'] != "" or #
 
             values['q_2'] != "8" or
 
-            # values['q_3'] != 1 or
-            # values['q_3_2'] != 1 or
+            values['q_3'] != '' or #
+            values['q_3_2'] != '' or #
             values['q_3_3'] != '1' or
             values['q_3_4'] != '1' or
             values['q_3_5'] != '1' or
@@ -155,7 +155,7 @@ class Quiz(Page):
             values['q_4'] != "Оно не зрелое и/или слабое" or
 
             values['q_5'] != '1' or
-            # values['q_5_2'] != 'Корректно' or
+            values['q_5_2'] != '' or #
             values['q_5_3'] != '1' or
 
             values['q_6'] != "Z🡢Y, X🡢Y, X🡢Z" or
