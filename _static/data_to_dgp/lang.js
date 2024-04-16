@@ -430,4 +430,20 @@ const langArr = {
 
         "ge": `Richtige Antworten`,
     },
+
+    "Prize1":{
+        "ru": `Токены, которые Вы получили за соответствие Вашей уверенности и точности выполнения задания:`,
+
+        "en": `Tokens You've got for correspondence of your confidence and task accuracy:`,
+
+        "ge": `NOTRANSLATION`,
+    },
+
+    "Prize2":{
+        "ru": `Токены, которые Вы получили за точность выполнения задания:`,
+
+        "en": `Tokens You've got for accuracy in task:`,
+
+        "ge": `NOTRANSLATION`,
+    },
 }

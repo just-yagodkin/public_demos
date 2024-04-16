@@ -15,7 +15,7 @@ class C(BaseConstants):
     train = False
     treatment = True
     Bonus = 5
-    Round_payoff = 10
+    Round_payoff = 1
     NUM_ROUNDS = 18
     SHOWING_INFORMATION_EDGE = 0.0  # you will see a feedback only after this percent of rounds
     NAME_IN_URL = 'data_to_dgp_new'
@@ -152,6 +152,9 @@ class Player(BasePlayer):
     node = models.StringField(initial='')
     seed = models.IntegerField(initial=0)
     round_num = models.IntegerField(initial=0)
+
+    payoff_for_score = models.FloatField(initial=0)
+    payoff_for_accuracy = models.FloatField(initial=0)
 
     def conf_bid_error_message(player, value):
         print('value is', value)
@@ -379,7 +382,10 @@ class DiagramTask(Page):
         # score от 0 до 1
         score = 1 - abs(values['conf_bid'] * 0.01 - player.accuracy/9)
         player.score = round(score, 4)
-        player.payoff = cu(score * C.Bonus + C.Round_payoff)
+
+        player.payoff_for_score = round(score * C.Bonus, 2)
+        player.payoff_for_accuracy = accuracy * C.Round_payoff
+        player.payoff = cu(player.payoff_for_score + player.payoff_for_accuracy)
 
         return error_messages
 
@@ -466,7 +472,9 @@ class DiagramTest(Page):
                   f'The seed is {seed}',
                   f'Treatment = {treatment}'
                   ],
-            accuracy=accuracy
+            accuracy=accuracy,
+            payoff_for_score=player.payoff_for_score,
+            payoff_for_accuracy=player.payoff_for_accuracy
         )
 
     @staticmethod
@@ -493,7 +501,7 @@ class DiagramTest(Page):
             edges_original=benchmark_edges,
             show_edges_template=show_edges,
             right_answers_list=right_answers_list,
-            player_answers=player_answers
+            player_answers=player_answers,
         )
 
 
