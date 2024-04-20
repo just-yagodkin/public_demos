@@ -36,7 +36,7 @@ class C(BaseConstants):
     # task_sequence = ["twolinks", "collider1", "threelinks", "twolinks", "fork", "nolinks", "onelink"]
     task_sequence = basis1 + basis2 + basis3
 
-    seed = [(name, random.randint(1, 1)) for name in task_sequence]
+    seed = [(name, random.randint(0, 5)) for name in task_sequence]
 
     pretraining = {'left': {'x': [1, 1, 1, 1, 0, 0, 0, 0], 'y': [1, 1, 1, 1, 1, 1, 0, 0]},
                    'right': {'x': [1, 1, 1, 1, 1, 1, 1, 1], 'y': [1, 1, 1, 1, 1, 1, 1, 1]}}
