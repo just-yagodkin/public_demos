@@ -471,6 +471,7 @@ class DiagramTest(Page):
                   f"User's score (from 0 to 1) for the round is {round(player.score, 4)}",
                   f'The seed is {seed}',
                   f'Treatment = {treatment}'
+                  f'Node is {player.node}'
                   ],
             accuracy=accuracy,
             payoff_for_score=player.payoff_for_score,
