@@ -362,7 +362,8 @@ class DiagramTask(Page):
 
         # radio_buttons = json.loads(player.radio_buttons)
         radio_buttons = json.loads(solutions['radio_buttons'])
-        player.backtransform_radio_buttons = gf.user_radio_buttons_before_seed(radio_buttons)
+
+        player.backtransform_radio_buttons = json.dumps(gf.user_radio_buttons_before_seed(radio_buttons, player.seed))
         penalty = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
         player.penalty = penalty
 
