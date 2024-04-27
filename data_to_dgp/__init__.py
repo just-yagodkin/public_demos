@@ -179,6 +179,7 @@ class Player(BasePlayer):
     treatment = models.BooleanField()
 
     node = models.StringField(initial='')
+    backtransform_node = models.StringField(initial='')
 
     seed = models.IntegerField(initial=0)
 
@@ -359,8 +360,10 @@ class DiagramTask(Page):
 
         if player.treatment and (player.dgptype in ['onelink', 'twolinks', 'collider1']):
             player.node = gf.wherex(C.seed[player.round_number - 1][1])
+            player.backtransform_node = 'X'
         else:
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
+            player.backtransform_node = 'Y'
 
         player.dir_error = gf.directional_error(json.loads(player.userdgp), json.loads(player.originaldgp))
         player.struct_error = gf.structure_error(json.loads(player.userdgp), json.loads(player.originaldgp))

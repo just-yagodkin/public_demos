@@ -794,6 +794,29 @@ def right_answers_after_seed(answers: list, seed: int):
     if seed == 5:
         return [answers[7]] + [answers[6]] + [answers[8]] + [answers[4]] + [answers[3]] + [answers[5]] + [answers[1]] + [answers[0]] + [answers[2]]
 
+def user_radio_buttons_before_seed(answers: list, seed: int):
+    """seed 1:  X Y Z   ->   X Z Y
+       seed 2:  X Y Z   ->   Y X Z
+       seed 3:  X Y Z   ->   Y Z X
+       seed 4:  X Y Z   ->   Z X Y
+       seed 5:  X Y Z   ->   Z Y X
+    """
+    # print(answers)
+    # print(type(answers))
+
+    if seed == 0:
+        return answers
+    if seed == 1:  #
+        return answers[3:6] + answers[:3] + [answers[7]] + [answers[6]] + [answers[8]]
+    if seed == 2:  #
+        return [answers[1]] + [answers[0]] + [answers[2]] + answers[6:9] + answers[3:6]
+    if seed == 3:  #
+        return [answers[4]] + [answers[3]] + [answers[5]] + [answers[7]] + [answers[6]] + [answers[8]] + answers[:3]
+    if seed == 4:  #
+        return answers[6:9] + [answers[1]] + [answers[0]] + [answers[2]] + [answers[4]] + [answers[3]] + [answers[5]]
+    if seed == 5:
+        return [answers[7]] + [answers[6]] + [answers[8]] + [answers[4]] + [answers[3]] + [answers[5]] + [answers[1]] + [answers[0]] + [answers[2]]
+
 
 ###----- TESTS -----###
 

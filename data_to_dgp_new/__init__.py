@@ -141,6 +141,7 @@ class Player(BasePlayer):
     buttons = models.StringField()
 
     radio_buttons = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
+    backtransform_radio_buttons = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
     right_answers = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
     right_answers_after_seed = models.StringField(initial='[0,0,0,0,0,0,0,0,0]')
 
@@ -150,6 +151,7 @@ class Player(BasePlayer):
 
     treatment = models.StringField()
     node = models.StringField(initial='')
+    backtransform_node = models.StringField(initial='')
     seed = models.IntegerField(initial=0)
     round_num = models.IntegerField(initial=0)
 
@@ -217,7 +219,6 @@ def datatask_output_json(player: Player):
             target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_yellow[num_round][1]]
         if player.treatment[2] == 'g':
             target_vocabulary = [C.observational_data[num_round][1], C.interventional_data_green[num_round][1]]
-
 
     return target_vocabulary
 
@@ -338,12 +339,16 @@ class DiagramTask(Page):
 
         if gf.take_color(player.treatment, player.round_number - 1) == 's':
             player.node = gf.wherey(C.seed[player.round_number - 1][1])
+            player.backtransform_node = 'Y'
         elif gf.take_color(player.treatment, player.round_number - 1) == 'y':
             player.node = gf.wherex(C.seed[player.round_number - 1][1])
+            player.backtransform_node = 'X'
         elif gf.take_color(player.treatment, player.round_number - 1) == 'g' and player.dgptype in ['onelink', 'twolinks', 'threelinks']:
             player.node = gf.wherez(C.seed[player.round_number - 1][1])
+            player.backtransform_node = 'Z'
         else:
             player.node = 'N'
+            player.backtransform_node = 'N'
 
 
         player.edges_num = len(json.loads(player.originaldgp))
@@ -357,6 +362,7 @@ class DiagramTask(Page):
 
         # radio_buttons = json.loads(player.radio_buttons)
         radio_buttons = json.loads(solutions['radio_buttons'])
+        player.backtransform_radio_buttons = gf.user_radio_buttons_before_seed(radio_buttons)
         penalty = sum([abs(x - y) for x, y in zip(right_answers_after_seed, radio_buttons)])
         player.penalty = penalty
 
@@ -460,7 +466,6 @@ class DiagramTest(Page):
         buttons_were_clicked = json.loads(player.buttons)
 
         accuracy = player.accuracy
-        player.payoff = cu(round(player.score, 5) * C.Bonus + C.Round_payoff)
 
         return dict(
             ekey=[f'The original sequence is {C.task_sequence}',
